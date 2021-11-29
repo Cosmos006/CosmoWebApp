@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AdminModule } from './Component/admin/admin.module';
 import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
@@ -11,33 +12,33 @@ const routes: Routes = [
     // path: '',
     // component: NavMenuComponent
     component: HomeComponent,
-    
+
     path: '',
   },
   {
     component: HomeComponent,
-    
-        path: 'home',
-       
+
+    path: 'home',
   },
   {
     component: LoginComponent,
-    
-        path: 'login',
-       
+
+    path: 'login',
   },
   {
     component: PhysicianComponent,
-    
-        path: 'Physician',
-       
-  },
-  { path: '**', redirectTo: '' }
-];
 
+    path: 'Physician',
+  },
+  // {
+  //   component: DashBoardComponent,
+  //   path: 'AdminDashboard',
+  // },
+  { path: '**', redirectTo: '' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -22,41 +22,49 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
-import { MatIconModule} from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Routes } from '@angular/router';
-import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HomeComponent } from './Component/home/home.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './Component/home/home.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     LoginComponent,
-    HomeComponent,PhysicianComponent
+    HomeComponent,
+    PhysicianComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,FlexLayoutModule,
+    AppRoutingModule,
+    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
-   
+
     MatDatepickerModule,
     MatBadgeModule,
     MatExpansionModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatDialogModule, MatAutocompleteModule,
+    MatDialogModule,
+    MatAutocompleteModule,
     MatPaginatorModule,
-    MatTableModule, MatSidenavModule, MatListModule, FlexLayoutModule,
-     MatCardModule, MatNativeDateModule,MatToolbarModule, MatInputModule,MatIconModule
+    MatTableModule,
+    MatSidenavModule,
+    MatListModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
