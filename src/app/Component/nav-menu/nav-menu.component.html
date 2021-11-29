@@ -1,16 +1,21 @@
-
 <div class="bg-primary">
-<mat-toolbar color="primary">
-    <span >
+  <mat-toolbar color="primary">
+    <span>
       <!-- <img src="assets/img/angular_whiteTransparent.svg" class="angular-logo"> -->
-      <span class="text-white " style="color:white;margin-right: 10px;"><b>Logo</b></span>
-    <button  routerLink="home"><b>Home</b></button>
-    <button   routerLink="Physician"><b>Physician</b></button>
-
-      
+      <span class="text-white" style="color: white; margin-right: 10px"
+        ><b>Logo</b></span
+      >
+      <button routerLink="home"><b>Home</b></button>
+      <button routerLink="Physician"><b>Physician</b></button>
+      <button
+        [routerLink]="['AdminDashboard']"
+        routerLinkActive="router-link-active"
+      >
+        Admin
+      </button>
     </span>
     <span class="fill-remaining-space"></span>
-    <button  routerLink="login"><b>Login</b></button>
+    <button routerLink="login"><b>Login</b></button>
     <button (click)="onLogout()"><b>Logout</b></button>
   </mat-toolbar>
 </div>
