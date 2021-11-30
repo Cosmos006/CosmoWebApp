@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
 import { AdminModule } from './Component/admin/admin.module';
+import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
 import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     component: AddPhysicianComponent,
     path: 'AddPhysician',
+  },
+  {
+    component: ViewPhysicianComponent,
+    path: 'ViewPhysician',
   },
   { path: '**', redirectTo: '' },
 ];

@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { LoginComponent } from './Component/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './Component/home/home.component';
+import { PhysicianComponent } from './Component/physician/physician.component';
+// import { MaterialModule } from './material.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -24,10 +28,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule, Routes } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './Component/home/home.component';
-import { PhysicianComponent } from './Component/physician/physician.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 @NgModule({
   declarations: [
@@ -40,15 +42,14 @@ import { PhysicianComponent } from './Component/physician/physician.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
     MatSlideToggleModule,
-
     MatDatepickerModule,
     MatBadgeModule,
     MatExpansionModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatDialogModule,
@@ -63,6 +64,9 @@ import { PhysicianComponent } from './Component/physician/physician.component';
     MatToolbarModule,
     MatInputModule,
     MatIconModule,
+    CdkTableModule,
+    CdkStepperModule,
+    // MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
