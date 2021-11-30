@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
 import { AdminModule } from './Component/admin/admin.module';
 import { HomeComponent } from './Component/home/home.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     component: AdminDashboardComponent,
     path: 'AdminDashboard',
+  },
+  {
+    component: AddPhysicianComponent,
+    path: 'AddPhysician',
   },
   { path: '**', redirectTo: '' },
 ];
