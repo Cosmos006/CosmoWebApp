@@ -30,6 +30,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -66,6 +69,8 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     MatIconModule,
     CdkTableModule,
     CdkStepperModule,
+    MatRadioModule,
+    MatSelectModule
     // MaterialModule,
   ],
   providers: [],
