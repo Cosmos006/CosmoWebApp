@@ -30,6 +30,25 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+//calender
+import { SchedulerModule } from 'angular-calendar-scheduler';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+//full Calender
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plug
+
+//Http
+import { HttpClientModule } from '@angular/common/http';
+
+//Edit Table
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+]);
 
 @NgModule({
   declarations: [
@@ -67,6 +86,19 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     CdkTableModule,
     CdkStepperModule,
     // MaterialModule,
+    //Calender
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
+    MatProgressSpinnerModule,
+    //Full Calender
+    FullCalendarModule,
+    //Http
+    HttpClientModule,
+    //Edit Table
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
