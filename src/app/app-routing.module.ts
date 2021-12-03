@@ -7,7 +7,9 @@ import { ViewPhysicianComponent } from './Component/admin/view-physician/view-ph
 import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
+import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
 
@@ -53,6 +55,14 @@ const routes: Routes = [
   {
     component: PatientDetailsComponent,
     path: 'PatientDetails',
+  },
+  {
+    component: PatientBookappointmentComponent,
+    path: 'PatientBookappointment',
+  },
+  {
+    component: PatientViewdetailsComponent,
+    path: 'PatientViewdetails',
   },
   { path: '**', redirectTo: '' },
 ];

@@ -32,6 +32,14 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
+import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
+//khushabu
+//import { MatMomentDateModule } from '@angular/material-moment-adapter';
+//import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+//import { PatientDetailsComponent } from './Component/patient/patient-details.component';
+
 
 
 @NgModule({
@@ -41,6 +49,8 @@ import {MatSelectModule} from '@angular/material/select';
     LoginComponent,
     HomeComponent,
     PhysicianComponent,
+    PatientDetailsComponent,
+    PatientBookappointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -70,8 +80,45 @@ import {MatSelectModule} from '@angular/material/select';
     CdkTableModule,
     CdkStepperModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    //khushabu
+    //MatMomentDateModule
+    // MaterialModule
+   
+  ],
+  exports:[
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatBadgeModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSidenavModule,
+    MatListModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatIconModule,
+    CdkTableModule,
+    CdkStepperModule,
+    MatRadioModule,
+    MatSelectModule,
+    //khushabu
+    //MatMomentDateModule
     // MaterialModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
