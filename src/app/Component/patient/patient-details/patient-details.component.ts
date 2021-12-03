@@ -10,10 +10,10 @@ import { MatAccordion } from '@angular/material/expansion';
 export class PatientDetailsComponent implements OnInit {
   form!:FormGroup;
   panelOpenState = false;
-  
-  constructor() { }
-      @ViewChild(MatAccordion)
+  @ViewChild(MatAccordion)
   accordion!: MatAccordion;
+  constructor() { }
+     
     
   ngOnInit(): void {
    this.form=new FormGroup({
