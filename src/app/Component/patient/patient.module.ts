@@ -15,13 +15,15 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import { PatientBookappointmentComponent } from './patient-bookappointment/patient-bookappointment.component';
 import { PatientViewdetailsComponent } from './patient-viewdetails/patient-viewdetails.component';
+import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 
 @NgModule({
   declarations: [
     PatientDetailsComponent,
     MatCardModule,
     PatientBookappointmentComponent,
-    PatientViewdetailsComponent
+    PatientViewdetailsComponent,
+    PatientDashboardComponent
   ],
   imports: [
     CommonModule,

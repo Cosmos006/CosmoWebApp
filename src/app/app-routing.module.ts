@@ -8,6 +8,7 @@ import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
+import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
@@ -63,6 +64,10 @@ const routes: Routes = [
   {
     component: PatientViewdetailsComponent,
     path: 'PatientViewdetails',
+  },
+  {
+    component: PatientDashboardComponent,
+    path: 'PatientDashboard',
   },
   { path: '**', redirectTo: '' },
 ];

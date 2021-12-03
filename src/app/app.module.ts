@@ -34,6 +34,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
+import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
 //khushabu
 //import { MatMomentDateModule } from '@angular/material-moment-adapter';
 //import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -50,7 +51,8 @@ import { PatientBookappointmentComponent } from './Component/patient/patient-boo
     HomeComponent,
     PhysicianComponent,
     PatientDetailsComponent,
-    PatientBookappointmentComponent
+    PatientBookappointmentComponent,
+    PatientDashboardComponent
   ],
   imports: [
     BrowserModule,
