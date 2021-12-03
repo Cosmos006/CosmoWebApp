@@ -7,6 +7,5 @@ export interface PeriodicElement {
 }
 
 export class EventMap {
-  // public id: string,
-  constructor(public title: string, public date: string) {}
+  constructor(public id: number, public title: string, public start: string) {}
 }
