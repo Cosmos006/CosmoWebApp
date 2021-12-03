@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
+import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
 import { HomeComponent } from './Component/home/home.component';
@@ -63,6 +64,10 @@ const routes: Routes = [
   {
     component: PatientViewdetailsComponent,
     path: 'PatientViewdetails',
+  },
+  {
+    component: AdminCalendarComponent,
+    path: 'AdminCalender',
   },
   { path: '**', redirectTo: '' },
 ];
