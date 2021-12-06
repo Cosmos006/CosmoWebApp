@@ -30,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import { AppointmentViewComponent } from './Component/nurse/appointment-view/appointment-view.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     LoginComponent,
     HomeComponent,
     PhysicianComponent,
+    AppointmentViewComponent
   ],
   imports: [
     BrowserModule,
