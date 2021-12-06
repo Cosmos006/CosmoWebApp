@@ -1,0 +1,94 @@
+<div style="margin-left: 3px">
+  <div>
+    <mat-card>
+      <div style="margin-left: 75%">
+        <button mat-raised-button color="primary">Save</button>
+
+        <button mat-raised-button color="primary">Update</button>
+
+        <button mat-raised-button color="primary">Clear</button>
+      </div>
+    </mat-card>
+  </div>
+  <mat-card-content>
+    <div class="container" style="margin:2%">
+      <div
+        fxLayout="row"
+        fxFlex="1 0 0"
+        fxLayoutGap="0px"
+        fxLayputAlign="center center"
+      >
+        <div fxFlex.gt-md="30" fxFlex.gt-sm="90" fxFlex.sm="60" fxFlex="100">
+          <div fxLayout="column" style="margin-top: 2%">
+            <div fxFlex="30" class="flex-p">
+              <mat-accordion>
+                <mat-card class="demo-inline-calendar-card">
+                  <mat-calendar (selectedChange)="selected = $event"></mat-calendar>
+                </mat-card>
+                <p>Selected date: {{selected}}</p>
+              </mat-accordion>
+             
+            </div>
+          </div>
+        </div>
+        <div fxFlex="10" class="flex-p">
+        </div>
+        <div fxFlex="60" class="flex-p">
+          <form>
+            
+              <span>
+              <mat-form-field appearance="outline">
+                <mat-label>Diagnosis</mat-label>
+                <mat-select>
+                  <mat-option></mat-option>
+                </mat-select>
+              </mat-form-field>
+              </span>
+            <span>
+              <mat-form-field appearance="outline">
+                <mat-label>Allergy</mat-label>
+                <mat-select>
+                  <mat-option></mat-option>
+                </mat-select>
+              </mat-form-field>
+              </span>
+              <span>
+              <mat-form-field appearance="outline">
+                <mat-label>physicianname</mat-label>
+                <mat-select>
+                  <mat-option></mat-option>
+                </mat-select>
+              </mat-form-field>
+             </span>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header> Slots </mat-expansion-panel-header>
+                <label><b>Section 1</b></label><br>
+                <div>
+                        <button mat-raised-button>9to9.30</button>
+                        <button mat-raised-button>10to10.30</button>
+                        <button mat-raised-button>11to11.30</button
+                        ><button mat-raised-button>12to12.30</button
+                        ><button mat-raised-button>1to1.30</button>
+                        
+                    </div>
+                    <label><b>Section 2</b></label><br>
+                <div>
+                        <button mat-raised-button>2to2.30</button>
+                        <button mat-raised-button>2.30to3</button>
+                        <button mat-raised-button>3to3.30</button
+                        ><button mat-raised-button>3.30to4</button
+                        ><button mat-raised-button>4to4.30</button>
+                        <button mat-raised-button>5to5.30</button>
+                        <button mat-raised-button>5.30to6</button>
+                        
+                    </div>
+                   
+                
+              </mat-expansion-panel>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</div>

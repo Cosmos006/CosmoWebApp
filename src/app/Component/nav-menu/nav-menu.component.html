@@ -31,7 +31,32 @@
       >
         Nurse
       </button>
-        </span>
+        
+      <button
+        [routerLink]="['PatientDetails']"
+        routerLinkActive="router-link-active"
+      >
+        Patient
+      </button>
+      <button
+        [routerLink]="['PatientBookappointment']"
+        routerLinkActive="router-link-active"
+      >
+        BookAppointment
+      </button>
+      <button
+        [routerLink]="['PatientViewdetails']"
+        routerLinkActive="router-link-active"
+      >
+        Patient
+      </button>
+      <button
+        [routerLink]="['AdminCalender']"
+        routerLinkActive="router-link-active"
+      >
+        Add Calendar
+      </button>
+    </span>
     <span class="fill-remaining-space"></span>
     <button routerLink="login"><b>Login</b></button>
     <button (click)="onLogout()"><b>Logout</b></button>
