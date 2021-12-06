@@ -23,6 +23,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 //Model Export
 import { EventMap } from '../admin/model/admin.model';
+
+//Form
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
@@ -65,10 +69,15 @@ const routes: Routes = [
     //Http
     HttpClientModule,
     //Edittable
+
     // MatSort,
     // MatSortModule,
     // MatTableDataSource,
     // MatFormFieldModule,
+
+    //Forms
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class AdminModule {}
