@@ -30,6 +30,33 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
+//khushabu
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+//import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+//calender
+import { SchedulerModule } from 'angular-calendar-scheduler';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+//full Calender
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plug
+//Http
+import { HttpClientModule } from '@angular/common/http';
+import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
+import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
+
+//Edit Table
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+]);
 
 @NgModule({
   declarations: [
@@ -38,6 +65,10 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     LoginComponent,
     HomeComponent,
     PhysicianComponent,
+    PatientDetailsComponent,
+    PatientBookappointmentComponent,
+    ViewPhysicianComponent,
+    AdminCalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +97,55 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     MatIconModule,
     CdkTableModule,
     CdkStepperModule,
+    MatRadioModule,
+    MatSelectModule,
+    //Full Calender
+    FullCalendarModule,
+    //Http
+    HttpClientModule,
+  ],
+  exports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatBadgeModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSidenavModule,
+    MatListModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatIconModule,
+    CdkTableModule,
+    CdkStepperModule,
+    MatRadioModule,
+    MatSelectModule,
+    //khushabu
+    //MatMomentDateModule
     // MaterialModule,
+
+    //Calender
+
+    MatProgressSpinnerModule,
+    //Full Calender
+    FullCalendarModule,
+    //Http
+    HttpClientModule,
+    //Edit Table
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

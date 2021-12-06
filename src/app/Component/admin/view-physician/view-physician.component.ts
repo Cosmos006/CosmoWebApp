@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/Services/admin.service';
 
 export interface PeriodicElement {
   name: string;
@@ -35,10 +36,7 @@ export class ViewPhysicianComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
   dataSource = ELEMENT_DATA;
-  constructor() {}
+  constructor(private userService: AdminService) {}
 
   ngOnInit(): void {}
-
-  // displayedColumns2: string[] = ['id', 'name', 'action'];
-  // Source = ELEMENT_DATA;
 }
