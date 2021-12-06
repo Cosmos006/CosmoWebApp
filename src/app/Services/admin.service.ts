@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventInput } from '@fullcalendar/angular';
 import { INITIAL_EVENTS } from '../Component/admin/model/event.utils';
-import { ApiPaths, environment } from '../Services/Url';
+import { Admin, environment } from '../Services/Url';
 import { EventMap } from '../Component/admin/model/admin.model';
 // import { EventData } from '../Component/admin/admin-calendar/admin-calendar.component';
 
@@ -15,6 +15,15 @@ export class AdminService {
   //Url Route
   baseUrl = environment.LocalUrl;
 
+  //Dash Board Changes Start
+
+  LoadDashBoardInfo() {
+    return this.http.get<any>(this.baseUrl + Admin.DashBoard);
+  }
+
+  //Dash Board Changes End
+
+  //Calendar Changes Start
   //Data Mapping
   private listEvent: EventMap[] = [];
 
@@ -25,7 +34,7 @@ export class AdminService {
   //Call Events Before loading to Component
   GetData() {
     this.http
-      .get<EventMap[]>(this.baseUrl + ApiPaths.Event)
+      .get<EventMap[]>(this.baseUrl + Admin.Event)
       .subscribe((res: EventMap[]) => {
         this.listEvent.splice(0, this.listEvent.length);
         this.listEvent.push(...res);
@@ -34,6 +43,8 @@ export class AdminService {
 
   //List Of ALL Events
   GetListofData() {
-    return this.http.get<EventMap[]>(this.baseUrl + ApiPaths.Event);
+    return this.http.get<EventMap[]>(this.baseUrl + Admin.Event);
   }
+
+  //Calendar Changes End
 }

@@ -11,7 +11,7 @@
     </mat-card>
   </div>
   <mat-card-content>
-    <div class="container" style="margin:2%">
+    <div class="container" style="margin: 2%">
       <div
         fxLayout="row"
         fxFlex="1 0 0"
@@ -23,27 +23,26 @@
             <div fxFlex="30" class="flex-p">
               <mat-accordion>
                 <mat-card class="demo-inline-calendar-card">
-                  <mat-calendar (selectedChange)="selected = $event"></mat-calendar>
+                  <mat-calendar
+                    (selectedChange)="selected = $event"
+                  ></mat-calendar>
                 </mat-card>
-                <p>Selected date: {{selected}}</p>
+                <p>Selected date: {{ selected }}</p>
               </mat-accordion>
-             
             </div>
           </div>
         </div>
-        <div fxFlex="10" class="flex-p">
-        </div>
+        <div fxFlex="10" class="flex-p"></div>
         <div fxFlex="60" class="flex-p">
           <form>
-            
-              <span>
+            <span>
               <mat-form-field appearance="outline">
                 <mat-label>Diagnosis</mat-label>
                 <mat-select>
                   <mat-option></mat-option>
                 </mat-select>
               </mat-form-field>
-              </span>
+            </span>
             <span>
               <mat-form-field appearance="outline">
                 <mat-label>Allergy</mat-label>
@@ -51,41 +50,47 @@
                   <mat-option></mat-option>
                 </mat-select>
               </mat-form-field>
-              </span>
-              <span>
+            </span>
+            <span>
               <mat-form-field appearance="outline">
                 <mat-label>physicianname</mat-label>
                 <mat-select>
                   <mat-option></mat-option>
                 </mat-select>
               </mat-form-field>
-             </span>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header> Slots </mat-expansion-panel-header>
-                <label><b>Section 1</b></label><br>
-                <div>
-                        <button mat-raised-button>9to9.30</button>
-                        <button mat-raised-button>10to10.30</button>
-                        <button mat-raised-button>11to11.30</button
-                        ><button mat-raised-button>12to12.30</button
-                        ><button mat-raised-button>1to1.30</button>
-                        
-                    </div>
-                    <label><b>Section 2</b></label><br>
-                <div>
-                        <button mat-raised-button>2to2.30</button>
-                        <button mat-raised-button>2.30to3</button>
-                        <button mat-raised-button>3to3.30</button
-                        ><button mat-raised-button>3.30to4</button
-                        ><button mat-raised-button>4to4.30</button>
-                        <button mat-raised-button>5to5.30</button>
-                        <button mat-raised-button>5.30to6</button>
-                        
-                    </div>
-                   
-                
-              </mat-expansion-panel>
-            
+            </span>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header> Slots </mat-expansion-panel-header>
+              <label><b>Section 1</b></label
+              ><br />
+              <div *ngFor="let number of firstslot">
+                <button
+                  mat-raised-button
+                  style="background-color: #00ff00"
+                  class="inline"
+                >
+                  {{ number }}
+                </button>
+                <!-- <button mat-raised-button>10to10.30</button>
+                <button mat-raised-button>11to11.30</button
+                ><button mat-raised-button>12to12.30</button
+                ><button mat-raised-button>1to1.30</button> -->
+              </div>
+              <label><b>Section 2</b></label
+              ><br />
+              <div *ngFor="let number of secondslot">
+                <button mat-raised-button style="background-color: #00ff00">
+                  {{ number }}
+                </button>
+                <!-- <button mat-raised-button>2to2.30</button>
+                <button mat-raised-button>2.30to3</button>
+                <button mat-raised-button>3to3.30</button
+                ><button mat-raised-button>3.30to4</button
+                ><button mat-raised-button>4to4.30</button>
+                <button mat-raised-button>5to5.30</button>
+                <button mat-raised-button>5.30to6</button> -->
+              </div>
+            </mat-expansion-panel>
           </form>
         </div>
       </div>
