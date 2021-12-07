@@ -35688,7 +35688,7 @@ html.maximized-card {
 }
 
 .card-default .nav-item:first-child .nav-link {
-  border-left: 0;
+  border-left: ;
 }
 
 .dark-mode .card-primary:not(.card-outline) > .card-header {

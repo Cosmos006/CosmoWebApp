@@ -1,16 +1,18 @@
-mat-form-field
-{
-    width:40%;
+mat-form-field {
+  width: 40%;
 }
-mat-expansion-panel
-{
-    width:90%;
+mat-expansion-panel {
+  width: 90%;
 }
 
-button
-{
+button {
   margin: 2%;
 }
-span{
-    margin-right: 10%
+span {
+  margin-right: 10%;
+}
+
+.inline {
+  display: inline-block;
+  margin-right: 5px;
 }

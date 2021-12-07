@@ -1,3 +1,8 @@
+export interface AdminDashboard {
+  Appointments: number;
+  LockedAccount: number;
+}
+
 export interface PeriodicElement {
   imageUrl: string;
   name: string;
