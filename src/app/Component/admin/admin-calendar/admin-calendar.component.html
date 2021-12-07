@@ -1,0 +1,11 @@
+<div class="demo-app">
+  <div class="demo-app-sidebar">
+    <div class="demo-app-main" id="calendar">
+      <full-calendar
+        *ngIf="calendarVisible"
+        [options]="calendarOptions"
+      ></full-calendar>
+      <!-- <full-calendar #calendar [options]="calendarOptions"></full-calendar> -->
+    </div>
+  </div>
+</div>

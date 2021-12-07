@@ -1,0 +1,31 @@
+.expansionpanel
+{
+    background-color:cornflowerblue !important;
+}
+.formsesign
+{
+    margin: right 30px;
+}
+/* .radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .radio-button {
+    margin: 5px;
+  } */
+  .additional-selection{
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+ 
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched
+{
+border: 1px;
+}
+button
+{
+  margin-right: 5%;
+}

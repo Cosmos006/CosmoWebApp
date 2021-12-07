@@ -41,5 +41,6 @@ export class PhysicianComponent implements OnInit {
 
   constructor() {}
 
+  Patient: any = 10;
   ngOnInit(): void {}
 }

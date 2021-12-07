@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
-import { LoginComponent } from './Component/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MaterialModule } from './material.module';
+//Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -24,10 +25,44 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule, Routes } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+
+//khushabu
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+//import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+//calender
+import { SchedulerModule } from 'angular-calendar-scheduler';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+//full Calender
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plug
+//Http
+import { HttpClientModule } from '@angular/common/http';
+import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
+//Component
+import { AppComponent } from './app.component';
+import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
+import { LoginComponent } from './Component/login/login.component';
+import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
+import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
+import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
 import { HomeComponent } from './Component/home/home.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
+//Internet Check
+import { NetworkStatusAngularModule } from 'network-status-angular';
+//Edit Table
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+]);
 
 @NgModule({
   declarations: [
@@ -36,19 +71,25 @@ import { PhysicianComponent } from './Component/physician/physician.component';
     LoginComponent,
     HomeComponent,
     PhysicianComponent,
+    PatientDetailsComponent,
+    PatientBookappointmentComponent,
+    ViewPhysicianComponent,
+    AdminCalendarComponent,
+    AddPhysicianComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    //Material Component
+    MaterialModule,
+    FlexLayoutModule,
     MatSlideToggleModule,
-
     MatDatepickerModule,
     MatBadgeModule,
     MatExpansionModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatDialogModule,
@@ -63,7 +104,19 @@ import { PhysicianComponent } from './Component/physician/physician.component';
     MatToolbarModule,
     MatInputModule,
     MatIconModule,
+    CdkTableModule,
+    CdkStepperModule,
+    MatRadioModule,
+    MatSelectModule,
+
+    //Full Calender
+    FullCalendarModule,
+    //Http
+    HttpClientModule,
+    //Internet Check
+    NetworkStatusAngularModule.forRoot(),
   ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent],
 })
