@@ -16,8 +16,8 @@ export class PatientBookappointmentComponent implements OnInit {
   constructor(private patientservice: PatientService) {}
 
   ngOnInit() {
-    const start = new Date('2019-08-08 08:00');
-    const end = new Date('2019-08-08 20:00');
+    const start = new Date('2019-08-08 10:00');
+    const end = new Date('2019-08-08 18:00');
     const timespan = 30 * 60; // 30 minutes
     const siestas = [
       {
