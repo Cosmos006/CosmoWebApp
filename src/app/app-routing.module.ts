@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
 import { AdminModule } from './Component/admin/admin.module';
+import { PatientUserComponent } from './Component/admin/patient-user/patient-user.component';
 import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     component: AdminDashboardComponent,
     path: 'AdminDashboard',
+  },
+  {
+    component: PatientUserComponent,
+    path: 'PatientUser',
   },
   { path: '**', redirectTo: '' },
 ];
