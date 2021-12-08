@@ -17,7 +17,7 @@ import { EventMap } from '../model/admin.model';
 })
 export class AdminCalendarComponent implements OnInit {
   name!: string;
-  date!: string;
+  date?: string;
   showModal!: boolean;
 
   listOfEvent: EventMap[] = [];
@@ -114,11 +114,14 @@ export class AdminCalendarComponent implements OnInit {
     var date = dateparms?.toDateString();
     var time = dateparms?.toTimeString();
     //if(clickInfo.event.de)
-    //this.date = date;
+    this.date = date;
     this.showModal = true;
   }
 
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
+  }
+  hide() {
+    this.showModal = false;
   }
 }
