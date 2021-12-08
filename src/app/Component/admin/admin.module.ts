@@ -2,12 +2,6 @@ import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { Router, RouterModule, Routes } from '@angular/router';
-<<<<<<< HEAD
-import { PatientUserComponent } from './patient-user/patient-user.component';
-import {MatCardModule} from '@angular/material/card';
-import { EmployeeUserComponent } from './employee-user/employee-user.component';
-import {MatTableModule} from '@angular/material/table';
-=======
 import { AddPhysicianComponent } from './add-physician/add-physician.component';
 import { ViewPhysicianComponent } from './view-physician/view-physician.component';
 import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
@@ -32,13 +26,13 @@ import { EventMap } from '../admin/model/admin.model';
 
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PatientUserComponent } from './patient-user/patient-user.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
 ]);
->>>>>>> d4e2f2f2174312342a5d7024e1ceba2e61cab6d8
 
 const routes: Routes = [
   {
@@ -46,10 +40,10 @@ const routes: Routes = [
     component: AdminDashboardComponent,
   },
   {
-<<<<<<< HEAD
-    path:'PatientUser',
-    component : PatientUserComponent
-=======
+    path: 'PatientUser',
+    component: PatientUserComponent,
+  },
+  {
     path: 'AddPhysician',
     component: AddPhysicianComponent,
   },
@@ -60,19 +54,10 @@ const routes: Routes = [
   {
     path: 'AdminCalender',
     component: AdminCalendarComponent,
->>>>>>> d4e2f2f2174312342a5d7024e1ceba2e61cab6d8
   },
 ];
 
 @NgModule({
-<<<<<<< HEAD
-  declarations: [AdminDashboardComponent, PatientUserComponent, EmployeeUserComponent],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatTableModule,
-    RouterModule.forChild(routes)],
-=======
   declarations: [
     AdminDashboardComponent,
     AddPhysicianComponent,
@@ -99,6 +84,5 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
->>>>>>> d4e2f2f2174312342a5d7024e1ceba2e61cab6d8
 })
 export class AdminModule {}

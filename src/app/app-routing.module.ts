@@ -4,12 +4,8 @@ import { AppComponent } from './app.component';
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
 import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
-<<<<<<< HEAD
-import { AdminModule } from './Component/admin/admin.module';
 import { PatientUserComponent } from './Component/admin/patient-user/patient-user.component';
-=======
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
->>>>>>> d4e2f2f2174312342a5d7024e1ceba2e61cab6d8
 import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
@@ -47,10 +43,10 @@ const routes: Routes = [
     path: 'AdminDashboard',
   },
   {
-<<<<<<< HEAD
     component: PatientUserComponent,
     path: 'PatientUser',
-=======
+  },
+  {
     component: AddPhysicianComponent,
     path: 'AddPhysician',
   },
@@ -77,7 +73,6 @@ const routes: Routes = [
   {
     component: AdminCalendarComponent,
     path: 'AdminCalender',
->>>>>>> d4e2f2f2174312342a5d7024e1ceba2e61cab6d8
   },
   { path: '**', redirectTo: '' },
 ];
