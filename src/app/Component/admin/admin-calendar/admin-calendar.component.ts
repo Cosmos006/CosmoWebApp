@@ -16,8 +16,11 @@ import { EventMap } from '../model/admin.model';
   styleUrls: ['./admin-calendar.component.css'],
 })
 export class AdminCalendarComponent implements OnInit {
-  listOfEvent: EventMap[] = [];
+  name!: string;
+  date!: string;
+  showModal!: boolean;
 
+  listOfEvent: EventMap[] = [];
   value: EventMap[] = [];
   constructor(private adminService: AdminService) {}
 
@@ -106,13 +109,13 @@ export class AdminCalendarComponent implements OnInit {
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    if (
-      confirm(
-        `Are you sure you want to delete the event '${clickInfo.event.title}' '${clickInfo.event.display}'`
-      )
-    ) {
-      clickInfo.event.remove();
-    }
+    this.name = clickInfo.event.title;
+    var dateparms = clickInfo.event._instance?.range.start;
+    var date = dateparms?.toDateString();
+    var time = dateparms?.toTimeString();
+    //if(clickInfo.event.de)
+    //this.date = date;
+    this.showModal = true;
   }
 
   handleEvents(events: EventApi[]) {
