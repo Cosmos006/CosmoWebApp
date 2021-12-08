@@ -52223,6 +52223,9 @@
     border-color: #dee2e6;
     color: #6c757d;
   }
+  table {
+  width: 100%;
+}
   
   .dark-mode .accent-gray-dark [class*="sidebar-dark-"] .sidebar a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link) {
     color: #c2c7d0;

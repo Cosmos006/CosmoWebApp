@@ -1,0 +1,504 @@
+<div class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Physician DashBoard</h1>
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+              </ol>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-gradient-info">
+                <div class="inner">
+                  <h3>{{ Patient }}</h3>
+
+                  <p>Patients</p>
+                </div>
+                <div class="icon">
+                  <i class="fa-calendar-alt"></i>
+                </div>
+                <a href="#" class="small-box-footer text-black bg-white"
+                  ><b>More info </b><i class="fa fa-arrow-circle-right"></i
+                ></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-gradient-danger">
+                <div class="inner">
+                  <h3>$50000</h3>
+
+                  <p>Income</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer text-black bg-white"
+                  ><b>More info </b><i class="fa fa-arrow-circle-right"></i
+                ></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-gradient-success">
+                <div class="inner">
+                  <h3>44</h3>
+
+                  <p>Appoinment</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer text-black bg-white"
+                  ><b>More info </b><i class="fa fa-arrow-circle-right"></i
+                ></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3 class="text-white">65</h3>
+
+                  <p class="text-white">Treatments</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer text-black bg-white"
+                  ><b>More info </b><i class="fa fa-arrow-circle-right"></i
+                ></a>
+              </div>
+            </div>
+            <!-- ./col -->
+          </div>
+          <!-- /.row -->
+          <!-- Main row -->
+          <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-7 connectedSortable">
+              <!-- Custom tabs (Charts with tabs)-->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title font-weight-bold">
+                    <i class="fas fa-chart-pie mr-1"></i>
+                    Today Appoinment
+                  </h3>
+                  <div class="container text-center">
+                    <button
+                      mat-button
+                      mat-flat-button
+                      color="primary"
+                      class="btn bg-info"
+                      style="color: white; float: right; background-color: grey"
+                    >
+                      Add New
+                    </button>
+
+                    <table
+                      mat-table
+                      [dataSource]="dataSource1"
+                      #mytable
+                      class="my-table mat-elevation-z8"
+                    >
+                      <!--- Note that these columns can be defined in any order.
+                                              The actual rendered columns are set as a property on the row definition" -->
+
+                      <!-- Id Column -->
+                      <ng-container matColumnDef="id">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          style="padding-left: 60px"
+                        >
+                          ID.
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.id }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          style="padding-left: 60px"
+                        >
+                          Name
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.name }}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Status">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          style="padding-left: 15px"
+                        >
+                          Status
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.Status }}
+                        </td>
+                      </ng-container>
+                      <!-- Action Column -->
+                      <ng-container matColumnDef="action">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          style="padding-left: 60px"
+                        >
+                          Action
+                        </th>
+                        <td
+                          mat-cell
+                          *matCellDef="let element"
+                          class="action-link"
+                        >
+                          <a>Edit</a> |
+                          <a>Delete</a>
+                        </td>
+                      </ng-container>
+
+                      <tr
+                        mat-header-row
+                        *matHeaderRowDef="displayedColumns1"
+                      ></tr>
+                      <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns1"
+                      ></tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card -->
+
+              <!-- TO DO List -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="ion ion-clipboard mr-1"></i>
+                    <b>Appoinment Request</b>
+                  </h3>
+
+                  <div class="container text-center">
+                    <button
+                      mat-button
+                      mat-flat-button
+                      color="primary"
+                      class="btn bg-info"
+                      style="color: white; float: right; background-color: grey"
+                    >
+                      Add New
+                    </button>
+
+                    <table
+                      mat-table
+                      [dataSource]="dataSource2"
+                      #mytable
+                      class="my-table mat-elevation-z8"
+                    >
+                      <!--- Note that these columns can be defined in any order.
+                                              The actual rendered columns are set as a property on the row definition" -->
+
+                      <!-- Id Column -->
+                      <ng-container matColumnDef="id">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          style="padding-left: 60px"
+                        >
+                          ID.
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.id }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          style="padding-left: 60px"
+                        >
+                          Name
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.name }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Action Column -->
+                      <ng-container matColumnDef="action">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          style="padding-left: 50px"
+                        >
+                          Action
+                        </th>
+                        <td
+                          mat-cell
+                          *matCellDef="let element"
+                          class="action-link"
+                        >
+                          <a class="bg-gradient-success btn">Accept</a> |
+                          <a class="bg-gradient-danger btn">Reject</a>
+                        </td>
+                      </ng-container>
+
+                      <tr
+                        mat-header-row
+                        *matHeaderRowDef="displayedColumns2"
+                      ></tr>
+                      <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns2"
+                      ></tr>
+                    </table>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+
+                <!-- /.card-body -->
+                <!-- <div class="card-footer clearfix">
+                                    <button type="button" class="btn btn-primary float-right">
+                                        <i class="fas fa-plus"></i> Add item
+                                    </button>
+                                </div> -->
+              </div>
+              <!-- /.card -->
+            </section>
+            <!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-5 connectedSortable">
+              <!-- Map card -->
+              <div class="card bg-white">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <b>Next Patient Details</b>
+
+                    <!-- <i class="fas fa-map-marker-alt mr-1"></i> -->
+                  </h3>
+                  <table
+                    mat-table
+                    [dataSource]="dataSource"
+                    class="mat-elevation-z8"
+                  >
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef>Name</th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.name }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="calories">
+                      <th mat-header-cell *matHeaderCellDef>Calories</th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.calories }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="fat">
+                      <th mat-header-cell *matHeaderCellDef>Fat (g)</th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.fat }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="carbs">
+                      <th mat-header-cell *matHeaderCellDef>Carbs (g)</th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.carbs }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="protein">
+                      <th mat-header-cell *matHeaderCellDef>Protein (g)</th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.protein }}
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                  </table>
+                  <!-- Copyright 2021 Google LLC. All Rights Reserved.
+                                          Use of this source code is governed by an MIT-style license that
+                                          can be found in the LICENSE file at https://angular.io/license -->
+                </div>
+
+                <!-- /.card-body-->
+                <div class="card-footer bg-transparent">
+                  <div class="row">
+                    <div class="col-4 text-center">
+                      <div id="sparkline-1"></div>
+                      <button class="text-white bg-primary btn">
+                        Phone Number
+                      </button>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-4 text-center">
+                      <div id="sparkline-2"></div>
+                      <button class="text-white bg-primary btn">
+                        Document
+                      </button>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-4 text-center">
+                      <div id="sparkline-3"></div>
+                      <button class="text-white bg-primary btn">Chat</button>
+                    </div>
+                    <!-- ./col -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+              </div>
+              <!-- /.card -->
+
+              <!-- solid sales graph -->
+              <div class="card bg-gradient-info">
+                <div class="card-header border-0">
+                  <h3 class="card-title">
+                    <i class="fas fa-th mr-1"></i>
+                    Graph
+                  </h3>
+
+                  <div class="card-tools">
+                    <button
+                      type="button"
+                      class="btn bg-info btn-sm"
+                      data-card-widget="collapse"
+                    >
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn bg-info btn-sm"
+                      data-card-widget="remove"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <canvas
+                    class="chart"
+                    id="line-chart"
+                    style="
+                      min-height: 250px;
+                      height: 250px;
+                      max-height: 250px;
+                      max-width: 100%;
+                    "
+                  ></canvas>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer bg-transparent">
+                  <div class="row">
+                    <div class="col-4 text-center">
+                      <input
+                        type="text"
+                        class="knob"
+                        data-readonly="true"
+                        value="20"
+                        data-width="60"
+                        data-height="60"
+                        data-fgColor="#39CCCC"
+                      />
+
+                      <div class="text-white">Mail-Orders</div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-4 text-center">
+                      <input
+                        type="text"
+                        class="knob"
+                        data-readonly="true"
+                        value="50"
+                        data-width="60"
+                        data-height="60"
+                        data-fgColor="#39CCCC"
+                      />
+
+                      <div class="text-white">Online</div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-4 text-center">
+                      <input
+                        type="text"
+                        class="knob"
+                        data-readonly="true"
+                        value="30"
+                        data-width="60"
+                        data-height="60"
+                        data-fgColor="#39CCCC"
+                      />
+
+                      <div class="text-white">In-Store</div>
+                    </div>
+                    <!-- ./col -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+                <!-- /.card-footer -->
+              </div>
+              <!-- /.card -->
+
+              <!-- Calendar -->
+
+              <!-- /.card -->
+            </section>
+            <!-- right col -->
+          </div>
+          <!-- /.row (main row) -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+
+      <!-- Main content -->
+
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+  </div>
+  <!-- ./wrapper -->
+</div>
