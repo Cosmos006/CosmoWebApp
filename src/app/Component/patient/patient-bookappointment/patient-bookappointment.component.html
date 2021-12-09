@@ -63,7 +63,7 @@
               <mat-expansion-panel-header> Slots </mat-expansion-panel-header>
               <label><b>Section 1</b></label
               ><br />
-              <div *ngFor="let number of firstslot">
+              <div class="btn-group" *ngFor="let number of firstslot">
                 <button
                   mat-raised-button
                   style="background-color: #00ff00"
@@ -76,9 +76,10 @@
                 ><button mat-raised-button>12to12.30</button
                 ><button mat-raised-button>1to1.30</button> -->
               </div>
+              <br />
               <label><b>Section 2</b></label
               ><br />
-              <div *ngFor="let number of secondslot">
+              <div class="btn-group" *ngFor="let number of secondslot">
                 <button mat-raised-button style="background-color: #00ff00">
                   {{ number }}
                 </button>
