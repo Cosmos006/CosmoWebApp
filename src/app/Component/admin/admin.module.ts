@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { Router, RouterModule, Routes } from '@angular/router';
@@ -26,6 +26,7 @@ import { EventMap } from '../admin/model/admin.model';
 
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PatientUserComponent } from './patient-user/patient-user.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'AdminDashBoard',
     component: AdminDashboardComponent,
+  },
+  {
+    path: 'PatientUser',
+    component: PatientUserComponent,
   },
   {
     path: 'AddPhysician',

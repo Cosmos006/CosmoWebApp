@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
 import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
+import { PatientUserComponent } from './Component/admin/patient-user/patient-user.component';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
 import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     component: AdminDashboardComponent,
     path: 'AdminDashboard',
+  },
+  {
+    component: PatientUserComponent,
+    path: 'PatientUser',
   },
   {
     component: AddPhysicianComponent,

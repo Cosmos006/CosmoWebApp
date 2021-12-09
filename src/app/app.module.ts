@@ -34,13 +34,15 @@ import { MatSelectModule } from '@angular/material/select';
 //khushabu
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 //import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-//calender
-import { SchedulerModule } from 'angular-calendar-scheduler';
-// import { CalendarModule, DateAdapter } from 'angular-calendar';
+
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SchedulerModule } from 'angular-calendar-scheduler';
+
+import { CalendarModule, DateAdapter } from 'angular-calendar';
 //full Calender
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plug
 //Http
@@ -119,6 +121,13 @@ FullCalendarModule.registerPlugins([
     HttpClientModule,
     //Internet Check
     NetworkStatusAngularModule.forRoot(),
+
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
+    MatProgressSpinnerModule,
   ],
   exports: [],
   providers: [],
