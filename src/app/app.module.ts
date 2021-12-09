@@ -58,6 +58,7 @@ import { HomeComponent } from './Component/home/home.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
+import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -78,6 +79,7 @@ FullCalendarModule.registerPlugins([
     ViewPhysicianComponent,
     AdminCalendarComponent,
     AddPhysicianComponent,
+    DynamicViewComponent,
   ],
   imports: [
     BrowserModule,

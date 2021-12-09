@@ -3,7 +3,7 @@ import { MatSort} from '@angular/material/sort';
 
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { products } from './appointments';
+import { Product, products } from './appointments';
 
 /**
  * @title Table with sorting
@@ -14,8 +14,8 @@ import { products } from './appointments';
   styleUrls: ['./appointment-view.component.css']
 })
 export class AppointmentViewComponent  {
-displayedColumns = ['productName', 'productCode', 'prodRating', 'edit', 'delete'];
-//products:Product[]= products;
+displayedColumns = ['userID','name', 'gender','address','mobile', 'age', 'bloodGroup' ,'temparature', 'bloodPresure', 'sugarLevel','edit','delete'];
+products:Product[]= products;
 dataSource = new MatTableDataSource(products);
 @ViewChild(MatPaginator) paginator !: MatPaginator;
 @ViewChild(MatSort, {}) sort !: MatSort;

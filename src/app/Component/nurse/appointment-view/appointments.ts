@@ -1,136 +1,233 @@
 export interface Product {
-    id: number | null;
-    productName: string;
-    productCode: string;
-    proddescription?: string;
-    prodRating?: number;
+    userID: number | null;
+    name: string;
+    gender: string;
+    address: string;
+    mobile: number;
+    age:number;
+    bloodGroup?:string;
+    temparature?:string;
+    bloodPresure?:string;
+    sugarLevel?:string;
 }
 
 
  export const products: Product[] = [
         {
-            id: 1,
-            productName: 'Netgear Cable Modem',
-            productCode: 'CM700',
-            proddescription: 'Netgear Cable Modem compatible with all cables',
-            prodRating: 4.0
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
+
+
         },
         {
-            id: 2,
-            productName: 'Linksys Cable Modem',
-            productCode: 'LK700',
-            proddescription: 'Linksys Cable Modem compatible with all cables',
-            prodRating: 4.1
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 3,
-            productName: 'TP Link Cable Modem',
-            productCode: 'TPL700',
-            proddescription: 'TP Link Cable Modem compatible with all cables',
-            prodRating: 4.2
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 1,
-            productName: 'Netgear Cable Modem',
-            productCode: 'CM700',
-            proddescription: 'Netgear Cable Modem compatible with all cables',
-            prodRating: 4.0
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 2,
-            productName: 'Linksys Cable Modem',
-            productCode: 'LK700',
-            proddescription: 'Linksys Cable Modem compatible with all cables',
-            prodRating: 4.1
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 3,
-            productName: 'TP Link Cable Modem',
-            productCode: 'TPL700',
-            proddescription: 'TP Link Cable Modem compatible with all cables',
-            prodRating: 4.2
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         }, {
-            id: 1,
-            productName: 'Netgear Cable Modem',
-            productCode: 'CM700',
-            proddescription: 'Netgear Cable Modem compatible with all cables',
-            prodRating: 4.0
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 2,
-            productName: 'Linksys Cable Modem',
-            productCode: 'LK700',
-            proddescription: 'Linksys Cable Modem compatible with all cables',
-            prodRating: 4.1
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 3,
-            productName: 'TP Link Cable Modem',
-            productCode: 'TPL700',
-            proddescription: 'TP Link Cable Modem compatible with all cables',
-            prodRating: 4.2
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
 
          {
-            id: 1,
-            productName: 'Netgear Cable Modem',
-            productCode: 'CM700',
-            proddescription: 'Netgear Cable Modem compatible with all cables',
-            prodRating: 4.0
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 2,
-            productName: 'Linksys Cable Modem',
-            productCode: 'LK700',
-            proddescription: 'Linksys Cable Modem compatible with all cables',
-            prodRating: 4.1
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 3,
-            productName: 'TP Link Cable Modem',
-            productCode: 'TPL700',
-            proddescription: 'TP Link Cable Modem compatible with all cables',
-            prodRating: 4.2
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 1,
-            productName: 'Netgear Cable Modem',
-            productCode: 'CM700',
-            proddescription: 'Netgear Cable Modem compatible with all cables',
-            prodRating: 4.0
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 2,
-            productName: 'Linksys Cable Modem',
-            productCode: 'LK700',
-            proddescription: 'Linksys Cable Modem compatible with all cables',
-            prodRating: 4.1
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 3,
-            productName: 'TP Link Cable Modem',
-            productCode: 'TPL700',
-            proddescription: 'TP Link Cable Modem compatible with all cables',
-            prodRating: 4.2
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         }, {
-            id: 1,
-            productName: 'Netgear Cable Modem',
-            productCode: 'CM700',
-            proddescription: 'Netgear Cable Modem compatible with all cables',
-            prodRating: 4.0
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 2,
-            productName: 'Linksys Cable Modem',
-            productCode: 'LK700',
-            proddescription: 'Linksys Cable Modem compatible with all cables',
-            prodRating: 4.1
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
         {
-            id: 3,
-            productName: 'TP Link Cable Modem',
-            productCode: 'TPL700',
-            proddescription: 'TP Link Cable Modem compatible with all cables',
-            prodRating: 4.2
+            userID: 1,
+            name: 'Netgear Cable Modem',
+            gender: 'CM700',
+            address:'hyderabad',
+            mobile: 1234578,
+            age: 4.0,
+            bloodGroup:'b+',
+            temparature:'120C',
+            bloodPresure:'120',
+            sugarLevel:'120c'
         },
     ];

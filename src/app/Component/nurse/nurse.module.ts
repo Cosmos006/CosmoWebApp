@@ -11,12 +11,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { DynamicViewComponent } from './dynamic-view/dynamic-view.component';
 
 
 @NgModule({
   declarations: [
     NurseDashboardComponent,
     AppointmentViewComponent,
+    DynamicViewComponent,
     
   ],
   imports: [
