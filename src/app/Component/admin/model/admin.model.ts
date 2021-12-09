@@ -5,3 +5,8 @@ export interface PeriodicElement {
   weight: number;
   symbol: string;
 }
+
+export class EventMap {
+  // public id: string,
+  constructor(public title: string, public date: string) {}
+}
