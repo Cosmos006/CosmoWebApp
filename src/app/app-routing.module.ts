@@ -8,6 +8,8 @@ import { PatientUserComponent } from './Component/admin/patient-user/patient-use
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
 import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
+import { AppointmentViewComponent } from './Component/nurse/appointment-view/appointment-view.component';
+import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
@@ -59,8 +61,16 @@ const routes: Routes = [
     path: 'NurseDashboard',
   },
   {
+    component: AppointmentViewComponent,
+    path: 'AppointmentView',
+  },
+  {
     component: PatientDetailsComponent,
     path: 'PatientDetails',
+  },
+  {
+    component: DynamicViewComponent,
+    path: 'DynamicView',
   },
   {
     component: PatientBookappointmentComponent,
