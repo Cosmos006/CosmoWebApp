@@ -48,16 +48,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
 //Component
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
-import { LoginComponent } from './Component/login/login.component';
 import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
-import { HomeComponent } from './Component/home/home.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
-//Internet Check
+import {MatGridListModule} from '@angular/material/grid-list'
+import { NavMenuComponent } from './Component/home/nav-menu/nav-menu.component';
+import { LoginComponent } from './Component/home/login/login.component';
+import { HomeComponent } from './Component/home/home/home.component';
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+//Internet Check
+
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -79,8 +81,10 @@ FullCalendarModule.registerPlugins([
     AddPhysicianComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

@@ -1,4 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+<<<<<<< HEAD
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.mat-dialog-container{
+    box-shadow: none;
+    background:none;
+    color: #0000;
+    width: 100%;
+}
+.pointer{
+    cursor: pointer;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0;
+  }
+  .mat-input-element {
+    font: inherit;
+     background: white!important;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    vertical-align: bottom;
+    text-align: inherit;
+    box-sizing: content-box;
+}
+.mat-form-field-appearance-legacy .mat-form-field-label {
+    color: white!important;
+}
+.mat-form-field.mat-form-field .mat-form-field-label{
+    color:#ddd!important;
+}
+
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: #f44336!important;
+}
+=======
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+>>>>>>> 32da54df22cb60eb27ee3947856a6dc1a2394a3e
