@@ -27,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import { AppointmentViewComponent } from './Component/nurse/appointment-view/appointment-view.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -59,6 +60,7 @@ import { HomeComponent } from './Component/home/home.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
+import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -73,11 +75,13 @@ FullCalendarModule.registerPlugins([
     LoginComponent,
     HomeComponent,
     PhysicianComponent,
+    AppointmentViewComponent,
     PatientDetailsComponent,
     PatientBookappointmentComponent,
     ViewPhysicianComponent,
     AdminCalendarComponent,
     AddPhysicianComponent,
+    DynamicViewComponent,
   ],
   imports: [
     BrowserModule,
