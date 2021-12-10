@@ -11,9 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {  MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -37,7 +37,6 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SchedulerModule } from 'angular-calendar-scheduler';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 //full Calender
@@ -62,6 +61,9 @@ import { PhysicianComponent } from './Component/physician/physician.component';
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edit-dailoge.component';
+
+
+
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -84,11 +86,15 @@ FullCalendarModule.registerPlugins([
     AddPhysicianComponent,
     DynamicViewComponent,
     EditDailogeComponent,
+   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatFormFieldModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     //Material Component
@@ -115,7 +121,7 @@ FullCalendarModule.registerPlugins([
     CdkTableModule,
     CdkStepperModule,
     MatRadioModule,
-    MatSelectModule,
+  
 
     //Full Calender
     FullCalendarModule,
@@ -128,7 +134,6 @@ FullCalendarModule.registerPlugins([
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
     MatProgressSpinnerModule,
   ],
   exports: [],
