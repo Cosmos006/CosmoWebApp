@@ -15,6 +15,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { PatientBookappointmentComponent } from './patient-bookappointment/patient-bookappointment.component';
 import { PatientViewdetailsComponent } from './patient-viewdetails/patient-viewdetails.component';
+import { MatOption } from '@angular/material/core';
+
+
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { PatientViewdetailsComponent } from './patient-viewdetails/patient-viewd
   ],
   imports: [
     CommonModule,
+    
     MatDatepickerModule,
     MatExpansionModule,
     MatIconModule,

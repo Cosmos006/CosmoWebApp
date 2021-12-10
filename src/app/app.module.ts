@@ -31,6 +31,7 @@ import { AppointmentViewComponent } from './Component/nurse/appointment-view/app
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
+
 //khushabu
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 //import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -49,16 +50,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
 //Component
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
-import { LoginComponent } from './Component/login/login.component';
 import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
-import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
-import { HomeComponent } from './Component/home/home.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
+import {MatGridListModule} from '@angular/material/grid-list'
+import { NavMenuComponent } from './Component/home/nav-menu/nav-menu.component';
+import { LoginComponent } from './Component/home/login/login.component';
+import { HomeComponent } from './Component/home/home/home.component';
+import { DynamicTableComponent } from './Component/reusable/dynamic-table/dynamic-table.component';
+import { ChartComponent } from './Component/reusable/chart/chart.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
+import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+import { RegisterComponent } from './Component/home/Register/register.component';
+import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './Services/Authservice/auth.service';
+import { UserService } from './Services/Userservice/userservice/user.service';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edit-dailoge.component';
 
@@ -84,13 +93,19 @@ FullCalendarModule.registerPlugins([
     ViewPhysicianComponent,
     AdminCalendarComponent,
     AddPhysicianComponent,
-    DynamicViewComponent,
+    RegisterComponent,ForgotpasswordComponent
+    ,DynamicViewComponent,
+  
+    DynamicTableComponent,
     EditDailogeComponent,
-   
+    ChartComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    MatIconModule,
+    MatGridListModule,
     FormsModule,
     MatOptionModule,
     MatSelectModule,
@@ -112,12 +127,14 @@ FullCalendarModule.registerPlugins([
     MatTableModule,
     MatSidenavModule,
     MatListModule,
+    MatIconModule,
     FlexLayoutModule,
     MatCardModule,
     MatNativeDateModule,
     MatToolbarModule,
     MatInputModule,
     MatIconModule,
+    MatDialogModule,
     CdkTableModule,
     CdkStepperModule,
     MatRadioModule,
@@ -134,10 +151,14 @@ FullCalendarModule.registerPlugins([
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+<<<<<<< HEAD
+=======
+   // SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
+>>>>>>> physiciandetails_branch
     MatProgressSpinnerModule,
   ],
   exports: [],
-  providers: [],
+  providers: [UserService,AuthGuard,AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
