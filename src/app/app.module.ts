@@ -151,10 +151,7 @@ FullCalendarModule.registerPlugins([
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-<<<<<<< HEAD
-=======
    // SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
->>>>>>> physiciandetails_branch
     MatProgressSpinnerModule,
   ],
   exports: [],
