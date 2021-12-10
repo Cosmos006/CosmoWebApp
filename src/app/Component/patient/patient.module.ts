@@ -17,6 +17,8 @@ import { PatientBookappointmentComponent } from './patient-bookappointment/patie
 import { PatientViewdetailsComponent } from './patient-viewdetails/patient-viewdetails.component';
 import { MatOption } from '@angular/material/core';
 
+
+
 @NgModule({
   declarations: [
     PatientDetailsComponent,
@@ -25,6 +27,7 @@ import { MatOption } from '@angular/material/core';
   ],
   imports: [
     CommonModule,
+    
     MatDatepickerModule,
     MatExpansionModule,
     MatIconModule,

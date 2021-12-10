@@ -30,6 +30,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
+
 //khushabu
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 //import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -58,6 +59,11 @@ import { LoginComponent } from './Component/home/login/login.component';
 import { HomeComponent } from './Component/home/home/home.component';
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+import { RegisterComponent } from './Component/home/Register/register.component';
+import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './Services/Authservice/auth.service';
+import { UserService } from './Services/Userservice/userservice/user.service';
 //Internet Check
 
 //Edit Table
@@ -79,11 +85,15 @@ FullCalendarModule.registerPlugins([
     ViewPhysicianComponent,
     AdminCalendarComponent,
     AddPhysicianComponent,
-  ],
+    RegisterComponent,ForgotpasswordComponent
+    
+  ]
+  ,
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    MatIconModule,
     MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
@@ -103,12 +113,14 @@ FullCalendarModule.registerPlugins([
     MatTableModule,
     MatSidenavModule,
     MatListModule,
+    MatIconModule,
     FlexLayoutModule,
     MatCardModule,
     MatNativeDateModule,
     MatToolbarModule,
     MatInputModule,
     MatIconModule,
+    MatDialogModule,
     CdkTableModule,
     CdkStepperModule,
     MatRadioModule,
@@ -129,7 +141,7 @@ FullCalendarModule.registerPlugins([
     MatProgressSpinnerModule,
   ],
   exports: [],
-  providers: [],
+  providers: [UserService,AuthGuard,AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

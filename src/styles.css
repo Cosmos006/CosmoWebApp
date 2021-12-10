@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-<<<<<<< HEAD
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 .mat-dialog-container{
@@ -40,8 +39,3 @@
 .mat-form-field.mat-form-field-invalid .mat-form-field-label {
     color: #f44336!important;
 }
-=======
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
->>>>>>> 32da54df22cb60eb27ee3947856a6dc1a2394a3e
