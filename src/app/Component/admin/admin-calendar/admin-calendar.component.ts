@@ -70,7 +70,7 @@ export class AdminCalendarComponent implements OnInit {
     //select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
-    height: 700,
+    height: 500,
     aspectRatio: 1.5,
     scrollTime: '00:00',
     events: this.value,
