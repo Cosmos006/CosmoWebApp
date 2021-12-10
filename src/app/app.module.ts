@@ -66,8 +66,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './Services/Authservice/auth.service';
 import { UserService } from './Services/Userservice/userservice/user.service';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
-//Internet Check
-
+import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edit-dailoge.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -91,7 +90,7 @@ FullCalendarModule.registerPlugins([
     RegisterComponent,ForgotpasswordComponent
     ,DynamicViewComponent
   ]
-  ,
+ ,
   imports: [
     HttpClientModule,
     BrowserModule,

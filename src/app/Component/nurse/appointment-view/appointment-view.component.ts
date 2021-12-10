@@ -3,7 +3,11 @@ import { MatSort} from '@angular/material/sort';
 
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { Product, products } from './appointments';
+import { Product,products } from 'src/app/models/appointment';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDailogeComponent } from '../dailoge/edit-dailoge/edit-dailoge.component';
+
+
 
 /**
  * @title Table with sorting
@@ -20,6 +24,10 @@ dataSource = new MatTableDataSource(products);
 @ViewChild(MatPaginator) paginator !: MatPaginator;
 @ViewChild(MatSort, {}) sort !: MatSort;
 
+
+constructor(
+  public dialogService: MatDialog
+  ) {}
   /**
    * Set the sort after the view init since this component will
    * be able to query its view for the initialized sort.
@@ -29,11 +37,21 @@ dataSource = new MatTableDataSource(products);
     this.dataSource.sort = this.sort;
   }
 
+
    ngOnInit() {
     //this.dataSource = this.products;
     //this.dataSource.paginator = this.paginator;
 
   }
+  startEdit(data:any[]){
+    console.log("edit worked",data)
+    const dialogRef = this.dialogService.open(EditDailogeComponent, {
+      data: {data}
+    });
+    dialogRef.afterClosed()
+  }
+
+  
 
 
 
@@ -49,3 +67,7 @@ dataSource = new MatTableDataSource(products);
   
 
 }
+function ELEMENT_DATA(ELEMENT_DATA: any) {
+  throw new Error('Function not implemented.');
+}
+
