@@ -19,25 +19,32 @@ export class AdminCalendarComponent implements OnInit {
   name!: string;
   date?: string;
   showModal!: boolean;
-
+  calendarVisible = false;
   listOfEvent: EventMap[] = [];
   value: EventMap[] = [];
   constructor(private adminService: AdminService) {}
 
   ngOnInit() {
-    this.adminService.GetListofData().subscribe((x) => {
-      this.listOfEvent.push(...x);
-      for (var i = 0; i < this.listOfEvent.length; i++) {
-        var title = this.listOfEvent[i].title;
-        var start = DateType(this.listOfEvent[i].date);
-        this.value.push({
-          // id: this.listOfEvent[i].id,
-          title: this.listOfEvent[i].title,
-          date: this.listOfEvent[i].date,
-        });
-      }
-    });
-    console.log(this.value[1].title);
+    this.adminService
+      .GetListofData()
+      .subscribe((x) => {
+        this.listOfEvent.push(...x);
+        for (var i = 0; i < this.listOfEvent.length; i++) {
+          var title = this.listOfEvent[i].title;
+          var start = DateType(this.listOfEvent[i].date);
+          this.value.push({
+            Id: this.listOfEvent[i].Id,
+            title: this.listOfEvent[i].title,
+            date: this.listOfEvent[i].date,
+            color: this.listOfEvent[i].color,
+          });
+        }
+      })
+      .add(() => {
+        if (this.value.length > 0) {
+          this.calendarVisible = true;
+        }
+      });
 
     function DateType(date: any): Date {
       var convertDate = new Date(date);
@@ -45,35 +52,35 @@ export class AdminCalendarComponent implements OnInit {
       return convertDate;
     }
   }
-  calendarVisible = true;
+
   calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
-    //initialView: 'dayGridMonth',
+    initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: false,
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
-    select: this.handleDateSelect.bind(this),
+    //select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
-
-    /* you can update a remote database when these fire:
-    eventAdd:
-    eventChange:
-    eventRemove:
-    */
-    // events: [
-    //   { title: 'Today Checkup', date: new Date('12-2-2021 13:15:30') },
-    //   { title: 'Doctor Appointment', date: new Date() },
-    // ],
+    height: 400,
+    aspectRatio: 1.5,
+    scrollTime: '00:00',
     events: this.value,
-    //events: [{ title: 'event 2', date: '2021-12-04 13:15:30' }],
+    // events: [
+    //   {
+    //     title: 'event 2',
+    //     date: '2021-12-04 13:15:30',
+    //     color: 'blue',
+    //     id: '1234',
+    //   },
+    // ],
   };
 
   handleDateClick(arg: any) {
@@ -111,9 +118,9 @@ export class AdminCalendarComponent implements OnInit {
   handleEventClick(clickInfo: EventClickArg) {
     this.name = clickInfo.event.title;
     var dateparms = clickInfo.event._instance?.range.start;
+    var ID = clickInfo.event._def?.publicId;
     var date = dateparms?.toDateString();
     var time = dateparms?.toTimeString();
-    //if(clickInfo.event.de)
     this.date = date;
     this.showModal = true;
   }

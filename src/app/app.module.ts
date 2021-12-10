@@ -27,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import { AppointmentViewComponent } from './Component/nurse/appointment-view/appointment-view.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -80,6 +81,7 @@ FullCalendarModule.registerPlugins([
     LoginComponent,
     HomeComponent,
     PhysicianComponent,
+    AppointmentViewComponent,
     PatientDetailsComponent,
     PatientBookappointmentComponent,
     ViewPhysicianComponent,
