@@ -61,6 +61,7 @@ import { PhysicianComponent } from './Component/physician/physician.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
+import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edit-dailoge.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -82,6 +83,7 @@ FullCalendarModule.registerPlugins([
     AdminCalendarComponent,
     AddPhysicianComponent,
     DynamicViewComponent,
+    EditDailogeComponent,
   ],
   imports: [
     BrowserModule,
