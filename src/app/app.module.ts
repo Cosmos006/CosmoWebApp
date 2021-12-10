@@ -93,7 +93,7 @@ FullCalendarModule.registerPlugins([
     RegisterComponent,ForgotpasswordComponent
     ,DynamicViewComponent,
   
- 
+    DynamicTableComponent,
     EditDailogeComponent,
     ChartComponent,
   ],
