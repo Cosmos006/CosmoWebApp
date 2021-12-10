@@ -65,6 +65,7 @@ import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotp
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './Services/Authservice/auth.service';
 import { UserService } from './Services/Userservice/userservice/user.service';
+import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 //Internet Check
 
 //Edit Table
@@ -88,7 +89,7 @@ FullCalendarModule.registerPlugins([
     AdminCalendarComponent,
     AddPhysicianComponent,
     RegisterComponent,ForgotpasswordComponent
-    
+    ,DynamicViewComponent
   ]
   ,
   imports: [
