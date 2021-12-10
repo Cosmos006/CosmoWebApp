@@ -58,6 +58,8 @@ import { PatientDetailsComponent } from './Component/patient/patient-details/pat
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
 import { HomeComponent } from './Component/home/home.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
+import { DynamicTableComponent } from './Component/reusable/dynamic-table/dynamic-table.component';
+import { ChartComponent } from './Component/reusable/chart/chart.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
@@ -82,6 +84,8 @@ FullCalendarModule.registerPlugins([
     AdminCalendarComponent,
     AddPhysicianComponent,
     DynamicViewComponent,
+    DynamicTableComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
