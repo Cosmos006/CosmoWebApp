@@ -58,6 +58,9 @@ import {MatGridListModule} from '@angular/material/grid-list'
 import { NavMenuComponent } from './Component/home/nav-menu/nav-menu.component';
 import { LoginComponent } from './Component/home/login/login.component';
 import { HomeComponent } from './Component/home/home/home.component';
+import { DynamicTableComponent } from './Component/reusable/dynamic-table/dynamic-table.component';
+import { ChartComponent } from './Component/reusable/chart/chart.component';
+//Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { RegisterComponent } from './Component/home/Register/register.component';
@@ -88,9 +91,12 @@ FullCalendarModule.registerPlugins([
     AdminCalendarComponent,
     AddPhysicianComponent,
     RegisterComponent,ForgotpasswordComponent
-    ,DynamicViewComponent
-  ]
- ,
+    ,DynamicViewComponent,
+  
+ 
+    EditDailogeComponent,
+    ChartComponent,
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,

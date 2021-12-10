@@ -1,31 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/Services/admin.service';
-
-export interface PeriodicElement {
-  name: string;
-
-  position: number;
-
-  weight: number;
-
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-];
+import { data } from '../../../models/data';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-view-physician',
@@ -33,10 +9,81 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./view-physician.component.css'],
 })
 export class ViewPhysicianComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  productSearchForm?: FormGroup;
+  showProgress = false;
+  showTableResults = false;
 
-  dataSource = ELEMENT_DATA;
-  constructor(private userService: AdminService) {}
+  results = data;
+  allResults = data;
+  fakeData: any;
 
-  ngOnInit(): void {}
+  //row: any;
+
+  //test
+  value?: string = 'abcd';
+  columns: any[] = [
+    {
+      columnDef: 'productName',
+      header: 'Product Name',
+      dataName: (row: { name: any }) => `${row.name}`,
+    },
+    {
+      columnDef: 'productDescription',
+      header: 'Description',
+      dataName: (row: { itemDescription: any }) => `${row.itemDescription}`,
+    },
+    {
+      columnDef: 'detailBtn',
+      header: 'View/Edit',
+      dataName: (row: { guid: any }) => `${row.guid}`,
+    },
+  ];
+  pageIndex = 1;
+  pageSize = 25;
+  metaCount?: number;
+
+  constructor(private userService: AdminService) {
+    this.fakeData = data;
+  }
+
+  ngOnInit() {
+    this.productSearchForm = new FormGroup({
+      productSearchBox: new FormControl('', {
+        validators: [Validators.required],
+      }),
+    });
+  }
+
+  onSubmit() {
+    this.getProductsSearched(this.productSearchForm?.value.productSearchBox);
+  }
+
+  getProductsSearched(searchTerm: any) {
+    this.allResults = this.fakeData;
+  }
+
+  getAllProducts(pageIndex: number, pageSize: number) {
+    // this.productSearchForm.reset(); // clear search field for better UX
+
+    this.allResults = this.fakeData;
+    this.metaCount = this.results.length;
+    // console.log(this.metaCount);
+    // console.log(this.results)
+  }
+
+  tabClick(tab: any) {
+    if ((tab.index = 1)) {
+      this.getAllProducts(this.pageIndex, this.pageSize);
+    }
+  }
+
+  // Functions used by data-table component
+  updatePagination(event: any) {
+    const correctedIndex = event.pageIndex + 1;
+    this.getAllProducts(correctedIndex, event.pageSize);
+  }
+
+  viewItem(guid: any) {
+    alert(guid);
+  }
 }

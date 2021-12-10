@@ -19,6 +19,7 @@ export class AdminCalendarComponent implements OnInit {
   name!: string;
   date?: string;
   showModal!: boolean;
+  ApproveModal!: boolean;
   calendarVisible = false;
   listOfEvent: EventMap[] = [];
   value: EventMap[] = [];
@@ -69,7 +70,7 @@ export class AdminCalendarComponent implements OnInit {
     //select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
-    height: 400,
+    height: 700,
     aspectRatio: 1.5,
     scrollTime: '00:00',
     events: this.value,
@@ -121,8 +122,13 @@ export class AdminCalendarComponent implements OnInit {
     var ID = clickInfo.event._def?.publicId;
     var date = dateparms?.toDateString();
     var time = dateparms?.toTimeString();
+    var color = clickInfo.event._def?.ui.backgroundColor;
     this.date = date;
-    this.showModal = true;
+    if (color == 'red') {
+      this.ApproveModal = true;
+    } else {
+      this.showModal = true;
+    }
   }
 
   handleEvents(events: EventApi[]) {
@@ -130,5 +136,8 @@ export class AdminCalendarComponent implements OnInit {
   }
   hide() {
     this.showModal = false;
+  }
+  Approvehide() {
+    this.ApproveModal = false;
   }
 }
