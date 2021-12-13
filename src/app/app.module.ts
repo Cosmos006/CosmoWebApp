@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {  MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
@@ -31,9 +31,8 @@ import { AppointmentViewComponent } from './Component/nurse/appointment-view/app
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
-
 //khushabu
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+//import { MatMomentDateModule } from '@angular/material-moment-adapter';
 //import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -54,7 +53,7 @@ import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-c
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
-import {MatGridListModule} from '@angular/material/grid-list'
+import { MatGridListModule } from '@angular/material/grid-list';
 import { NavMenuComponent } from './Component/home/nav-menu/nav-menu.component';
 import { LoginComponent } from './Component/home/login/login.component';
 import { HomeComponent } from './Component/home/home/home.component';
@@ -70,8 +69,6 @@ import { AuthService } from './Services/Authservice/auth.service';
 import { UserService } from './Services/Userservice/userservice/user.service';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edit-dailoge.component';
-
-
 
 //Edit Table
 FullCalendarModule.registerPlugins([
@@ -93,9 +90,10 @@ FullCalendarModule.registerPlugins([
     ViewPhysicianComponent,
     AdminCalendarComponent,
     AddPhysicianComponent,
-    RegisterComponent,ForgotpasswordComponent
-    ,DynamicViewComponent,
-  
+    RegisterComponent,
+    ForgotpasswordComponent,
+    DynamicViewComponent,
+
     DynamicTableComponent,
     EditDailogeComponent,
     ChartComponent,
@@ -138,7 +136,6 @@ FullCalendarModule.registerPlugins([
     CdkTableModule,
     CdkStepperModule,
     MatRadioModule,
-  
 
     //Full Calender
     FullCalendarModule,
@@ -151,11 +148,11 @@ FullCalendarModule.registerPlugins([
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-   // SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
+    // SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
     MatProgressSpinnerModule,
   ],
   exports: [],
-  providers: [UserService,AuthGuard,AuthService],
+  providers: [UserService, AuthGuard, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
