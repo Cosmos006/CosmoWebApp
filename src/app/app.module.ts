@@ -38,6 +38,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+// import { SchedulerModule } from 'angular-calendar-scheduler';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 //full Calender
@@ -73,6 +74,7 @@ import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edi
 
 
 
+import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -99,6 +101,7 @@ FullCalendarModule.registerPlugins([
     DynamicTableComponent,
     EditDailogeComponent,
     ChartComponent,
+    PatientDashboardComponent
   ],
   imports: [
     HttpClientModule,
@@ -152,6 +155,7 @@ FullCalendarModule.registerPlugins([
       useFactory: adapterFactory,
     }),
    // SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
+    // SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange' }),
     MatProgressSpinnerModule,
   ],
   exports: [],
