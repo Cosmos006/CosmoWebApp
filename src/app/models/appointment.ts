@@ -5,10 +5,8 @@ export interface Product {
     address: string;
     mobile: number;
     age:number;
-    bloodGroup?:string;
-    temparature?:string;
-    bloodPresure?:string;
-    sugarLevel?:string;
+    email:string;
+    physician:string;
 }
 
 

@@ -6,6 +6,7 @@ import { EditDailogeComponent } from '../dailoge/edit-dailoge/edit-dailoge.compo
 import { DailogeService } from 'src/app/Services/dailoge.service';
 import { Product } from 'src/app/models/appointment';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 /**
  * @title Table with sorting
@@ -16,12 +17,12 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./appointment-view.component.css']
 })
 export class AppointmentViewComponent {
-  displayedColumns = ['id', 'name', 'gender', 'address', 'mobile', 'age', 'bloodGroup', 'temparature', 'bloodPresure', 'sugarLevel', 'edit', 'delete'];
+  displayedColumns = ['id', 'name', 'gender', 'address', 'mobile', 'age', 'email','physician','edit', 'pastvisit','delete'];
   dataSource1 !: MatTableDataSource<Product>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
 
-  constructor(public dialogService: MatDialog, public appoiService: DailogeService) { }
+  constructor(public dialogService: MatDialog, public appoiService: DailogeService, private router:Router) { }
 
   ngOnInit() {
     this.getdata();
@@ -47,6 +48,10 @@ export class AppointmentViewComponent {
   onDelete(rowid: number) {
     this.appoiService.deletePostapp(rowid);
     this.getdata();
+  }
+  OnVisit(){
+    console.log("vamsiclicked")
+    this.router.navigateByUrl('/PatientDetails');
   }
 
 }

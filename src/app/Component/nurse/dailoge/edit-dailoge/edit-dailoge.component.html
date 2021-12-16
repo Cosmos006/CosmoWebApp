@@ -1,37 +1,46 @@
 <div class="container">
-    <form class="mat-dialog-content" #formControl="ngForm">
+    <form class="mat-dialog-content" #formControl="ngForm" >
   <h3>Edit Appointment Details</h3>
         <div class="form">
             <mat-form-field color="accent">
-                <input matInput #input class="form-control" placeholder="Name" [(ngModel)]="this.data.data.name" name="name" required minlength="4" >             
+                <input matInput #input class="form-control" placeholder="Name" [(ngModel)]="this.name" name="name" maxlength="15" required>    
+                                     
               </mat-form-field>
-          </div>
-          
+          </div>        
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="Gender" [(ngModel)]="this.data.data.gender" name="gender" required>             
+              <input matInput #input class="form-control" placeholder="Gender" [(ngModel)]="this.gender" name="gender" required>             
             </mat-form-field>
             &nbsp; &nbsp; &nbsp;
             <mat-form-field color="accent">
-                <input matInput #input class="form-control" placeholder="Address" [(ngModel)]="this.data.data.address" name="address">             
+                <input matInput #input class="form-control" placeholder="Address" [(ngModel)]="this.address" name="address">             
               </mat-form-field>
           </div>
           <div class="form" style="font-size: medium;">
             <mat-form-field color="accent">
-                <input matInput #input class="form-control" placeholder="Age" [(ngModel)]="this.data.data.age" name="age" required >             
+                <input matInput #input class="form-control" placeholder="Age" [(ngModel)]="this.age" name="age" required >             
               </mat-form-field>
               &nbsp; &nbsp; &nbsp;
               <mat-form-field color="accent">
-                  <input matInput #input class="form-control" placeholder="BloodGroup" [(ngModel)]="this.data.data.bloodGroup"  name="bloodgroup" required >             
+                  <input matInput #input class="form-control" placeholder="BloodGroup" [(ngModel)]="this.bloodGroup"  name="bloodgroup" required >             
                 </mat-form-field>
           </div>
           <div class="form">
             <mat-form-field color="accent">
-                <input matInput #input class="form-control" placeholder="Temparature" [(ngModel)]="this.data.data.temparature"  name="temparature" required >             
+                <input matInput #input class="form-control" placeholder="Temparature" [(ngModel)]="this.temparature"  name="temparature" required >             
               </mat-form-field>
               &nbsp; &nbsp; &nbsp;
               <mat-form-field color="accent">
-                  <input matInput #input class="form-control" placeholder="SugarLevel" [(ngModel)]="this.data.data.sugarLevel" name="sugarlevel" required >             
+                  <input matInput #input class="form-control" placeholder="SugarLevel" [(ngModel)]="this.sugarLevel" name="sugarlevel" required >             
+                </mat-form-field>
+          </div>
+          <div class="form">
+            <mat-form-field color="accent">
+                <input matInput #input class="form-control" placeholder="Mobile" [(ngModel)]="this.mobile"  name="mobile" required >             
+              </mat-form-field>
+              &nbsp; &nbsp; &nbsp;
+              <mat-form-field color="accent">
+                  <input matInput #input class="form-control" placeholder="BloodPresure" [(ngModel)]="this.bloodPresure" name="bloodPresure" required >             
                 </mat-form-field>
           </div>
           <div mat-dialog-actions>
