@@ -1,0 +1,323 @@
+<div class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Dashboard</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ 
+      
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-info" style="padding: 13px">
+                <div class="inner">
+                  <h3>10</h3>
+                  <p>Total Appointments</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-danger" style="padding: 13px">
+                <div class="inner">
+                  <h3>650</h3>
+                  <p>Blood Pressure</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer"
+                      >More info <i class="fas fa-arrow-circle-right"></i
+                    ></a> -->
+              </div>
+            </div>
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-warning" style="padding: 13px">
+                <div class="inner" style="color: #fff">
+                  <h3>66-85</h3>
+                  <p>Glucose Level</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-success" style="padding: 11px">
+                <div class="inner">
+                  <h3 style="font-size: 20px">Add Demographic Details</h3>
+                  <br />
+                  <button type="button" class="btn btn-primary float-center">
+                    Click here
+                  </button>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Main row -->
+          <div class="row">
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-12 connectedSortable">
+              <!-- /.card -->
+
+              <div class="card">
+                <div class="card-header">
+                  <mat-form-field appearance="fill" style="width: 25%">
+                    <mat-label>Select Appointment</mat-label>
+                    <mat-select
+                      (selectionChange)="filterAppointments(selectedValue)"
+                      [(ngModel)]="selectedValue"
+                      name="appointment"
+                    >
+                      <mat-option
+                        *ngFor="let appointment of appointments"
+                        [value]="appointment.value"
+                      >
+                        {{ appointment.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                   
+                  </mat-form-field>
+                  <div class="card-tools">
+                    <div
+                      class="input-group input-group-sm"
+                      style="width: 150px"
+                    >
+                      <input
+                        type="text"
+                        name="table_search"
+                        [(ngModel)]="searchText"
+                        class="form-control float-right"
+                        placeholder="Search"
+                      />
+
+                      <div class="input-group-append">
+                        <button type="submit" (click)="filterAppointments(selectedValue)" class="btn btn-default">
+                          <i class="fa fa-fw fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="card-body p-0">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr *ngFor="let h of gridheader; let i = index">
+                        <th style="width: 10px"></th>
+                        <th>{{ h.doctorName }}</th>
+                        <th>{{ h.nurseName }}</th>
+                        <th>{{ h.date }}</th>
+                        <th *ngIf="selectedValue != '2'">{{ h.diagnosis }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of griddata; let i = index">
+                        <td></td>
+                        <td>{{ item.doctorName }}</td>
+                        <td>{{ item.nurseName }}</td>
+                        <td>{{ item.date | date:'short' }}</td>
+                        <td *ngIf="selectedValue != '2'">{{ item.diagnosis }}</td>
+
+                        <td>
+                          <button *ngIf="selectedValue == '1'" (click)="ModifyAppointment()" mat-raised-button color="primary">
+                            Modify
+                          </button>
+                          <!-- Past Appointments -->
+                          <button style="padding: 5px;" *ngIf="selectedValue == '2'" (click)="ShowViewdetailModel(item)"  mat-raised-button color="primary">
+                            View Details
+                          </button>
+                          <button style="margin-left: 3px;
+                          padding: 5px;" *ngIf="selectedValue == '2'" (click)="ShowPrescriptionModel()"  mat-raised-button color="primary">
+                            Prescription
+                          </button>
+                          <button *ngIf="selectedValue == '2'" (click)="export(item)"  mat-raised-button color="primary" style="margin-left: 3px;
+                          padding: 5px;">
+                            Export
+                          </button>
+                          <!-- Decline -->
+                          <button *ngIf="selectedValue == '3'" (click)="ShowDeclineInfo()" mat-raised-button color="primary">
+                            <i class="fa fa-fw fa-info-circle"></i> Reason
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+
+              <!-- /.card -->
+            </section>
+            <!-- right col -->
+          </div>
+          <!-- /.row (main row) -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+      <strong
+        >Copyright &copy; 2020-2021
+        <a href="https://adminlte.io">Cosmos Hospital</a>.</strong
+      >
+      All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0
+      </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+</div>
+
+  <!-- /.Decline Modal header -->
+  <div class="modal" id="declineModal" [style.display]="showDeclineModal ? 'block' : 'none'">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Appointment Decline</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="hide()"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+        <h5>Declined By : Patient</h5>
+        <h5>Reason : Date doesn't matched the schedule.</h5>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-dismiss="modal"
+          (click)="hide()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!--  Prescription Modal -->
+  <div class="modal" id="prescriptionModel"  [style.display]="showPrescriptionModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Presciption</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            (click)="hidePrescriptionModel()"
+          >
+            &times;
+          </button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+          <h5>Declined By : Patient</h5>
+          <h5>Reason : Date doesn't matched the schedule.</h5>
+  
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-dismiss="modal"
+            (click)="hidePrescriptionModel()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!--  View Detail Modal -->
+    <div class="modal" id="viewdetailModel"  [style.display]="showviewdetailModel ? 'block' : 'none'">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">View Detail</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              (click)="hideViewdetailModel()"
+            >
+              &times;
+            </button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body" *ngIf="selectedAppointment">
+            <h5> Doctor : {{selectedAppointment.doctorName}} </h5>
+            <h5> Nurse Name : {{ selectedAppointment.nurseName }} </h5>
+            <h5> Diagnosis : {{ selectedAppointment.diagnosis }} </h5>
+            <h5> Appointment Date : {{ selectedAppointment.doctorName | date:'short' }} </h5>
+            <h5>Declined By : Patient</h5>
+            <h5>Reason : Date doesn't matched the schedule.</h5>
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+              (click)="hideViewdetailModel()"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>

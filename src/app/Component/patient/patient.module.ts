@@ -18,12 +18,14 @@ import { PatientViewdetailsComponent } from './patient-viewdetails/patient-viewd
 import { MatOption } from '@angular/material/core';
 
 
+import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 
 @NgModule({
   declarations: [
     PatientDetailsComponent,
     PatientBookappointmentComponent,
     PatientViewdetailsComponent,
+    PatientDashboardComponent,
   ],
   imports: [
     CommonModule,
