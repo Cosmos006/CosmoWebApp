@@ -21,15 +21,10 @@ import { PatientViewdetailsComponent } from './Component/patient/patient-viewdet
 import { PhysicianComponent } from './Component/physician/physician.component';
 
 const routes: Routes = [
- 
- 
-  
-  { 
+  {
     path: 'login',
-    component:LoginComponent
+    component: LoginComponent,
   },
-  
- 
   {
     component: PhysicianComponent,
 
@@ -59,7 +54,6 @@ const routes: Routes = [
     component: ForgotpasswordComponent,
 
     path: 'forgotpassword',
-   
   },
   {
     component: NurseDashboardComponent,
