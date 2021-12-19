@@ -11,8 +11,10 @@ import { Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { PatientDashboardService } from 'src/app/Services/patientdashboard.service';
+
 import {
-  appointmentData,
+  //appointmentData,
   AppointmentData,
   appointments,
   Appointment,
@@ -22,10 +24,6 @@ import {
   AppointmentHeaderData,
 } from 'src/app/models/patientDashboard';
 
-
-
-
-
 @Component({
   selector: 'app-patient-dashboard',
   templateUrl: './patient-dashboard.component.html',
@@ -33,21 +31,20 @@ import {
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PatientDashboardComponent implements OnInit {
-  appointmentData: AppointmentData[] = appointmentData;
+  //appointmentData: AppointmentData[];
   appointmentPastHeaderData: AppointmentPastHeaderData[] =
     appointmentPastHeaderData;
 
-  dataSource = new MatTableDataSource(appointmentData);
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort, {}) sort!: MatSort;
+  //dataSource = new MatTableDataSource(appointmentData);
+  //@ViewChild(MatPaginator) paginator!: MatPaginator;
+  //@ViewChild(MatSort, {}) sort!: MatSort;
 
 
 
-  fakeData = appointmentData;
-  allResults = appointmentData;
-  pastResults = appointmentPastHeaderData;
+  //fakeData = appointmentData;
+  //pastResults = appointmentPastHeaderData;
 
-  value?: string = 'abcd';
+  //value?: string = 'abcd';
   allcolumns: any[] = [
     {
       columnDef: 'doctorName',
@@ -59,7 +56,7 @@ export class PatientDashboardComponent implements OnInit {
       columnDef: 'date',
       isvisible: true,
       header: 'Appointment Date',
-      dataName: (row: { date: Date }) => `${row.date.toLocaleDateString('en-US')}`,
+      dataName: (row: { date: Date }) => `${new Date(row.date).toLocaleDateString('en-US')}`,
     },
     {
       columnDef: 'nurseName',
@@ -102,11 +99,7 @@ export class PatientDashboardComponent implements OnInit {
       dataName: (row: { id: any }) => `${row.id}`,
     },
   ];
-
   showcolumns!: any[];
-
-  pageIndex = 1;
-  pageSize = 25;
   metaCount?: number;
 
   selectedValue: string = '1';
@@ -115,27 +108,39 @@ export class PatientDashboardComponent implements OnInit {
   showviewdetailModel!: boolean;
   selectedAppointment!: AppointmentData;
   searchText!: string;
+
   appointments: Appointment[] = [
     { value: '1', viewValue: 'Upcoming Appointments' },
     { value: '2', viewValue: 'Past Appointments' },
     { value: '3', viewValue: 'Decline Appointments' },
   ];
-  gridheader: AppointmentPastHeaderData[] = [];
-  gridheader1: AppointmentHeaderData[] = [];
+  
+  //gridheader: AppointmentPastHeaderData[] = [];
+  //gridheader1: AppointmentHeaderData[] = [];
+
+  //allResults : AppointmentData[]=[];
   griddata: AppointmentData[] = [];
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private changeDetection: ChangeDetectorRef
+    private changeDetection: ChangeDetectorRef,
+    private patientDashboardService: PatientDashboardService
   ) {}
 
   ngOnInit(): void {
-    this.griddata = this.appointmentData.filter((v) => v.date > new Date());
-    this.filterAppointments('1');
+    this.showcolumns = this.allcolumns;
+    this.patientDashboardService.GetAllAppointmentList()
+      .subscribe((x : AppointmentData[]) => {
+        this.griddata = x.filter((v) => new Date(v.date) > new Date());
+        this.filterAppointments('1');
+      });
+      
 
   }
   filterAppointments(val: any, pagination: any={}) {
+    this.patientDashboardService.GetAllAppointmentList()
+    .subscribe((x : AppointmentData[]) => {
     if (val == '1') {
       this.showcolumns = this.allcolumns.filter(
         (e) =>
@@ -143,16 +148,16 @@ export class PatientDashboardComponent implements OnInit {
           e.columnDef != 'viewdetailBtn' &&
           e.columnDef != 'reasonBtn'
       );
-      this.griddata = this.appointmentData.filter((v) => v.date > new Date());
+      this.griddata = x.filter((v) => new Date(v.date) > new Date());
     } else if (val == '2') {
       // console.log('Hi..');
-      this.griddata = this.appointmentData.filter((v) => v.date < new Date());
+      this.griddata = x.filter((v) => new Date(v.date) < new Date());
       this.showcolumns = this.allcolumns.filter(
         (e) => e.columnDef != 'modifyBtn' && e.columnDef != 'reasonBtn'
       );
     } else if (val == '3') {
 
-      this.griddata = this.appointmentData.filter((v) => v.isDeclined == true);
+      this.griddata = x.filter((v) => v.isDeclined == true);
       this.showcolumns = this.allcolumns.filter(
         (e) =>
           e.columnDef != 'prescriptionBtn' &&
@@ -160,12 +165,13 @@ export class PatientDashboardComponent implements OnInit {
           e.columnDef != 'viewdetailBtn'
       );
     } else {
-      this.griddata = this.appointmentData;
+      this.griddata = x;
       this.showcolumns = this.allcolumns;
     }
     if (this.searchText)
       this.griddata = this.griddata.filter((v) =>
         v.doctorName.includes(this.searchText)
+        || v.nurseName.includes(this.searchText)
       );
 
     if(pagination != null && pagination.pageIndex >= 0)
@@ -173,6 +179,7 @@ export class PatientDashboardComponent implements OnInit {
       this.griddata = this.griddata.slice(pagination.pageIndex * pagination.pageSize,
         (pagination.pageIndex+1) * pagination.pageSize)
     }
+  });
   }
   searchAppointments(val:any)
   {
@@ -245,8 +252,12 @@ export class PatientDashboardComponent implements OnInit {
     }
     if (obj.columnDef == 'viewdetailBtn') {
       var id = obj.guid;
-      let apointdata = appointmentData.find((e) => e.id == obj.guid)!;
-      this.ShowViewdetailModel(apointdata);
+      let apointdata = this.patientDashboardService.GetAppointmentById(Number(obj.guid))
+      .subscribe((v)=>{
+       var data = v.find((e) => e.id == obj.guid)!;
+       this.ShowViewdetailModel(data);
+      });
+      
     }
     if (obj.columnDef == 'reasonBtn') {
       this.ShowDeclineInfo();
