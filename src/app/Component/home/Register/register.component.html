@@ -1,0 +1,166 @@
+<!-- <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div>
+        <img src="~\Login\Login\src\app\login\MicrosoftTeams-image (1).png">
+      </div>
+      <div class="row d-flex justify-content-center align-items-center h-100">
+  
+        <div class="col-md-8 col-lg-5 col-xl-5">
+          <img class="w-75"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvFcQ7_ae2_tLfUIHm0FBZnKWg0PARCDpr-g&usqp=CAU">
+        </div>
+        <div class="col-md-8 col-lg-7 col-xl-7 "> -->
+
+<div class="card auth">
+  <div class="card-body auth-card">
+    <form [formGroup]="userService.formModel" (submit)="onSubmit()">
+      <span
+        alt="user"
+        class="user-image text-center text-white"
+        style="margin-bottom: 1rem"
+        ><h3 class="">Register</h3></span
+      >
+
+      <!-- Title&FN -->
+      <div formGroupName="TitleFName">
+        <div class="form-group row">
+          <div class="col-6">
+            <label for="name">Title : </label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              formControlName="Title"
+              placeholder=""
+            />
+          </div>
+          <div class="col-6">
+            <label for="name">First Name : </label>
+            <input
+              type="text"
+              name="First Name"
+              class="form-control"
+              formControlName="FirstName"
+              placeholder="First Name"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- LN&UserName -->
+      <div formGroupName="LNameUserName">
+        <div class="form-group row">
+          <div class="col-6">
+            <label for="name">Last Name : </label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              formControlName="LastName"
+              placeholder="LastName"
+            />
+          </div>
+          <div class="col-6">
+            <label for="name">User Name : </label>
+            <input
+              type="text"
+              name="User Name "
+              class="form-control"
+              formControlName="UserName"
+              placeholder="User Name"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Contacts -->
+      <div formGroupName="Contacts">
+        <div class="form-group row">
+          <div class="col-6">
+            <label for="name">Phone : </label>
+            <input
+              type="text"
+              name="phone"
+              class="form-control"
+              formControlName="PhoneNo"
+              placeholder="Phone"
+            />
+          </div>
+          <div class="col-6">
+            <label for="name">EmailId : </label>
+            <input
+              type="text"
+              name="EmailId"
+              class="form-control"
+              placeholder="EmailId"
+              formControlName="Email"
+            />
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Passwords -->
+     <!-- <div formGroupName="Passwords">  -->
+        <div class="form-group row">
+          <div class="col-6">
+            <label for="name">Password: </label>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              formControlName="Password"
+            />
+          </div>
+          <div class="col-6">
+            <label for="name">Confirm-Password: </label>
+            <input
+              type="password"
+              name="Confirm-Password: "
+              class="form-control"
+              placeholder="Confirm-Password: "
+              formControlName="ConfirmPassword"
+            />
+            <!-- <label class="text-danger" *ngIf="userService.formModel.get('Passwords.ConfirmPassword').touched && userService.formModel.get('Passwords.ConfirmPassword').errors?.required">This
+              field is mandatory.</label>
+            <label class="text-danger" *ngIf="userService.formModel.get('Passwords.ConfirmPassword').touched && userService.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">Confirm
+              Password does not match.</label> -->
+          </div>
+        </div>
+      <!-- </div> -->
+
+      <div formGroupName="DOB">
+        <div class="form-group row">
+          <div class="col-6">
+            <label for="name">Date of birth : </label>
+            <input
+              type="date"
+              name="Date of birth"
+              class="form-control"
+              placeholder="Date of birth"
+              formControlName="DateOfBirth"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group text-center col-md-8 offset-md-2">
+          <button type="submit" class="btn btn-success justify-content-center" >Sign Up</button>
+          <!-- [disabled]="!userService.formModel.valid" -->
+        </div>
+      </div>
+      <!-- <div class="text-center mb-2">
+        <input type="submit" class="signupbtn" value="Sign Up" />
+      </div> -->
+      <div class="text-center row w-100 login">
+        Already have an account ? <a routerLink="/login">Login</a> here.
+      </div>
+    </form>
+  </div>
+</div>
+<!-- </div>
+        </div>
+      </div>
+  
+  </section> -->

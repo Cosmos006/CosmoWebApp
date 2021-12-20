@@ -13,6 +13,8 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plug
 //DataTable
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 
+//Datateble
+import { MatTabsModule } from '@angular/material/tabs';
 //Http Issue
 import { HttpClientModule } from '@angular/common/http';
 
@@ -26,6 +28,10 @@ import { EventMap } from '../admin/model/admin.model';
 
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PatientUserComponent } from './patient-user/patient-user.component';
+import { DynamicTableComponent } from '../reusable/dynamic-table/dynamic-table.component';
+
+//Import Dynamic table
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -37,6 +43,10 @@ const routes: Routes = [
   {
     path: 'AdminDashBoard',
     component: AdminDashboardComponent,
+  },
+  {
+    path: 'PatientUser',
+    component: PatientUserComponent,
   },
   {
     path: 'AddPhysician',
@@ -58,6 +68,7 @@ const routes: Routes = [
     AddPhysicianComponent,
     ViewPhysicianComponent,
     AdminCalendarComponent,
+    DynamicTableComponent,
   ],
   imports: [
     CommonModule,

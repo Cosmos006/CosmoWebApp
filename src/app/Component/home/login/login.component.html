@@ -1,0 +1,78 @@
+<!-- <section class="vh-100">
+   <div class="container-fluid h-custom">
+    <div>
+      <img src="~\Login\Login\src\app\login\MicrosoftTeams-image (1).png">
+    </div>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+
+      <div class="col-md-8 col-lg-6 col-xl-6">
+        <img class="w-75"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvFcQ7_ae2_tLfUIHm0FBZnKWg0PARCDpr-g&usqp=CAU">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1"> -->
+
+<section class="vh-100 gradient-custom">
+  <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+    <div class="card auth" style="align-content: flex-end">
+      <div class="card-body auth-card">
+        <form [formGroup]="form" (submit)="onSubmit()">
+          <h3 class="text-white text-center">WelCome to Cosmos</h3>
+          <div class="m-0">
+            <mat-form-field class="w-100" style="margin-top: 1.5rem">
+              <!-- <mat-label></mat-label> -->
+              <input
+                matInput
+                placeholder="User"
+                class="form-control"
+                formControlName="UserName"
+                required
+              />
+              <mat-error *ngIf="isFieldInvalid('userName')">
+                Please inform your user name
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div formGroupName="Passwords">
+          <div class="full-width-input m-0">
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                formControlName="Password"
+                required
+              />
+              <mat-error *ngIf="isFieldInvalid('password')">
+                Please inform your password
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="errorstatus" >
+          <strong>Error : </strong> UserName or Password is incorrect
+        </div>
+
+          <div class="text-center mb-2">
+            <button mat-raised-button class="btn-my" type="submit">
+              Login
+            </button>
+          </div>
+        </form>
+        <div class="text-center text-white font-bold sign-up">
+          Don`t have an account ?
+          <a routerLink="/Signup"><b>Sign Up</b></a> here.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--         
+      </div>
+    </div>
+  </div>
+
+</section>
+ -->
