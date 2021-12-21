@@ -18,3 +18,45 @@ button{
     color: white;
     font-size: medium;
 }
+
+div {
+    overflow: inherit;
+}
+@media(max-width:576px){
+    .menu{
+        height: 0vh!important;
+        text-align: left!important;
+        background: #f5f5f5;
+      }
+
+      a{
+        text-decoration: none;
+        font-size: 3.2vw!important;;
+    color: black !important;
+        white-space: nowrap;
+    }
+
+}
+
+
+a{
+    text-decoration: none;
+    font-size: 1.2vw;
+color: white;
+    white-space: nowrap;
+}
+
+
+.example-icon {
+    padding: 0 14px;
+  }
+
+  /* .example-spacer {
+    flex: 1 1 auto;
+  } */
+
+  .mat-sidenav-content{
+      font-size: 200%;
+      background-color: none;
+      text-align: left!important;
+  }

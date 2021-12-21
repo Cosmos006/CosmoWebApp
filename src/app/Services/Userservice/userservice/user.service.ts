@@ -1,11 +1,21 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-@Injectable()
+import { HttpClient } from '@angular/common/http';
+import { User } from 'src/app/Modules/User';
+import { environment } from 'src/environments/environment';
+
+
+@Injectable({ providedIn: 'root' })
 export class UserService {
-  private userDataSource = new BehaviorSubject({email : '', password : ''});
-  currentUserData = this.userDataSource.asObservable();
-  constructor() { }
-  changeData(newUserData:any) {
-    this.userDataSource.next(newUserData)
-  }
+    constructor(private http: HttpClient) { }
+
+    getAll() {
+        return this.http.get<User[]>(`${environment.apiUrl}/users`);
+    }
+
+    getById(id?: number) {
+       
+            return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+
+      
+    }
 }

@@ -65,12 +65,19 @@ import { NetworkStatusAngularModule } from 'network-status-angular';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { RegisterComponent } from './Component/home/Register/register.component';
 import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
-import { AuthGuard } from './auth/auth.guard';
-import { AuthService } from './Services/Authservice/auth.service';
 import { UserService } from './Services/Userservice/userservice/user.service';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edit-dailoge.component';
+//fakebackend
 
+import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+
+// used to create fake backend
+import { AuthGuard, fakeBackendProvider } from './_helpers';
+
+
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { AuthenticationService } from './Services';
 
 
 //Edit Table
@@ -155,7 +162,10 @@ FullCalendarModule.registerPlugins([
     MatProgressSpinnerModule,
   ],
   exports: [],
-  providers: [UserService,AuthGuard,AuthService],
+  providers: [UserService,AuthGuard,AuthenticationService,  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // provider used to create fake backend
+    fakeBackendProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
