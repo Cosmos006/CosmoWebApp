@@ -10,8 +10,12 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+
+
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dynamic-table',
@@ -19,12 +23,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./dynamic-table.component.css'],
 })
 export class DynamicTableComponent implements OnInit {
-  @ViewChild(MatPaginator, { static: false })
-  set paginator(value: MatPaginator) {
-    if (this.dataSource) {
-      this.dataSource.paginator = value;
-    }
-  }
+  @ViewChild(MatPaginator) paginator !: MatPaginator;
+ 
 
   @ViewChild(MatSort, { static: false })
   set sort(value: MatSort) {
@@ -45,25 +45,39 @@ export class DynamicTableComponent implements OnInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   pageIndex = 0;
-  pageSize = 25;
+  pageSize = 10;
   length = 0;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
-  ngOnInit(): void {}
-
-  ngOnChanges() {
+  ngOnInit() {
     if (this.columns !== undefined || this.columns !== null) {
+      console.log(this.receivedData);
       this.dataSource = new MatTableDataSource(this.receivedData);
-
+console.log("vamsi"+this.paginator)
       this.displayedColumns = this.columns.map((x) => x.columnDef);
       this.dataSource.paginator = this.paginator;
 
-      this.dataSource.paginator.pageSize = this.pageSize;
+      // this.dataSource.paginator.pageSize = this.pageSize;
       this.dataSource.paginator.pageIndex = this.pageIndex;
 
       this.dataSource.paginator.length = this.receivedData.length;
     }
+  }
+
+  ngOnChanges() {
+//     if (this.columns !== undefined || this.columns !== null) {
+//       console.log(this.receivedData);
+//       this.dataSource = new MatTableDataSource(this.receivedData);
+// console.log("vamsi"+this.paginator)
+//       this.displayedColumns = this.columns.map((x) => x.columnDef);
+//       this.dataSource.paginator = this.paginator;
+
+//       // this.dataSource.paginator.pageSize = this.pageSize;
+//       this.dataSource.paginator.pageIndex = this.pageIndex;
+
+//       this.dataSource.paginator.length = this.receivedData.length;
+//     }
   }
 
   applyFilter(filterValue: string) {

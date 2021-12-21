@@ -13,6 +13,7 @@ import { NavMenuComponent } from './Component/home/nav-menu/nav-menu.component';
 import { RegisterComponent } from './Component/home/Register/register.component';
 import { AppointmentViewComponent } from './Component/nurse/appointment-view/appointment-view.component';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
+import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
 import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
@@ -93,6 +94,10 @@ const routes: Routes = [
   {
     component: AdminCalendarComponent,
     path: 'AdminCalender',
+  },
+  {
+    component: MatTablegridComponent,
+    path: 'MatTableGrid',
   },
   { path: '**', redirectTo: '' },
 ];

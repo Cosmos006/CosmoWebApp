@@ -75,6 +75,7 @@ import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edi
 
 
 import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
+import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -101,7 +102,8 @@ FullCalendarModule.registerPlugins([
     DynamicTableComponent,
     EditDailogeComponent,
     ChartComponent,
-    PatientDashboardComponent
+    PatientDashboardComponent,
+    MatTablegridComponent
   ],
   imports: [
     HttpClientModule,

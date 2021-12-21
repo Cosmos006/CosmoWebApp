@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/Services/admin.service';
-import { data } from '../../../models/data';
+import { data } from '../../../models/dynamic_data';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-view-physician',
-  templateUrl: './view-physician.component.html',
-  styleUrls: ['./view-physician.component.css'],
+  selector: 'app-mat-tablegrid',
+  templateUrl: './mat-tablegrid.component.html',
+  styleUrls: ['./mat-tablegrid.component.css']
 })
-export class ViewPhysicianComponent implements OnInit {
+export class MatTablegridComponent implements OnInit {
+
   productSearchForm?: FormGroup;
   showProgress = false;
   showTableResults = false;
@@ -23,23 +24,33 @@ export class ViewPhysicianComponent implements OnInit {
   value?: string = 'abcd';
   columns: any[] = [
     {
-      columnDef: 'productName',
-      header: 'Product Name',
+      columnDef: 'id',
+      header: 'ID',
+      dataName: (row: { id: any }) => `${row.id}`,
+    },
+    {
+      columnDef: 'jkjk',
+      header: 'IDj',
+      dataName: (row: { id: any }) => `${row.id}`,
+    },
+    {
+      columnDef: 'name',
+      header: 'Name',
       dataName: (row: { name: any }) => `${row.name}`,
     },
     {
-      columnDef: 'productDescription',
-      header: 'Description',
-      dataName: (row: { description: any }) => `${row.description}`,
-    },
+      columnDef: 'status',
+      header: 'Status',
+      dataName: (row: { status: any }) => `${row.status}`,
+    },   
     {
       columnDef: 'detailBtn',
-      header: 'View/Edit',
+      header: 'Action',
       dataName: (row: { guid: any }) => `${row.guid}`,
     },
   ];
   pageIndex = 1;
-  pageSize = 25;
+  pageSize = 10;
   metaCount?: number;
 
   constructor(private userService: AdminService) {

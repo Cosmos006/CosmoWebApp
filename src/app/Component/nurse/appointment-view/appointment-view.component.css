@@ -25,9 +25,7 @@
 
 .mat-table {
   overflow: auto;
-  font-family: "Open Sans", sans-serif
-  
-  
+  font-family: "Open Sans", sans-serif 
 }
 
 .mat-header-cell.mat-sort-header-sorted {
@@ -52,7 +50,7 @@ h6 {
 
 .mat-cell:nth-child(5),
 .mat-header-cell:nth-child(5) {
-  
+ 
 }
 
 .mat-sort-header-container {
@@ -119,4 +117,49 @@ h6 {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+.mat-column-physician {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 13% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-column-email {
+  /* word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 30% !important; */
+  /* overflow-wrap: break-word;
+  word-wrap: break-word; */
+
+  /* word-break: break-word; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+    
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.table-data-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+th, td {
+  overflow: hidden;
+  width:auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -23,6 +23,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 
 import {MatCardModule} from '@angular/material/card';
+import { MatTablegridComponent } from './mat-tablegrid/mat-tablegrid.component';
 
 
 
@@ -37,6 +38,7 @@ import {MatCardModule} from '@angular/material/card';
     AddDailogeComponent,
     EditDailogeComponent,
     DeleteDailogeComponent,
+    MatTablegridComponent,
     
   ],
   imports: [
