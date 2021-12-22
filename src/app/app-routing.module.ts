@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './auth/auth.guard';
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
 import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
@@ -21,7 +22,7 @@ import { PatientViewdetailsComponent } from './Component/patient/patient-viewdet
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
 import { Role } from './Modules/Role';
-import { AuthGuard } from './_helpers';
+
 
 const routes: Routes = [
  
@@ -75,7 +76,6 @@ const routes: Routes = [
   },
   {
     component: ForgotpasswordComponent,
-
     path: 'forgotpassword',
   },
   {
@@ -87,7 +87,6 @@ const routes: Routes = [
   {
     component: AppointmentViewComponent,
     path: 'AppointmentView',
-
   },
   {
     component: PatientDetailsComponent,
@@ -121,7 +120,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin]}
   },
-  { path: '**', redirectTo: '' },
+  //{ path: '**', redirectTo: '' },
 ];
 
 @NgModule({

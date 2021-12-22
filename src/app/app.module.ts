@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {  MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
@@ -31,6 +31,7 @@ import { AppointmentViewComponent } from './Component/nurse/appointment-view/app
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
+
 //khushabu
 //import { MatMomentDateModule } from '@angular/material-moment-adapter';
 //import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -45,7 +46,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // must go before pl
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plug
 //Http
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
 //Component
 import { AppComponent } from './app.component';
@@ -70,15 +71,19 @@ import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edi
 import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
 //fakebackend
 
-import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 // used to create fake backend
 import { AuthGuard, fakeBackendProvider } from './_helpers';
 
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { AuthenticationService } from './Services';
 
+// import { AuthService } from './Services/Authservice/auth.service';
+
+import { AuthInterceptor } from './auth/auth.interceptor';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AuthenticationService } from './Services';
 
 //Edit Table
 FullCalendarModule.registerPlugins([
@@ -155,12 +160,20 @@ FullCalendarModule.registerPlugins([
     //Internet Check
     NetworkStatusAngularModule.forRoot(),
     MatProgressSpinnerModule,
+
+    MatSnackBarModule//Registratin and Login
   ],
   exports: [],
-  providers: [UserService,AuthGuard,AuthenticationService,  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  providers: [UserService,AuthGuard,AuthenticationService,  
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // provider used to create fake backend
     fakeBackendProvider],
+  //  providers: [UserService,AuthGuard,AuthService,{
+  //   provide: HTTP_INTERCEPTORS,
+  //   useClass:AuthInterceptor,
+  //   multi:true
+  // }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

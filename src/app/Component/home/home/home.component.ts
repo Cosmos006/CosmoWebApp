@@ -14,13 +14,6 @@ export class HomeComponent {
     id!: number;
     userid:any= localStorage.getItem('currentUser');
     isLoggedIn$!: Observable<boolean>; // {1}
-   
-  
-  
-   
-  
-  
-
     constructor(
         private userService: UserService,
         private authenticationService: AuthenticationService
