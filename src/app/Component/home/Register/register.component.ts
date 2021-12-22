@@ -15,11 +15,11 @@ export class RegisterComponent implements OnInit {
   constructor(private user: UserService) { }
 
   ngOnInit() {
-    this.user.currentUserData.subscribe(userData => this.userData = userData)
+   // this.user.currentUserData.subscribe(userData => this.userData = userData)
   }
   signUp(data:any){
     
-    this.user.changeData(data);
+    //this.user.changeData(data);
   }
 
   ngAfterViewInit() {

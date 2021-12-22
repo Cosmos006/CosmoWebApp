@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 .mat-dialog-container{
     box-shadow: none;
@@ -32,7 +33,8 @@
     color: white!important;
 }
 .mat-form-field.mat-form-field .mat-form-field-label{
-    color:#ddd!important;
+    color:black!important;
+    margin-bottom: 1rem!important;
 }
 
 
