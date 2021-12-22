@@ -15,15 +15,21 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { PatientBookappointmentComponent } from './patient-bookappointment/patient-bookappointment.component';
 import { PatientViewdetailsComponent } from './patient-viewdetails/patient-viewdetails.component';
+import { MatOption } from '@angular/material/core';
+
+
+import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 
 @NgModule({
   declarations: [
     PatientDetailsComponent,
     PatientBookappointmentComponent,
     PatientViewdetailsComponent,
+    PatientDashboardComponent,
   ],
   imports: [
     CommonModule,
+    
     MatDatepickerModule,
     MatExpansionModule,
     MatIconModule,

@@ -1,0 +1,164 @@
+
+<!-- Old Navbar-->
+<div  >
+ 
+
+  <mat-toolbar  *ngIf="isLoggedIn$ | async as isLoggedIn" style="background-color:lightskyblue;">
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <span  class="text-white" style="color: white; margin-right: 10px"
+    ><b>Logo</b></span
+  >
+   
+    <span class="example-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true">
+      <span>
+        <!-- <img src="assets/img/angular_whiteTransparent.svg" class="angular-logo"> -->
+      
+        <a mat-button class="companyName" routerLink="/">
+          <span>CosmosHospital</span>
+        </a>
+        <a class="companyName"   routerLinkActive="router-link-active"   mat-button>Home</a>&nbsp;
+  
+        <a class="companyName"   [routerLink]="['Physician']"  routerLinkActive="router-link-active" *ngIf="isPhysician" mat-button >Physician</a>
+        <a class="companyName"
+          [routerLink]="['AdminDashboard']"
+          routerLinkActive="router-link-active"
+          *ngIf="isAdmin">
+          Admin
+      </a>
+        <a class="companyName"
+          [routerLink]="['AddPhysician']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPhysician" mat-button>
+          Add Physician
+    </a>
+        <a mat-button class="companyName"
+          [routerLink]="['ViewPhysician']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPhysician">
+          View Physician
+  </a>
+        <a class="companyName"
+          [routerLink]="['NurseDashboard']"
+          routerLinkActive="router-link-active"
+          *ngIf="isNurse">
+          Nurse
+</a>
+        <a mat-button class="companyName"
+        [routerLink]="['DynamicView']"
+        routerLinkActive="router-link-active"
+        *ngIf="isNurse">
+        Nurse1
+</a>
+          
+        <a mat-button class="companyName"
+          [routerLink]="['PatientDetails']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient">
+          Patient
+</a>
+        <a mat-button class="companyName"
+          [routerLink]="['PatientBookappointment']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient">
+          BookAppointment
+</a>
+        <a mat-button class="companyName"
+          [routerLink]="['PatientViewdetails']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient">
+          Patient
+</a>
+        <a mat-button class="companyName"
+          [routerLink]="['AdminCalender']"
+          routerLinkActive="router-link-active"
+          *ngIf="isAdmin" >
+          Add Calendar
+</a>
+      </span>
+     
+      <!-- <button routerLink="login"><b>Login</b></button> -->
+    </div>
+    <span class="fill-remaining-space"></span>
+    <i class="material-icons text-white pointer"  (click)="logout()" *ngIf="isLoggedIn">logout</i>
+
+
+  </mat-toolbar>
+
+    <mat-sidenav  #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true"   >
+      <div fxLayout="column"    >
+        <a mat-button routerLink="home"   >Home</a>
+  
+        <a mat-button routerLink="Physician"  *ngIf="isPhysician" >Physician</a>
+        <a
+          [routerLink]="['AdminDashboard']"
+          routerLinkActive="router-link-active"
+          *ngIf="isAdmin">
+          Admin
+      </a>
+        <a
+          [routerLink]="['AddPhysician']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPhysician" mat-button>
+          AddPhysician
+    </a>
+        <a mat-button
+          [routerLink]="['ViewPhysician']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPhysician">
+          View Physician
+  </a>
+        <a
+          [routerLink]="['NurseDashboard']"
+          routerLinkActive="router-link-active"
+          *ngIf="isNurse">
+          Nurse
+</a>
+        <a mat-button
+        [routerLink]="['DynamicView']"
+        routerLinkActive="router-link-active"
+        *ngIf="isNurse">
+        Nurse1
+</a>
+          
+        <a mat-button
+          [routerLink]="['PatientDetails']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient">
+          Patient
+</a>
+        <a mat-button
+          [routerLink]="['PatientBookappointment']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient">
+          BookAppointment
+</a>
+        <a mat-button
+          [routerLink]="['PatientViewdetails']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient">
+          Patient
+</a>
+        <a mat-button
+          [routerLink]="['AdminCalender']"
+          routerLinkActive="router-link-active"
+          *ngIf="isAdmin" >
+          Add Calendar
+</a>
+
+      </div>
+</mat-sidenav>
+     
+</div>
+
+
+
+
+
+
+
+
