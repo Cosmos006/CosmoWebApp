@@ -32,4 +32,8 @@ export class AddPhysicianComponent implements OnInit {
     firstName: new FormControl(''),
     lastName: new FormControl(''),
   });
+
+  onSubmit() {
+    alert('submit');
+  }
 }

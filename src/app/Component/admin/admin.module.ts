@@ -29,7 +29,10 @@ import { EventMap } from '../admin/model/admin.model';
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PatientUserComponent } from './patient-user/patient-user.component';
-import { DynamicTableComponent } from '../reusable/dynamic-table/dynamic-table.component';
+import { DynamicTableComponent } from '../shared/dynamic-table/dynamic-table.component';
+import { PieChartComponent } from '../shared/pie-chart/pie-chart.component';
+import { BookAppointmentComponent } from '../shared/book-appointment/book-appointment.component';
+import { CalendarComponent } from '../shared/calendar/calendar.component';
 
 //Import Dynamic table
 
@@ -69,6 +72,9 @@ const routes: Routes = [
     ViewPhysicianComponent,
     AdminCalendarComponent,
     DynamicTableComponent,
+    PieChartComponent,
+    BookAppointmentComponent,
+    CalendarComponent,
   ],
   imports: [
     CommonModule,
