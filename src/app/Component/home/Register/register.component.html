@@ -1,0 +1,81 @@
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div>
+        <img src="~\Login\Login\src\app\login\MicrosoftTeams-image (1).png">
+      </div>
+      <div class="row d-flex justify-content-center align-items-center h-100">
+  
+        <div class="col-md-8 col-lg-5 col-xl-5">
+          <img class="w-75"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvFcQ7_ae2_tLfUIHm0FBZnKWg0PARCDpr-g&usqp=CAU">
+        </div>
+        <div class="col-md-8 col-lg-7 col-xl-7 ">
+        
+           
+                  <div class="card auth">
+                    <div class="card-body auth-card">
+                     
+                      <form (submit)="signUp(userData)">
+                        <span  alt="user" class="user-image text-center text-black" style="margin-bottom: 1rem;"><h2 class="text-center text-black" >Register</h2></span>
+
+                          <div class="form-group row">
+                           
+                           <div class="col-6"> <label for="name">Title : </label>
+                            <input type="text" name="Title" class="form-control" placeholder="Name" [(ngModel)]="userData.name">
+                          </div>
+                          <div class="col-6"> <label for="name">First Name : </label>
+                            <input type="text" name="First Name" class="form-control" placeholder="First Name" [(ngModel)]="userData.phone">
+                          </div>
+                          </div>
+                        
+                          <div class="form-group row">
+                           
+                            <div class="col-6"> <label for="name">Name : </label>
+                             <input type="text" name="name" class="form-control" placeholder="Name" [(ngModel)]="userData.name">
+                           </div>
+                           <div class="col-6"> <label for="name">Phone : </label>
+                             <input type="text" name="phone" class="form-control" placeholder="Phone" [(ngModel)]="userData.phone">
+                           </div>
+                           </div>
+                           <div class="form-group row">
+                           
+                            <div class="col-6"> <label for="name">Last Name  : </label>
+                             <input type="text" name="Last Name " class="form-control" placeholder="Last Name" [(ngModel)]="userData.name">
+                           </div>
+                           <div class="col-6"> <label for="name">EmailId : </label>
+                             <input type="text" name="EmailId" class="form-control" placeholder="EmailId" [(ngModel)]="userData.phone">
+                           </div>
+                           </div>
+                           <div class="form-group row">
+                           
+                            <div class="col-6"> <label for="name">Date of birth : </label>
+                             <input type="text" name="Date of birth" class="form-control" placeholder="Date of birth" [(ngModel)]="userData.name">
+                           </div>
+                           <div class="col-6"> <label for="name">Phone Number : </label>
+                             <input type="text" name="Phone Number" class="form-control" placeholder="Phone Number" [(ngModel)]="userData.phone">
+                           </div>
+                           </div>
+                           <div class="form-group row">
+                           
+                            <div class="col-6"> <label for="name">Password: </label>
+                             <input type="text" name="Password" class="form-control" placeholder="Password" [(ngModel)]="userData.name">
+                           </div>
+                           <div class="col-6"> <label for="name">Confirm-Password: </label>
+                             <input type="text" name="Confirm-Password: " class="form-control" placeholder="Confirm-Password: " [(ngModel)]="userData.phone">
+                           </div>
+                           </div>
+                          <div class="text-center mb-2">
+                            <input type="submit" class="btn btn-my" value="Sign Up">
+                          </div>
+                          <div class="text-center row   justify-content-center w-100 ">
+                            Already have an account ?  <a routerLink="/login" class="text-primary">&nbsp; Login&nbsp;  </a>  here.
+                          </div>
+                          
+                      </form>
+                    </div>
+                  </div>
+          </div>
+        </div>
+      </div>
+  
+  </section>

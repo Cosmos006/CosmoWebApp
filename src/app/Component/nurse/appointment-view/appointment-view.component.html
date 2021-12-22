@@ -1,0 +1,89 @@
+<div class="example-container mat-elevation-z8" >
+  <mat-form-field>
+  <mat-label>Filter Product</mat-label>
+  <input matInput type="text"
+ placeholder="Search product name">
+</mat-form-field>
+<div class="spinner-container">
+        
+    </div>
+
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <!-- First Column ID-->
+          <ng-container matColumnDef="userID">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> User Id </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.userID}} </mat-cell>
+          </ng-container>
+
+          <!-- Second Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <!-- Third Column -->
+          <ng-container matColumnDef="gender">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.gender}}>              
+            </mat-cell>
+          </ng-container>
+          
+          <!-- Fourth Column -->
+          <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+          </ng-container>
+          
+          <!-- Action Column -->
+          <ng-container matColumnDef="mobile">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.mobile}} </mat-cell>
+          </ng-container>
+          <!-- Action Column -->
+          <ng-container matColumnDef="age">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Age </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.age}} </mat-cell>
+          </ng-container>
+          <!-- Action Column -->
+          <ng-container matColumnDef="bloodGroup">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> BloodGroup </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.bloodGroup}} </mat-cell>
+          </ng-container>
+          <!-- Action Column -->
+          <ng-container matColumnDef="temparature">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Temparature </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.temparature}} </mat-cell>
+          </ng-container>
+          <!-- Action Column -->
+          <ng-container matColumnDef="bloodPresure">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> BloodPresure </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.bloodPresure}} </mat-cell>
+          </ng-container>
+          <!-- Action Column -->
+          <ng-container matColumnDef="sugarLevel">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> SugarLevel </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.sugarLevel}} </mat-cell>
+          </ng-container>
+          <!-- Action Column -->
+          <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit" class="iconbutton"
+                color="primary" (click)="startEdit(element)">
+                <mat-icon>edit</mat-icon>
+              </button> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Cancel Appointment </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Delete" class="iconbutton"
+                 color="warn">
+                 <mat-icon> cancel </mat-icon>
+              </button> </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+      </div>
