@@ -27,12 +27,9 @@
     "@fullcalendar/interaction": "^5.10.1",
     "angular-calendar": "^0.28.28",
     "date-fns": "^2.27.0",
-<<<<<<< HEAD
-=======
     "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "moment": "^2.29.1",
->>>>>>> 0918dfdb5aa14a72e8be4222f1c9625cf70199cc
     "network-status-angular": "^1.0.4",
     "rxjs": "~7.4.0",
     "simple-keyboard": "^3.4.9",

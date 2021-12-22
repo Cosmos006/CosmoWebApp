@@ -45,13 +45,10 @@ const routes: Routes = [
     component: AdminDashboardComponent,
   },
   {
-<<<<<<< HEAD
-=======
     path: 'PatientUser',
     component: PatientUserComponent,
   },
   {
->>>>>>> 0918dfdb5aa14a72e8be4222f1c9625cf70199cc
     path: 'AddPhysician',
     component: AddPhysicianComponent,
   },
