@@ -16,12 +16,12 @@
                     <div class="card-body auth-card">
                      
                       <form (submit)="signUp(userData)">
-                        <span  alt="user" class="user-image text-center text-white" style="margin-bottom: 1rem;"><h3 class="">Register</h3></span>
+                        <span  alt="user" class="user-image text-center text-black" style="margin-bottom: 1rem;"><h2 class="text-center text-black" >Register</h2></span>
 
                           <div class="form-group row">
                            
                            <div class="col-6"> <label for="name">Title : </label>
-                            <input type="text" name="name" class="form-control" placeholder="Name" [(ngModel)]="userData.name">
+                            <input type="text" name="Title" class="form-control" placeholder="Name" [(ngModel)]="userData.name">
                           </div>
                           <div class="col-6"> <label for="name">First Name : </label>
                             <input type="text" name="First Name" class="form-control" placeholder="First Name" [(ngModel)]="userData.phone">
@@ -67,8 +67,8 @@
                           <div class="text-center mb-2">
                             <input type="submit" class="btn btn-my" value="Sign Up">
                           </div>
-                          <div class="text-center row  justify-content-center w-100 login">
-                            Already have an account ? <a routerLink="/login">Login</a> here.
+                          <div class="text-center row   justify-content-center w-100 ">
+                            Already have an account ?  <a routerLink="/login" class="text-primary">&nbsp; Login&nbsp;  </a>  here.
                           </div>
                           
                       </form>
