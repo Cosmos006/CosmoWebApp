@@ -5,39 +5,33 @@
       <span class="text-white" style="color: white; margin-right: 10px"
         ><b>Logo</b></span
       >
-      <button routerLink="home"><b>Home</b></button>
-      <button routerLink="Physician"><b>Physician</b></button>
-      <button
+      <a routerLink="home"><b>Home</b></a>
+      <a routerLink="Physician"><b>Physician</b></a>
+      <a 
         [routerLink]="['AdminDashboard']"
         routerLinkActive="router-link-active"
       >
         Admin
-      </button>
-      <button
-        [routerLink]="['AddPhysician']"
-        routerLinkActive="router-link-active"
-      >
+      </a>
+      <a [routerLink]="['AddPhysician']" routerLinkActive="router-link-active">
         AddPhysician
-      </button>
-      <button
-        [routerLink]="['ViewPhysician']"
-        routerLinkActive="router-link-active"
-      >
+      </a>
+      <a [routerLink]="['ViewPhysician']" routerLinkActive="router-link-active">
         View Physician
-      </button>
-      <button
+      </a>
+      <a
         [routerLink]="['NurseDashboard']"
         routerLinkActive="router-link-active"
       >
         Nurse
-      </button>
+      </a>
       <button
-      [routerLink]="['DynamicView']"
-      routerLinkActive="router-link-active"
-    >
-      Nurse1
-    </button>
-        
+        [routerLink]="['DynamicView']"
+        routerLinkActive="router-link-active"
+      >
+        Nurse1
+      </button>
+
       <button
         [routerLink]="['PatientDetails']"
         routerLinkActive="router-link-active"
@@ -68,4 +62,3 @@
     <button (click)="onLogout()"><b>Logout</b></button>
   </mat-toolbar>
 </div>
-

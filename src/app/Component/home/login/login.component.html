@@ -8,9 +8,11 @@
   
         <div class="col-md-8 col-lg-6 col-xl-6">
 
-          <img class="w-75"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvFcQ7_ae2_tLfUIHm0FBZnKWg0PARCDpr-g&usqp=CAU">
+          <!-- <img class="w-75"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvFcQ7_ae2_tLfUIHm0FBZnKWg0PARCDpr-g&usqp=CAU"> -->
         </div>
+
+        
         <div class="col-md-8 col-lg-6 col-xl-4 ">
         
           <div class="card auth">
@@ -24,9 +26,9 @@
                 <mat-form-field class="form-group w-100"  style="margin-top: 1.5rem;">
                 
                   <input matInput placeholder="User" formControlName="username"  class="form-control" required>
-                  <mat-error *ngIf="isFieldInvalid('username')" style="color:red">
+                  <!-- <mat-error *ngIf="isFieldInvalid('username')" style="color:red">
                     Please inform your user name
-                  </mat-error>
+                  </mat-error> -->
                
                 </mat-form-field>
               </div>
@@ -35,12 +37,15 @@
               <mat-form-field  class="form-group w-100 mb-1">
                  
                     <input matInput type="password" class="form-control" placeholder="Password" formControlName="password" required>
-                    <mat-error *ngIf="isFieldInvalid('password')" style="color: red;"
+                    <!-- <mat-error *ngIf="isFieldInvalid('password')" style="color: red;"
                     >
                       Please inform your password
-                    </mat-error>
+                    </mat-error> -->
                 
               </mat-form-field >
+              <mat-error *ngIf="errorstatus" style="color:red">
+                Username or Password is incorrect
+              </mat-error>
               <span class="float-right text-right mt-0"><a href="#">Forgot Password</a></span>
 
               </div>

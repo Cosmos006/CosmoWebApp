@@ -5,12 +5,16 @@ import { map } from 'rxjs/operators';
 import { User } from 'src/app/Modules/User';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { UserDetails } from 'src/app/models/userdetails';
+import { FormGroup } from '@angular/forms';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
+    readonly baseUrl = environment.apiUrl;
+    userList:UserDetails[] =[];
 
     private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
@@ -18,7 +22,7 @@ export class AuthenticationService {
         return this.loggedIn.asObservable(); // {2}
     }
    
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private httpClient: HttpClient, private router: Router) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')!));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -27,21 +31,53 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                    this.loggedIn.next(true);
-                }
 
-                return user;
-            }));
+    login(formModel : FormGroup) {
+        var loginModel={
+          //UserName:this.formModel.value.UserName,
+          //Password:this.formModel.value.Passwords.Password
+          UserName:formModel.value.username,
+          Password:formModel.value.password
+        }
+        console.log(loginModel);
+        return this.httpClient.post(this.baseUrl + 'ApplicationUser/Login', loginModel);
+      }
+      
+      logout() {
+        this.loggedIn.next(false);
+        localStorage.removeItem('token');
+        console.log(localStorage.getItem('token') + "Hii")
+        this.router.navigate(['/login'])
+      }
+      
+      getUserData(){
+        console.log("Hi")
+        this.httpClient
+        .get<UserDetails[]>(this.baseUrl + 'ApplicationUser/GetUser')
+        .subscribe((res: UserDetails[]) => {
+          this.userList.push(...res);
+          console.log(this.userList)
+        });
+        return this.userList;
+        }
+      
+
+
+    // login(username: string, password: string) {
+    //     return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
+    //         .pipe(map(user => {
+    //             // login successful if there's a jwt token in the response
+    //             if (user && user.token) {
+    //                 // store user details and jwt token in local storage to keep user logged in between page refreshes
+    //                 localStorage.setItem('currentUser', JSON.stringify(user));
+    //                 this.currentUserSubject.next(user);
+    //                 this.loggedIn.next(true);
+    //             }
+
+    //             return user;
+    //         }));
          
-    }
+    // }
 
 
 
@@ -56,12 +92,12 @@ export class AuthenticationService {
     //     }
     // }
 
-    logout() {
-        this.loggedIn.next(false);
-        localStorage.removeItem('currentUser');
-        this.router.navigate(['/login']);
+    // logout() {
+    //     this.loggedIn.next(false);
+    //     localStorage.removeItem('currentUser');
+    //     this.router.navigate(['/login']);
 
-      }
+    //   }
 
 
 }

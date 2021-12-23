@@ -5,45 +5,51 @@ import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/Services';
 import { Role } from 'src/app/Modules/Role';
 import { User } from 'src/app/Modules/User';
+import { UserDetails } from 'src/app/models/userdetails';
 
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     loginForm!: FormGroup;
-    loading = false;
-    submitted = false;
+    // loading = false;
+    // submitted = false;
     returnUrl!: string;
-    error = '';
-    currentUser!: User;
+    // error = '';
+    // currentUser!: User;
+    userList: any[] = [];
+    user!: UserDetails | undefined;
+    isValidCredentials!: boolean;
+    errorstatus : boolean = false;
 
     private formSubmitAttempt!: boolean;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private fb: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService
-    ) { 
-       
-    }
+    ) { }
+
+   
 
     ngOnInit() {
-        this.loginForm = this.formBuilder.group({
+        this.userList = this.authenticationService.getUserData();
+        console.log(this.userList);
+        if (localStorage.getItem('token') !== null)
+            this.router.navigate(['AdminDashBoard']);
+        else 
+          this.router.navigateByUrl('/login');
+       
+
+          this.loginForm = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
-
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    // convenience getter for easy access to form fields
-
-//     get form(): { [key: string]: AbstractControl; }
-// {
-//     return this.loginForm.controls;
-// }
-    // get f() { return this.loginForm.controls; }
+    
 
     isFieldInvalid(field: string) {
         return (
@@ -52,25 +58,60 @@ export class LoginComponent implements OnInit {
         );
       }
 
-    onSubmit() {
-        this.submitted = true;
-        if (this.loginForm.invalid) {
-            return;
+      onSubmit() {
+        var data = this.loginForm.value;
+        console.log(data)
+        let isValidCredentials = this.userList.find(
+          (x) =>
+             x.userName ===  data.username &&
+            x.password === data.password
+        );
+        console.log(isValidCredentials);
+        if (isValidCredentials !== undefined) {
+         console.log('Hii')
+         this.errorstatus = false;
+           this.authenticationService.login(this.loginForm).subscribe({
+            next: (res: any) => {
+              console.log(res)
+              localStorage.setItem('token', res.token);
+              console.log(localStorage.getItem('token'))
+              //var username = this.form.value.UserName;
+              // this.user = this.userList.find(
+              //   (x) => x.UserName.toLowerCase() === username.toLowerCase()
+              // );
+              //if (this.user !== undefined) {
+                this.router.navigate(['AdminDashBoard']);
+                console.log('Hii');
+              //}
+            },
+            error: (e) => console.error(e),
+          });
         }
-         
-        this.loading = true;
-        this.authenticationService.login(this.loginForm.controls['username'].value,this.loginForm.controls['password'].value )
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.router.navigate([this.returnUrl]);
-                 
-                },
-                error => {
-                    this.error = error;
-                    this.loading = false;
-                });
-          this.formSubmitAttempt = true;
+        else{
+          this.errorstatus = true;
+        }
+      }
+    
 
-    }
+    // onSubmit() {
+    //     this.submitted = true;
+    //     if (this.loginForm.invalid) {
+    //         return;
+    //     }
+         
+    //     this.loading = true;
+    //     this.authenticationService.login(this.loginForm.controls['username'].value,this.loginForm.controls['password'].value )
+    //         .pipe(first())
+    //         .subscribe(
+    //             data => {
+    //                 this.router.navigate([this.returnUrl]);
+                 
+    //             },
+    //             error => {
+    //                 this.error = error;
+    //                 this.loading = false;
+    //             });
+    //       this.formSubmitAttempt = true;
+
+    // }
 }
