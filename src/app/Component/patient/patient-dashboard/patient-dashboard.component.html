@@ -19,8 +19,8 @@
         </div>
       </div>
 
- 
-      
+
+
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -98,14 +98,14 @@
                         {{ appointment.viewValue }}
                       </mat-option>
                     </mat-select>
-                   
+
                   </mat-form-field>
                   <div class="card-tools">
                     <div
                       class="input-group input-group-sm"
                       style="width: 150px"
                     >
-                      <input
+                      <!-- <input
                         type="text"
                         name="table_search"
                         [(ngModel)]="searchText"
@@ -117,55 +117,39 @@
                         <button type="submit" (click)="filterAppointments(selectedValue)" class="btn btn-default">
                           <i class="fa fa-fw fa-search"></i>
                         </button>
-                      </div>
+                      </div> -->
+                      <button
+                        *ngIf="selectedValue === '2'"
+                        mat-raised-button
+                        color="primary"
+                        (click)="exporAll()"
+                        style="
+                          margin-left: 3px;
+                          padding: 5px;
+                          margin-top: 15px;
+                          width: 85px;
+                          border-radius: 4px;
+                        "
+                      >
+                        Export All
+                      </button>
                     </div>
                   </div>
-                  
                 </div>
 
                 <div class="card-body p-0">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr *ngFor="let h of gridheader; let i = index">
-                        <th style="width: 10px"></th>
-                        <th>{{ h.doctorName }}</th>
-                        <th>{{ h.nurseName }}</th>
-                        <th>{{ h.date }}</th>
-                        <th *ngIf="selectedValue != '2'">{{ h.diagnosis }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of griddata; let i = index">
-                        <td></td>
-                        <td>{{ item.doctorName }}</td>
-                        <td>{{ item.nurseName }}</td>
-                        <td>{{ item.date | date:'short' }}</td>
-                        <td *ngIf="selectedValue != '2'">{{ item.diagnosis }}</td>
+                  <div [hidden]="!griddata">
+                    <app-dynamic-table
+                      [receivedData]="griddata"
+                      [columns]="showcolumns"
+                      [metaCount]="metaCount"
+                      (clickedItem)="viewItem($event)"
+                      (pageEvent)="updatePagination($event)"
+                      (filterEvent)="searchAppointments($event)"
+                    >
+                    </app-dynamic-table>
 
-                        <td>
-                          <button *ngIf="selectedValue == '1'" (click)="ModifyAppointment()" mat-raised-button color="primary">
-                            Modify
-                          </button>
-                          <!-- Past Appointments -->
-                          <button style="padding: 5px;" *ngIf="selectedValue == '2'" (click)="ShowViewdetailModel(item)"  mat-raised-button color="primary">
-                            View Details
-                          </button>
-                          <button style="margin-left: 3px;
-                          padding: 5px;" *ngIf="selectedValue == '2'" (click)="ShowPrescriptionModel()"  mat-raised-button color="primary">
-                            Prescription
-                          </button>
-                          <button *ngIf="selectedValue == '2'" (click)="export(item)"  mat-raised-button color="primary" style="margin-left: 3px;
-                          padding: 5px;">
-                            Export
-                          </button>
-                          <!-- Decline -->
-                          <button *ngIf="selectedValue == '3'" (click)="ShowDeclineInfo()" mat-raised-button color="primary">
-                            <i class="fa fa-fw fa-info-circle"></i> Reason
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  </div>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -201,8 +185,12 @@
   <!-- ./wrapper -->
 </div>
 
-  <!-- /.Decline Modal header -->
-  <div class="modal" id="declineModal" [style.display]="showDeclineModal ? 'block' : 'none'">
+<!-- /.Decline Modal header -->
+<div
+  class="modal"
+  id="declineModal"
+  [style.display]="showDeclineModal ? 'block' : 'none'"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Modal Header -->
@@ -220,10 +208,10 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        
+
         <h5>Declined By : Patient</h5>
         <h5>Reason : Date doesn't matched the schedule.</h5>
-
+ 
       </div>
 
       <!-- Modal footer -->
@@ -240,84 +228,95 @@
     </div>
   </div>
 </div>
-  <!--  Prescription Modal -->
-  <div class="modal" id="prescriptionModel"  [style.display]="showPrescriptionModal ? 'block' : 'none'">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Presciption</h4>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            (click)="hidePrescriptionModel()"
-          >
-            &times;
-          </button>
-        </div>
-  
-        <!-- Modal body -->
-        <div class="modal-body">
-          
-          <h5>Declined By : Patient</h5>
-          <h5>Reason : Date doesn't matched the schedule.</h5>
-  
-        </div>
-  
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-danger"
-            data-dismiss="modal"
-            (click)="hidePrescriptionModel()"
-          >
-            Close
-          </button>
-        </div>
+<!--  Prescription Modal -->
+<div
+  class="modal"
+  id="prescriptionModel"
+  [style.display]="showPrescriptionModal ? 'block' : 'none'"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Presciption</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="hidePrescriptionModel()"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <h5>Declined By : Patient</h5>
+        <h5>Reason : Date doesn't matched the schedule.</h5>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-dismiss="modal"
+          (click)="hidePrescriptionModel()"
+        >
+          Close
+        </button>
       </div>
     </div>
   </div>
+</div>
 
-    <!--  View Detail Modal -->
-    <div class="modal" id="viewdetailModel"  [style.display]="showviewdetailModel ? 'block' : 'none'">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">View Detail</h4>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              (click)="hideViewdetailModel()"
-            >
-              &times;
-            </button>
-          </div>
-    
-          <!-- Modal body -->
-          <div class="modal-body" *ngIf="selectedAppointment">
-            <h5> Doctor : {{selectedAppointment.doctorName}} </h5>
-            <h5> Nurse Name : {{ selectedAppointment.nurseName }} </h5>
-            <h5> Diagnosis : {{ selectedAppointment.diagnosis }} </h5>
-            <h5> Appointment Date : {{ selectedAppointment.doctorName | date:'short' }} </h5>
-            <h5>Declined By : Patient</h5>
-            <h5>Reason : Date doesn't matched the schedule.</h5>
-          </div>
-    
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-dismiss="modal"
-              (click)="hideViewdetailModel()"
-            >
-              Close
-            </button>
-          </div>
-        </div>
+<!--  View Detail Modal -->
+<div
+  class="modal"
+  id="viewdetailModel"
+  [style.display]="showviewdetailModel ? 'block' : 'none'"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">View Detail</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="hideViewdetailModel()"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" *ngIf="selectedAppointment">
+        <h5>Doctor : {{ selectedAppointment.doctorName }}</h5>
+        <h5>Nurse Name : {{ selectedAppointment.nurseName }}</h5>
+        <h5>Diagnosis : {{ selectedAppointment.diagnosis }}</h5>
+        <h5>
+          Appointment Date :
+          {{ selectedAppointment.doctorName | date: "short" }}
+        </h5>
+        <h5>Declined By : Patient</h5>
+        <h5>Reason : Date doesn't matched the schedule.</h5>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-dismiss="modal"
+          (click)="hideViewdetailModel()"
+        >
+          Close
+        </button>
       </div>
     </div>
+  </div>
+</div>

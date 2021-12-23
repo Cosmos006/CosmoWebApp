@@ -41,6 +41,7 @@ export class DynamicTableComponent implements OnInit {
 
   @Output() clickedItem = new EventEmitter();
   @Output() pageEvent = new EventEmitter<PageEvent>();
+  @Output() filterEvent = new EventEmitter();
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
@@ -56,12 +57,14 @@ export class DynamicTableComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.receivedData);
 console.log("vamsi"+this.paginator)
       this.displayedColumns = this.columns.map((x) => x.columnDef);
+      if(this.paginator){
       this.dataSource.paginator = this.paginator;
 
       // this.dataSource.paginator.pageSize = this.pageSize;
       this.dataSource.paginator.pageIndex = this.pageIndex;
 
       this.dataSource.paginator.length = this.receivedData.length;
+      }
     }
   }
 
@@ -96,7 +99,10 @@ console.log("vamsi"+this.paginator)
     this.pageEvent.emit(event);
   }
 
-  viewItem(guid: any) {
-    this.clickedItem.emit(guid);
+  viewItem(guid: any,columnDef:string) {
+    this.clickedItem.emit({guid:guid,columnDef:columnDef});
+  };
+   filtertem(search: any) {
+    this.filterEvent.emit(search);
   }
 }

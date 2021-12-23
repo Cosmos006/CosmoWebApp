@@ -52251,3 +52251,12 @@
   font-size: 14px !important;
   font-family: "Open Sans", sans-serif !important;
 }
+
+.mat-column-diagnosis
+{
+  width:110px;
+}
+.mat-column-viewdetailBtn
+{
+  width: 9% !important;
+}

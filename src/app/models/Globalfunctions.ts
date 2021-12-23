@@ -22,6 +22,10 @@ export const GenerateTimeSlot = (
     const timeslotEnd = dateClone(start);
     dateExtend(timeslotEnd, timespanMS);
 
+    // function eventOverlap({ start: start2, end: end2 }) {
+    //   return timeslotStart >= toDate(start2) && timeslotStart < toDate(end2);
+    // }
+
     const availArray = [];
     while (timeslotStart < toDate(end)) {
       if (true) {
@@ -59,6 +63,38 @@ export const GenerateTimeSlot = (
   appoint.forEach((element) =>
     (element < '16 -16:30' ? slot1 : slot2).push(element)
   );
+
+  function mergeDates(eventsArray: any) {
+    return eventsArray.reduce(reducer, []);
+  }
+
+  function reducer(intervals: any) {
+    function someCallback({ start, end }: any, index: string | number) {
+      // no overlap?
+      var startInput: any;
+      var endInput: any;
+      if (endInput < start) {
+        return false;
+      }
+      let extended = false;
+      // extend after?
+      if (startInput < end && endInput > end) {
+        intervals[index].end = endInput;
+        extended = true;
+      }
+      // extend before?
+      if (startInput < start && endInput > start) {
+        intervals[index].start = startInput;
+        extended = true;
+      }
+      return extended;
+    }
+    const found = intervals.some(someCallback);
+    if (found === false) {
+      // intervals.push({ start: startInput, end: endInput });
+    }
+    return intervals;
+  }
 
   return [slot1, slot2];
 

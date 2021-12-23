@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NetworkStatusAngularService } from 'network-status-angular';
+import { Role } from './Modules/Role';
+import { User } from './Modules/User';
+import { AuthenticationService } from './Services';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +22,10 @@ export class AppComponent implements OnInit {
   isConnected = true;
   start2: any;
   constructor(
-    private networkStatusAngularService: NetworkStatusAngularService
-  ) {
+    private networkStatusAngularService: NetworkStatusAngularService,  private router: Router,
+    private authenticationService: AuthenticationService
+) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.networkStatusAngularService.status.subscribe((status) => {
       if (status) {
         this.isConnected = true;
@@ -30,4 +36,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {}
+  currentUser!: User;
+
+ 
+
+ 
 }

@@ -1,79 +1,76 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { Router } from "@angular/router";
-import { AuthService } from "src/app/Services/Authservice/auth.service";
-import { UserService } from "src/app/Services/Userservice/userservice/user.service";
-import { ForgotpasswordComponent } from "../forgotpassword/forgotpassword.component";
-@Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"]
-})
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/Services';
+import { Role } from 'src/app/Modules/Role';
+import { User } from 'src/app/Modules/User';
+
+
+@Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
-  userData: any;
-  form: FormGroup = new FormGroup({});
-  submitted = false;
-  private formSubmitAttempt!: boolean;
-  loading = false;
-  public addCusForm!: FormGroup;
-  wasFormChanged = false;
-  constructor(private router:Router, private user: UserService, public dialog: MatDialog, private formBuilder: FormBuilder,private authservice:AuthService) { }
+    loginForm!: FormGroup;
+    loading = false;
+    submitted = false;
+    returnUrl!: string;
+    error = '';
+    currentUser!: User;
 
+    private formSubmitAttempt!: boolean;
 
-  dialogRef!: MatDialogRef <any> ;
-  ngOnInit() {
-    // this.user.currentUserData.subscribe(userData => (this.userData = userData));
-    this.form = this.formBuilder.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-
-    // reset login status
-  }
-
-  isFieldInvalid(field: string) {
-    return (
-      (!this.form.value.valid && this.form.value.touched) ||
-      (this.form.value.untouched && this.formSubmitAttempt)
-    );
-  }
-
-  onSubmit() {
-    if (this.form.valid) {
-      this.authservice.login(this.form.value);
+    constructor(
+        private formBuilder: FormBuilder,
+        private route: ActivatedRoute,
+        private router: Router,
+        private authenticationService: AuthenticationService
+    ) { 
+       
     }
-    this.formSubmitAttempt = true;
-  }
 
-   openDialog(): void {
-    this.dialogRef = this.dialog.open(ForgotpasswordComponent, {
-   
-  });
-   
-  }
+    ngOnInit() {
+        this.loginForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
 
-  onLogin() {
-    let email:string = this.form.value.email;
-    let password:string = this.form.value.password;
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
 
-    
+    // convenience getter for easy access to form fields
 
-    // if (result === true) {
-    //   // navigate to post-list
-    //   this.router.navigate(["/post-list"])
-    // } else {
-    //   alert("Loged failed, try again!")
-    // }
-    
+//     get form(): { [key: string]: AbstractControl; }
+// {
+//     return this.loginForm.controls;
+// }
+    // get f() { return this.loginForm.controls; }
 
-  }
-   
+    isFieldInvalid(field: string) {
+        return (
+          (!this.loginForm.value.valid && this.loginForm.value.touched) ||
+          (this.loginForm.value.untouched && this.formSubmitAttempt)
+        );
+      }
+
+    onSubmit() {
+        this.submitted = true;
+        if (this.loginForm.invalid) {
+            return;
+        }
+         
+        this.loading = true;
+        this.authenticationService.login(this.loginForm.controls['username'].value,this.loginForm.controls['password'].value )
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.router.navigate([this.returnUrl]);
+                 
+                },
+                error => {
+                    this.error = error;
+                    this.loading = false;
+                });
+          this.formSubmitAttempt = true;
+
+    }
 }
-
-
-  
-
-
-
-

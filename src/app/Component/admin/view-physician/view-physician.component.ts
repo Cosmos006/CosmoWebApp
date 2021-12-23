@@ -20,7 +20,7 @@ export class ViewPhysicianComponent implements OnInit {
   //row: any;
 
   //test
-  value?: string = 'abcd';
+  value?: string = 'Hemanth';
   columns: any[] = [
     {
       columnDef: 'productName',

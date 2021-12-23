@@ -14,4 +14,5 @@ export enum Admin {
  }
 export enum Patient {
   PatientBookedAppointment = '/PatientBookedAppointment',
+  Appointment = '/AppointmentData',
 }

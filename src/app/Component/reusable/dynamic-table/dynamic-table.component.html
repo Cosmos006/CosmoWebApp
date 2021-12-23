@@ -8,7 +8,8 @@
 
   <mat-card-content>
     <mat-form-field class="full-width-filter">
-      <input matInput placeholder="Filter" />
+    
+      <input matInput placeholder="Filter" (change)="filtertem($event)" autocomplete="off" />
     </mat-form-field>
 
     <table mat-table #table [dataSource]="dataSource">
@@ -30,9 +31,9 @@
               mat-raised-button
               color="primary"
               id="column.dataName(row)"
-              (click)="viewItem(column.dataName(row))"
+              (click)="viewItem(column.dataName(row),column.columnDef)"
             >
-              View
+            {{ column.header }}
             </button>
           </td>
         </div>

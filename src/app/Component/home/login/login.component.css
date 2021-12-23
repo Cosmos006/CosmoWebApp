@@ -1,6 +1,16 @@
 .login{
   color: #fff;
 }
+
+.auth-card{
+  background:#fff;  /* fallback for old browsers */
+  border:1px solid #ddd;
+  border-radius: 5px;
+  
+  }
+
+
+
 .login a{
   color: #d39e00;
   font-weight: 600;
@@ -10,13 +20,7 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
 @import url('../node_modules/simple-keyboard/build/css/index.css');
 
-.auth-card{
-  background:#5B9ED7;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #5B9ED7, #5B9ED7);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #5B9ED7, #5B9ED7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  border-radius: 5px;
-  box-shadow: 0px 0px 30px #f7f7f7;
-  }
+
 label{
 color: #fff;
 font-weight: 700;
@@ -35,7 +39,7 @@ border-radius: 6px;
 }
 .btn-my{
   background-color:#fff;
-  border-color:#ffff ;
+  border: 1px solid black!important;
   color:#5B9ED7 ;
   font-weight: 700;
   }
