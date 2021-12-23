@@ -24,50 +24,45 @@ import { Role } from './Modules/Role';
 import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
- 
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard]
-},
-// {
-//   path: '', pathMatch: 'full', redirectTo: 'login'
-// },
-
-  { 
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'login',
     component: LoginComponent,
   },
- 
+
   {
     component: PhysicianComponent,
     path: 'Physician',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Physician] }
+    data: { roles: [Role.Physician] },
   },
   {
     component: AdminDashboardComponent,
     path: 'AdminDashboard',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    data: { roles: [Role.Admin] },
   },
   {
     component: PatientUserComponent,
     path: 'PatientUser',
     canActivate: [AuthGuard],
-    data: { roles: [Role.User]}
+    data: { roles: [Role.User] },
   },
   {
     component: AddPhysicianComponent,
     path: 'AddPhysician',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Physician]}
+    data: { roles: [Role.Physician] },
   },
   {
     component: ViewPhysicianComponent,
     path: 'ViewPhysician',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Physician]}
+    data: { roles: [Role.Physician] },
   },
   {
     component: RegisterComponent,
@@ -82,18 +77,17 @@ const routes: Routes = [
     component: NurseDashboardComponent,
     path: 'NurseDashboard',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Nurse]}
+    data: { roles: [Role.Nurse] },
   },
   {
     component: AppointmentViewComponent,
     path: 'AppointmentView',
-
   },
   {
     component: PatientDetailsComponent,
     path: 'PatientDetails',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Patient]}
+    data: { roles: [Role.Patient] },
   },
   {
     component: DynamicViewComponent,
@@ -103,13 +97,13 @@ const routes: Routes = [
     component: PatientBookappointmentComponent,
     path: 'PatientBookappointment',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Patient]}
+    data: { roles: [Role.Patient] },
   },
   {
     component: PatientViewdetailsComponent,
     path: 'PatientViewdetails',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Patient]}
+    data: { roles: [Role.Patient] },
   },
   {
     component: PatientDashboardComponent,
@@ -119,7 +113,7 @@ const routes: Routes = [
     component: AdminCalendarComponent,
     path: 'AdminCalender',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin]}
+    data: { roles: [Role.Admin] },
   },
   { path: '**', redirectTo: '' },
 ];
