@@ -34,8 +34,6 @@ export class AuthenticationService {
 
     login(formModel : FormGroup) {
         var loginModel={
-          //UserName:this.formModel.value.UserName,
-          //Password:this.formModel.value.Passwords.Password
           UserName:formModel.value.username,
           Password:formModel.value.password
         }
@@ -51,7 +49,6 @@ export class AuthenticationService {
       }
       
       getUserData(){
-        console.log("Hi")
         this.httpClient
         .get<UserDetails[]>(this.baseUrl + 'ApplicationUser/GetUser')
         .subscribe((res: UserDetails[]) => {

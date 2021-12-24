@@ -2,6 +2,8 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { UserService } from 'src/app/Services/Userservice/userservice/user.service';
 
 import Keyboard from "simple-keyboard";
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-register',
   encapsulation: ViewEncapsulation.None,
@@ -9,13 +11,19 @@ import Keyboard from "simple-keyboard";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  userData:any;
- keyboard!: Keyboard;
-  value = "";
-  constructor(private user: UserService) { }
+  userData: any;
+  registrationform! : FormGroup
+  keyboard!: Keyboard;
+  value = '';
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  constructor(public userService: UserService, public _snackBar: MatSnackBar) {}
 
   ngOnInit() {
-   // this.user.currentUserData.subscribe(userData => this.userData = userData)
+    this.userService.formModel.reset();
+    
+    //this.user.currentUserData.subscribe(userData => this.userData = userData)
   }
   signUp(data:any){
     
@@ -97,6 +105,64 @@ export class RegisterComponent implements OnInit {
     this.keyboard.setOptions({
       layoutName: numbersToggle
     });
+  }
+
+  onSubmit() {
+    // console.log(this.userService.formModel.value.Password)
+    // console.log(this.userService.formModel.value.ConfirmPassword)
+    if (
+      this.userService.formModel.value.Password ===
+      this.userService.formModel.value.ConfirmPassword
+    ) {
+      this.userService.register().subscribe({
+        next: (res: any) => {
+          console.log(res)
+          if (res) {
+            console.log('In next sub')
+            this.userService.formModel.reset();
+            this._snackBar.open('Registration Successful', 'Done', {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 5000,
+            });
+            //this.toastr.success('New user created!', 'Registration successful.');
+          } else {
+            console.log(res)
+            console.log('In next sub')
+            res.errors.forEach((element: { code: any; description: any }) => {
+              switch (element.code) {
+                case 'DuplicateUserName':
+                  this._snackBar.open('Duplicate Username.', 'Failed', {
+                    horizontalPosition: this.horizontalPosition,
+                    verticalPosition: this.verticalPosition,
+                    duration: 5000,
+                  });
+                  //this.toastr.error('Username is already taken','Registration failed.');
+                  break;
+
+                default:
+                  this._snackBar.open('Registration Failed.', '', {
+                    horizontalPosition: this.horizontalPosition,
+                    verticalPosition: this.verticalPosition,
+                    duration: 5000,
+                  });
+                  break;
+              }
+            });
+          }
+        },
+        error: (e) => console.error(e),
+      });
+      console.log('In out sub')
+    }
+    else{
+      console.log('hii')
+      this._snackBar.open('Password and Confirm Password mismatch', '', {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 5000,
+      });
+    }
   }
 
 
