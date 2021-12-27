@@ -35,7 +35,6 @@ import { MatSelectModule } from '@angular/material/select';
 //import { MatMomentDateModule } from '@angular/material-moment-adapter';
 //import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { SchedulerModule } from 'angular-calendar-scheduler';
 
@@ -70,15 +69,14 @@ import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edi
 import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
 //fakebackend
 
-import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
 import { AuthGuard, fakeBackendProvider } from './_helpers';
 
-
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AuthenticationService } from './Services';
-
+//import { AuthenticationService } from './Services';
 
 //Edit Table
 FullCalendarModule.registerPlugins([
@@ -107,7 +105,7 @@ FullCalendarModule.registerPlugins([
     DynamicTableComponent,
     EditDailogeComponent,
     ChartComponent,
-    PatientDashboardComponent
+    PatientDashboardComponent,
   ],
   imports: [
     HttpClientModule,
@@ -157,10 +155,15 @@ FullCalendarModule.registerPlugins([
     MatProgressSpinnerModule,
   ],
   exports: [],
-  providers: [UserService,AuthGuard,AuthenticationService,  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  providers: [
+    UserService,
+    AuthGuard,
+    AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // provider used to create fake backend
-    fakeBackendProvider],
+    fakeBackendProvider,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
