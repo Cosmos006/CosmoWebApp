@@ -35,11 +35,10 @@ import { MatSelectModule } from '@angular/material/select';
 //import { MatMomentDateModule } from '@angular/material-moment-adapter';
 //import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { SchedulerModule } from 'angular-calendar-scheduler';
 
-import { CalendarModule, DateAdapter } from 'angular-calendar';
 //full Calender
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 
@@ -155,11 +154,6 @@ FullCalendarModule.registerPlugins([
     HttpClientModule,
     //Internet Check
     NetworkStatusAngularModule.forRoot(),
-
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
     MatProgressSpinnerModule,
   ],
   exports: [],
