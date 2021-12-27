@@ -56,8 +56,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { NavMenuComponent } from './Component/home/nav-menu/nav-menu.component';
 import { LoginComponent } from './Component/home/login/login.component';
 import { HomeComponent } from './Component/home/home/home.component';
-import { DynamicTableComponent } from './Component/reusable/dynamic-table/dynamic-table.component';
-import { ChartComponent } from './Component/reusable/chart/chart.component';
+import { DynamicTableComponent } from './Component/shared/dynamic-table/dynamic-table.component';
+import { ChartComponent } from './Component/shared/chart/chart.component';
+import { PieChartComponent } from './Component/shared/pie-chart/pie-chart.component';
+import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
+import { CalendarComponent } from './Component/shared/calendar/calendar.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
@@ -77,6 +80,9 @@ import { AuthGuard, fakeBackendProvider } from './_helpers';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AuthenticationService } from './Services';
 //import { AuthenticationService } from './Services';
+
+//Apex Chart
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 //Edit Table
 FullCalendarModule.registerPlugins([
@@ -101,11 +107,13 @@ FullCalendarModule.registerPlugins([
     RegisterComponent,
     ForgotpasswordComponent,
     DynamicViewComponent,
-
     DynamicTableComponent,
     EditDailogeComponent,
     ChartComponent,
     PatientDashboardComponent,
+    PieChartComponent,
+    BookAppointmentComponent,
+    CalendarComponent,
   ],
   imports: [
     HttpClientModule,
@@ -153,6 +161,8 @@ FullCalendarModule.registerPlugins([
     //Internet Check
     NetworkStatusAngularModule.forRoot(),
     MatProgressSpinnerModule,
+    //Apex chart
+    NgApexchartsModule,
   ],
   exports: [],
   providers: [
