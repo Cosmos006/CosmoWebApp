@@ -50,7 +50,7 @@ export class MatTablegridComponent implements OnInit {
     },
   ];
   pageIndex = 1;
-  pageSize = 10;
+  pageSize = 5;
   metaCount?: number;
 
   constructor(private userService: AdminService) {

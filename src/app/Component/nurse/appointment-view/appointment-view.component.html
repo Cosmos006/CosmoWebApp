@@ -13,7 +13,7 @@
     <ng-container matColumnDef="id"  [style.display]="'none'">
       <mat-header-cell *matHeaderCellDef [style.display]="'none'" mat-sort-headerstyle="font-size: medium;" style="font-size: medium;"> Id
       </mat-header-cell>
-      <mat-cell *matCellDef="let element" [style.display]="'none'"> {{element.id}} </mat-cell>
+      <mat-cell *matCellDef="let element" [style.display]="'none'" matTooltip="id"> {{element.id}} </mat-cell>
     </ng-container>
 
     <!-- Second Column -->
@@ -48,8 +48,8 @@
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef mat-sort-header    style="font-size: medium;"> Email </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header  style="font-size: medium;"> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element" matTooltip={{element.email}}><span class="ellipsis">{{element.email}}</span> </mat-cell>
     </ng-container>
     <ng-container matColumnDef="physician">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> AppointedPhysician </mat-header-cell>
@@ -57,16 +57,17 @@
     </ng-container>
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Vitals </mat-header-cell>
-      <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit" class="iconbutton"
+      <mat-cell *matCellDef="let element"> <button mat-icon-button class="iconbutton"
           color="primary" (click)="OnVisit()">
-          <mat-icon> perm_identity </mat-icon>
+          <mat-icon matTooltip="My tooltip"> perm_identity </mat-icon>
         </button> </mat-cell>
     </ng-container>
     <ng-container matColumnDef="pastvisit">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> PastVisit </mat-header-cell>
-      <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit" class="iconbutton"
+      <mat-cell *matCellDef="let element" >
+         <button mat-icon-button class="iconbutton"
           color="primary" (click)="OnVisit()">
-          <mat-icon> history </mat-icon>
+          <mat-icon matTooltip="Info about the action"> history </mat-icon>
         </button> </mat-cell>
     </ng-container>
     <ng-container matColumnDef="delete">

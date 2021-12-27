@@ -24,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {MatCardModule} from '@angular/material/card';
 import { MatTablegridComponent } from './mat-tablegrid/mat-tablegrid.component';
+import { DynamicTableComponent } from '../reusable/dynamic-table/dynamic-table.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -39,6 +41,7 @@ import { MatTablegridComponent } from './mat-tablegrid/mat-tablegrid.component';
     EditDailogeComponent,
     DeleteDailogeComponent,
     MatTablegridComponent,
+    DynamicTableComponent,
     
   ],
   imports: [
@@ -56,7 +59,8 @@ import { MatTablegridComponent } from './mat-tablegrid/mat-tablegrid.component';
     MatToolbarModule,
     HttpClientModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTooltipModule
     
     
     

@@ -22,6 +22,7 @@ export class AppointmentViewComponent {
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
 
+  pastVisit:string="PastVisit";
   constructor(public dialogService: MatDialog, public appoiService: DailogeService, private router:Router) { }
 
   ngOnInit() {
@@ -31,6 +32,7 @@ export class AppointmentViewComponent {
     this.appoiService.getAppointmentData().subscribe(data => {
       this.dataSource1 = new MatTableDataSource(data)    
       this.dataSource1.paginator = this.paginator;
+      console.log(this.dataSource1)
     });
   }
   startEdit(data: any[]) {    

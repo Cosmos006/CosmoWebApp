@@ -9,7 +9,7 @@
   <mat-card-content>
     <mat-form-field class="full-width-filter">
     
-      <input matInput placeholder="Filter" (change)="filtertem($event)" autocomplete="off" />
+      <input matInput placeholder="Filter" (change)="filtertem($event)" autocomplete="on" />
     </mat-form-field>
 
     <table mat-table #table [dataSource]="dataSource">
@@ -48,8 +48,10 @@
     </table>
 
     <mat-paginator
-      [pageSizeOptions]="[10,25, 50, 100]"
-      showFirstLastButtons
+    #paginator 
+    [pageSize]="5" 
+    [pageSizeOptions]="[5, 10, 20]" 
+    [showFirstLastButtons]="true"
       [length]="length"
       (page)="updateProductsTable($event)"
     ></mat-paginator>

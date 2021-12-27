@@ -82,6 +82,8 @@ import { AuthenticationService } from './Services';
 
 
 import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
+import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -110,7 +112,8 @@ FullCalendarModule.registerPlugins([
     EditDailogeComponent,
     ChartComponent,
     PatientDashboardComponent,
-    MatTablegridComponent
+    MatTablegridComponent,
+    NurseDashboardComponent
   ],
   imports: [
     HttpClientModule,
@@ -158,6 +161,7 @@ FullCalendarModule.registerPlugins([
     //Internet Check
     NetworkStatusAngularModule.forRoot(),
     MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   exports: [],
   providers: [UserService,AuthGuard,AuthenticationService,  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

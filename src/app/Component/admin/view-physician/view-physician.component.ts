@@ -63,14 +63,7 @@ export class ViewPhysicianComponent implements OnInit {
     this.allResults = this.fakeData;
   }
 
-  getAllProducts(pageIndex: number, pageSize: number) {
-    // this.productSearchForm.reset(); // clear search field for better UX
-
-    this.allResults = this.fakeData;
-    this.metaCount = this.results.length;
-    // console.log(this.metaCount);
-    // console.log(this.results)
-  }
+  
 
   tabClick(tab: any) {
     if ((tab.index = 1)) {
@@ -83,7 +76,14 @@ export class ViewPhysicianComponent implements OnInit {
     const correctedIndex = event.pageIndex + 1;
     this.getAllProducts(correctedIndex, event.pageSize);
   }
+  getAllProducts(pageIndex: number, pageSize: number) {
+    // this.productSearchForm.reset(); // clear search field for better UX
 
+    this.allResults = this.fakeData;
+    this.metaCount = this.results.length;
+    // console.log(this.metaCount);
+    // console.log(this.results)
+  }
   viewItem(guid: any) {
     alert(guid);
   let da=  this.fakeData.find((i: { guid: any; })=>i.guid==guid)

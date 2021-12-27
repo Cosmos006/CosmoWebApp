@@ -24,15 +24,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class DynamicTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator !: MatPaginator;
+  @ViewChild(MatSort, {}) sort !: MatSort;
  
-
-  @ViewChild(MatSort, { static: false })
-  set sort(value: MatSort) {
-    if (this.dataSource) {
-      this.dataSource.sort = value;
-    }
-  }
-
   @Input() displayedColumns?: string[];
   @Input() receivedData: any;
   @Input() tableTitle?: string;
@@ -43,10 +36,10 @@ export class DynamicTableComponent implements OnInit {
   @Output() pageEvent = new EventEmitter<PageEvent>();
   @Output() filterEvent = new EventEmitter();
 
-  dataSource: MatTableDataSource<any> = new MatTableDataSource();
+  dataSource !: MatTableDataSource<any>;
 
-  pageIndex = 0;
-  pageSize = 10;
+  pageIndex = 1;
+  pageSize = 5;
   length = 0;
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -54,19 +47,11 @@ export class DynamicTableComponent implements OnInit {
   ngOnInit() {
     if (this.columns !== undefined || this.columns !== null) {
       console.log(this.receivedData);
-      this.dataSource = new MatTableDataSource(this.receivedData);
-console.log("vamsi"+this.paginator)
+      this.dataSource =new MatTableDataSource(this.receivedData);
       this.displayedColumns = this.columns.map((x) => x.columnDef);
-      if(this.paginator){
-      this.dataSource.paginator = this.paginator;
-
-      // this.dataSource.paginator.pageSize = this.pageSize;
-      this.dataSource.paginator.pageIndex = this.pageIndex;
-
-      this.dataSource.paginator.length = this.receivedData.length;
-      }
-    }
+      this.dataSource.paginator = this.paginator; 
   }
+}
 
   ngOnChanges() {
 //     if (this.columns !== undefined || this.columns !== null) {
@@ -94,15 +79,28 @@ console.log("vamsi"+this.paginator)
 
   updateProductsTable(event: PageEvent) {
     this.pageSize = event.pageSize;
-    this.pageIndex = event.pageIndex + 1; // API starts 1, Mat-Table starts at 0
+   console.log(this.pageSize);
+   if (this.columns !== undefined || this.columns !== null) {
+   
+    this.dataSource =new MatTableDataSource(this.receivedData);
+  
+    this.displayedColumns = this.columns.map((x) => x.columnDef);
+   
+    this.dataSource.paginator = this.paginator;
 
+    this.dataSource.paginator.pageIndex = this.pageIndex;
+
+    this.dataSource.paginator.length = this.receivedData.length;
+    
     this.pageEvent.emit(event);
+  }
   }
 
   viewItem(guid: any,columnDef:string) {
     this.clickedItem.emit({guid:guid,columnDef:columnDef});
   };
    filtertem(search: any) {
+     console.log(search);
     this.filterEvent.emit(search);
   }
 }
