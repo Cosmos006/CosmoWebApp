@@ -1,3 +1,7 @@
+// export class AdminDashboard {
+//   constructor(Appointments: number, LockedAccount: number) {}
+// }
+
 export interface AdminDashboard {
   Appointments: number;
   LockedAccount: number;

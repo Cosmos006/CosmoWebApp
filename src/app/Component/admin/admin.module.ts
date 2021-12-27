@@ -33,6 +33,7 @@ import { DynamicTableComponent } from '../shared/dynamic-table/dynamic-table.com
 import { PieChartComponent } from '../shared/pie-chart/pie-chart.component';
 import { BookAppointmentComponent } from '../shared/book-appointment/book-appointment.component';
 import { CalendarComponent } from '../shared/calendar/calendar.component';
+import { MatInputModule } from '@angular/material/input';
 
 //Import Dynamic table
 
@@ -95,6 +96,9 @@ const routes: Routes = [
     //Forms
     FormsModule,
     ReactiveFormsModule,
+    //Material
+    MatFormFieldModule,
+    MatInputModule,
   ],
 })
 export class AdminModule {}
