@@ -6,7 +6,6 @@ import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-c
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
 import { PatientUserComponent } from './Component/admin/patient-user/patient-user.component';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
-import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
 import { HomeComponent } from './Component/home/home/home.component';
 import { LoginComponent } from './Component/home/login/login.component';
 import { NavMenuComponent } from './Component/home/nav-menu/nav-menu.component';
@@ -73,11 +72,7 @@ const routes: Routes = [
     component: RegisterComponent,
     path: 'Signup',
   },
-  {
-    component: ForgotpasswordComponent,
 
-    path: 'forgotpassword',
-  },
   {
     component: NurseDashboardComponent,
     path: 'NurseDashboard',
