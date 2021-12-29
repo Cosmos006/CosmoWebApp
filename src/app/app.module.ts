@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -30,6 +31,8 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { AppointmentViewComponent } from './Component/nurse/appointment-view/appointment-view.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
 
 //khushabu
 //import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -64,7 +67,6 @@ import { ChartComponent } from './Component/reusable/chart/chart.component';
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { RegisterComponent } from './Component/home/Register/register.component';
-import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
 import { UserService } from './Services/Userservice/userservice/user.service';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edit-dailoge.component';
@@ -79,6 +81,9 @@ import { AuthGuard, fakeBackendProvider } from './_helpers';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AuthenticationService } from './Services';
+import { ModalModule } from 'ngb-modal';
+import { AlertService } from './Services/Alert/alert.service';
+
 
 
 //Edit Table
@@ -102,17 +107,17 @@ FullCalendarModule.registerPlugins([
     AdminCalendarComponent,
     AddPhysicianComponent,
     RegisterComponent,
-    ForgotpasswordComponent,
     DynamicViewComponent,
-
     DynamicTableComponent,
     EditDailogeComponent,
     ChartComponent,
     PatientDashboardComponent
   ],
   imports: [
+    
     HttpClientModule,
     BrowserModule,
+    NgbModule,
     AppRoutingModule,
     MatIconModule,
     MatGridListModule,
@@ -122,6 +127,8 @@ FullCalendarModule.registerPlugins([
     MatFormFieldModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ModalModule,
+    
     //Material Component
     MaterialModule,
     FlexLayoutModule,
@@ -163,7 +170,7 @@ FullCalendarModule.registerPlugins([
     MatProgressSpinnerModule,
   ],
   exports: [],
-  providers: [UserService,AuthGuard,AuthenticationService,  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  providers: [UserService,AuthGuard,AuthenticationService,BsModalService, AlertService,BsModalRef, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // provider used to create fake backend
     fakeBackendProvider],
