@@ -14,3 +14,13 @@ export enum Patient {
   PatientBookedAppointment = '/PatientBookedAppointment',
   Appointment = '/AppointmentData',
 }
+
+export enum AddPhysycian {
+  GetGender = '/GetGender',
+  GetPhysicianEduaction = '/GetPhysicianEduaction',
+  GetNurseEduaction = '/GetNurseEduaction',
+  GetPhysicianDesignation = '/GetPhysicianDesignation',
+  GetNurseDesignation = '/GetNurseDesignation',
+  GetPhysicianDepartment = '/GetPhysicianDepartment',
+  GetNurseDepartment = '/GetNurseDepartment',
+}

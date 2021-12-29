@@ -34,6 +34,9 @@ import { PieChartComponent } from '../shared/pie-chart/pie-chart.component';
 import { BookAppointmentComponent } from '../shared/book-appointment/book-appointment.component';
 import { CalendarComponent } from '../shared/calendar/calendar.component';
 import { MatInputModule } from '@angular/material/input';
+import { LockedAccountComponent } from './locked-account/locked-account.component';
+import { AdminPatientComponent } from './admin-patient/admin-patient.component';
+import { AdminHospitalComponent } from './admin-hospital/admin-hospital.component';
 
 //Import Dynamic table
 
@@ -76,6 +79,9 @@ const routes: Routes = [
     PieChartComponent,
     BookAppointmentComponent,
     CalendarComponent,
+    LockedAccountComponent,
+    AdminPatientComponent,
+    AdminHospitalComponent,
   ],
   imports: [
     CommonModule,
@@ -99,6 +105,8 @@ const routes: Routes = [
     //Material
     MatFormFieldModule,
     MatInputModule,
+    //router
+    RouterModule,
   ],
 })
 export class AdminModule {}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Role } from 'src/app/Modules/Role';
 import { User } from 'src/app/Modules/User';
 import { AuthenticationService } from 'src/app/Services';
@@ -24,12 +24,14 @@ import { AuthenticationService } from 'src/app/Services';
 })
 export class NavMenuComponent implements OnInit {
   isLoggedIn$!: Observable<boolean>; // {1}
-  currentUser!: User;
+  currentUser?: User;
 
-  constructor(private authService: AuthenticationService,private router:Router) { 
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
   }
- 
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
@@ -41,22 +43,16 @@ export class NavMenuComponent implements OnInit {
 
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
-  
   }
   get isPatient() {
     return this.currentUser && this.currentUser.role === Role.Patient;
   }
 
-  get isPhysician(){
+  get isPhysician() {
     return this.currentUser && this.currentUser.role === Role.Physician;
-
   }
 
-  get isNurse(){
+  get isNurse() {
     return this.currentUser && this.currentUser.role === Role.Nurse;
-
   }
-  
-
-
 }
