@@ -6,7 +6,9 @@ import {
   FormControl,
   AbstractControl,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { map } from 'rxjs';
+import { AdminService } from 'src/app/Services/admin.service';
 
 @Component({
   selector: 'app-add-physician',
@@ -14,6 +16,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-physician.component.css'],
 })
 export class AddPhysicianComponent implements OnInit {
+  UserType: string = '';
+  Type?: string;
   Physician!: FormGroup;
   loading = false;
   submitted = false;
@@ -26,30 +30,55 @@ export class AddPhysicianComponent implements OnInit {
   department: any;
   departmentdata: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private adminservice: AdminService
+  ) {}
 
   ngOnInit(): void {
-    this.genderdata = ['Male', 'Female', 'Other'];
-    this.designationdata = [
-      'Cardiologist',
-      'Audiologist',
-      'Dentist',
-      'Gynaecologist',
-    ];
+    this.route.paramMap.subscribe((res) => {
+      this.UserType += res.get('type');
+    });
 
-    this.educationdata = [
-      { ID: 1, Value: 'MBBS' },
-      { ID: 2, Value: 'BDS' },
-      { ID: 3, Value: 'BAMS' },
-      { ID: 3, Value: 'BUMS' },
-    ];
+    this.adminservice.Gender().subscribe((res) => {
+      this.genderdata = res.gender;
+    });
 
-    this.departmentdata = [
-      { ID: 1, Value: 'Operating theatre (OT)' },
-      { ID: 2, Value: 'Intensive care unit (ICU)' },
-      // { ID: 3, Value: 'Casualty department' },
-      // { ID: 3, Value: 'Anesthesiology department' },
-    ];
+    // this.genderdata = ['Male', 'Female', 'Other'];
+    if (this.UserType === 'physician') {
+      this.Type = 'Physician';
+
+      if (this.UserType === 'physician') {
+        this.adminservice.EduactionList(this.Type).subscribe((res) => {
+          this.educationdata = res.physician;
+        });
+
+        this.adminservice.Designation(this.Type).subscribe((res) => {
+          this.designationdata = res.physician;
+        });
+
+        this.adminservice.Department(this.Type).subscribe((res) => {
+          this.departmentdata = res.physician;
+        });
+      }
+    } else if (this.UserType === 'nurse') {
+      this.Type = 'Nurse';
+
+      if (this.UserType === 'nurse') {
+        this.adminservice.EduactionList(this.Type).subscribe((res) => {
+          this.educationdata = res.nurse;
+        });
+        this.adminservice.Designation(this.Type).subscribe((res) => {
+          this.designationdata = res.nurse;
+        });
+
+        this.adminservice.Department(this.Type).subscribe((res) => {
+          this.departmentdata = res.nurse;
+        });
+      }
+    }
 
     this.FormData();
   }
