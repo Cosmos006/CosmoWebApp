@@ -6,8 +6,6 @@ import { AuthenticationService } from 'src/app/Services';
 import { Role } from 'src/app/Modules/Role';
 import { User } from 'src/app/Modules/User';
 import { ModalDismissReasons, NgbModal,  } from '@ng-bootstrap/ng-bootstrap';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AlertService } from 'src/app/Services/Alert/alert.service';
 import {Location} from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
@@ -33,7 +31,6 @@ export class LoginComponent implements OnInit {
     returnUrl!: string;
     error = '';
     currentUser!: User;
-    modalRef!: BsModalRef;
     IsmodelShow!: boolean;
     userEmail!: string;
     mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
@@ -50,22 +47,19 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,private alertService:AlertService,
-        private authenticationService: AuthenticationService, private modalService: NgbModal, private bsModalService: BsModalService
+        private authenticationService: AuthenticationService, private modalService: NgbModal
     ) { 
        
     }
-    
+
     open(content:any) {
-      this.modalService.open(content,
-     {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
-        this.closeResult = 
-           `Dismissed ${this.getDismissReason(reason)}`;
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
-
     }
-
+  
     private getDismissReason(reason: any): string {
       if (reason === ModalDismissReasons.ESC) {
         return 'by pressing ESC';
@@ -76,11 +70,30 @@ export class LoginComponent implements OnInit {
       }
     }
     
+    // open(content:any) {
+    //   this.modalService.open(content,
+    //  {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    //     this.closeResult = `Closed with: ${result}`;
+    //   }, (reason) => {
+    //     this.closeResult = 
+    //        `Dismissed ${this.getDismissReason(reason)}`;
+    //   });
+
+    // }
+
+    // private getDismissReason(reason: any): string {
+    //   if (reason === ModalDismissReasons.ESC) {
+    //     return 'by pressing ESC';
+    //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    //     return 'by clicking on a backdrop';
+    //   } else {
+    //     return `with: ${reason}`;
+    //   }
+    // }
+    
 
       close() {
         this.modalService.dismissAll();
-        this.bsModalService.hide(this.bsModalService.getModalsCount());
-        window.scrollTo(0, 0);
       }
     
 
@@ -152,26 +165,26 @@ export class LoginComponent implements OnInit {
       
       }
     
-      ResetPassword() {
+    //   ResetPassword() {
        
-        this.errorMessage = "";
-        // if (this.oldpasswordInmailGenerated != this.oldpassword) {
-        //   this.errorMessage += "Entered old Password is incorrect";
-        //   return;
-        // }
-        // if (this.newpassword != this.confirmpassword) {
-        //   this.errorMessage += "Passwords are not same";
-        //   return;
-        // }
+    //     this.errorMessage = "";
+    //     // if (this.oldpasswordInmailGenerated != this.oldpassword) {
+    //     //   this.errorMessage += "Entered old Password is incorrect";
+    //     //   return;
+    //     // }
+    //     // if (this.newpassword != this.confirmpassword) {
+    //     //   this.errorMessage += "Passwords are not same";
+    //     //   return;
+    //     // }
     
-        if (this.newpassword.length < 8) {
-          this.errorMessage += "Password cannot be less than 8 characters";
-          return;
-        }
+    //     if (this.newpassword.length < 8) {
+    //       this.errorMessage += "Password cannot be less than 8 characters";
+    //       return;
+    //     }
 
-        this.modalService.dismissAll();
+    //     this.modalService.dismissAll();
        
-        close() ;
-     //   this.location.back();
-      }
+    //     close() ;
+    //  //   this.location.back();
+    //   }
 }

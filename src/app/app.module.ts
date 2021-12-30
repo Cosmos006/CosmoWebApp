@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -31,7 +30,6 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { AppointmentViewComponent } from './Component/nurse/appointment-view/appointment-view.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 
 //khushabu
@@ -84,6 +82,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AuthenticationService } from './Services';
 import { ModalModule } from 'ngb-modal';
 import { AlertService } from './Services/Alert/alert.service';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+
 
 
 
@@ -172,7 +172,7 @@ FullCalendarModule.registerPlugins([
     MatProgressSpinnerModule,
   ],
   exports: [],
-  providers: [UserService,AuthGuard,AuthenticationService,BsModalService, AlertService,BsModalRef, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  providers: [UserService,AuthGuard,AuthenticationService, AlertService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // provider used to create fake backend
     fakeBackendProvider],
