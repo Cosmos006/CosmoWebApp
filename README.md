@@ -28,6 +28,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #Component Create
 ng g c Component/shared/PieChart
 
+#componentSkiptest
+ng g c Component/admin/adminHospital --skipTests
+
 #npm installs
 //Apex chart
 npm install apexcharts ng-apexcharts --save

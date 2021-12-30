@@ -70,7 +70,10 @@
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer"
+                <a
+                  (click)="DashboardRedirectURL('locked')"
+                  routerLinkActive="router-link-active"
+                  class="small-box-footer"
                   >More info <i class="fas fa-arrow-circle-right"></i
                 ></a>
               </div>
@@ -85,8 +88,9 @@
               >
                 <div class="inner">
                   <h3></h3>
-
-                  <p>Patients</p>
+                  <a (click)="DashboardRedirectURL('patient')"
+                    ><p>Patients</p></a
+                  >
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -102,8 +106,9 @@
               <div class="small-box bg-success" style="padding: 34px">
                 <div class="inner">
                   <h3></h3>
-
-                  <p>Hospital User</p>
+                  <a (click)="DashboardRedirectURL('hospital')"
+                    ><p>Hospital User</p></a
+                  >
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>

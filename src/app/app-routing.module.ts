@@ -4,6 +4,9 @@ import { AppComponent } from './app.component';
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
 import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
+import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
+import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
+import { LockedAccountComponent } from './Component/admin/locked-account/locked-account.component';
 import { PatientUserComponent } from './Component/admin/patient-user/patient-user.component';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
 import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
@@ -59,9 +62,15 @@ const routes: Routes = [
   },
   {
     component: AddPhysicianComponent,
-    path: 'AddPhysician',
+    path: 'AddPhysician/:type',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Physician] },
+    data: { roles: [Role.Admin] },
+  },
+  {
+    component: AddPhysicianComponent,
+    path: 'AddNurse/:type',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] },
   },
   {
     component: ViewPhysicianComponent,
@@ -155,7 +164,31 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.Nurse] },
   },
+  {
 
+    component: PatientBookappointmentComponent,
+    path: 'AdminBookappointment',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] },
+  },
+  {
+    component: LockedAccountComponent,
+    path: 'LockedAccount',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] },
+  },
+  {
+    component: AdminPatientComponent,
+    path: 'AdminPatient',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] },
+  },
+  {
+    component: AdminHospitalComponent,
+    path: 'AdminHospital',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] },
+  },
   { path: '**', redirectTo: '' },
   
 ];
