@@ -33,7 +33,7 @@ export class AuthenticationService {
 
 
     login(formModel : FormGroup) {
-        var loginModel={
+        var loginModel = {
           UserName:formModel.value.username,
           Password:formModel.value.password
         }
@@ -44,7 +44,7 @@ export class AuthenticationService {
       logout() {
         this.loggedIn.next(false);
         localStorage.removeItem('token');
-        console.log(localStorage.getItem('token') + "Hii")
+        //console.log(localStorage.getItem('token') + "Hii")
         this.router.navigate(['/login'])
       }
       

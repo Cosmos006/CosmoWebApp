@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     user!: UserDetails | undefined;
     isValidCredentials!: boolean;
     errorstatus : boolean = false;
-
+    submitted:boolean = false;
     private formSubmitAttempt!: boolean;
 
     constructor(
@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
       }
 
       onSubmit() {
+        this.submitted = true;
         var data = this.loginForm.value;
         console.log(data)
         let isValidCredentials = this.userList.find(
@@ -67,7 +68,8 @@ export class LoginComponent implements OnInit {
             x.password === data.password
         );
         console.log(isValidCredentials);
-        if (isValidCredentials !== undefined) {
+        console.log(this.loginForm)
+        if (isValidCredentials !== undefined && this.loginForm.valid ) {
          console.log('Hii')
          this.errorstatus = false;
            this.authenticationService.login(this.loginForm).subscribe({
