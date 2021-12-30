@@ -121,7 +121,7 @@ h6 {
 .mat-column-physician {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 13% !important;
+  flex: 0 0 10% !important;
   width: 28% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -133,60 +133,25 @@ h6 {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
-.mat-column-email:after {
-  /* word-wrap: break-word !important;
-  white-space: unset !important;
-  flex: 0 0 10% !important;
-  width: 30% !important; */
-  /* overflow-wrap: break-word;
-  word-wrap: break-word; */
-
-  /* word-break: break-word; */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip!important;
-    
-
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-
-.mat-column-email:before {
-  /* word-wrap: break-word !important;
-  white-space: unset !important;
-  flex: 0 0 10% !important;
-  width: 30% !important; */
-  /* overflow-wrap: break-word;
-  word-wrap: break-word; */
-
-  /* word-break: break-word; */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis !important;
-    
-
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-.table-data-content {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-th, td {
-  overflow: hidden;
-  width:auto;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
 
 mat-cell > span.ellipsis {
    text-overflow: ellipsis; 
    overflow: hidden; 
    white-space: nowrap;
+}
+.mat-column-edit {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }

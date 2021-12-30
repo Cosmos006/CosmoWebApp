@@ -6,6 +6,7 @@ import { Appointment, environment } from '../Services/Url';
 import { EventMap } from '../Component/admin/model/admin.model';
 import { Product } from '../models/appointment';
 import { Observable } from 'rxjs';
+import { Doctor } from '../models/doctordata';
 // import { EventData } from '../Component/admin/admin-calendar/admin-calendar.component';
 
 @Injectable({
@@ -15,6 +16,7 @@ export class DailogeService  {
   constructor(private http: HttpClient) {}
 
   //Url Route
+  private readonly API_URL = 'http://localhost:3000/DoctorList';
   baseUrl = environment.LocalUrl;
   appointmentData: any;
 
@@ -54,7 +56,10 @@ export class DailogeService  {
    
     });
     }
-  
+    getDoctorListData() : Observable<Doctor[]>{
+    
+        return this.http.get<Doctor[]>(this.API_URL);
+      }
 
   //Dash Board Changes End
 

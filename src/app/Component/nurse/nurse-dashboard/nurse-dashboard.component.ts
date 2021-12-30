@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/Services/admin.service';
 import { data } from '../../../models/dynamic_data';
@@ -14,6 +14,7 @@ export class NurseDashboardComponent implements OnInit {
   productSearchForm?: FormGroup;
   showProgress = false;
   showTableResults = false;
+  @Input() chartData: any;
 
   results = data;
   allResults = data;
@@ -99,9 +100,24 @@ console.log(pageIndex,pageSize);
   alert(da.name);
   }
   
-  Onsubmit(){
+  Onappointment(){
     console.log("vamsiclicked")
     this.router.navigateByUrl('/AppointmentView');
+  }
+  Onsubmitbook(){
+    console.log("vamsiclicked")
+    this.router.navigateByUrl('/nurseBookappointment');
+  }
+  Onsubmitbar(){
+    console.log("vamsiclickedt")
+    this.router.navigateByUrl('/NursegridView');
+  }
+  Ondoctorlist(){
+    console.log("VamsiOnDoctor")
+    this.router.navigateByUrl('/Doctorlist');
+  }
+  Oncalender(){
+    this.router.navigateByUrl('/NurseAdminCalender');
   }
 
 }

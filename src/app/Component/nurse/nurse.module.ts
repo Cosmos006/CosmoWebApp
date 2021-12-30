@@ -24,8 +24,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {MatCardModule} from '@angular/material/card';
 import { MatTablegridComponent } from './mat-tablegrid/mat-tablegrid.component';
-import { DynamicTableComponent } from '../reusable/dynamic-table/dynamic-table.component';
+// import { DynamicTableComponent } from '../reusable/dynamic-table/dynamic-table.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BarchartComponent } from './barchart/barchart.component';
+import { NursedashboardgridComponent } from './nursedashboardgrid/nursedashboardgrid.component';
+import { DoctorlistComponent } from './doctorlist/doctorlist.component';
 
 
 
@@ -41,7 +44,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     EditDailogeComponent,
     DeleteDailogeComponent,
     MatTablegridComponent,
-    DynamicTableComponent,
+    // DynamicTableComponent,
+    BarchartComponent,
+    NursedashboardgridComponent,
+    DoctorlistComponent,
     
   ],
   imports: [
