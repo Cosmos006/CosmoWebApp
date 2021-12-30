@@ -27,16 +27,15 @@ import { Role } from './Modules/Role';
 const routes: Routes = [
  
   {
-    path: '',
-    redirectTo:'login',
-    pathMatch:'full'
+    path: 'Home',
+    component: HomeComponent,
 },
 // {
 //   path: '', pathMatch: 'full', redirectTo: 'login'
 // },
 
   { 
-    path: 'login',
+    path: '',
     component: LoginComponent,
   },
  

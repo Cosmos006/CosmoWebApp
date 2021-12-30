@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
               //   (x) => x.UserName.toLowerCase() === username.toLowerCase()
               // );
               //if (this.user !== undefined) {
-                this.router.navigate(['AdminDashBoard']);
+                this.router.navigateByUrl('/Home');
                 console.log('Hii');
               //}
             },
