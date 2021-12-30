@@ -1,0 +1,519 @@
+<!-- <app-bookappointment></app-bookappointment> -->
+<div style="margin-left: 3px">
+  <div>
+    <mat-card>
+      <p style="color:black"><b>Patient Details</b></p>
+      <div style="margin-left: 75%">
+        <button mat-raised-button color="primary" [disabled]="form.invalid">
+          Save
+        </button>
+
+        <button mat-raised-button color="primary">update</button>
+
+        <button mat-raised-button color="primary">Clear</button>
+       
+      </div>
+    </mat-card>
+  </div>
+  <mat-card-content>
+    <div
+      fxLayout="row"
+      fxFlex="1 0 0"
+      fxLayoutGap="0px"
+      fxLayputAlign="center center"
+    >
+      <div fxFlex.gt-md="70" fxFlex.gt-sm="90" fxFlex.sm="60" fxFlex="100">
+        <div fxLayout="column" style="margin-top: 2%">
+          <div fxFlex="60" class="flex-p">
+            <form [formGroup]="form">
+              <mat-accordion>
+              <mat-card class="form-group">
+                <p><b>Demographics Details</b></p>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title> Personal Details </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input
+                          matInput
+                          placeholder="First Name"
+                          class="form-group"
+                          formControlName="firstname"
+                        />
+                        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                        <mat-error
+                          *ngIf="form.controls['firstname']?.errors?.['required'] && form.controls['firstname']?.touched"
+                        >
+                          Required Field</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+  
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input
+                          matInput
+                          placeholder="Last Name"
+                          class="form-group"
+                          formControlName="lastname"
+                        />
+                        <mat-error
+                          *ngIf="form.controls['lastname']?.errors?.['required'] && form.controls['lastname']?.touched"
+                        >
+                          Required Field</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+  
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Age</mat-label>
+                        <input type="number" matInput placeholder="Age" />
+                      </mat-form-field>
+                    </span>
+  
+                    <span style="margin-right: 10%">
+                      <label>Gender: </label>
+                      <span>
+                        <mat-radio-button appearance="outline">
+                          Male
+                        </mat-radio-button>
+                      </span>
+                      <span style="margin-left: 3%">
+                        <mat-radio-button> Female </mat-radio-button>
+                      </span>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Race</mat-label>
+                        <input
+                          matInput
+                          placeholder="Race"
+                          class="form-group"
+                          formControlName="race"
+                        />
+                        <mat-error
+                          *ngIf="form.controls['race']?.errors?.['maxlength']"
+                          >Required 50 Characters only</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+  
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Ethnicity</mat-label>
+                        <input
+                          matInput
+                          placeholder="Ethnicity"
+                          class="form-group"
+                          formControlName="ethnicity"
+                        />
+                        <mat-error
+                          *ngIf="form.controls['ethnicity']?.errors?.['maxlength'] && form.controls['ethnicity']?.touched"
+                          >Required 50 Characters only</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+  
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Languages Known</mat-label>
+                        <textarea
+                          matInput
+                          class="form-group"
+                          formControlName="languagesknown"
+                        ></textarea>
+                        <mat-error
+                          *ngIf="form.controls['languagesknown']?.errors?.['maxlength'] && form.controls['languagesknown']?.touched"
+                          >Required 50 Characters only</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+  
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input
+                          type="email"
+                          matInput
+                          placeholder="Email"
+                          class="form-group"
+                          formControlName="email"
+                        />
+                        <mat-error
+                          *ngIf="form.controls['email']?.errors?.['email'] && form.controls['email']?.touched"
+                          >Enter email in correct format
+                        </mat-error>
+                      </mat-form-field>
+                    </span>
+  
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Home Address</mat-label>
+                        <textarea matInput></textarea>
+                      </mat-form-field>
+                    </span>
+  
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>PinCode</mat-label>
+                        <input
+                          type="number"
+                          matInput
+                          placeholder="PinCode"
+                          maxlength="6"
+                          class="form-group"
+                          formControlName="pincode"
+                        />
+                        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                        <mat-error
+                          *ngIf="form.controls['pincode']?.errors?.['required'] && form.controls['pincode']?.touched"
+                        >
+                          Required Field</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <input type="text" matInput placeholder="Country" />
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Contact Number</mat-label>
+                        <input
+                          type="number"
+                          matInput
+                          placeholder="Contact Number"
+                          class="form-group"
+                          formControlName="contactnumber"
+                        />
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Date Of Birth</mat-label>
+                        <input matInput [matDatepicker]="picker" />
+                        <mat-datepicker-toggle
+                          matSuffix
+                          [for]="picker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </span>
+                  </mat-expansion-panel>
+                </mat-card>
+                <mat-card>
+                  <mat-expansion-panel (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title> Emergancy Details </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input
+                          matInput
+                          placeholder="First Name"
+                          class="form-group"
+                          formControlName="emergancyfirstname"
+                        />
+                        <mat-error
+                          *ngIf="form.controls['emergancyfirstname']?.errors?.['required'] && form.controls['emergancyfirstname']?.touched"
+                        >
+                          Required Field</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input
+                          matInput
+                          placeholder="Last Name"
+                          class="form-group"
+                          formControlName="emergancylastname"
+                        />
+                        <mat-error
+                          *ngIf="form.controls['emergancylastname']?.errors?.['required'] && form.controls['emergancylastname']?.touched"
+                        >
+                          Required Field</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Relationship</mat-label>
+                        <mat-select
+                          [formControl]="Allergy"
+                          multiple
+                          class="form-group"
+                          formControlName="emergancyrelationship"
+                          required
+                        >
+                          <mat-select-trigger>
+                            {{ Allergy.value ? Allergy.value[0] : "" }}
+                            <span
+                              *ngIf="Allergy.value?.length > 1"
+                              class="additional-selection"
+                            >
+                              (+{{ Allergy.value.length - 1 }}
+                              {{
+                                Allergy.value?.length === 2 ? "other" : "others"
+                              }})
+                            </span>
+                          </mat-select-trigger>
+                          <mat-option
+                            *ngFor="let Relation of RelationshipList"
+                            [value]="Relation"
+                            >{{ Relation }}</mat-option
+                          >
+                        </mat-select>
+                        <mat-error *ngIf="form.hasError('required')"
+                          >please select relationship</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input
+                          type="email"
+                          matInput
+                          placeholder="Email"
+                          class="form-group"
+                          formControlName="emergancyemail"
+                        />
+                        <mat-error
+                          *ngIf="form.controls['emergancyemail']?.errors?.['emergancyemail'] && form.controls['emergancyemail']?.touched"
+                          >Enter email in correct format
+                        </mat-error>
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Contact Number</mat-label>
+                        <input
+                          type="number"
+                          matInput
+                          placeholder="Contact Number"
+                          class="form-group"
+                          formControlName="emergancycontactnumber"
+                        />
+                        <mat-error
+                          *ngIf="form.controls['emergancycontactnumber']?.errors?.['required'] && form.controls['emergancycontactnumber']?.touched"
+                        >
+                          Required Field</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Home Address</mat-label>
+                        <textarea
+                          matInput
+                          class="form-group"
+                          formControlName="emergancyaddress"
+                        ></textarea>
+                        <mat-error
+                          *ngIf="form.controls['emergancyaddress']?.errors?.['required'] && form.controls['emergancyaddress']?.touched"
+                        >
+                          Required Field</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>PinCode</mat-label>
+                        <input
+                          type="number"
+                          matInput
+                          placeholder="PinCode"
+                          maxlength="6"
+                          class="form-group"
+                          formControlName="emergancypincode"
+                        />
+                        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                        <mat-error
+                          *ngIf="form.controls['emergancypincode']?.errors?.['required'] && form.controls['emergancypincode']?.touched"
+                        >
+                          Required Field</mat-error
+                        >
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <input type="text" matInput placeholder="Country" />
+                      </mat-form-field>
+                    </span>
+                    <span style="margin-right: 10%"
+                      ><br />
+                      <label>Do you need access to patient portal: </label>
+                      <span>
+                        <mat-radio-button appearance="outline">
+                          Yes
+                        </mat-radio-button>
+                      </span>
+                      <span style="margin-left: 3%">
+                        <mat-radio-button checked="true" appearance="outline"
+                          >No
+                        </mat-radio-button>
+                      </span>
+                    </span>
+                    
+                  </mat-expansion-panel>
+                
+              </mat-card>
+            </mat-accordion>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="50" class="flex-p" style="padding: 10px">
+        <mat-card>
+          <p><b>Allergies</b></p>
+
+          <label>Patient has any known allergies?</label><br />
+          <span>
+            <mat-radio-button (click)="accordion.openAll()">
+              Yes
+            </mat-radio-button>
+          </span>
+          <span style="margin-left: 3%">
+            <mat-radio-button (click)="accordion.closeAll()" checked="true"
+              >No
+            </mat-radio-button>
+          </span>
+          <mat-accordion multi>
+            <mat-expansion-panel #Allergypanel 
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Type of allergies</p>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <form>
+                <span style="margin-right: 10%">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Allergyid</mat-label>
+                    <mat-select [formControl]="Allergy" multiple>
+                      <mat-select-trigger>
+                        {{ Allergy.value ? Allergy.value[0] : "" }}
+                        <span
+                          *ngIf="Allergy.value?.length > 1"
+                          class="additional-selection"
+                        >
+                          (+{{ Allergy.value.length - 1 }}
+                          {{
+                            Allergy.value?.length === 2 ? "other" : "others"
+                          }})
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option
+                        *ngFor="let Allergyid of AllergyIDList"
+                        [value]="Allergyid"
+                        >{{ Allergyid }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span style="margin-right: 10%">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Allergytype</mat-label>
+                    <mat-select [formControl]="Allergy" multiple>
+                      <mat-select-trigger>
+                        {{ Allergy.value ? Allergy.value[0] : "" }}
+                        <span
+                          *ngIf="Allergy.value?.length > 1"
+                          class="additional-selection"
+                        >
+                          (+{{ Allergy.value.length - 1 }}
+                          {{
+                            Allergy.value?.length === 2 ? "other" : "others"
+                          }})
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option
+                        *ngFor="let Allergytype of AllergytypeList"
+                        [value]="Allergytype"
+                        >{{ Allergytype }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span style="margin-right: 10%">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Allergyname</mat-label>
+                    <mat-select [formControl]="Allergy" multiple>
+                      <mat-select-trigger>
+                        {{ Allergy.value ? Allergy.value[0] : "" }}
+                        <span
+                          *ngIf="Allergy.value?.length > 1"
+                          class="additional-selection"
+                        >
+                          (+{{ Allergy.value.length - 1 }}
+                          {{
+                            Allergy.value?.length === 2 ? "other" : "others"
+                          }})
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option
+                        *ngFor="let Allergyname of AllergynameList"
+                        [value]="Allergyname"
+                        >{{ Allergyname }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span style="margin-right: 10%">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Allergy Details</mat-label>
+                    <input matInput placeholder="Allergy Details" />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Allergy Discription</mat-label>
+                    <input matInput placeholder="Allergy Discription" />
+                  </mat-form-field>
+                </span>
+                <span style="margin-right: 10%">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Clinical Information</mat-label>
+                    <input matInput placeholder="Clinical Information" />
+                  </mat-form-field>
+                </span>
+              </form>
+             
+              <mat-expansion-panel 
+              
+              >
+                <mat-expansion-panel-header>
+                  <mat-panel-title> Is allergy fatal </mat-panel-title>
+                </mat-expansion-panel-header>
+                <span>
+                  <mat-radio-button> Yes </mat-radio-button>
+                </span>
+                <span style="margin-left: 3%">
+                  <mat-radio-button>No </mat-radio-button>
+                </span>
+                
+                
+              </mat-expansion-panel>
+             
+            </mat-expansion-panel>
+            
+          </mat-accordion>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</div> 
+
+    
+  
+  
