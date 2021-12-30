@@ -20,7 +20,7 @@
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Name
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      <mat-cell *matCellDef="let element"matTooltip={{element.name}}><span class="ellipsis">{{element.name}}</span> </mat-cell>
     </ng-container>
 
     <!-- Third Column -->
@@ -33,7 +33,7 @@
     <!-- Fourth Column -->
     <ng-container matColumnDef="address">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Address </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+      <mat-cell *matCellDef="let element"matTooltip={{element.name}}><span class="ellipsis">{{element.name}}</span> </mat-cell>
     </ng-container>
     
     <ng-container matColumnDef="edit">
