@@ -25,9 +25,7 @@
 
 .mat-table {
   overflow: auto;
-  font-family: "Open Sans", sans-serif
-  
-  
+  font-family: "Open Sans", sans-serif 
 }
 
 .mat-header-cell.mat-sort-header-sorted {
@@ -47,12 +45,12 @@ h6 {
 
 .mat-cell:nth-child(4),
 .mat-header-cell:nth-child(4) {
-  flex: 0 0 40px;
+  
 }
 
 .mat-cell:nth-child(5),
 .mat-header-cell:nth-child(5) {
-  flex: 0 0 40px;
+ 
 }
 
 .mat-sort-header-container {
@@ -84,4 +82,76 @@ h6 {
 .highlight{
   color: white;
   background: #673AB7;
+}
+.input-txt {
+  padding: 30px;
+  font-size: 40px;
+}
+
+.mat-column-name {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-column-address {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-column-physician {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+
+mat-cell > span.ellipsis {
+   text-overflow: ellipsis; 
+   overflow: hidden; 
+   white-space: nowrap;
+}
+.mat-column-edit {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }

@@ -1,0 +1,62 @@
+
+<h2>Patient Appointment Details</h2>
+
+<div class="example-container mat-elevation-z8" class="table-content" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;">
+  <mat-form-field style="margin-left: 15px" style="width: 100%" >
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search Here">
+  </mat-form-field>
+  <div class="spinner-container">
+  </div>
+
+  <mat-table #table [dataSource]="dataSource1" style="margin-left: 15px"  >
+
+    <ng-container matColumnDef="id"  [style.display]="'none'">
+      <mat-header-cell *matHeaderCellDef [style.display]="'none'" mat-sort-headerstyle="font-size: medium;" style="font-size: medium;"> Id
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" [style.display]="'none'" matTooltip="id"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Second Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Name
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"matTooltip={{element.name}}><span class="ellipsis">{{element.name}}</span> </mat-cell>
+    </ng-container>
+
+    <!-- Third Column -->
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Gender </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.gender}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Fourth Column -->
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Address </mat-header-cell>
+      <mat-cell *matCellDef="let element"matTooltip={{element.name}}><span class="ellipsis">{{element.name}}</span> </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <button mat-icon-button class="iconbutton"
+          color="primary" (click)="OnVisit()">
+          <mat-icon matTooltip="Click To Record Vitals"> perm_identity </mat-icon>
+        </button> </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="age">
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Age </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.age}} </mat-cell>
+    </ng-container>
+   
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+  </mat-paginator>
+
+
+
+</div>

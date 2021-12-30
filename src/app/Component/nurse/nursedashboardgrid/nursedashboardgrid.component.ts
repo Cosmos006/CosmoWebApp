@@ -8,16 +8,14 @@ import { Product } from 'src/app/models/appointment';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
-/**
- * @title Table with sorting
- */
 @Component({
-  selector: 'app-appointment-view',
-  templateUrl: './appointment-view.component.html',
-  styleUrls: ['./appointment-view.component.css']
+  selector: 'app-nursedashboardgrid',
+  templateUrl: './nursedashboardgrid.component.html',
+  styleUrls: ['./nursedashboardgrid.component.css']
 })
-export class AppointmentViewComponent {
-  displayedColumns = ['id', 'name', 'gender', 'address', 'mobile', 'age', 'email','physician','edit', 'pastvisit','delete'];
+export class NursedashboardgridComponent implements OnInit {
+
+  displayedColumns = ['id', 'name', 'gender', 'address','edit','age'];
   dataSource1 !: MatTableDataSource<Product>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
@@ -52,15 +50,8 @@ export class AppointmentViewComponent {
     this.getdata();
   }
   OnVisit(){
-    
     console.log("vamsiclicked")
-    this.router.navigateByUrl('/nurseBookappointment');
+    this.router.navigateByUrl('/PatientDetails');
   }
 
 }
-
-
-function ELEMENT_DATA(ELEMENT_DATA: any) {
-  throw new Error('Function not implemented.');
-}
-
