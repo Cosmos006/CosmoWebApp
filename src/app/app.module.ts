@@ -63,6 +63,7 @@ import { LoginComponent } from './Component/home/login/login.component';
 import { HomeComponent } from './Component/home/home/home.component';
 import { DynamicTableComponent } from './Component/reusable/dynamic-table/dynamic-table.component';
 import { ChartComponent } from './Component/reusable/chart/chart.component';
+
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
@@ -114,6 +115,7 @@ FullCalendarModule.registerPlugins([
     PatientDashboardComponent
   ],
   imports: [
+
     
     HttpClientModule,
     BrowserModule,

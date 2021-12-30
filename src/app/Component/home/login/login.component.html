@@ -98,14 +98,22 @@
                
                 <div *ngIf="OldpassWordGenerated"  class="form-group">
                   <input class="mt-2 form-control text-black input-lg" [(ngModel)]="oldpassword" placeholder="Enter Old Password" name="Old Password" type="password"/>
+                 
+         
                   <input class="mt-2 form-control text-black input-lg" [(ngModel)]="newpassword" placeholder="Enter New Password" name="password" type="password" />
+                 
                   <input class="mt-2 form-control text-black input-lg" [(ngModel)]="confirmpassword" placeholder="Confirm New Password" name="confirmpassword" type="password" />
+                 
                 </div>
-                <button *ngIf="OldpassWordGenerated" class="mt-2 btn btn-md btn-primary btn-block" [disabled]="!oldpassword || !newpassword || !confirmpassword" (click)="ResetPassword()"  data-dismiss="modal">Reset Password</button>
 
                 <div>
                   <span style="color:red">{{errorMessage}}</span>
                 </div>
+                <button *ngIf="OldpassWordGenerated" class="mt-2 btn btn-md btn-primary btn-block" [disabled]="!oldpassword || !newpassword || !confirmpassword" (click)="ResetPassword()"  data-dismiss="modal">Reset Password</button>
+
+                <!-- <div>
+                  <span style="color:red">{{errorMessage}}</span>
+                </div> -->
               </fieldset>
             </div>
           </div>
