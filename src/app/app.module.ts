@@ -162,7 +162,6 @@ FullCalendarModule.registerPlugins([
     NetworkStatusAngularModule.forRoot(),
     MatProgressSpinnerModule,
     //Apex chart
-    NgApexchartsModule,
   ],
   exports: [],
   providers: [
