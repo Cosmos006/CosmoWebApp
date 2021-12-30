@@ -6,7 +6,7 @@
   background:#fff;  /* fallback for old browsers */
   border:1px solid #ddd;
   border-radius: 5px;
-  
+  vertical-align: middle;
   }
 
 
@@ -50,5 +50,16 @@ input.ng-invalid.ng-touched {
   border: 1px solid red;
   border-bottom: none;
   padding: 1px;
+}
+
+
+section
+{
+  background-image: url("../../../../assets/Images/Bg6.jpg");
+  align-items: center;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 

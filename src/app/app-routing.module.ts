@@ -29,12 +29,11 @@ import { Role } from './Modules/Role';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'Home',
     component: HomeComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'login',
+},
+  { 
+    path: '',
     component: LoginComponent,
   },
 
