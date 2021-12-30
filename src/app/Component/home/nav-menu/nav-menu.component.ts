@@ -1,3 +1,4 @@
+  
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -35,6 +36,10 @@ export class NavMenuComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   get isAdmin() {
