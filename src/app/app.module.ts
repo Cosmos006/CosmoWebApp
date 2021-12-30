@@ -81,6 +81,7 @@ import { AuthenticationService } from './Services';
 import { ModalModule } from 'ngb-modal';
 import { AlertService } from './Services/Alert/alert.service';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { FooterComponent } from './Component/home/footer/footer.component';
 
 
 
@@ -116,6 +117,7 @@ FullCalendarModule.registerPlugins([
     
     BookAppointmentComponent,
     CalendarComponent,
+    FooterComponent,
   ],
   imports: [
 
