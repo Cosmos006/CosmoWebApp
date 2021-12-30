@@ -22,10 +22,13 @@ export class AppComponent implements OnInit {
   isConnected = true;
   start2: any;
   constructor(
-    private networkStatusAngularService: NetworkStatusAngularService,  private router: Router,
+    private networkStatusAngularService: NetworkStatusAngularService,
+    private router: Router,
     private authenticationService: AuthenticationService
-) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  ) {
+    this.authenticationService.currentUser.subscribe(
+      (x) => (this.currentUser = x)
+    );
     this.networkStatusAngularService.status.subscribe((status) => {
       if (status) {
         this.isConnected = true;
@@ -37,8 +40,4 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {}
   currentUser!: User;
-
- 
-
- 
 }

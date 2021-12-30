@@ -29,7 +29,14 @@ import { EventMap } from '../admin/model/admin.model';
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PatientUserComponent } from './patient-user/patient-user.component';
-import { DynamicTableComponent } from '../reusable/dynamic-table/dynamic-table.component';
+import { DynamicTableComponent } from '../shared/dynamic-table/dynamic-table.component';
+import { PieChartComponent } from '../shared/pie-chart/pie-chart.component';
+import { BookAppointmentComponent } from '../shared/book-appointment/book-appointment.component';
+import { CalendarComponent } from '../shared/calendar/calendar.component';
+import { MatInputModule } from '@angular/material/input';
+import { LockedAccountComponent } from './locked-account/locked-account.component';
+import { AdminPatientComponent } from './admin-patient/admin-patient.component';
+import { AdminHospitalComponent } from './admin-hospital/admin-hospital.component';
 
 //Import Dynamic table
 
@@ -69,6 +76,12 @@ const routes: Routes = [
     ViewPhysicianComponent,
     AdminCalendarComponent,
     DynamicTableComponent,
+    PieChartComponent,
+    BookAppointmentComponent,
+    CalendarComponent,
+    LockedAccountComponent,
+    AdminPatientComponent,
+    AdminHospitalComponent,
   ],
   imports: [
     CommonModule,
@@ -89,6 +102,11 @@ const routes: Routes = [
     //Forms
     FormsModule,
     ReactiveFormsModule,
+    //Material
+    MatFormFieldModule,
+    MatInputModule,
+    //router
+    RouterModule,
   ],
 })
 export class AdminModule {}

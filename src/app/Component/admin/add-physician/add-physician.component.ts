@@ -4,8 +4,11 @@ import {
   FormGroup,
   Validators,
   FormControl,
+  AbstractControl,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { map } from 'rxjs';
+import { AdminService } from 'src/app/Services/admin.service';
 
 @Component({
   selector: 'app-add-physician',
@@ -13,23 +16,185 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-physician.component.css'],
 })
 export class AddPhysicianComponent implements OnInit {
-  form!: FormGroup;
+  UserType: string = '';
+  Type?: string;
+  Physician!: FormGroup;
   loading = false;
   submitted = false;
+  Gender: any;
+  genderdata: any;
+  designationdata: any;
+  designation: any;
+  educationdata: any;
+  eduaction: any;
+  department: any;
+  departmentdata: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private adminservice: AdminService
+  ) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      firstName: ['', Validators.required],
+    this.route.paramMap.subscribe((res) => {
+      this.UserType += res.get('type');
+    });
+
+    this.adminservice.Gender().subscribe((res) => {
+      this.genderdata = res.gender;
+    });
+
+    // this.genderdata = ['Male', 'Female', 'Other'];
+    if (this.UserType === 'physician') {
+      this.Type = 'Physician';
+
+      if (this.UserType === 'physician') {
+        this.adminservice.EduactionList(this.Type).subscribe((res) => {
+          this.educationdata = res.physician;
+        });
+
+        this.adminservice.Designation(this.Type).subscribe((res) => {
+          this.designationdata = res.physician;
+        });
+
+        this.adminservice.Department(this.Type).subscribe((res) => {
+          this.departmentdata = res.physician;
+        });
+      }
+    } else if (this.UserType === 'nurse') {
+      this.Type = 'Nurse';
+
+      if (this.UserType === 'nurse') {
+        this.adminservice.EduactionList(this.Type).subscribe((res) => {
+          this.educationdata = res.nurse;
+        });
+        this.adminservice.Designation(this.Type).subscribe((res) => {
+          this.designationdata = res.nurse;
+        });
+
+        this.adminservice.Department(this.Type).subscribe((res) => {
+          this.departmentdata = res.nurse;
+        });
+      }
+    }
+
+    this.FormData();
+  }
+
+  FormData() {
+    this.Physician = this.formBuilder.group({
+      firstName: [
+        null,
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(10),
+      ],
+      Gender: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      designation: ['', Validators.required],
+      education: ['', Validators.required],
+      // image: [''],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      mobile: ['', Validators.required, Validators.maxLength(10)],
+      dob: ['', Validators.required],
+      department: ['', Validators.required],
+      address: ['', Validators.required],
     });
   }
 
-  profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-  });
+  get f(): { [key: string]: AbstractControl } {
+    return this.Physician.controls;
+  }
+  get name() {
+    this.submitted = false;
+    return this.Physician.get('firstName');
+  }
+
+  //Gender
+  genderChange(e: any) {
+    this.Gender.setValue(e.target.value, {
+      onlySelf: true,
+    });
+  }
+
+  get gendererror() {
+    return this.Physician.get('Gender');
+  }
+
+  //Email
+  get emailerror() {
+    return this.Physician.get('Email');
+  }
+
+  //Designation
+
+  get designationerror() {
+    return this.Physician.get('designation');
+  }
+
+  designationChange(e: any) {
+    this.designation.setValue(e.target.value, {
+      onlySelf: true,
+    });
+  }
+
+  //Eduaction
+  get educationerror() {
+    return this.Physician.get('education');
+  }
+
+  eduactionChange(e: any) {
+    this.eduaction.setValue(e.target.value, {
+      onlySelf: true,
+    });
+  }
+
+  //image
+  get imageerror() {
+    return this.Physician.get('image');
+  }
+
+  //Last Name
+  get lastnameerror() {
+    return this.Physician.get('lastName');
+  }
+
+  //Mobilenumber
+  get mobileerror() {
+    return this.Physician.get('mobile');
+  }
+
+  //Dob
+  get doberror() {
+    return this.Physician.get('dob');
+  }
+
+  //department
+  get departmenterror() {
+    return this.Physician.get('department');
+  }
+
+  departmentChange(e: any) {
+    this.department.setValue(e.target.value, {
+      onlySelf: true,
+    });
+  }
+
+  //Address
+  get addresserror() {
+    return this.Physician.get('address');
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+
+    if (this.Physician.invalid) {
+      return;
+    } else {
+      console.log('success');
+      console.log(this.Physician.value);
+    }
+  }
 }

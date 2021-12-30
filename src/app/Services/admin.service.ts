@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventInput } from '@fullcalendar/angular';
 import { INITIAL_EVENTS } from '../Component/admin/model/event.utils';
-import { Admin, environment } from '../Services/Url';
+import { AddPhysycian, Admin, environment } from '../Services/Url';
 import { EventMap } from '../Component/admin/model/admin.model';
+import { Observable } from 'rxjs';
+import { AdminDashboard } from '../models/admin.model';
 // import { EventData } from '../Component/admin/admin-calendar/admin-calendar.component';
 
 @Injectable({
@@ -14,6 +16,24 @@ export class AdminService {
 
   //Url Route
   baseUrl = environment.LocalUrl;
+
+  //Observer Event
+
+  GlobalObservableEvent(url: any) {
+    const $http = new Observable((observer) => {
+      fetch(url)
+        .then((responce) => {
+          return responce.json();
+        })
+        .then((body) => {
+          observer.next(body);
+          observer.complete();
+        })
+        .catch((err) => observer.error(err));
+    });
+
+    return $http;
+  }
 
   //Dash Board Changes Start
 
@@ -46,5 +66,72 @@ export class AdminService {
     return this.http.get<EventMap[]>(this.baseUrl + Admin.Event);
   }
 
-  //Calendar Changes End
+  GetAdminDashboard(): Observable<AdminDashboard[]> {
+    return this.http.get<AdminDashboard[]>(this.baseUrl + Admin.DashBoard);
+  }
+
+  TempGetAdminData() {
+    return this.GlobalObservableEvent(this.baseUrl + '/PayLoad');
+  }
+
+  //Observable Event
+
+  Observeevent() {
+    const $http = new Observable((observer) => {
+      fetch(this.baseUrl + Admin.DashBoard)
+        .then((res) => {
+          return res.json();
+        })
+        .then((body) => {
+          observer.next(body);
+          observer.complete();
+        })
+        .catch((err) => {
+          observer.error(err);
+        });
+    });
+
+    return $http;
+  }
+
+  //Gender
+
+  Gender() {
+    return this.http.get<any>(this.baseUrl + AddPhysycian.GetGender);
+  }
+
+  //Designation
+  Designation(type: any) {
+    if (type === 'Physician') {
+      return this.http.get<any>(
+        this.baseUrl + AddPhysycian.GetPhysicianDesignation
+      );
+    } else {
+      return this.http.get<any>(
+        this.baseUrl + AddPhysycian.GetNurseDesignation
+      );
+    }
+  }
+
+  //Department
+  Department(type: any) {
+    if (type === 'Physician') {
+      return this.http.get<any>(
+        this.baseUrl + AddPhysycian.GetPhysicianDepartment
+      );
+    } else {
+      return this.http.get<any>(this.baseUrl + AddPhysycian.GetNurseDepartment);
+    }
+  }
+
+  //Physician/Nurse/EduactionList
+  EduactionList(type: any) {
+    if (type === 'Physician') {
+      return this.http.get<any>(
+        this.baseUrl + AddPhysycian.GetPhysicianEduaction
+      );
+    } else {
+      return this.http.get<any>(this.baseUrl + AddPhysycian.GetNurseEduaction);
+    }
+  }
 }
