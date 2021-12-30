@@ -58,7 +58,6 @@ import { LoginComponent } from './Component/home/login/login.component';
 import { HomeComponent } from './Component/home/home/home.component';
 import { DynamicTableComponent } from './Component/shared/dynamic-table/dynamic-table.component';
 import { ChartComponent } from './Component/shared/chart/chart.component';
-import { PieChartComponent } from './Component/shared/pie-chart/pie-chart.component';
 import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
 //Internet Check
@@ -82,7 +81,7 @@ import { AuthenticationService } from './Services';
 //import { AuthenticationService } from './Services';
 
 //Apex Chart
-import { NgApexchartsModule } from 'ng-apexcharts';
+//import { NgApexchartsModule } from 'ng-apexcharts';
 
 //Edit Table
 FullCalendarModule.registerPlugins([
@@ -111,7 +110,7 @@ FullCalendarModule.registerPlugins([
     EditDailogeComponent,
     ChartComponent,
     PatientDashboardComponent,
-    PieChartComponent,
+    
     BookAppointmentComponent,
     CalendarComponent,
   ],
