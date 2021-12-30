@@ -59,3 +59,14 @@ button {
 .error{
   background-color: reds;
 }
+
+
+section
+{
+  background-image: url("../../../../assets/Images/Bg6.jpg");
+  align-items: center;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

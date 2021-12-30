@@ -1,4 +1,4 @@
-<section class="vh-100">
+<section class="vh-100 gradient-custom">
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-8 col-lg-5 col-xl-5">
@@ -9,12 +9,13 @@
         <div class="card auth">
           <div class="card-body auth-card">
             <form [formGroup]="registrationform" (submit)="onSubmit()">
-              <span
+              <!-- <span
                 alt="user"
                 class="user-image text-center text-white"
                 style="margin-bottom: 1rem"
                 ><h3 class="">Register</h3></span
-              >
+              > -->
+              <h1 class=" text-black font-bold text-center" style="color: blue; font-weight: bold;">Registration Form</h1>
 
               <div class="form-group row">
                 <div class="col-6">
@@ -52,12 +53,10 @@
                     name="First Name"
                     class="form-control"
                     formControlName="FirstName"
-                    placeholder="First Name"
                     [ngClass]="{
                       'is-invalid':
                         submitted &&
                         this.registrationform.controls['FirstName'].invalid
-                        
                     }"
                   />
                   <div class="text-danger">
@@ -66,14 +65,14 @@
                       submitted &&
                       this.registrationform.controls['FirstName'].invalid
                       && this.registrationform.controls['FirstName']?.errors?.['pattern']
+                      && this.registrationform.controls['FirstName']?.status === 'INVALID'
                       && this.registrationform.status === 'INVALID'
                     "
                       >First Name is invalid</span
                     >
                     <span
                       *ngIf="
-                        this.registrationform.controls['FirstName']?.touched &&
-                        this.registrationform.controls['FirstName']?.status === 'INVALID'
+                        (this.registrationform.controls['FirstName']?.touched && this.registrationform.controls['FirstName']?.value === '')
                         || (submitted && this.registrationform.controls['FirstName']?.untouched)
                       "
                       >First Name is required</span
@@ -90,7 +89,6 @@
                     name="Last name"
                     class="form-control"
                     formControlName="LastName"
-                    placeholder="LastName"
                     [ngClass]="{
                       'is-invalid':
                         submitted &&
@@ -102,20 +100,22 @@
                       *ngIf="
                       submitted &&
                       this.registrationform.controls['LastName'].invalid
-                      && (this.registrationform.controls['LastName']?.errors?.['pattern']) 
+                      && this.registrationform.controls['LastName']?.errors?.['pattern']
+                      && this.registrationform.controls['LastName']?.status === 'INVALID'
+                      && this.registrationform.status === 'INVALID'
                     "
                       >Last Name is invalid</span
                     >
                     <span
                       *ngIf="
-                        this.registrationform.controls['LastName']?.touched &&
-                        this.registrationform.controls['LastName']?.status === 'INVALID'
+                        (this.registrationform.controls['LastName']?.touched && this.registrationform.controls['LastName']?.value === '')
                         || (submitted && this.registrationform.controls['LastName']?.untouched)
                       "
                       >Last Name is required</span
                     >
                   </div>
                 </div>
+                
 
                 <div class="col-6">
                   <label for="name">User Name : </label>
@@ -124,7 +124,6 @@
                     name="User Name "
                     class="form-control"
                     formControlName="UserName"
-                    placeholder="User Name"
                     [ngClass]="{
                       'is-invalid':
                         submitted &&
@@ -136,14 +135,15 @@
                       *ngIf="
                       submitted &&
                       this.registrationform.controls['UserName'].invalid
-                      && (this.registrationform.controls['UserName']?.errors?.['pattern']) 
+                      && this.registrationform.controls['UserName']?.errors?.['pattern']
+                      && this.registrationform.controls['UserName']?.status === 'INVALID'
+                      && this.registrationform.status === 'INVALID'
                     "
                       >User Name is invalid</span
                     >
                     <span
                       *ngIf="
-                      this.registrationform.controls['UserName']?.touched &&
-                      this.registrationform.controls['UserName']?.status === 'INVALID'
+                        (this.registrationform.controls['UserName']?.touched && this.registrationform.controls['UserName']?.value === '')
                         || (submitted && this.registrationform.controls['UserName']?.untouched)
                       "
                       >User Name is required</span
@@ -172,14 +172,15 @@
                       *ngIf="
                       submitted &&
                       this.registrationform.controls['PhoneNo'].invalid
-                      && (this.registrationform.controls['PhoneNo']?.errors?.['pattern']) 
+                      && this.registrationform.controls['PhoneNo']?.errors?.['pattern']
+                      && this.registrationform.controls['PhoneNo']?.status === 'INVALID'
+                      && this.registrationform.status === 'INVALID'
                     "
                       >Contact is invalid</span
                     >
                     <span
                       *ngIf="
-                      this.registrationform.controls['PhoneNo']?.touched &&
-                      this.registrationform.controls['PhoneNo']?.status === 'INVALID'
+                        (this.registrationform.controls['PhoneNo']?.touched && this.registrationform.controls['PhoneNo']?.value === '')
                         || (submitted && this.registrationform.controls['PhoneNo']?.untouched)
                       "
                       >Contact is required</span
@@ -194,7 +195,6 @@
                     type="text"
                     name="EmailId"
                     class="form-control"
-                    placeholder="EmailId"
                     formControlName="Email"
                   [ngClass]="{
                       'is-invalid':
@@ -207,14 +207,15 @@
                       *ngIf="
                       submitted &&
                       this.registrationform.controls['Email'].invalid
-                      && (this.registrationform.controls['Email']?.errors?.['pattern']) 
+                      && this.registrationform.controls['Email']?.errors?.['pattern']
+                      && this.registrationform.controls['Email']?.status === 'INVALID'
+                      && this.registrationform.status === 'INVALID'
                     "
                       >Email is invalid</span
                     >
                     <span
                       *ngIf="
-                      this.registrationform.controls['Email']?.touched &&
-                      this.registrationform.controls['Email']?.status === 'INVALID'
+                        (this.registrationform.controls['Email']?.touched && this.registrationform.controls['Email']?.value === '')
                         || (submitted && this.registrationform.controls['Email']?.untouched)
                       "
                       >Email is required</span
@@ -256,7 +257,6 @@
                     type="date"
                     name="Date of birth"
                     class="form-control"
-                    placeholder="Date of birth"
                     formControlName="DateOfBirth"
                    [ngClass]="{
                       'is-invalid':
@@ -277,13 +277,13 @@
                 </div>
               </div>
 
-              <div class="form-row">
+              <div class="align-items-center text-center justify-content-center" style="width: 100px ;">
                 <div>
                   <button type="submit" class="btn btn-success">Sign Up</button>
                 </div>
               </div>
 
-              <div class="text-center row w-100 login">
+              <div class="align-items-center text-center login">
                 Already have an account ? <a routerLink="/login">Login</a> here.
               </div>
             </form>

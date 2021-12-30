@@ -28,8 +28,8 @@ const routes: Routes = [
  
   {
     path: '',
-    component: HomeComponent,
-    canActivate: [AuthGuard]
+    redirectTo:'login',
+    pathMatch:'full'
 },
 // {
 //   path: '', pathMatch: 'full', redirectTo: 'login'

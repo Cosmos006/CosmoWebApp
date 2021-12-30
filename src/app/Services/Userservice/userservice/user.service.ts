@@ -56,8 +56,7 @@ export class UserService {
       PhoneNo: registrationform.value.PhoneNo,
       Email: registrationform.value.Email,
       DateOfBirth: registrationform.value.DateOfBirth,
-      Role:"Patient"
-      
+      Role:"Patient",
       // Title: this.formModel.value.TitleFName.Title,
       // FirstName: this.formModel.value.TitleFName.FirstName,
       // LastName: this.formModel.value.LNameUserName.LastName,

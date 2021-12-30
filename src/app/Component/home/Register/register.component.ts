@@ -22,15 +22,25 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     //this.registrationform.reset();
-    this.registrationform = this.fb.group({
-      Title: ['', Validators.required,Validators.pattern('^[a-zA-Z]+$')],
-      FirstName:['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
-      LastName:['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
-      UserName:['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
-      PhoneNo: ['', Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10)],
-      Email:['', Validators.required, Validators.email],
-      DateOfBirth: ['', Validators.required],
-    })    
+    
+      this.registrationform = new FormGroup({
+        Title: new FormControl('',[Validators.required]),
+        FirstName: new FormControl('',[Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
+        LastName: new FormControl('',[Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
+        UserName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]),
+        PhoneNo: new FormControl('',[Validators.required, Validators.pattern('^[0-9]+$')]),
+        Email: new FormControl('',[Validators.required, Validators.email]),
+        DateOfBirth: new FormControl('',[Validators.required]),
+      });
+      //this.registrationform = this.fb.group({
+      // Title: ['', Validators.required],
+      // FirstName:['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
+      // LastName:['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
+      // UserName:['', Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')],
+      // PhoneNo: ['', Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10)],
+      // Email:['', Validators.required, Validators.email],
+      // DateOfBirth: ['', Validators.required],
+    //})    
 }
   onSubmit():void {
     // console.log(this.userService.formModel.value.Password)og(this.userService.formModel.value.ConfirmPassword)
