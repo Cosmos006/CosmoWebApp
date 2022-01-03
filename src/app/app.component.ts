@@ -11,7 +11,6 @@ import { AuthenticationService } from './Services';
     <div *ngIf="isConnected; else internet">
       <app-nav-menu></app-nav-menu>
       <router-outlet></router-outlet>
-      <app-footer></app-footer>
     </div>
     <ng-template #internet> Please Check Your Internet Connection </ng-template>
   `,

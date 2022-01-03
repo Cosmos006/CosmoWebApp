@@ -4,9 +4,6 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class AlertService {
-    info(arg0: string) {
-        throw new Error('Method not implemented.');
-    }
     private subject = new Subject<any>();
     private keepAfterNavigationChange = false;
 
