@@ -1,2 +1,12 @@
 @import url('../../../../assets/css/Dashboard.css');
 
+
+.example-card {
+    max-width: 400px;
+    margin: 8px;
+    padding: 10px;
+  }
+
+  table {
+    width: 100%;
+  }

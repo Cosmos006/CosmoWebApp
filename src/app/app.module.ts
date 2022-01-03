@@ -82,6 +82,8 @@ import { ModalModule } from 'ngb-modal';
 import { AlertService } from './Services/Alert/alert.service';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { FooterComponent } from './Component/home/footer/footer.component';
+import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
+import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
 
 
 
@@ -114,7 +116,8 @@ FullCalendarModule.registerPlugins([
     EditDailogeComponent,
     ChartComponent,
     PatientDashboardComponent,
-    
+    AdminPatientComponent,
+    AdminHospitalComponent,
     BookAppointmentComponent,
     CalendarComponent,
     FooterComponent,
