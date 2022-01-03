@@ -12,6 +12,10 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plug
 
 //DataTable
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+//card
+import { MatCardTitle } from '@angular/material/card';
+//pagination 
+import { MatPaginator } from '@angular/material/paginator';
 
 //Datateble
 import { MatTabsModule } from '@angular/material/tabs';
@@ -82,6 +86,7 @@ const routes: Routes = [
     LockedAccountComponent,
     AdminPatientComponent,
     AdminHospitalComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -92,8 +97,10 @@ const routes: Routes = [
     MatTableModule,
     //Http
     HttpClientModule,
+    //card 
+    MatCardTitle,
     //Edittable
-
+    MatPaginator,
     // MatSort,
     // MatSortModule,
     // MatTableDataSource,

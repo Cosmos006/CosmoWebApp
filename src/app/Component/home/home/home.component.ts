@@ -34,7 +34,7 @@ export class HomeComponent {
     if (user.role == 'Admin') {
       this.router.navigateByUrl('/AdminDashboard');
     } else if (user.role == 'Physician') {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/Physician');
     } else if (user.role == 'Patient') {
       this.router.navigateByUrl('/PatientDashboard');
     } else if (user.role == 'Nurse') {
