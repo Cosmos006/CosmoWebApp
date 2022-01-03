@@ -84,6 +84,9 @@ import { AuthenticationService } from './Services';
 //Apex Chart
 import { NgApexchartsModule } from 'ng-apexcharts';
 
+//Mat snak
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -163,6 +166,7 @@ FullCalendarModule.registerPlugins([
     MatProgressSpinnerModule,
     //Apex chart
     NgApexchartsModule,
+    MatSnackBarModule,
   ],
   exports: [],
   providers: [

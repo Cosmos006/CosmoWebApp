@@ -71,7 +71,7 @@ export class PatientBookappointmentComponent implements OnInit {
 
   ngOnInit() {
     //Text input Bind
-    this.TextInput = 'Book Appointment';
+    this.TextInput = 'Ram';
 
     //Bind DropDownn
     this.diagnosics = [

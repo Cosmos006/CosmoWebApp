@@ -1,18 +1,6 @@
 <div style="margin-left: 3px">
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <div>
-      <mat-card>
-        <div style="margin-left: 75%">
-          <button mat-raised-button color="primary" type="submit">Save</button>
-
-          <!-- <button mat-raised-button color="primary" type="button">
-            Update
-          </button> -->
-
-          <button mat-raised-button color="primary" type="button">Clear</button>
-        </div>
-      </mat-card>
-    </div>
+    <div></div>
     <mat-card-content>
       <div class="container" style="margin: 2%">
         <div
@@ -47,7 +35,7 @@
           <div fxFlex="60" class="flex-p">
             <span>
               <mat-form-field appearance="outline">
-                <mat-label>title</mat-label>
+                <mat-label>Patient Id</mat-label>
                 <input matInput placeholder="Title" value="{{ TextInput }}" />
               </mat-form-field>
             </span>
@@ -149,5 +137,16 @@
         </div>
       </div>
     </mat-card-content>
+    <mat-card>
+      <div style="margin-left: 75%">
+        <button mat-raised-button color="primary" type="submit">Save</button>
+
+        <!-- <button mat-raised-button color="primary" type="button">
+          Update
+        </button> -->
+
+        <button mat-raised-button color="primary" type="button">Clear</button>
+      </div>
+    </mat-card>
   </form>
 </div>

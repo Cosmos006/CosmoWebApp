@@ -11,7 +11,8 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plug
 
 //DataTable
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 
 //Datateble
 import { MatTabsModule } from '@angular/material/tabs';
@@ -22,9 +23,13 @@ import { HttpClientModule } from '@angular/common/http';
 // import { MatSort, MatTableDataSource } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 //Model Export
 import { EventMap } from '../admin/model/admin.model';
+
+//Snack Bar
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -90,6 +95,7 @@ const routes: Routes = [
     FullCalendarModule,
     //Datatable
     MatTableModule,
+    MatTableDataSource,
     //Http
     HttpClientModule,
     //Edittable
@@ -107,6 +113,10 @@ const routes: Routes = [
     MatInputModule,
     //router
     RouterModule,
+    //Paginator
+    MatPaginatorModule,
+    //SnakBar
+    MatSnackBarModule,
   ],
 })
 export class AdminModule {}

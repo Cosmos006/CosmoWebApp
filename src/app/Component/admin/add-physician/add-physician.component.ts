@@ -9,6 +9,11 @@ import {
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { AdminService } from 'src/app/Services/admin.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-physician',
@@ -29,12 +34,15 @@ export class AddPhysicianComponent implements OnInit {
   eduaction: any;
   department: any;
   departmentdata: any;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private adminservice: AdminService
+    private adminservice: AdminService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -193,6 +201,24 @@ export class AddPhysicianComponent implements OnInit {
     if (this.Physician.invalid) {
       return;
     } else {
+      if (this.UserType === 'physician') {
+        this._snackBar.open('Phyician Registration Successful', 'Done', {
+          panelClass: 'success',
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 5000,
+        });
+      } else {
+        this._snackBar.open('Nurse Registration Successful', 'Done', {
+          panelClass: 'success',
+
+          horizontalPosition: this.horizontalPosition,
+
+          verticalPosition: this.verticalPosition,
+
+          duration: 5000,
+        });
+      }
       console.log('success');
       console.log(this.Physician.value);
     }
