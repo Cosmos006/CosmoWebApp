@@ -1,16 +1,14 @@
 <!-- Old Navbar-->
 
 <div>
-  <mat-toolbar *ngIf="currentUser" style="background-color: #a6d3f0; background-image: linear-gradient(to right,#a6d3f0 ,rgb(23, 118, 177));">
+  <mat-toolbar *ngIf="currentUser" style="background-color: lightskyblue">
     <div fxShow="true" fxHide.gt-sm="true">
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
     <span class="text-white" style="color: white; margin-right: 10px"
-      ><a class="navbar-item">
-        <img src="assets/Images/Logo/CosmosLogo.png" style="width: 100px;height:20px;">
-      </a></span
+      ><b>Logo</b></span
     >
 
     <span class="example-spacer"></span>
@@ -41,7 +39,7 @@
           *ngIf="isAdmin"
           mat-button
         >
-          Register Physician
+          Add Physician
         </a>
         <a
           class="companyName"
@@ -50,7 +48,7 @@
           *ngIf="isAdmin"
           mat-button
         >
-        Register Nurse
+          Add Nurse
         </a>
         <a
           mat-button
