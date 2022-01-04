@@ -22,7 +22,7 @@ import { PatientDetailsComponent } from './Component/patient/patient-details/pat
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
-import { Role } from './Modules/Role';
+import { Role } from './models/Role';
 import { AuthGuard } from './_helpers';
 
 const routes: Routes = [

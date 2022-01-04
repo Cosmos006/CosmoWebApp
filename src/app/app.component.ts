@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NetworkStatusAngularService } from 'network-status-angular';
-import { Role } from './Modules/Role';
-import { User } from './Modules/User';
+import { Role } from './models/Role';
+import { User } from './models/User';
 import { AuthenticationService } from './Services';
 
 @Component({
