@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -30,7 +30,6 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { AppointmentViewComponent } from './Component/nurse/appointment-view/appointment-view.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-
 
 //khushabu
 //import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -59,12 +58,14 @@ import { LoginComponent } from './Component/home/login/login.component';
 import { HomeComponent } from './Component/home/home/home.component';
 import { DynamicTableComponent } from './Component/shared/dynamic-table/dynamic-table.component';
 import { ChartComponent } from './Component/shared/chart/chart.component';
+import { PieChartComponent } from './Component/shared/pie-chart/pie-chart.component';
 import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { RegisterComponent } from './Component/home/Register/register.component';
+import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
 import { UserService } from './Services/Userservice/userservice/user.service';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
 import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edit-dailoge.component';
@@ -78,17 +79,10 @@ import { AuthGuard, fakeBackendProvider } from './_helpers';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AuthenticationService } from './Services';
-import { ModalModule } from 'ngb-modal';
-import { AlertService } from './Services/Alert/alert.service';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-import { FooterComponent } from './Component/home/footer/footer.component';
-import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
-import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
-
-
+//import { AuthenticationService } from './Services';
 
 //Apex Chart
-//import { NgApexchartsModule } from 'ng-apexcharts';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
@@ -118,6 +112,7 @@ FullCalendarModule.registerPlugins([
     AdminCalendarComponent,
     AddPhysicianComponent,
     RegisterComponent,
+    ForgotpasswordComponent,
     DynamicViewComponent,
     DynamicTableComponent,
     EditDailogeComponent,
@@ -125,23 +120,16 @@ FullCalendarModule.registerPlugins([
     PatientDashboardComponent,
     MatTablegridComponent,
     NurseDashboardComponent,
+    PieChartComponent,
     BookAppointmentComponent,
     CalendarComponent,
     BarchartComponent,
     NursedashboardgridComponent,
-    DoctorlistComponent,
-    AdminPatientComponent,
-    AdminHospitalComponent,
-    BookAppointmentComponent,
-    CalendarComponent,
-    FooterComponent,
+    DoctorlistComponent
   ],
   imports: [
-
-    
     HttpClientModule,
     BrowserModule,
-    NgbModule,
     AppRoutingModule,
     MatIconModule,
     MatGridListModule,
@@ -151,8 +139,6 @@ FullCalendarModule.registerPlugins([
     MatFormFieldModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ModalModule,
-    
     //Material Component
     MaterialModule,
     FlexLayoutModule,
@@ -187,12 +173,16 @@ FullCalendarModule.registerPlugins([
     //Internet Check
     NetworkStatusAngularModule.forRoot(),
     MatProgressSpinnerModule,
+    NgApexchartsModule,
     MatTooltipModule,
     //Apex chart
     
   ],
   exports: [],
-  providers: [UserService,AuthGuard,AuthenticationService, AlertService, 
+  providers: [
+    UserService,
+    AuthGuard,
+    AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // provider used to create fake backend
