@@ -44,7 +44,7 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
     MatMomentDateModule,
     ReactiveFormsModule,
     MatButtonModule,
-
+    MatOption
     //AppModule
   ],
   exports: [],
