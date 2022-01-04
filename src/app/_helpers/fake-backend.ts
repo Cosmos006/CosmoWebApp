@@ -9,8 +9,8 @@ import {
 } from '@angular/common/http';
 import { Observable, of, SchedulerLike } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { Role } from '../Modules/Role';
-import { User } from '../Modules/User';
+import { Role } from '../models/Role';
+import { User } from '../models/User';
 
 export declare function throwError(
   error: any,
