@@ -103,7 +103,7 @@
     -webkit-hyphens: auto;
     hyphens: auto;
   }
-  .mat-column-address {
+  .mat-column-diagnosis {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 auto !important;
@@ -118,7 +118,7 @@
     -webkit-hyphens: auto;
     hyphens: auto;
   }
-  .mat-column-gender {
+  .mat-column-physician {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 auto !important;
@@ -155,19 +155,5 @@
     -webkit-hyphens: auto;
     hyphens: auto;
   }
-  .mat-column-age {
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    flex: 0 0 auto !important;
-    width: 28% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
   
-    word-break: break-word;
-  
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-  }
   

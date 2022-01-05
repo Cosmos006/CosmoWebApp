@@ -31,9 +31,9 @@
     </ng-container>
 
     <!-- Fourth Column -->
-    <ng-container matColumnDef="address">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Address </mat-header-cell>
-      <mat-cell *matCellDef="let element" matTooltip={{element.address}}><span class="ellipsis">{{element.address}}</span> </mat-cell>
+    <ng-container matColumnDef="diagnosis">
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> DiagnosisReason </mat-header-cell>
+      <mat-cell *matCellDef="let element" matTooltip={{element.diagnosis}}><span class="ellipsis">{{element.diagnosis}}</span> </mat-cell>
     </ng-container>
 
     <!-- Action Column -->
@@ -56,14 +56,14 @@
       <mat-cell *matCellDef="let element"> {{element.physician}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Action </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;">  </mat-header-cell>
       <mat-cell *matCellDef="let element"> <button mat-icon-button class="iconbutton"
           color="primary" (click)="OnVisit()">
           <mat-icon matTooltip="Click To Record Vitals"> perm_identity </mat-icon>
         </button> </mat-cell>
     </ng-container>
     <ng-container matColumnDef="pastvisit">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Action </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;">  </mat-header-cell>
       <mat-cell *matCellDef="let element" >
          <button mat-icon-button class="iconbutton"
           color="primary" (click)="OnVisit()">
@@ -71,7 +71,7 @@
         </button> </mat-cell>
     </ng-container>
     <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Action
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> 
       </mat-header-cell>
       <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click To Cancel Appointment" class="iconbutton"
           color="warn" (click)="onDelete(element.id)">
