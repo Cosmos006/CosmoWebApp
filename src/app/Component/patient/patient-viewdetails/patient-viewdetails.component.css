@@ -1,0 +1,35 @@
+mat-form-field
+{
+    width:60%;
+}
+mat-expansion-panel
+{
+    width:90%;
+}
+
+button
+{
+  margin-right: 5%;
+}
+mat-expansion-panel
+{
+  padding-left: 5%;
+}
+mat-form-field
+{
+  width: 30%;
+}
+span
+{
+  margin-right: 10%;
+}
+.mat-stepper-vertical {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+  mat-stepper{
+      margin-left: 10%;
+  }

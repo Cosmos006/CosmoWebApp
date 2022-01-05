@@ -68,15 +68,25 @@ export class DynamicTableComponent implements OnInit {
 //     }
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
+  applyFilter(filterValue:any) {
+    filterValue = filterValue.target.value.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
+  // applyFilter(filterValue: any) {
 
+  //   let itemvalue = filterValue.target.value;  
+
+  //   this.dataSource1.filter = itemvalue.trim().toLowerCase();
+
+  //   this.dataSource1.paginator = this.paginator;
+
+
+
+  // }
   updateProductsTable(event: PageEvent) {
     this.pageSize = event.pageSize;
    console.log(this.pageSize);
