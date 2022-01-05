@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./appointment-view.component.css']
 })
 export class AppointmentViewComponent {
-  displayedColumns = ['id', 'name', 'gender', 'address', 'mobile', 'age', 'email','physician','edit', 'pastvisit','delete'];
+  displayedColumns = ['id', 'name', 'gender', 'diagnosis', 'mobile', 'age', 'email','physician','edit', 'pastvisit','delete'];
   dataSource1 !: MatTableDataSource<Product>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
