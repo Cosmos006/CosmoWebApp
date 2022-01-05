@@ -7,18 +7,17 @@ import { DailogeService } from 'src/app/Services/dailoge.service';
 import { Product } from 'src/app/models/appointment';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Doctor } from 'src/app/models/doctordata';
 
-/**
- * @title Table with sorting
- */
 @Component({
-  selector: 'app-appointment-view',
-  templateUrl: './appointment-view.component.html',
-  styleUrls: ['./appointment-view.component.css']
+  selector: 'app-doctorlist',
+  templateUrl: './doctorlist.component.html',
+  styleUrls: ['./doctorlist.component.css']
 })
-export class AppointmentViewComponent {
-  displayedColumns = ['id', 'name', 'gender', 'address', 'mobile', 'age', 'email','physician','edit', 'pastvisit','delete'];
-  dataSource1 !: MatTableDataSource<Product>;
+export class DoctorlistComponent implements OnInit {
+countries!:Doctor[];
+  displayedColumns = ['id', 'name', 'specailization', 'status'];
+  dataSource1 !: MatTableDataSource<Doctor>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
 
@@ -27,19 +26,14 @@ export class AppointmentViewComponent {
 
   ngOnInit() {
     this.getdata();
+   this.getdoctordata();
   }
   getdata() {
-    this.appoiService.getAppointmentData().subscribe(data => {
+    this.appoiService.getDoctorListData().subscribe(data => {
       this.dataSource1 = new MatTableDataSource(data)    
       this.dataSource1.paginator = this.paginator;
       console.log(this.dataSource1)
     });
-  }
-  startEdit(data: any[]) {    
-    const dialogRef = this.dialogService.open(EditDailogeComponent, {
-      data: { data }
-    });
-    dialogRef.afterClosed()
   }
   applyFilter(filterValue: any) {
     let itemvalue = filterValue.target.value;   
@@ -47,20 +41,28 @@ export class AppointmentViewComponent {
     this.dataSource1.paginator = this.paginator;
 
   }
-  onDelete(rowid: number) {
-    this.appoiService.deletePostapp(rowid);
-    this.getdata();
-  }
   OnVisit(){
-    
     console.log("vamsiclicked")
-    this.router.navigateByUrl('/nurseBookappointment');
+    this.router.navigateByUrl('/PatientDetails');
   }
+ 
+  getdoctordata() {
+    this.appoiService.getDoctorListData().subscribe(data => {
+      this.countries=data;     
+      
+    });
+  }
+  onSelect(countryid: any) {
+    let itemvalue = countryid.target.value;   
+    console.log(countryid.target.value);
+    if (itemvalue!=0){
+      this.dataSource1.filter = itemvalue.trim().toLowerCase();
+    }
+    else{
+      this.getdata();
 
+    }
+   
+    
+  }
 }
-
-
-function ELEMENT_DATA(ELEMENT_DATA: any) {
-  throw new Error('Function not implemented.');
-}
-

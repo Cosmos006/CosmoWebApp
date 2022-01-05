@@ -95,6 +95,13 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 
+
+import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
+import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BarchartComponent } from './Component/nurse/barchart/barchart.component';
+import { NursedashboardgridComponent } from './Component/nurse/nursedashboardgrid/nursedashboardgrid.component';
+import { DoctorlistComponent } from './Component/nurse/doctorlist/doctorlist.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -122,13 +129,16 @@ FullCalendarModule.registerPlugins([
     EditDailogeComponent,
     ChartComponent,
     PatientDashboardComponent,
+    MatTablegridComponent,
+    NurseDashboardComponent,
     PieChartComponent,
     BookAppointmentComponent,
     CalendarComponent,
-    
     PreviouspatientvisitdetailsComponent,
     PatientViewdetailsComponent,
-    
+    BarchartComponent,
+    NursedashboardgridComponent,
+    DoctorlistComponent
   ],
   imports: [
     HttpClientModule,
@@ -181,7 +191,9 @@ FullCalendarModule.registerPlugins([
     Ng2TelInputModule,
     NgxMatSelectSearchModule,
     MatSelectFilterModule,
-   
+    MatTooltipModule,
+    //Apex chart
+    
   ],
   exports: [],
   providers: [
