@@ -94,6 +94,10 @@ FullCalendarModule.registerPlugins([
   interactionPlugin,
 ]);
 
+//Location Strategy
+
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -175,6 +179,7 @@ FullCalendarModule.registerPlugins([
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     // provider used to create fake backend
     fakeBackendProvider,
   ],

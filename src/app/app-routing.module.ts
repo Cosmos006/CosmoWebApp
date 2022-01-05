@@ -23,6 +23,7 @@ import { PatientDetailsComponent } from './Component/patient/patient-details/pat
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
+import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
 import { Role } from './Modules/Role';
 import { AuthGuard } from './_helpers';
 
@@ -126,7 +127,7 @@ const routes: Routes = [
   },
   {
     component: PatientBookappointmentComponent,
-    path: 'AdminBookappointment',
+    path: 'AdminBookappointment/:type',
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] },
   },
@@ -147,6 +148,12 @@ const routes: Routes = [
     path: 'AdminHospital',
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] },
+  },
+  {
+    component: BookAppointmentComponent,
+    path: 'BookAppointment/:type',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Patient] || [Role.Nurse] || [Role.Physician] },
   },
   { path: '**', redirectTo: '' },
 ];
