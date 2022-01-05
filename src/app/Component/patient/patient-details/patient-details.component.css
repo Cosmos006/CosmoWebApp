@@ -20,12 +20,20 @@
     font-size: 0.75em;
   }
  
-input.ng-invalid.ng-touched,
-textarea.ng-invalid.ng-touched
-{
-border: 1px;
-}
+
 button
 {
   margin-right: 5%;
+}
+mat-expansion-panel
+{
+  padding-left: 5%;
+}
+mat-form-field
+{
+  width: 30%;
+}
+span
+{
+  margin-right: 10%;
 }
