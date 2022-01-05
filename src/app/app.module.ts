@@ -103,6 +103,8 @@ import { NursedashboardgridComponent } from './Component/nurse/nursedashboardgri
 import { BarchartComponent } from './Component/nurse/barchart/barchart.component';
 import { DoctorlistComponent } from './Component/nurse/doctorlist/doctorlist.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
+import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -139,7 +141,10 @@ FullCalendarModule.registerPlugins([
     PatientViewdetailsComponent,
     BarchartComponent,
     NursedashboardgridComponent,
-    DoctorlistComponent
+    DoctorlistComponent,
+    AdminPatientComponent,
+    AdminHospitalComponent
+
   ],
   imports: [
     HttpClientModule,
