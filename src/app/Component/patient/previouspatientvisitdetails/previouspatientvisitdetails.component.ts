@@ -142,8 +142,9 @@ export class PreviouspatientvisitdetailsComponent implements OnInit {
 
   // Functions used by data-table component
   updatePagination(event: any) {
-    const correctedIndex = event.pageIndex + 1;
-    this.getAllProducts(correctedIndex, event.pageSize);
+   // const correctedIndex = event.pageIndex + 1;
+   // this.getAllProducts(correctedIndex, event.pageSize);
+    //this.filterAppointments(this.selectedValue, event);
   }
 
   viewItem(data: any[])

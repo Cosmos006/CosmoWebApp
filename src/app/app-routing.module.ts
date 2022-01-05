@@ -21,6 +21,7 @@ import { PatientBookappointmentComponent } from './Component/patient/patient-boo
 import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
+import { PreviouspatientvisitdetailsComponent } from './Component/patient/previouspatientvisitdetails/previouspatientvisitdetails.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
 import { Role } from './Modules/Role';
@@ -147,6 +148,12 @@ const routes: Routes = [
     path: 'AdminHospital',
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] },
+  },
+  {
+    component: PreviouspatientvisitdetailsComponent,
+    path: 'previouspatientvisitdetails',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Patient] },
   },
   { path: '**', redirectTo: '' },
 ];
