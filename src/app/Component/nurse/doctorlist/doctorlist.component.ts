@@ -35,6 +35,7 @@ countries!:Doctor[];
       console.log(this.dataSource1)
     });
   }
+  
   applyFilter(filterValue: any) {
     let itemvalue = filterValue.target.value;   
     this.dataSource1.filter = itemvalue.trim().toLowerCase();
