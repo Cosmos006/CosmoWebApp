@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -81,6 +80,7 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AuthenticationService } from './Services';
 //import { AuthenticationService } from './Services';
 
+//Apex Chart
 
 import { patientvisitdetails } from './models/patientvisitdetails';
 
@@ -99,9 +99,12 @@ import { PatientViewdetailsComponent } from './Component/patient/patient-viewdet
 import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { BarchartComponent } from './Component/nurse/barchart/barchart.component';
 import { NursedashboardgridComponent } from './Component/nurse/nursedashboardgrid/nursedashboardgrid.component';
+import { BarchartComponent } from './Component/nurse/barchart/barchart.component';
 import { DoctorlistComponent } from './Component/nurse/doctorlist/doctorlist.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
+import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -138,7 +141,10 @@ FullCalendarModule.registerPlugins([
     PatientViewdetailsComponent,
     BarchartComponent,
     NursedashboardgridComponent,
-    DoctorlistComponent
+    DoctorlistComponent,
+    AdminPatientComponent,
+    AdminHospitalComponent
+
   ],
   imports: [
     HttpClientModule,

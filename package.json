@@ -36,6 +36,7 @@
     "moment": "^2.29.1",
     "network-status-angular": "^1.0.4",
     "ng2-tel-input": "^2.3.0",
+    "ngb-modal": "^2.0.3",
     "ngx-mat-select-search": "^3.3.3",
     "rxjs": "~7.4.0",
     "simple-keyboard": "^3.4.9",
