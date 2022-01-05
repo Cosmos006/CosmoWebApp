@@ -102,7 +102,16 @@
           routerLinkActive="router-link-active"
           *ngIf="isPatient"
         >
-          Patient
+          Patient Visit Details
+        </a>
+        <a
+          mat-button
+          class="companyName"
+          [routerLink]="['previouspatientvisitdetails']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient"
+        >
+         Previouspatient Visit Details
         </a>
         <a
           mat-button

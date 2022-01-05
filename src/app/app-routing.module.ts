@@ -15,15 +15,21 @@ import { LoginComponent } from './Component/home/login/login.component';
 import { NavMenuComponent } from './Component/home/nav-menu/nav-menu.component';
 import { RegisterComponent } from './Component/home/Register/register.component';
 import { AppointmentViewComponent } from './Component/nurse/appointment-view/appointment-view.component';
+import { BarchartComponent } from './Component/nurse/barchart/barchart.component';
+import { DoctorlistComponent } from './Component/nurse/doctorlist/doctorlist.component';
 import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-view.component';
+import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
+import { NursedashboardgridComponent } from './Component/nurse/nursedashboardgrid/nursedashboardgrid.component';
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
 import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
+import { PreviouspatientvisitdetailsComponent } from './Component/patient/previouspatientvisitdetails/previouspatientvisitdetails.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
 import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
+import { CalendarComponent } from './Component/shared/calendar/calendar.component';
 import { Role } from './Modules/Role';
 import { AuthGuard } from './_helpers';
 
@@ -94,10 +100,22 @@ const routes: Routes = [
     path: 'AppointmentView',
   },
   {
+    component: BarchartComponent,
+    path: 'BarchartView',
+  },
+  {
+    component: NursedashboardgridComponent,
+    path: 'NursegridView',
+  },
+  {
     component: PatientDetailsComponent,
     path: 'PatientDetails',
     canActivate: [AuthGuard],
     data: { roles: [Role.Patient] },
+  },
+  {
+    component: DoctorlistComponent,
+    path: 'Doctorlist',
   },
   {
     component: DynamicViewComponent,
@@ -109,6 +127,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.Patient] },
   },
+  {
+    component: PatientBookappointmentComponent,
+    path: 'nurseBookappointment',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Nurse] },
+  },
+
   {
     component: PatientViewdetailsComponent,
     path: 'PatientViewdetails',
@@ -124,6 +149,22 @@ const routes: Routes = [
     path: 'AdminCalender',
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] },
+  },
+  {
+    component: MatTablegridComponent,
+    path: 'MatTableGrid',
+  },
+  {
+    component: PatientViewdetailsComponent,
+    path: 'NurseViewdetails',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Nurse] },
+  },
+  {
+    component: CalendarComponent,
+    path: 'NurseAdminCalender',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Nurse] },
   },
   {
     component: PatientBookappointmentComponent,
@@ -154,6 +195,12 @@ const routes: Routes = [
     path: 'BookAppointment/:type',
     canActivate: [AuthGuard],
     data: { roles: [Role.Patient] || [Role.Nurse] || [Role.Physician] },
+  },
+  {
+    component: PreviouspatientvisitdetailsComponent,
+    path: 'previouspatientvisitdetails',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Patient] },
   },
   { path: '**', redirectTo: '' },
 ];

@@ -63,7 +63,10 @@ import { BookAppointmentComponent } from './Component/shared/book-appointment/bo
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
-import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+import {
+  MY_FORMATS,
+  PatientDetailsComponent,
+} from './Component/patient/patient-details/patient-details.component';
 import { RegisterComponent } from './Component/home/Register/register.component';
 import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
 import { UserService } from './Services/Userservice/userservice/user.service';
@@ -81,12 +84,31 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AuthenticationService } from './Services';
 //import { AuthenticationService } from './Services';
 
-//Apex Chart
-import { NgApexchartsModule } from 'ng-apexcharts';
-
 //Mat snak
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { patientvisitdetails } from './models/patientvisitdetails';
+
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
+import { Ng2TelInputModule } from 'ng2-tel-input';
+
+import { MatStepperModule } from '@angular/material/stepper';
+import { PreviouspatientvisitdetailsComponent } from './Component/patient/previouspatientvisitdetails/previouspatientvisitdetails.component';
+
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatSelectFilterModule } from 'mat-select-filter';
+import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
+
+import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
+import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BarchartComponent } from './Component/nurse/barchart/barchart.component';
+import { NursedashboardgridComponent } from './Component/nurse/nursedashboardgrid/nursedashboardgrid.component';
+import { DoctorlistComponent } from './Component/nurse/doctorlist/doctorlist.component';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -118,9 +140,16 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     EditDailogeComponent,
     ChartComponent,
     PatientDashboardComponent,
+    MatTablegridComponent,
+    NurseDashboardComponent,
     PieChartComponent,
     BookAppointmentComponent,
     CalendarComponent,
+    PreviouspatientvisitdetailsComponent,
+    PatientViewdetailsComponent,
+    BarchartComponent,
+    NursedashboardgridComponent,
+    DoctorlistComponent,
   ],
   imports: [
     HttpClientModule,
@@ -169,8 +198,12 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     NetworkStatusAngularModule.forRoot(),
     MatProgressSpinnerModule,
     //Apex chart
-    NgApexchartsModule,
     MatSnackBarModule,
+    MatStepperModule,
+    Ng2TelInputModule,
+    MatSelectFilterModule,
+    MatTooltipModule,
+    //Apex chart
   ],
   exports: [],
   providers: [
@@ -180,6 +213,12 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
     // provider used to create fake backend
     fakeBackendProvider,
   ],

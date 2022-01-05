@@ -1,90 +1,91 @@
-// import {Injectable} from '@angular/core';
-// import {BehaviorSubject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { EventInput } from '@fullcalendar/angular';
+ 
+import { Appointment, environment } from '../Services/Url';
+import { EventMap } from '../Component/admin/model/admin.model';
+import { Product } from '../models/appointment';
+import { Observable } from 'rxjs';
+import { Doctor } from '../models/doctordata';
+// import { EventData } from '../Component/admin/admin-calendar/admin-calendar.component';
 
-// import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+@Injectable({
+  providedIn: 'root',
+})
+export class DailogeService  {
+  constructor(private http: HttpClient) {}
 
-// @Injectable()
-// export class DailogeService {
-//   private readonly API_URL = 'https://api.github.com/repos/angular/angular/issues';
+  //Url Route
+  private readonly API_URL = 'http://localhost:3000/DoctorList';
+  baseUrl = environment.LocalUrl;
+  appointmentData: any;
 
-//   dataChange: BehaviorSubject<Appointment[]> = new BehaviorSubject<Appointment[]>([]);
-//   // Temporarily stores data from dialogs
-//   dialogData: any;
+  //Dash Board Changes Start
 
-//   constructor(private httpClient: HttpClient) {}
+  getAppointmentData(): Observable<Product[]>{
+    
+         return this.http.get<Product[]>(this.baseUrl + Appointment.AppointmentGrid);
+  }
+  updateIssue(product: Product): void {
+    this.appointmentData = product;
+    this.http.post('http://localhost:3000/APPOINTMENT_DATA',  this.appointmentData).subscribe((res) => {
+      console.log("datacame");  
+    });
+    
+    
+  }
 
-//   get data(): Appointment[] {
-//     return this.dataChange.value;
-//   }
+  addAppoinmentData(product: Product) {
+    console.log("calcame"); 
+    console.log(product.id);
+    // this.listOfPosts.push(post);
+    // this.http.patch('http://localhost:3000/APPOINTMENT_DATA' ,product).subscribe((res) => {
+      
+      this.http.put<any>('http://localhost:3000/APPOINTMENT_DATA/3',product).subscribe((res) => {;
+      console.log(product.id); 
+     
+    });
+  }
 
-//   getDialogData() {
-//     return this.dialogData;
-//   }
+  deletePostapp(id: number | undefined) {
+    // this.listOdeletefPosts.splice(index, 1);
+    console.log("deletevalue"+id)
+    this.http.delete('http://localhost:3000/APPOINTMENT_DATA/' + id).subscribe((res) => {
+    console.log(res);
+    this.getAppointmentData();
+   
+    });
+    }
+    getDoctorListData() : Observable<Doctor[]>{
+    
+        return this.http.get<Doctor[]>(this.API_URL);
+      }
 
-//   /** CRUD METHODS */
-//   getAllIssues(): void {
-//     this.httpClient.get<Appointment[]>(this.API_URL).subscribe(data => {
-//         this.dataChange.next(data);
-//       },
-//       (error: HttpErrorResponse) => {
-//       console.log (error.name + ' ' + error.message);
-//       });
-//   }
+  //Dash Board Changes End
 
-//   // DEMO ONLY, you can find working methods below
-//   addIssue(appointment: Appointment): void {
-//     this.dialogData = appointment;
-//   }
+  //Calendar Changes Start
+  //Data Mappingrtf
+  // private listEvent: EventMap[] = [];
 
-//   updateIssue(appointment: Appointment): void {
-//     this.dialogData = appointment;
-//   }
+  // GetEventData(): Promise<EventInput[]> {
+  //   return Promise.resolve(INITIAL_EVENTS);
+  // }
 
-//   deleteIssue(id: number): void {
-//     console.log(id);
-//   }
-// }
+  //Call Events Before loading to Component
+  // GetData() {
+  //   this.http
+  //     .get<EventMap[]>(this.baseUrl + Admin.Event)
+  //     .subscribe((res: EventMap[]) => {
+  //       this.listEvent.splice(0, this.listEvent.length);
+  //       this.listEvent.push(...res);
+  //     });
+  // }
 
+  //List Of ALL Events
+  // GetListofData() {
+  //   return this.http.get<EventMap[]>(this.baseUrl + Admin.Event);
+  // }
 
-
-// /* REAL LIFE CRUD Methods I've used in projects. ToasterService uses Material Toasts for displaying messages:
-
-//     // ADD, POST METHOD
-//     addItem(kanbanItem: KanbanItem): void {
-//     this.httpClient.post(this.API_URL, kanbanItem).subscribe(data => {
-//       this.dialogData = kanbanItem;
-//       this.toasterService.showToaster('Successfully added', 3000);
-//       },
-//       (err: HttpErrorResponse) => {
-//       this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
-//     });
-//    }
-
-//     // UPDATE, PUT METHOD
-//      updateItem(kanbanItem: KanbanItem): void {
-//     this.httpClient.put(this.API_URL + kanbanItem.id, kanbanItem).subscribe(data => {
-//         this.dialogData = kanbanItem;
-//         this.toasterService.showToaster('Successfully edited', 3000);
-//       },
-//       (err: HttpErrorResponse) => {
-//         this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
-//       }
-//     );
-//   }
-
-//   // DELETE METHOD
-//   deleteItem(id: number): void {
-//     this.httpClient.delete(this.API_URL + id).subscribe(data => {
-//       console.log(data['']);
-//         this.toasterService.showToaster('Successfully deleted', 3000);
-//       },
-//       (err: HttpErrorResponse) => {
-//         this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
-//       }
-//     );
-//   }
-// */
-
-
-
+  //Calendar Changes End
+}
 
