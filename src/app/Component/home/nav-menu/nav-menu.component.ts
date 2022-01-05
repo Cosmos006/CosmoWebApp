@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Role } from 'src/app/Modules/Role';
-import { User } from 'src/app/Modules/User';
+import { Role } from 'src/app/models/Role';
+import { User } from 'src/app/models/User';
 import { AuthenticationService } from 'src/app/Services';
 
 @Component({

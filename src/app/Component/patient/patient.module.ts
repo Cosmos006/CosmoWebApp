@@ -23,7 +23,7 @@ import { PreviouspatientvisitdetailsComponent } from './previouspatientvisitdeta
 import { HttpClientModule } from '@angular/common/http';
 import { MatStepperModule } from '@angular/material/stepper';
 import {Ng2TelInputModule} from 'ng2-tel-input';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
 
 @NgModule({
   declarations: [
@@ -51,9 +51,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatMomentDateModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatOption,
     HttpClientModule,
     Ng2TelInputModule,
-    NgxMatSelectSearchModule,
     MatStepperModule,
     
     //AppModule

@@ -42,6 +42,7 @@ import { MatInputModule } from '@angular/material/input';
 import { LockedAccountComponent } from './locked-account/locked-account.component';
 import { AdminPatientComponent } from './admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './admin-hospital/admin-hospital.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 //Import Dynamic table
 
@@ -98,8 +99,8 @@ const routes: Routes = [
     MatTableDataSource,
     //Http
     HttpClientModule,
-    //Edittable
-
+    //Paginator
+    MatPaginator,
     // MatSort,
     // MatSortModule,
     // MatTableDataSource,

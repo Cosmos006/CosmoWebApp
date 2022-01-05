@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/Services';
-import { Role } from 'src/app/Modules/Role';
-import { User } from 'src/app/Modules/User';
+import { Role } from 'src/app/models/Role';
+import { AlertService } from 'src/app/Services/Alert/alert.service';
+import {Location} from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
+import { User } from 'src/app/models/User';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 
 @Component({ templateUrl: 'login.component.html' })

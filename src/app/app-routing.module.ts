@@ -30,7 +30,7 @@ import { PreviouspatientvisitdetailsComponent } from './Component/patient/previo
 import { PhysicianComponent } from './Component/physician/physician.component';
 import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
-import { Role } from './Modules/Role';
+import { Role } from './models/Role';
 import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
