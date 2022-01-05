@@ -40,8 +40,9 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Action </mat-header-cell>
       <mat-cell *matCellDef="let element"> <button mat-icon-button class="iconbutton"
           color="primary" (click)="OnVisit()">
-          <mat-icon matTooltip="Click To Record Vitals"> perm_identity </mat-icon>
+          <mat-icon matTooltip="Click To Move Into DoctorsQue"> verified_user </mat-icon>
         </button> </mat-cell>
+        
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
