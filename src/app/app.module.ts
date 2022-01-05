@@ -82,7 +82,6 @@ import { AuthenticationService } from './Services';
 
 //Apex Chart
 
-import { patientvisitdetails } from './models/patientvisitdetails';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Ng2TelInputModule } from 'ng2-tel-input';
@@ -145,7 +144,7 @@ FullCalendarModule.registerPlugins([
     NursedashboardgridComponent,
     DoctorlistComponent,
     AdminPatientComponent,
-    AdminHospitalComponent
+    AdminHospitalComponent,
 
   ],
   imports: [
