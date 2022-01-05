@@ -81,8 +81,7 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AuthenticationService } from './Services';
 //import { AuthenticationService } from './Services';
 
-//Apex Chart
-import { NgApexchartsModule } from 'ng-apexcharts';
+
 import { patientvisitdetails } from './models/patientvisitdetails';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -178,7 +177,6 @@ FullCalendarModule.registerPlugins([
     NetworkStatusAngularModule.forRoot(),
     MatProgressSpinnerModule,
     //Apex chart
-    NgApexchartsModule,
     MatStepperModule,
     Ng2TelInputModule,
     NgxMatSelectSearchModule,
