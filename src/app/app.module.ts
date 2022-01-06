@@ -82,7 +82,6 @@ import { AuthenticationService } from './Services';
 
 //Apex Chart
 
-import { patientvisitdetails } from './models/patientvisitdetails';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Ng2TelInputModule } from 'ng2-tel-input';
@@ -95,7 +94,8 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 
-
+//ngb-bootstrap
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -105,6 +105,7 @@ import { DoctorlistComponent } from './Component/nurse/doctorlist/doctorlist.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
+import { AlertService } from './Services/Alert/alert.service';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -143,7 +144,7 @@ FullCalendarModule.registerPlugins([
     NursedashboardgridComponent,
     DoctorlistComponent,
     AdminPatientComponent,
-    AdminHospitalComponent
+    AdminHospitalComponent,
 
   ],
   imports: [
@@ -158,6 +159,7 @@ FullCalendarModule.registerPlugins([
     MatFormFieldModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgbModule,
     //Material Component
     MaterialModule,
     FlexLayoutModule,
@@ -203,7 +205,7 @@ FullCalendarModule.registerPlugins([
   ],
   exports: [],
   providers: [
-    UserService,AuthGuard,AuthenticationService,  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    UserService,AuthGuard,AuthenticationService, AlertService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
