@@ -34,3 +34,12 @@ ng g c Component/admin/adminHospital --skipTests
 #npm installs
 //Apex chart
 npm install apexcharts ng-apexcharts --save
+
+khushabu
+npm set strict-ssl false -to fix selfsigned issue
+npm install
+npm i angular-material
+npm install mat-select-filter
+npm install intl-tel-input
+
+

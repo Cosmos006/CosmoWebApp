@@ -1,0 +1,49 @@
+
+<div class="example-container mat-elevation-z8" class="table-content" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;">
+   <div>
+    <label style="font: medium; padding-left: 10px;">Departments:</label>
+    &nbsp;
+    <select (change)="onSelect($event)" style="width: auto;">
+      <option value="0">Select Doctor On Specialization</option>
+      <option *ngFor="let country of countries" value= {{country.id}} style="border-radius: 2%;">{{country.specailization}} </option>
+    </select>
+   </div>
+   <div>
+   
+    <mat-table #table [dataSource]="dataSource1" style="margin-left: 15px"  >
+  
+      <ng-container matColumnDef="id"  [style.display]="'none'">
+        <mat-header-cell *matHeaderCellDef [style.display]="'none'" mat-sort-headerstyle="font-size: medium;" style="font-size: medium;"> Id
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" [style.display]="'none'" matTooltip="id"> {{element.id}} </mat-cell>
+      </ng-container>
+  
+      <!-- Second Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" matTooltip={{element.name}}><span class="ellipsis">{{element.name}}</span></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="specailization">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Specailization
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.specailization}} </mat-cell>
+      </ng-container>
+      <!-- Third Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.status}}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+  
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+    </mat-paginator>
+  
+  
+  
+  </div>

@@ -3,13 +3,21 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/Services';
-import { Role } from 'src/app/Modules/Role';
-import { User } from 'src/app/Modules/User';
 import { UserDetails } from 'src/app/models/userdetails';
 
 
 @Component({ templateUrl: 'login.component.html' })
+
 export class LoginComponent implements OnInit {
+    showModal!: boolean;
+    forgotModal!: boolean;
+    isForgotPassword!: boolean;
+    OldpassWordGenerated!: boolean;
+    oldpasswordInmailGenerated!: number;
+    oldpassword!: number;
+    newpassword!: string;
+    confirmpassword!: string;
+    errorMessage!: string;
     loginForm!: FormGroup;
     // loading = false;
     // submitted = false;
@@ -22,6 +30,7 @@ export class LoginComponent implements OnInit {
     errorstatus : boolean = false;
     submitted:boolean = false;
     private formSubmitAttempt!: boolean;
+  displayStyle!: '';
 
     constructor(
         private fb: FormBuilder,
