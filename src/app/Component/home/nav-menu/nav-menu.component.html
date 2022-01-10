@@ -24,6 +24,15 @@
         </a>
 
         <a
+        class="companyName"
+        [routerLink]="['Physician']"
+        routerLinkActive="router-link-active"
+        *ngIf="isPhysician"
+        mat-button
+        >Physician</a
+      >
+      
+        <a
           class="companyName"
           [routerLink]="['Physician']"
           routerLinkActive="router-link-active"

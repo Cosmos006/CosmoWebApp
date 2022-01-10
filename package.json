@@ -32,6 +32,7 @@
     "font-awesome": "^4.7.0",
     "moment": "^2.29.1",
     "network-status-angular": "^1.0.4",
+    "ng-apexcharts": "^1.6.0",
     "ngx-toastr": "^14.2.1",
     "rxjs": "~7.4.0",
     "simple-keyboard": "^3.4.9",
