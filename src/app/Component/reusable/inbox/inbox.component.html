@@ -1,1 +1,410 @@
-<p>inbox works!</p>
+<div class="container-fluid" style="padding-top: 0px">
+    <div class="row" style="max-height: 50%">
+      <div class="col-xl-6">
+        <mat-card>
+          <mat-card-header style="text-align: center;color: cornflowerblue;">
+            <mat-card-title>NOTES</mat-card-title>
+          </mat-card-header>
+          <mat-tab-group
+            style="max-height: 50%"
+            mat-stretch-tabs
+            class="example-stretched-tabs mat-elevation-z4"
+            [selectedIndex]='selectedIndex'
+          >
+            <mat-tab class="mat-headline" label="SEND">
+              <form class="example-form" [formGroup]="form">
+                <div style="width: 50%; padding-left: 5px">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Receiver Name</mat-label>
+                    <input
+                      type="text"
+                      placeholder="search name"
+                      aria-label="Name"
+                      matInput
+                      formControlName="receiver"
+                      style="max-width: fit-content"
+                      [formControl]="control"
+                      [matAutocomplete]="auto"
+                    />
+                    <mat-autocomplete
+                      autoActiveFirstOption
+                      #auto="matAutocomplete"
+                    >
+                      <mat-option
+                        *ngFor="let option of filteredOptions | async"
+                        [value]="option.name"
+                        (click)="OnClickName(option.designation)"
+                      >
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+  
+                <div style="width: 70%; padding-left: 5px">
+                  <mat-form-field
+                    style="width: auto"
+                    class="example-full-width"
+                    appearance="fill"
+                  >
+                    <mat-label>Receiver Designation</mat-label>
+                    <input
+                      matInput
+                      [readonly]="true"
+                      formControlName="designation"
+                      [(ngModel)]="designation"
+                      value="{{ designation }}"
+                    />
+                  </mat-form-field>
+                </div>
+  
+                <div style="width: 50%; padding-left: 5px; max-height: 50%">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Message</mat-label>
+                    <textarea
+                      formControlName="message"
+                      maxlength="200"
+                      placeholder="Message..."
+                      matInput
+                      rows="5"
+                      cols="60"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+  
+                <div style="width: 50%; padding-left: 5px; padding-bottom: 5px">
+                  <button
+                    style="width: auto; padding-left: 15%; padding-right: 15%"
+                    class="btn-primary"
+                    type="submit"
+                    [disabled]="form.invalid"
+                    value="Send"
+                    (click)="OnSend()"
+                  >
+                    Send
+                  </button>
+                </div>
+              </form>
+            </mat-tab>
+  
+            <mat-tab class="mat-headline" label="RECIEVED">
+              <table
+                mat-table
+                [dataSource]="RecieveddataSource"
+                class="tablemobile"
+              >
+                <ng-container matColumnDef="Sender Name" >
+                  <th class="widthcol2" style="text-align: center;" mat-header-cell *matHeaderCellDef>
+                    Sender Name 
+                  </th>
+                  <td
+                    class="widthcol2"
+                    [style.color]="getBackgroundColor(element.date)"
+                    mat-cell
+                    *matCellDef="let element"
+                  >
+                    {{ element.senderName }}
+                  </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="Designation">
+                  <th class="widthcol2" style="text-align: center;" mat-header-cell *matHeaderCellDef>
+                    Designation
+                  </th>
+                  <td
+                    class="widthcol2"
+                    [style.color]="getBackgroundColor(element.date)"
+                    mat-cell
+                    *matCellDef="let element"
+                  >
+                    {{ element.designation }}
+                  </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="Message" >
+                  <th class="widthcol5" style="text-align: center;" mat-header-cell *matHeaderCellDef>
+                    Message
+                  </th>
+                  <td
+                    class="widthcol5"
+                    [style.color]="getBackgroundColor(element.date)"
+                    mat-cell
+                    *matCellDef="let element"
+                  >
+                    <textarea [readOnly]="true" style="width:100%;">{{ element.message }}</textarea>
+                  </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="Reply">
+                  <th class="widthcol2"  style="text-align: center;" mat-header-cell *matHeaderCellDef>
+                    Reply
+                  </th>
+                  <td  mat-cell *matCellDef="let element" class="widthcol2" align="center">
+                    <button mat-raised-button width="10px" style="background-color: cornflowerblue;color:white;" tabindex="-1" (click)='OnReply("SEND", element)'>
+                      Reply
+                    </button>
+                  </td>
+                </ng-container>
+  
+                <ng-container  matColumnDef="Date and Time">
+                  <th mat-header-cell *matHeaderCellDef class="widthcol2" style="text-align: center;" >Date & Time</th>
+                  <td
+                    align="center"
+                    class="widthcol2" 
+                    [style.color]="getBackgroundColor(element.date)"
+                    mat-cell
+                    *matCellDef="let element"
+                  >
+                    {{ element.date | date: "dd-MMM-yy h:mm:ss a " }}
+                  </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="Delete">
+                  <th mat-header-cell class="widthcol3"  *matHeaderCellDef align="center">Delete</th>
+                  <td mat-cell *matCellDef="let element; let j = index;"  class="widthcol3" align="center">
+                    <button
+                      (click)="onDelete('RECIEVED',element)"
+                      mat-mini-fab
+                      style="background-color: cornflowerblue;color:white;"
+                      aria-label="Example icon button with a delete icon"
+                    >
+                      <mat-icon aria-hidden="false" aria-label="Delete icon">delete_outline</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+  
+                <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+              </table>
+              <mat-paginator
+                #paginator1
+                class="paginator"
+                [pageSizeOptions]="[4]"
+                showFirstLastButtons
+                aria-label="Select page of received notes"
+              >
+              </mat-paginator>
+            </mat-tab>
+  
+            <mat-tab class="mat-headline" label="SENT"> 
+            <table
+                mat-table
+                [dataSource]="SentdataSource"
+                class="demo-table tablemobile"
+              >
+                <ng-container matColumnDef="Sender Name" >
+                  <th class="widthcol2"mat-header-cell *matHeaderCellDef>
+                    Sender Name 
+                  </th>
+                  <td
+                    class="widthcol2"
+                    align="left"
+                    [style.color]="getBackgroundColor(element.date)"
+                    mat-cell
+                    *matCellDef="let element"
+                  >
+                    {{ element.senderName }}
+                  </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="Designation">
+                  <th class="widthcol2" mat-header-cell *matHeaderCellDef>
+                    Designation
+                  </th>
+                  <td
+                    class="widthcol2"
+                    [style.color]="getBackgroundColor(element.date)"
+                    mat-cell
+                    *matCellDef="let element"
+                  >
+                    {{ element.designation }}
+                  </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="Message">
+                  <th class="widthcol4" style="text-align: center;" mat-header-cell *matHeaderCellDef>
+                    Message
+                  </th>
+                  <td
+                    class="widthcol4"
+                    [style.color]="getBackgroundColor(element.date)"
+                    mat-cell
+                    *matCellDef="let element"
+                  >
+                    <textarea [readOnly]="true" style="width:100%;">{{ element.message }}</textarea>
+                  </td>
+                </ng-container>
+  
+                <!-- <ng-container matColumnDef="Reply" align="center">
+                  <th style="padding: 5px" class="widthcol3"align="center" mat-header-cell *matHeaderCellDef>
+                    Reply
+                  </th>
+                  <td  mat-cell *matCellDef="let element" class="widthcol3" align="center">
+                    <button mat-raised-button width="10px" color="primary" onclick="Reply()">
+                      Reply
+                    </button>
+                  </td>
+                </ng-container> -->
+  
+                <ng-container matColumnDef="Date and Time">
+                  <th mat-header-cell *matHeaderCellDef class="widthcol1" style="text-align: center;">Date & Time</th>
+                  <td
+                    style="text-align: center;"
+                    class="widthcol1" 
+                    [style.color]="getBackgroundColor(element.date)"
+                    mat-cell
+                    *matCellDef="let element"
+                  >
+                    {{ element.date | date: "dd-MMM-yy h:mm:ss a " }}
+                  </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="Delete">
+                  <th mat-header-cell *matHeaderCellDef align="center">Delete</th>
+                  <td mat-cell *matCellDef="let element"  class="widthcol3" align="center">
+                    <button
+                      (click)="onDelete('SENT',element.id)"
+                      mat-mini-fab
+                      style="background-color: cornflowerblue; color: white"
+                      aria-label="Example icon button with a delete icon"
+                    >
+                      <mat-icon aria-hidden="false" aria-label="Delete icon">delete_outline</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+  
+                <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+              </table>
+              <mat-paginator
+              #paginator2
+              class="paginator"
+              [pageSizeOptions]="[4]"
+              showFirstLastButtons
+              aria-label="Select page of sent notes"
+            >
+            </mat-paginator>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card>
+      </div>
+  
+      <!-- APPOINTMENTS -->
+      <div class="col-xl-6">
+        <mat-card style="min-height: 400px">
+          <mat-card-header  style="text-align: center;color: cornflowerblue;">
+            <mat-card-title>APPOINTMENTS</mat-card-title>
+          </mat-card-header>
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="Meeting Title">
+              <th class="widthcol1" mat-header-cell *matHeaderCellDef>
+                Meeting Title
+              </th>
+              <td
+                [style.color]="getBackgroundColor(element.date)"
+                mat-cell
+                *matCellDef="let element"
+              >
+                {{ element.meetingTitle }}
+              </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Description">
+              <th class="widthcol1" mat-header-cell *matHeaderCellDef>
+                Description
+              </th>
+              <td
+                [style.color]="getBackgroundColor(element.date)"
+                mat-cell
+                *matCellDef="let element"
+              >
+                {{ element.description }}
+              </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Physician">
+              <th class="widthcol2" mat-header-cell *matHeaderCellDef>
+                Physician
+              </th>
+              <td
+                [style.color]="getBackgroundColor(element.date)"
+                mat-cell
+                *matCellDef="let element"
+              >
+                {{ element.physician }}
+              </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Date">
+              <th class="widthcol2" mat-header-cell *matHeaderCellDef>Date</th>
+              <td
+                [style.color]="getBackgroundColor(element.date)"
+                mat-cell
+                *matCellDef="let element"
+              >
+                {{ element.date | date: "dd-MMM-yy" }}
+              </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Time">
+              <th class="widthcol2" mat-header-cell *matHeaderCellDef>Time</th>
+              <td
+                [style.color]="getBackgroundColor(element.date)"
+                mat-cell
+                *matCellDef="let element"
+              >
+                {{ element.date | date: "h:mm:ss a z" }}
+              </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Patient Details">
+              <th class="widthcol2" mat-header-cell *matHeaderCellDef>
+                Patient Details
+              </th>
+              <td mat-cell *matCellDef="let element" align="center">
+                <button
+                routerLink="/viewpatient/{{
+                  element.patientId ? element.patientId : 0
+                }}"
+                      mat-mini-fab
+                      style="background-color: cornflowerblue; color: white"
+                    >
+                    <mat-icon  aria-label="View icon">visibility</mat-icon>
+                    </button>
+              </td>
+            </ng-container>
+  
+            <!-- <ng-container matColumnDef="Edit History">
+              <th class="widthcol2" mat-header-cell *matHeaderCellDef>
+                Edit History
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <button
+                  [disabled]="!element.editHistory"
+                  mat-button
+                  color="primary"
+                >
+                  View
+                </button>
+              </td>
+            </ng-container> -->
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+  
+          <div *ngIf="dataSource.data.length === 0">
+            <h3>There are no appointments this week</h3>
+          </div>
+          <mat-paginator
+            #paginator
+            class="paginator"
+            [pageSizeOptions]="[5]"
+            aria-label="Select page of users"
+          >
+          </mat-paginator>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  

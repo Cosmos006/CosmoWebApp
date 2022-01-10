@@ -11,6 +11,7 @@ import { UserDetails } from 'src/app/models/userdetails';
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     loginForm!: FormGroup;
+     Userlocal : any
     // loading = false;
     // submitted = false;
     returnUrl!: string;
@@ -62,20 +63,24 @@ export class LoginComponent implements OnInit {
         this.submitted = true;
         var data = this.loginForm.value;
         console.log(data)
-        let isValidCredentials = this.userList.find(
+        //let isValidCredentials = this.userList.find(
+         this.user = this.userList.find(
           (x) =>
              x.userName ===  data.username &&
             x.password === data.password
         );
-        console.log(isValidCredentials);
+        console.log(this.user);
         console.log(this.loginForm)
-        if (isValidCredentials !== undefined && this.loginForm.valid ) {
+        if (this.user !== undefined && this.loginForm.valid ) {
          console.log('Hii')
          this.errorstatus = false;
            this.authenticationService.login(this.loginForm).subscribe({
             next: (res: any) => {
               console.log(res)
               localStorage.setItem('token', res.token);
+              localStorage.setItem('user', JSON.stringify(this.user))
+              //this.Userlocal =   { id: 1, username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', role: Role.Admin }
+              //localStorage.setItem('currentUser', this.Userlocal);
               console.log(localStorage.getItem('token'))
               //var username = this.form.value.UserName;
               // this.user = this.userList.find(

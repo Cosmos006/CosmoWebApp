@@ -29,6 +29,7 @@
     "date-fns": "^2.27.0",
     "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
+    "guid-typescript": "^1.0.9",
     "moment": "^2.29.1",
     "network-status-angular": "^1.0.4",
     "ngx-toastr": "^14.2.1",
