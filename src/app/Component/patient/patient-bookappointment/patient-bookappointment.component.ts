@@ -74,11 +74,11 @@ export class PatientBookappointmentComponent implements OnInit {
     this.TextInput = 'Ram';
 
     //Bind DropDownn
-    this.diagnosics = [
-      { ID: 1, Value: 'Cold' },
-      { ID: 2, Value: 'Feaver' },
-      { ID: 3, Value: 'Thyroid' },
-    ];
+    // this.diagnosics = [
+    //   { ID: 1, Value: 'Cold' },
+    //   { ID: 2, Value: 'Feaver' },
+    //   { ID: 3, Value: 'Thyroid' },
+    // ];
 
     this.physician = [
       { Id: 1, PhysicianName: 'Raj' },

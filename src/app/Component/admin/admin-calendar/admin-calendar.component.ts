@@ -39,7 +39,7 @@ export class AdminCalendarComponent implements OnInit {
           var title = this.listOfEvent[i].title;
           var start = DateType(this.listOfEvent[i].date);
           this.value.push({
-            Id: this.listOfEvent[i].Id,
+            publicId: this.listOfEvent[i].publicId,
             title: this.listOfEvent[i].title,
             date: this.listOfEvent[i].date,
             color: this.listOfEvent[i].color,

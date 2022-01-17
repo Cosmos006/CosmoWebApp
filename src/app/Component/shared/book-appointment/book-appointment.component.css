@@ -16,3 +16,10 @@ span {
   display: inline-block;
   margin-right: 5px;
 }
+
+mat-form-field.border-red ::ng-deep .mat-form-field-outline {
+  color: red !important;
+}
+mat-form-field.border-red ::ng-deep .mat-form-field-label {
+  color: red !important;
+}

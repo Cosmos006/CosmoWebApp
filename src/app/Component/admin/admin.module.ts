@@ -43,6 +43,8 @@ import { LockedAccountComponent } from './locked-account/locked-account.componen
 import { AdminPatientComponent } from './admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './admin-hospital/admin-hospital.component';
 import { MatPaginator } from '@angular/material/paginator';
+//
+//MatSlideToggleModule;
 
 //Import Dynamic table
 

@@ -9,7 +9,7 @@ export interface PeriodicElement {
 export class EventMap {
   // public id: string,
   constructor(
-    public Id: string,
+    public publicId: string,
     public title: string,
     public date: string,
     public color: string

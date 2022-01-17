@@ -162,9 +162,11 @@ const routes: Routes = [
   },
   {
     component: CalendarComponent,
-    path: 'NurseAdminCalender',
+    path: 'Calender',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Nurse] },
+    data: {
+      roles: [Role.Admin] || [Role.Patient] || [Role.Nurse] || [Role.Physician],
+    },
   },
   {
     component: PatientBookappointmentComponent,
@@ -188,13 +190,17 @@ const routes: Routes = [
     component: AdminHospitalComponent,
     path: 'AdminHospital',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] },
+    data: {
+      roles: [Role.Admin] || [Role.Patient] || [Role.Nurse] || [Role.Physician],
+    },
   },
   {
     component: BookAppointmentComponent,
-    path: 'BookAppointment/:type',
+    path: 'BookAppointment/:Type',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Patient] || [Role.Nurse] || [Role.Physician] },
+    data: {
+      roles: [Role.Admin],
+    },
   },
   {
     component: PreviouspatientvisitdetailsComponent,

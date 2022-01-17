@@ -217,7 +217,22 @@
                   <label>Upload Image</label>
                   <span class="btn btn-success col fileinput-button">
                     <i class="fas fa-plus"></i>
-                    <span>Upload Image</span>
+                    <!-- <span>Upload Image</span> -->
+                    <input
+                      type="file"
+                      #file
+                      placeholder="Choose file"
+                      (change)="uploadFile(file.files)"
+                      style="display: none"
+                    />
+                    <button
+                      #test
+                      type="file"
+                      class="btn btn-success"
+                      (click)="file.click()"
+                    >
+                      Upload Image
+                    </button>
                   </span>
                   <!-- <span
                     *ngIf="
