@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class NursedashboardgridComponent implements OnInit {
 
-  displayedColumns = ['id', 'name', 'gender', 'address','edit','age'];
+  displayedColumns = ['id', 'name', 'physician', 'diagnosis','edit'];
   dataSource1 !: MatTableDataSource<Product>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;

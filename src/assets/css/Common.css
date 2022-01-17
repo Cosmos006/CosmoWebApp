@@ -11835,9 +11835,9 @@
   }
   
   .main-footer {
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
     border-top: 1px solid #dee2e6;
-    color: #869099;
+    color: #000;
     padding: 1rem;
   }
   

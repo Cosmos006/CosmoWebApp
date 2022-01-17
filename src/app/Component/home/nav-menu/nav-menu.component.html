@@ -1,15 +1,25 @@
 <!-- Old Navbar-->
 
 <div>
-  <mat-toolbar *ngIf="currentUser" style="background-color: lightskyblue">
+  <mat-toolbar
+    *ngIf="currentUser"
+    style="
+      background-color: #a6d3f0;
+      background-image: linear-gradient(to right, #a6d3f0, rgb(23, 118, 177));
+    "
+  >
     <div fxShow="true" fxHide.gt-sm="true">
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
     <span class="text-white" style="color: white; margin-right: 10px"
-      ><b>Logo</b></span
-    >
+      ><a class="navbar-item">
+        <img
+          src="assets/Images/CosmosLogo.png"
+          style="width: 100px; height: 20px"
+        /> </a
+    ></span>
 
     <span class="example-spacer"></span>
     <div fxShow="true" fxHide.lt-md="true">
@@ -39,7 +49,7 @@
           *ngIf="isAdmin"
           mat-button
         >
-          Add Physician
+          Register Physician
         </a>
         <a
           class="companyName"
@@ -48,7 +58,7 @@
           *ngIf="isAdmin"
           mat-button
         >
-          Add Nurse
+          Register Nurse
         </a>
         <a
           mat-button
@@ -102,16 +112,7 @@
           routerLinkActive="router-link-active"
           *ngIf="isPatient"
         >
-          Patient Visit Details
-        </a>
-        <a
-          mat-button
-          class="companyName"
-          [routerLink]="['previouspatientvisitdetails']"
-          routerLinkActive="router-link-active"
-          *ngIf="isPatient"
-        >
-          Previouspatient Visit Details
+          Patient
         </a>
         <a
           mat-button
