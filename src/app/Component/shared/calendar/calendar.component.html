@@ -66,7 +66,7 @@
           type="button"
           class="close"
           data-dismiss="modal"
-          (click)="Approvehide()"
+          (click)="ApproveRejectClose()"
         >
           &times;
         </button>
@@ -82,7 +82,7 @@
           type="button"
           class="btn btn-success"
           data-dismiss="modal"
-          (click)="Approvehide()"
+          (click)="ApproveReject('Approved')"
         >
           Approve
         </button>
@@ -90,9 +90,87 @@
           type="button"
           class="btn btn-danger"
           data-dismiss="modal"
-          (click)="Approvehide()"
+          (click)="ApproveReject('Rejected')"
         >
           Reject
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="myModal"
+  [style.display]="AddAppointment ? 'block' : 'none'"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Appointment</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="AddAppointmentClose()"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <!-- <div class="modal-body">Create Appointment</div> -->
+
+      <div class="modal-body">Create Appointment</div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success"
+          data-dismiss="modal"
+          (click)="CreateAppointment()"
+        >
+          Create
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-dismiss="modal"
+          (click)="AddAppointmentClose()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModal" [style.display]="checkDate ? 'block' : 'none'">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Appointment</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="checkDateClose()"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="modal-body">Please Select Date Greater than Current Date</div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-dismiss="modal"
+          (click)="checkDateClose()"
+        >
+          Close
         </button>
       </div>
     </div>

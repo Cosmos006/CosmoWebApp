@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 //Book Appointment
 import {
@@ -9,15 +8,19 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { MatExpansionPanel } from '@angular/material/expansion';
-import { guid } from '@fullcalendar/core';
-import { id } from 'date-fns/locale';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { GenerateTimeSlot } from 'src/app/models/Globalfunctions';
 import { PatientService } from 'src/app/Services/patient.service';
 //Model Imports
 import { Booking, Diagnosics, Physician } from '../../../models/patient.model';
 //Router
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Patient } from 'src/app/Services/Url';
+import { BookAppointmentService } from 'src/app/Services/BookAppointment/book-appointment.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-book-appointment',
@@ -25,16 +28,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./book-appointment.component.css'],
 })
 export class BookAppointmentComponent implements OnInit {
+  UserType: string = '';
   form!: FormGroup;
   selected: Date | undefined;
   firstslot!: Array<string>;
   secondslot!: Array<string>;
-  diagnosics?: Diagnosics[];
-  physician?: Physician[];
+  incomingslot: Array<string> = [];
+  outgoingslot!: Array<string>;
+  diagnosics: Diagnosics[] = [];
+  physician: Physician[] = [];
   TextInput?: string;
   //Form
   isSubmitted = false;
-  diagnosicsName: any;
+  diagnosicsName: string = '';
   phsicianName: any;
   slot?: string;
   slotName: any;
@@ -47,12 +53,32 @@ export class BookAppointmentComponent implements OnInit {
 
   //Slot
   slotcheck = false;
+  diagnosicscheck = false;
+
+  //Result
+  Result: string = '';
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  //Date
+  minDate: any;
+  maxDate: any;
 
   constructor(
     private patientservice: PatientService,
     public fb: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: BookAppointmentService,
+    private _snackBar: MatSnackBar
+  ) {
+    var CurrentDate = new Date();
+    this.minDate = CurrentDate;
+    var FutureDate = new Date();
+    this.maxDate = new Date(FutureDate.setMonth(CurrentDate.getMonth() + 1));
+    // console.log(this.maxDate);
+  }
 
   //Bind Data
   bookinglist: Booking[] = [];
@@ -70,14 +96,18 @@ export class BookAppointmentComponent implements OnInit {
 
   ngOnInit() {
     //Text input Bind
+    this.route.paramMap.subscribe((res) => {
+      this.UserType += res.get('Type');
+    });
+
     this.TextInput = 'Book Appointment';
 
     //Bind DropDownn
-    this.diagnosics = [
-      { ID: 1, Value: 'Cold' },
-      { ID: 2, Value: 'Feaver' },
-      { ID: 3, Value: 'Thyroid' },
-    ];
+    // this.diagnosics = [
+    //   { id: '1', value: 'Cold' },
+    //   { id: '2', value: 'Feaver' },
+    //   { id: '3', value: 'Thyroid' },
+    // ];
 
     this.physician = [
       { Id: 1, PhysicianName: 'Raj' },
@@ -89,19 +119,40 @@ export class BookAppointmentComponent implements OnInit {
     this.matExpansionPanelElement.close();
 
     var data = 1;
-    switch (data) {
-      case 0:
-        alert('It is a Sunday.');
+    switch (this.UserType) {
+      case 'Patient':
+        this.GlobalBookAppointment(this.UserType);
         break;
-      case 1:
-        alert('It is a Monday.');
+      case 'Nurse':
+        this.GlobalBookAppointment(this.UserType);
         break;
-      case 2:
-        alert('It is a Tuesday.');
+      case 'Physician':
+        this.GlobalBookAppointment(this.UserType);
+        break;
+      case 'Admin':
+        this.GlobalBookAppointment(this.UserType);
         break;
       default:
         alert('No such day exists!');
         break;
+    }
+  }
+
+  GlobalBookAppointment(UserType: string) {
+    if (UserType == 'Patient') {
+      this.TextInput = 'Book Appointment';
+      this.service.GetDiagnosics().subscribe((res) => {
+        // alert(res);
+        this.diagnosics.push(...res);
+      });
+      this.physician = [
+        { Id: 1, PhysicianName: 'Raj' },
+        { Id: 2, PhysicianName: 'Ram' },
+        { Id: 3, PhysicianName: 'Anand' },
+      ];
+    } else if (UserType == 'Nusre') {
+    } else if (UserType == 'Physician') {
+    } else if (UserType == 'Admin') {
     }
   }
 
@@ -130,17 +181,37 @@ export class BookAppointmentComponent implements OnInit {
 
   changeDiagnosics(e: any) {
     if (e.value != null) {
-      this.diagnosicsName.setValue(e.value, {
-        onlySelf: true,
-      });
+      // this.diagnosicsName.setValue(e.value, {
+      //   onlySelf: true,
+      // });
+
+      // this.diagnosicsName = this.registrationForm
+      //   .get('diagnosicsName')
+      //   ?.patchValue(e.value);
+
+      this.diagnosicsName =
+        this.registrationForm.get('diagnosicsName')?.setValue(e.value) || '';
+
+      this.diagnosicscheck = false;
+
+      //alert(this.diagnosicsName);
+
+      //alert(this.registrationForm.get('diagnosicsName')?.value);
     }
   }
 
-  changePhysician(e: any) {
-    if (e.value == undefined) {
+  changePhysician(e: any): boolean {
+    var diagnosics = this.registrationForm.get('diagnosicsName')?.value;
+    var date = this.registrationForm.get('calendardata')?.value;
+
+    if (e.value == undefined || diagnosics === '' || date === '') {
       this.matExpansionPanelElement.close();
-    }
-    if (e.value != null) {
+      this.diagnosicscheck = true;
+      this.datecheck = true;
+      return false;
+    } else if (e.value != null && diagnosics != '' && date != '') {
+      this.diagnosicscheck = false;
+      this.datecheck = false;
       this.matExpansionPanelElement.open();
       const start = new Date('2019-08-08 09:00');
       const end = new Date('2019-08-08 20:00');
@@ -149,19 +220,6 @@ export class BookAppointmentComponent implements OnInit {
         {
           start: '2019-08-08 8:00',
           end: '2019-08-08  8:30',
-        },
-        {
-          start: '2019-08-08 09:00',
-          end: '2019-08-08 09:30',
-        },
-
-        {
-          start: '2019-08-08 10:30:00.000',
-          end: '2019-08-08 11:00:00.000',
-        },
-        {
-          start: '2019-08-08 13:00:00.000',
-          end: '2019-08-08 14:00:00.000',
         },
       ];
 
@@ -173,12 +231,36 @@ export class BookAppointmentComponent implements OnInit {
       );
       this.firstslot = firstslot;
       this.secondslot = secondslot;
+      this.service
+        .GetBookSlot(
+          '3FA85F64-5717-4562-B3FC-2C963F66AFA6',
+          date._i.year + '-' + date._i.month + 1 + '-' + date._i.date
+        )
+        .subscribe((res) => {
+          for (var i = 0; i < res.length; i++) {
+            this.incomingslot.push(res[i].bookslot);
+          }
+          const duplicate = this.incomingslot;
+          let unique = [...new Set(duplicate)];
+          this.firstslot = firstslot.filter((val) => !unique.includes(val));
+          this.secondslot = secondslot.filter((val) => !unique.includes(val));
+        });
+
+      // this.incomingslot = [
+      //   '09 to09:30 ',
+      //   '09:30 to10:00 ',
+      //   '10 to10:30 ',
+      //   '12 to12:30 ',
+      // ];
     }
+
+    return true;
   }
 
   Slot(e: any) {
     const slotvalue = String(e._elementRef.nativeElement.id);
     if (slotvalue != null) {
+      this.diagnosicscheck = false;
       this.registrationForm.patchValue({
         slotName: slotvalue,
       });
@@ -193,12 +275,15 @@ export class BookAppointmentComponent implements OnInit {
     } else {
       this.matExpansionPanelElement.open();
       this.slotcheck = false;
+      this.diagnosicscheck = false;
     }
   }
 
   onSubmit(): boolean {
     this.isSubmitted = true;
     if (this.registrationForm.valid) {
+      //Diagnosics
+      this.diagnosicscheck = false;
       //alert(JSON.stringify(this.registrationForm.value));
       //var data = JSON.stringify(this.registrationForm.value);
       var data = this.registrationForm.value;
@@ -222,19 +307,58 @@ export class BookAppointmentComponent implements OnInit {
       //myDate.setSeconds(0);
 
       var bookingdata: Booking = {
-        id: guid(),
-        title: 'Book Appointment',
-        date: myDate,
-        description: data.descriptionName,
-        color: 'red',
+        appointmentType: this.TextInput,
+        diagnosis: data.diagnosicsName,
+        appointmentStatus: 'pending',
+        isCompleted: false,
+        bookslot: data.slotName,
+        appointmentDateTime: myDate,
+        patientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        physicianId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        nurseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       };
-      this.patientservice.Edit(bookingdata);
+      this.service
+        .BookAppointmentPost(bookingdata)
+        .then((response) => response.text())
+        .then((result) => {
+          this.Result += result;
+          if (this.Result == 'Success') {
+            this.registrationForm.reset();
+            this.registrationForm.controls['diagnosicsName'].setErrors(null);
+            this.registrationForm.controls['phsicianName'].setErrors(null);
+            this.registrationForm.controls['descriptionName'].setErrors(null);
+            this.registrationForm.controls['calendardata'].setErrors(null);
+            this.registrationForm.controls['slotName'].setErrors(null);
+            this.matExpansionPanelElement.close();
 
-      this.router.navigate(['/AdminCalender']);
+            const snackBarRef = this._snackBar.open(
+              'Appointment Created',
+              'Done',
+              {
+                panelClass: 'success',
+                horizontalPosition: this.horizontalPosition,
+                verticalPosition: this.verticalPosition,
+                duration: 5000,
+              }
+            );
+
+            snackBarRef.afterDismissed().subscribe((info) => {
+              if (info.dismissedByAction === true) {
+                // your code for handling this goes here
+                this.router.navigate(['/Calender']);
+              }
+            });
+
+            //this.router.navigate(['/Calender']);
+          }
+        })
+        .catch((error) => console.log('error', error));
+      //this.router.navigate(['/AdminCalender']);
       return true;
     } else {
       var date = this.registrationForm.value['calendardata'];
       var slot = this.registrationForm.value['slotName'];
+      this.diagnosicscheck = true;
       if (date === '' || date === null) {
         this.datecheck = true;
       }
@@ -243,5 +367,15 @@ export class BookAppointmentComponent implements OnInit {
       }
       return false;
     }
+  }
+
+  Clear() {
+    this.registrationForm.reset();
+    this.registrationForm.controls['diagnosicsName'].setErrors(null);
+    this.registrationForm.controls['phsicianName'].setErrors(null);
+    this.registrationForm.controls['descriptionName'].setErrors(null);
+    this.registrationForm.controls['calendardata'].setErrors(null);
+    this.registrationForm.controls['slotName'].setErrors(null);
+    this.matExpansionPanelElement.close();
   }
 }

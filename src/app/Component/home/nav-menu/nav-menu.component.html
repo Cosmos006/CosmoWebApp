@@ -111,11 +111,11 @@
           routerLinkActive="router-link-active"
           *ngIf="isPatient"
         >
-         Previouspatient Visit Details
+          Previouspatient Visit Details
         </a>
         <a
           mat-button
-          [routerLink]="['AdminBookappointment']"
+          [routerLink]="['BookAppointment/Patient']"
           routerLinkActive="router-link-active"
           *ngIf="isAdmin"
         >
@@ -124,7 +124,7 @@
         <a
           mat-button
           class="companyName"
-          [routerLink]="['AdminCalender']"
+          [routerLink]="['Calender']"
           routerLinkActive="router-link-active"
           *ngIf="isAdmin"
         >
