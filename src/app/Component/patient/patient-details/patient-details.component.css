@@ -31,9 +31,14 @@ mat-expansion-panel
 }
 mat-form-field
 {
-  width: 30%;
+  width: 90%;
 }
-span
+/* span
 {
   margin-right: 10%;
+} */
+
+.nextBtn{
+  width: 100%;
+  text-align: right;
 }

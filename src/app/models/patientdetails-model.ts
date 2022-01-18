@@ -1,34 +1,26 @@
+import { Patientrelativedetails } from "./patientrelativedetails";
+
 export class Patientdetails {
-  constructor(
-    public id: number,
-    public firstname: string,
-    public lastname: string,
-    public dateofbirth: Date,
-    public age: number,
-    public gender: boolean,
-    public race: string,
-    public ethnicity: string,
-    public languagesknown: string,
-    public email: string,
-    public homeaddress: string,
-    public pincode: number,
-    public country: string,
-    public state: string,
-    public contactnumber: string,
-    public emergancyfirstname: string,
-    public emergancylastname: string,
-    public emergancyrelationship: string,
-    public emergancyemail: string,
-    public emergancycontactnumber: string,
-    public emergancyaddress: string,
-    public emergancypincode: number,
-    public emergancycountry: string,
-    public accessforpatientportal: boolean,
-    public allergyid: number,
-    public allergytype: string,
-    public allergyname: string,
-    public allergydetails: string,
-    public allergydescription: string,
-    public clinicalinformation: string,) 
-    {}
+        Id!: string;
+        firstName!: string;
+        lastName!: string;
+        dateofBirth!: Date;
+        age!: number;
+        gender!: boolean;
+        race!: string;
+        ethinicity!: string;
+        //languagesknown!: string;
+        email!: string;
+        address!: string;
+        pincode!: number;
+        country!: string;
+        state!: string;
+        contactnumber!: string;
+        allergyId!: string;
+        allergyType!: string;
+        isFatal!: boolean;
+        PatientId!: number;
+        patientDetails!:string;
+        patientRelativeId!: string;
+        PatientRelativeDetails!: Patientrelativedetails ;
 }

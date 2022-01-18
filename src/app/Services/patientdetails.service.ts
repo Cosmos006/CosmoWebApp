@@ -23,14 +23,18 @@ export class patientdetails {
   baseUrl = environment.LocalUrl;
   //patientdetailscreen
   addPost(post: Patientdetails) {
-    this.http.post('http://localhost:3000/posts', post).subscribe((res) => {
+    this.http.post('https://localhost:44315/api/Demographicsdetails/PostPatientdemographicsdetails', post).subscribe((res) => {
       console.log(res);
     });
   }
 
-  fetchfrombackendfromid1(id: number): Observable<Patientdetails> {
-    const getuser = localStorage.getItem('USerID');
-    return this.http.get<Patientdetails>('http://localhost:3000/posts/' + 9);
+  fetchfrombackendfromid1(id:any) {
+    
+  return fetch(`https:localhost:44315/api/Demographicsdetails?Patientid=${id}`, {
+      method: 'GET',
+      redirect: 'follow'
+      })
+      
   }
 
   deletePost(id: number | undefined) {
