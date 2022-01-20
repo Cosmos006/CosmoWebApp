@@ -31,20 +31,9 @@ import {
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PatientDashboardComponent implements OnInit {
-  //appointmentData: AppointmentData[];
   appointmentPastHeaderData: AppointmentPastHeaderData[] =
     appointmentPastHeaderData;
 
-  //dataSource = new MatTableDataSource(appointmentData);
-  //@ViewChild(MatPaginator) paginator!: MatPaginator;
-  //@ViewChild(MatSort, {}) sort!: MatSort;
-
-
-
-  //fakeData = appointmentData;
-  //pastResults = appointmentPastHeaderData;
-
-  //value?: string = 'abcd';
   allcolumns: any[] = [
     {
       columnDef: 'doctorName',
@@ -53,27 +42,22 @@ export class PatientDashboardComponent implements OnInit {
       dataName: (row: { doctorName: any }) => `${row.doctorName}`,
     },
     {
-      columnDef: 'date',
+      columnDef: 'appointmentDateTime',
       isvisible: true,
       header: 'Appointment Date',
-      dataName: (row: { date: Date }) => `${new Date(row.date).toLocaleDateString('en-US')}`,
-    },
-    {
-      columnDef: 'nurseName',
-      isvisible: true,
-      header: 'Nurse Name',
-      dataName: (row: { nurseName: any }) => `${row.nurseName}`,
+      dataName: (row: { appointmentDateTime: Date }) => `${new Date(row.appointmentDateTime).toLocaleDateString('en-US')}`,
     },
     {
       columnDef: 'diagnosis',
       isvisible: true,
-      header: 'Diagnosis',
+      header: 'Diagnosis Name',
       dataName: (row: { diagnosis: any }) => `${row.diagnosis}`,
     },
     {
       columnDef: 'modifyBtn',
       header: 'Modify',
       type: 'button',
+      icon: 'edit',
       isvisible: true,
       dataName: (row: { id: any }) => `${row.id}`,
     },
@@ -82,12 +66,14 @@ export class PatientDashboardComponent implements OnInit {
       header: 'View details',
       isvisible: false,
       type: 'button',
+      icon: 'visibility',
       dataName: (row: { id: any }) => `${row.id}`,
     },
     {
       columnDef: 'prescriptionBtn',
       header: 'prescription',
       type: 'button',
+      icon: 'description',
       isvisible: false,
       dataName: (row: { id: any }) => `${row.id}`,
     },
@@ -95,6 +81,7 @@ export class PatientDashboardComponent implements OnInit {
       columnDef: 'reasonBtn',
       header: 'reason',
       type: 'button',
+      icon: 'contact_support',
       isvisible: false,
       dataName: (row: { id: any }) => `${row.id}`,
     },
@@ -114,11 +101,7 @@ export class PatientDashboardComponent implements OnInit {
     { value: '2', viewValue: 'Past Appointments' },
     { value: '3', viewValue: 'Decline Appointments' },
   ];
-  
-  //gridheader: AppointmentPastHeaderData[] = [];
-  //gridheader1: AppointmentHeaderData[] = [];
 
-  //allResults : AppointmentData[]=[];
   griddata: AppointmentData[] = [];
 
   constructor(
@@ -126,68 +109,87 @@ export class PatientDashboardComponent implements OnInit {
     public dialog: MatDialog,
     private changeDetection: ChangeDetectorRef,
     private patientDashboardService: PatientDashboardService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.showcolumns = this.allcolumns;
     this.patientDashboardService.GetAllAppointmentList()
-      .subscribe((x : AppointmentData[]) => {
-        this.griddata = x.filter((v) => new Date(v.date) > new Date());
+      .subscribe((x: AppointmentData[]) => {
+        this.griddata = x.filter((v) => new Date(v.appointmentDateTime) > new Date());
         this.filterAppointments('1');
       });
       
 
   }
-  filterAppointments(val: any, pagination: any={}) {
-    this.patientDashboardService.GetAllAppointmentList()
-    .subscribe((x : AppointmentData[]) => {
-    if (val == '1') {
-      this.showcolumns = this.allcolumns.filter(
-        (e) =>
-          e.columnDef != 'prescriptionBtn' &&
-          e.columnDef != 'viewdetailBtn' &&
-          e.columnDef != 'reasonBtn'
-      );
-      this.griddata = x.filter((v) => new Date(v.date) > new Date());
-    } else if (val == '2') {
-      // console.log('Hi..');
-      this.griddata = x.filter((v) => new Date(v.date) < new Date());
-      this.showcolumns = this.allcolumns.filter(
-        (e) => e.columnDef != 'modifyBtn' && e.columnDef != 'reasonBtn'
-      );
-    } else if (val == '3') {
+  
+  filterAppointments(val: any, pagination: any = {}) {
 
-      this.griddata = x.filter((v) => v.isDeclined == true);
-      this.showcolumns = this.allcolumns.filter(
-        (e) =>
-          e.columnDef != 'prescriptionBtn' &&
-          e.columnDef != 'modifyBtn' &&
-          e.columnDef != 'viewdetailBtn'
-      );
-    } else {
-      this.griddata = x;
-      this.showcolumns = this.allcolumns;
+    if (val == '1') {
+      this.patientDashboardService.GetAllUpcomingAppointmentList()
+        .subscribe((x: AppointmentData[]) => {
+          this.showcolumns = this.allcolumns.filter(
+            (e) =>
+              e.columnDef != 'prescriptionBtn' &&
+              e.columnDef != 'viewdetailBtn' &&
+              e.columnDef != 'reasonBtn'
+          );
+          this.griddata = x.filter((v) => new Date(v.appointmentDateTime) > new Date() && v.appointmentStatus != 'Rejected');
+          this.processPaginationAndFilter(pagination);
+
+        });
     }
-    if (this.searchText)
+    else if (val == '2') {
+      this.patientDashboardService.GetPastAppointmentList()
+        .subscribe((x: AppointmentData[]) => {
+
+          this.griddata = x.filter((v) => new Date(v.appointmentDateTime) < new Date());
+          this.showcolumns = this.allcolumns.filter(
+            (e) => e.columnDef != 'modifyBtn' && e.columnDef != 'reasonBtn'
+          );
+          this.processPaginationAndFilter(pagination);
+
+        });
+        
+    }
+    else {
+      this.patientDashboardService.GetDeclineAppointmentsList()
+        .subscribe((x: AppointmentData[]) => {
+       if (val == '3') {
+        
+            this.griddata = x.filter((v) => v.appointmentStatus == 'Rejected');
+            this.showcolumns = this.allcolumns.filter(
+              (e) =>
+                e.columnDef != 'prescriptionBtn' &&
+                e.columnDef != 'modifyBtn' &&
+                e.columnDef != 'viewdetailBtn'
+            );
+          } else {
+            this.griddata = x;
+            this.showcolumns = this.allcolumns;
+          }
+          this.processPaginationAndFilter(pagination);
+        });
+    }
+  }
+  processPaginationAndFilter(pagination: any = {}) {
+    if (pagination != null && pagination.pageIndex >= 0) {
+      this.griddata = this.griddata.slice(pagination.pageIndex * pagination.pageSize,
+        (pagination.pageIndex + 1) * pagination.pageSize)
+    }
+    if (this.searchText){
       this.griddata = this.griddata.filter((v) =>
         v.doctorName.includes(this.searchText)
         || v.nurseName.includes(this.searchText)
       );
-
-    if(pagination != null && pagination.pageIndex >= 0)
-    {
-      this.griddata = this.griddata.slice(pagination.pageIndex * pagination.pageSize,
-        (pagination.pageIndex+1) * pagination.pageSize)
     }
-  });
   }
-  searchAppointments(val:any)
-  {
+  searchAppointments(val: any) {
     this.searchText = val.target.value;
     this.filterAppointments(this.selectedValue);
   }
- 
-  ShowDeclineInfo() {
+
+  ShowDeclineInfo(item: AppointmentData) {
+    this.selectedAppointment = item;
     this.showDeclineModal = true;
   }
   ShowPrescriptionModel() {
@@ -195,7 +197,7 @@ export class PatientDashboardComponent implements OnInit {
   }
   ModifyModel() {
     // alert('hi..');
-    this.router.navigate(['/PatientBookappointment']);
+    this.router.navigate(['/PatientDetails']);
   }
   hide() {
     this.showDeclineModal = false;
@@ -252,15 +254,33 @@ export class PatientDashboardComponent implements OnInit {
     }
     if (obj.columnDef == 'viewdetailBtn') {
       var id = obj.guid;
-      let apointdata = this.patientDashboardService.GetAppointmentById(Number(obj.guid))
-      .subscribe((v)=>{
-       var data = v.find((e) => e.id == obj.guid)!;
-       this.ShowViewdetailModel(data);
-      });
-      
+      let apointdata = this.patientDashboardService.GetAppointmentById(obj.guid)
+        .subscribe((v) => {
+          //var data = v.find((e) => e.id == obj.guid)!;
+          this.ShowViewdetailModel(v);
+        });
+
     }
     if (obj.columnDef == 'reasonBtn') {
-      this.ShowDeclineInfo();
+      
+      var id = obj.guid;
+      let apointdata = this.patientDashboardService.GetAppointmentById(obj.guid)
+        .subscribe((v) => {
+          //var data = v.find((e) => e.id == obj.guid)!;
+          this.ShowDeclineInfo(v);
+        });
+    }
+  }
+
+  demographicBtn(){
+    this.router.navigate(['/PatientDetails']);
+  }
+
+  DashboardRedirectURL(navigate: any) {
+    if (navigate == 'locked') {
+      this.router.navigateByUrl('/LockedAccount');
+    } else if (navigate == 'patient') {
+      this.router.navigateByUrl('/AdminPatient');
     }
   }
 }

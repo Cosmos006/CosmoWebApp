@@ -29,7 +29,7 @@
               <div class="small-box bg-info" style="padding: 13px">
                 <div class="inner">
                   <h3>10</h3>
-                  <p>Total Appointments</p>
+                  <p>Past Appointments</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -61,12 +61,12 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-6">
+            <!-- <div class="col-lg-3 col-6">
               <div class="small-box bg-success" style="padding: 11px">
                 <div class="inner">
-                  <h3 style="font-size: 20px">Add Demographic Details</h3>
+                  <h3 style="font-size: 20px">Book Appointment</h3>
                   <br />
-                  <button type="button" class="btn btn-primary float-center">
+                  <button (click)="demographicBtn()" type="button" class="btn btn-primary float-center">
                     Click here
                   </button>
                 </div>
@@ -74,6 +74,25 @@
                   <i class="ion ion-pie-graph"></i>
                 </div>
               </div>
+            </div> -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div
+                class="small-box bg-success"
+                style="padding: 34px"
+                routerLink="/PatientBookappointment"
+              >
+                <div class="inner">
+                  <h3></h3>
+                  <a (click)="DashboardRedirectURL('patient')"
+                    ><p>Book Appointment</p></a
+                  >
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+              </div>
+              
             </div>
           </div>
           <!-- Main row -->
@@ -207,10 +226,11 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
+      <div *ngIf="selectedAppointment" class="modal-body">
 
-        <h5>Declined By : Patient</h5>
-        <h5>Reason : Date doesn't matched the schedule.</h5>
+        <!-- <h5>Declined By : Patient</h5> -->
+        <h5>Reason : {{ selectedAppointment.deletedReason }}</h5>
+        
  
       </div>
 
@@ -250,10 +270,10 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
+      <div *ngIf="selectedAppointment" class="modal-body">
 
-        <h5>Declined By : Patient</h5>
-        <h5>Reason : Date doesn't matched the schedule.</h5>
+        <!-- <h5>Declined By : Patient</h5> -->
+        <h5>Reason : {{ selectedAppointment.deletedReason }}</h5>
 
       </div>
 
@@ -295,15 +315,17 @@
 
       <!-- Modal body -->
       <div class="modal-body" *ngIf="selectedAppointment">
+        <!-- <h5>Doctor : {{ selectedAppointment.appointmentType }}</h5> -->
+        <h5>AppointmentStatus : {{ selectedAppointment.appointmentStatus }}</h5>
         <h5>Doctor : {{ selectedAppointment.doctorName }}</h5>
         <h5>Nurse Name : {{ selectedAppointment.nurseName }}</h5>
         <h5>Diagnosis : {{ selectedAppointment.diagnosis }}</h5>
         <h5>
           Appointment Date :
-          {{ selectedAppointment.doctorName | date: "short" }}
+          {{ selectedAppointment.appointmentDateTime | date: "short" }}
         </h5>
-        <h5>Declined By : Patient</h5>
-        <h5>Reason : Date doesn't matched the schedule.</h5>
+        <!-- <h5>Declined By : Patient</h5> -->
+        <!-- <h5>Reason : {{ selectedAppointment.deletedReason }}</h5> -->
       </div>
 
       <!-- Modal footer -->
