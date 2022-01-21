@@ -19,18 +19,14 @@ export class LoginComponent implements OnInit {
     confirmpassword!: string;
     errorMessage!: string;
     loginForm!: FormGroup;
-    // loading = false;
-    // submitted = false;
-    returnUrl!: string;
-    // error = '';
-    // currentUser!: User;
+    Userlocal : any
     userList: any[] = [];
     user!: UserDetails | undefined;
     isValidCredentials!: boolean;
     errorstatus : boolean = false;
     submitted:boolean = false;
     private formSubmitAttempt!: boolean;
-  displayStyle!: '';
+    displayStyle!: '';
 
     constructor(
         private fb: FormBuilder,
@@ -43,11 +39,11 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.userList = this.authenticationService.getUserData();
-        console.log(this.userList);
-        if (localStorage.getItem('token') !== null)
-            this.router.navigate(['AdminDashBoard']);
-        else 
-          this.router.navigateByUrl('/login');
+        //console.log(this.userList);
+        // if (localStorage.getItem('token') !== null)
+        //     this.router.navigate(['AdminDashBoard']);
+        // else 
+        //   this.router.navigateByUrl('/login');
        
 
           this.loginForm = this.fb.group({
@@ -55,10 +51,8 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.required]
         });
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
-
-    
 
     isFieldInvalid(field: string) {
         return (
@@ -71,29 +65,22 @@ export class LoginComponent implements OnInit {
         this.submitted = true;
         var data = this.loginForm.value;
         console.log(data)
-        let isValidCredentials = this.userList.find(
+        //let isValidCredentials = this.userList.find(
+         this.user = this.userList.find(
           (x) =>
              x.userName ===  data.username &&
             x.password === data.password
         );
-        console.log(isValidCredentials);
+        console.log(this.user);
         console.log(this.loginForm)
-        if (isValidCredentials !== undefined && this.loginForm.valid ) {
-         console.log('Hii')
+        if (this.user !== undefined && this.loginForm.valid ) {
          this.errorstatus = false;
            this.authenticationService.login(this.loginForm).subscribe({
             next: (res: any) => {
               console.log(res)
               localStorage.setItem('token', res.token);
-              console.log(localStorage.getItem('token'))
-              //var username = this.form.value.UserName;
-              // this.user = this.userList.find(
-              //   (x) => x.UserName.toLowerCase() === username.toLowerCase()
-              // );
-              //if (this.user !== undefined) {
+              localStorage.setItem('user', JSON.stringify(this.user))
                 this.router.navigateByUrl('/Home');
-                console.log('Hii');
-              //}
             },
             error: (e) => console.error(e),
           });

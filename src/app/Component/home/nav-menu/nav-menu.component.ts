@@ -35,7 +35,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
+    //this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
   }
 
   logout() {
@@ -54,6 +54,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   get isNurse() {
-    return this.currentUser && this.currentUser.role === Role.Nurse;
+    return true;
+    //return this.currentUser && this.currentUser.role === Role.Nurse;
   }
 }

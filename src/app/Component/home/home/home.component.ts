@@ -30,16 +30,18 @@ export class HomeComponent {
   ngOnInit() {
     this.loading = true;
     this.isLoggedIn$ = this.authenticationService.isLoggedIn; // {2}
+    //const user = this.currentUser;
     const user = this.currentUser;
-    if (user.role == 'Admin') {
-      this.router.navigateByUrl('/AdminDashboard');
-    } else if (user.role == 'Physician') {
-      this.router.navigateByUrl('/');
-    } else if (user.role == 'Patient') {
-      this.router.navigateByUrl('/PatientDashboard');
-    } else if (user.role == 'Nurse') {
-      this.router.navigateByUrl('/NurseDashboard');
-    }
+    this.router.navigateByUrl('/NurseDashboard');
+    // if (user.role == 'Admin') {
+    //   this.router.navigateByUrl('/AdminDashboard');
+    // } else if (user.role == 'Physician') {
+    //   this.router.navigateByUrl('/');
+    // } else if (user.role == 'Patient') {
+    //   this.router.navigateByUrl('/PatientDashboard');
+    // } else if (user.role == 'Nurse') {
+    //   this.router.navigateByUrl('/NurseDashboard');
+    // }
   }
   getuserbyId() {
     this.userService

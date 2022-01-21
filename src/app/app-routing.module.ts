@@ -30,6 +30,7 @@ import { PreviouspatientvisitdetailsComponent } from './Component/patient/previo
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
+import { InboxComponent } from './Component/shared/inbox/inbox.component';
 import { Role } from './models/Role';
 import { AuthGuard } from './_helpers';
 
@@ -194,6 +195,12 @@ const routes: Routes = [
     path: 'previouspatientvisitdetails',
     canActivate: [AuthGuard],
     data: { roles: [Role.Patient] },
+  },
+  {
+    component: InboxComponent,
+    path: 'Inbox',
+    //canActivate: [AuthGuard],
+    
   },
   { path: '**', redirectTo: '' },
   

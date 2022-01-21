@@ -37,7 +37,7 @@ export class AuthenticationService {
           Password:formModel.value.password
         }
         console.log(loginModel);
-        return this.httpClient.post(this.baseUrl + 'ApplicationUser/Login', loginModel);
+        return this.httpClient.post(this.baseUrl + 'User/Login', loginModel);
       }
       
       logout() {
@@ -49,7 +49,7 @@ export class AuthenticationService {
       
       getUserData(){
         this.httpClient
-        .get<UserDetails[]>(this.baseUrl + 'ApplicationUser/GetUser')
+        .get<UserDetails[]>(this.baseUrl + 'User/GetUser')
         .subscribe((res: UserDetails[]) => {
           this.userList.push(...res);
           console.log(this.userList)

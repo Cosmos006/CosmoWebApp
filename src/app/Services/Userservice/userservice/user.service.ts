@@ -72,7 +72,7 @@ export class UserService {
     };
     console.log(userDetails);
     registrationform.reset();
-    return this.http.post(this.baseUrl+'ApplicationUser/Patient/Register', userDetails , {responseType: 'text'});
+    return this.http.post(this.baseUrl+'User/Patient/Register', userDetails , {responseType: 'text'});
   }
 }
 

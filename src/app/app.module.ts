@@ -110,6 +110,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
 import { AlertService } from './Services/Alert/alert.service';
+import { InboxComponent } from './Component/shared/inbox/inbox.component';
+import { MatTabsModule } from '@angular/material/tabs';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -149,6 +151,7 @@ FullCalendarModule.registerPlugins([
     DoctorlistComponent,
     AdminPatientComponent,
     AdminHospitalComponent,
+    InboxComponent
 
   ],
   imports: [
@@ -205,6 +208,23 @@ FullCalendarModule.registerPlugins([
     MatSelectFilterModule,
     MatTooltipModule,
     //Apex chart
+
+    //Inbox
+    MatTabsModule,
+    MatTableModule,
+    MatBadgeModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSnackBarModule
     
   ],
   exports: [],
