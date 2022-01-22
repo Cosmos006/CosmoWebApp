@@ -323,10 +323,21 @@ export class PatientDetailsComponent implements OnInit {
   }
 
   addEvent(event: MatDatepickerInputEvent<Date>) {
-    
+    //alert(event.value);
+    var dateValue = event.value!;
+    var selectedYear = new Date(dateValue).getFullYear();
+    var currentYear = new Date().getFullYear();
+    var age = currentYear - selectedYear;
+    alert("TimeDi"+ age);
+    if (event.value) {
+      //var timeDiff = Math.abs(Date.now() - event.value?.getTime());
+      //var age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+      //alert("TimeDiff : " + timeDiff + "Date Selected : " + age);
+      
+    }
     //var date = new Date(event.value)
     //var year = date.getFullYear();
-    alert(event.value?.getFullYear);
+    //alert(event.value?.getFullYear);
   }
   
   onChangeEvent(event: any){
