@@ -78,22 +78,30 @@
       <!-- Modal footer -->
 
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-success"
-          data-dismiss="modal"
-          (click)="ApproveReject('Approved')"
-        >
-          Approve
-        </button>
-        <button
-          type="button"
-          class="btn btn-danger"
-          data-dismiss="modal"
-          (click)="ApproveReject('Rejected')"
-        >
-          Reject
-        </button>
+        <ng-container *ngIf="CheckPatient; else test">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Pending For Approval
+          </button>
+        </ng-container>
+
+        <ng-template #test>
+          <button
+            type="button"
+            class="btn btn-success"
+            data-dismiss="modal"
+            (click)="ApproveReject('Approved')"
+          >
+            Approve
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-dismiss="modal"
+            (click)="ApproveReject('Rejected')"
+          >
+            Reject
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>

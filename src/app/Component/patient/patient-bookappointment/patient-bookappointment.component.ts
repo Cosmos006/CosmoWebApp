@@ -81,9 +81,9 @@ export class PatientBookappointmentComponent implements OnInit {
     // ];
 
     this.physician = [
-      { Id: 1, PhysicianName: 'Raj' },
-      { Id: 2, PhysicianName: 'Ram' },
-      { Id: 3, PhysicianName: 'Anand' },
+      { id: '1', physicianName: 'Raj' },
+      { id: '2', physicianName: 'Ram' },
+      { id: '3', physicianName: 'Anand' },
     ];
 
     //Mat expansion close

@@ -25,8 +25,8 @@ export class BookAppointmentService {
 
   //GEt Physician
   GetPhysician() {
-    return this.http.get<Diagnosics[]>(
-      'https://localhost:44347/api/Diagnoses/GetDiagnosisData'
+    return this.http.get<Physician[]>(
+      'https://localhost:44347/api/Appointments/GetAllPhysician'
     );
   }
 
@@ -42,28 +42,26 @@ export class BookAppointmentService {
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     var raw = JSON.stringify(value);
-
-    // return this.http.post<any>('https://localhost:44347/api/Appointments', {
-    //   method: 'POST',
-    //   headers: myHeaders,
-    //   body: raw,
-    //   redirect: 'follow',
-    // });
-    // .subscribe({
-    //   next: (data) => {
-    //     alert(data);
-    //   },
-    //   error: (error) => {
-    //     const errorMessage = error.message;
-    //     console.log('There was an error!' + error);
-    //   },
-    // });
-
     return fetch('https://localhost:44347/api/Appointments', {
       method: 'POST',
       headers: myHeaders,
       body: raw,
       redirect: 'follow',
     });
+  }
+
+  UpdateAppointment(AppointmentId: string, value: any) {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    var raw = JSON.stringify(value);
+    return fetch(
+      `https://localhost:44347/api/Appointments/UpdateAppointments/${AppointmentId}`,
+      {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
+      }
+    );
   }
 }

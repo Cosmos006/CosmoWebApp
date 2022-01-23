@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CalendarOptions,
   DateSelectArg,
@@ -28,6 +28,8 @@ export class EventMap {
   styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent implements OnInit {
+  UserType: string = '';
+  CheckPatient: boolean = false;
   name!: string;
   date?: string;
   showModal!: boolean;
@@ -47,31 +49,22 @@ export class CalendarComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private admim: CalendarService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     var CurrentDate = new Date();
     this.minDate = CurrentDate;
   }
 
   ngOnInit() {
-    //   switch (this.UserType) {
-    //     case 'Patient':
-    //       this.GlobalBookAppointment(this.UserType);
-    //       break;
-    //     case 'Nurse':
-    //       this.GlobalBookAppointment(this.UserType);
-    //       break;
-    //     case 'Physician':
-    //       this.GlobalBookAppointment(this.UserType);
-    //       break;
-    //     case 'Admin':
-    //       this.GlobalBookAppointment(this.UserType);
-    //       break;
-    //     default:
-    //       alert('No such day exists!');
-    //       break;
-    //   }
-    // }
+    this.route.paramMap.subscribe((res) => {
+      this.UserType += res.get('Type');
+    });
+
+    if (this.UserType == 'Patient') {
+      //alert('patient');
+      this.CheckPatient = true;
+    }
 
     this.adminService
       .GetListofData()

@@ -41,8 +41,8 @@ export class AdminHospitalComponent {
     'specialization',
     'email',
     'contact',
+    'isLocked',
     'isActive',
-    'Disable',
   ];
 
   HospitalapplyFilter(event: Event) {
@@ -55,21 +55,44 @@ export class AdminHospitalComponent {
     }
   }
 
+  updateLockStatus(element: any) {
+    //var Status = (element.activate = !element.activate);
+    var Id = element.userId;
+    var Status = !element.isLocked;
+    this.serive
+      .AdminLockHospitalUsers(Id, Status, 'Locked')
+      .then((response) => response.text())
+      .then((result) =>
+        result === 'Success'
+          ? this.refreshTableSorce()
+          : alert('Please try again')
+      )
+      .catch((error) => console.log('error', error));
+  }
+
   updateActiveStatus(element: any) {
-    console.log(element);
-    //alert('Original:' + element.isActive);
-    var change = (element.activate = !element.activate);
-    //alert('Changes1:' + change);
-    //alert('Changes2:' + !element.isActive);
-    // alert(element.id);
-    var Id = element.id;
-    this.serive.AdminLockHospitalUsers(Id);
+    //var Status = (element.activate = !element.activate);
+    var Id = element.userId;
+    var Status = !element.isActive;
+    this.serive
+      .AdminLockHospitalUsers(Id, Status, 'Active')
+      .then((response) => response.text())
+      .then((result) =>
+        result === 'Success'
+          ? this.refreshTableSorce()
+          : alert('Please try again')
+      )
+      .catch((error) => console.log('error', error));
+  }
+
+  refreshTableSorce() {
+    window.location.reload();
   }
 
   ngAfterViewInit(): void {
     //Patient
     this.HospitalUserdataSource.paginator = this.paginator;
     this.HospitalUserdataSource.sort = this.sort;
-    throw new Error('Method not implemented.');
+    //throw new Error('Method not implemented.');
   }
 }

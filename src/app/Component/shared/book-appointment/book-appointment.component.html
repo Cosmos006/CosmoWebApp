@@ -73,6 +73,7 @@
                 <mat-select
                   (selectionChange)="changeDiagnosics($event)"
                   formControlName="diagnosicsName"
+                  [disabled]="editing"
                 >
                   <mat-option>Select</mat-option>
                   <mat-option
@@ -89,17 +90,6 @@
                 >
                   <sup>*</sup>Please Select Diagnosics
                 </div>
-
-                <!-- <div
-                  class="invalid-feedback"
-                  [style.border-bottom]="
-                    diagnosicscheck === true
-                      ? 'solid 2px red'
-                      : 'solid 2px white'
-                  "
-                >
-                  <p>Please Select Diagnosics</p>
-                </div> -->
               </mat-form-field>
             </span>
             <span>
@@ -110,8 +100,8 @@
                   formControlName="phsicianName"
                 >
                   <mat-option>Select</mat-option>
-                  <mat-option *ngFor="let item of physician" [value]="item.Id">
-                    {{ item.PhysicianName }}</mat-option
+                  <mat-option *ngFor="let item of physician" [value]="item.id">
+                    {{ item.physicianName }}</mat-option
                   >
                 </mat-select>
               </mat-form-field>

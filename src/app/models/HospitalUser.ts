@@ -34,12 +34,12 @@ export class HospitalUser {
     public id: number,
     public title: string,
     public firstName: any,
-    public lastName: any,
+    public role: any,
     public contact: any,
     public specialization: any,
     public email: any,
     public createdOn: any,
     public isActive: any,
-    public isDisabled: any
+    public IsLocked: any
   ) {}
 }

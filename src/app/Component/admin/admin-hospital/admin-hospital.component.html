@@ -12,7 +12,7 @@
 
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef>Role</th>
-      <td mat-cell *matCellDef="let element">{{ element.Role }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.role }}</td>
     </ng-container>
 
     <!-- specialization Column -->
@@ -33,45 +33,29 @@
       <td mat-cell *matCellDef="let element">{{ element.contact }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="isActive">
+    <ng-container matColumnDef="isLocked">
       <th mat-header-cell *matHeaderCellDef>Lock/Unlock</th>
       <td mat-cell *matCellDef="let element">
-        <!-- <td mat-cell *matCellDef="let element">{{ element.isActive }}</td> -->
-        <ng-container *ngIf="element.isActive; else deactivate">
-          <mat-slide-toggle
-            [checked]="element.isActive"
-            (change)="updateActiveStatus(element)"
-            color="accent"
-          >
-          </mat-slide-toggle>
-        </ng-container>
-        <ng-template #deactivate>
-          <mat-slide-toggle
-            [checked]="element.isActive"
-            (change)="updateActiveStatus(element)"
-            color="deactivate"
-          >
-          </mat-slide-toggle>
-        </ng-template>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Disable">
-      <th mat-header-cell *matHeaderCellDef>Disable</th>
-      <td mat-cell *matCellDef="let element">
         <mat-slide-toggle
-          [checked]="element.isDisabled"
-          (change)="updateActiveStatus(element)"
+          [checked]="element.isLocked"
+          (change)="updateLockStatus(element)"
           color="warn"
         >
         </mat-slide-toggle>
       </td>
     </ng-container>
 
-    <!-- <ng-container matColumnDef="isActive">
-      <th mat-header-cell *matHeaderCellDef>Toggle</th>
-      <td mat-cell *matCellDef="let element">{{ element.isActive }}</td>
-    </ng-container> -->
+    <ng-container matColumnDef="isActive">
+      <th mat-header-cell *matHeaderCellDef>Active</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-slide-toggle
+          [checked]="element.isActive"
+          (change)="updateActiveStatus(element)"
+          color="accent"
+        >
+        </mat-slide-toggle>
+      </td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedthreeColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedthreeColumns"></tr>

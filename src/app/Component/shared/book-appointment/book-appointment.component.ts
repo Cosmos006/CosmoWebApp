@@ -29,6 +29,7 @@ import {
 })
 export class BookAppointmentComponent implements OnInit {
   UserType: string = '';
+  AppointmentID: string = '';
   form!: FormGroup;
   selected: Date | undefined;
   firstslot!: Array<string>;
@@ -58,12 +59,22 @@ export class BookAppointmentComponent implements OnInit {
   //Result
   Result: string = '';
 
+  //Editing Drop Down
+  editing: boolean = false;
+
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   //Date
   minDate: any;
   maxDate: any;
+
+  //Edit Appointment
+  AppointmentType?: string;
+  AppointmentDate: any;
+  IncomingSlotBooked?: string;
+  IncomingDiagnosics?: string;
+  IncomingPhysicianName?: string;
 
   constructor(
     private patientservice: PatientService,
@@ -98,7 +109,15 @@ export class BookAppointmentComponent implements OnInit {
     //Text input Bind
     this.route.paramMap.subscribe((res) => {
       this.UserType += res.get('Type');
+      // this.AppointmentID += res.get('AppointmentID');
     });
+
+    this.route.queryParams.subscribe((params) => {
+      // Defaults to 0 if no query param provided.
+      this.AppointmentID += params['appointmentId'] || 'undefined';
+    });
+
+    //alert(this.AppointmentID);
 
     this.TextInput = 'Book Appointment';
 
@@ -109,11 +128,11 @@ export class BookAppointmentComponent implements OnInit {
     //   { id: '3', value: 'Thyroid' },
     // ];
 
-    this.physician = [
-      { Id: 1, PhysicianName: 'Raj' },
-      { Id: 2, PhysicianName: 'Ram' },
-      { Id: 3, PhysicianName: 'Anand' },
-    ];
+    // this.physician = [
+    //   { Id: 1, PhysicianName: 'Raj' },
+    //   { Id: 2, PhysicianName: 'Ram' },
+    //   { Id: 3, PhysicianName: 'Anand' },
+    // ];
 
     //Mat expansion close
     this.matExpansionPanelElement.close();
@@ -142,14 +161,69 @@ export class BookAppointmentComponent implements OnInit {
     if (UserType == 'Patient') {
       this.TextInput = 'Book Appointment';
       this.service.GetDiagnosics().subscribe((res) => {
-        // alert(res);
         this.diagnosics.push(...res);
       });
-      this.physician = [
-        { Id: 1, PhysicianName: 'Raj' },
-        { Id: 2, PhysicianName: 'Ram' },
-        { Id: 3, PhysicianName: 'Anand' },
-      ];
+
+      this.service.GetDiagnosics().subscribe((res) => {
+        this.diagnosics.push(...res);
+      });
+
+      this.service.GetPhysician().subscribe((res) => {
+        this.physician.push(...res);
+      });
+
+      if (this.AppointmentID != 'undefined') {
+        this.patientservice
+          .GetPatientAppointmentDetailsById(this.AppointmentID)
+          .subscribe((x) => {
+            if (x.length > 0) {
+              this.AppointmentType = x[0].appointmentType;
+              this.AppointmentDate = x[0].appointmentDateTime;
+              this.IncomingSlotBooked = x[0].slotBooked;
+              this.IncomingPhysicianName = x[0].physicianName;
+              var Diagnosics = x[0].diagnosis;
+
+              this.registrationForm.controls['diagnosicsName'].patchValue(
+                Diagnosics
+              );
+
+              this.registrationForm.controls['phsicianName'].patchValue(
+                this.IncomingPhysicianName
+              );
+
+              if (this.AppointmentDate != undefined) {
+                var date = new Date(this.AppointmentDate);
+                var full =
+                  date.getDate() +
+                  '-' +
+                  date.getMonth() +
+                  1 +
+                  '-' +
+                  date.getFullYear();
+                this.selectedDate = full;
+                var SendDatetoSlot =
+                  date.getFullYear() +
+                  '-' +
+                  date.getMonth() +
+                  1 +
+                  '-' +
+                  date.getDate();
+                this.SlotGenerator(this.UserType, SendDatetoSlot);
+                this.expClick();
+              }
+            }
+          });
+
+        this.TextInput = 'Update Appointment';
+        this.editing = true;
+        this.registrationForm = this.fb.group({
+          diagnosicsName: ['', [Validators.required]],
+          phsicianName: ['', [Validators.required]],
+          descriptionName: ['', [Validators.required]],
+          calendardata: ['', Validators.required],
+          slotName: ['', [Validators.required]],
+        });
+      }
     } else if (UserType == 'Nusre') {
     } else if (UserType == 'Physician') {
     } else if (UserType == 'Admin') {
@@ -181,22 +255,10 @@ export class BookAppointmentComponent implements OnInit {
 
   changeDiagnosics(e: any) {
     if (e.value != null) {
-      // this.diagnosicsName.setValue(e.value, {
-      //   onlySelf: true,
-      // });
-
-      // this.diagnosicsName = this.registrationForm
-      //   .get('diagnosicsName')
-      //   ?.patchValue(e.value);
-
       this.diagnosicsName =
         this.registrationForm.get('diagnosicsName')?.setValue(e.value) || '';
 
       this.diagnosicscheck = false;
-
-      //alert(this.diagnosicsName);
-
-      //alert(this.registrationForm.get('diagnosicsName')?.value);
     }
   }
 
@@ -245,13 +307,6 @@ export class BookAppointmentComponent implements OnInit {
           this.firstslot = firstslot.filter((val) => !unique.includes(val));
           this.secondslot = secondslot.filter((val) => !unique.includes(val));
         });
-
-      // this.incomingslot = [
-      //   '09 to09:30 ',
-      //   '09:30 to10:00 ',
-      //   '10 to10:30 ',
-      //   '12 to12:30 ',
-      // ];
     }
 
     return true;
@@ -279,93 +334,218 @@ export class BookAppointmentComponent implements OnInit {
     }
   }
 
+  SlotGenerator(UserType: string, date: string) {
+    if (UserType == 'Patient') {
+      this.diagnosicscheck = false;
+      this.datecheck = false;
+      this.matExpansionPanelElement.open();
+      const start = new Date('2019-08-08 09:00');
+      const end = new Date('2019-08-08 20:00');
+      const timespan = 30 * 60; // 30 minutes
+      const siestas = [
+        {
+          start: '2019-08-08 8:00',
+          end: '2019-08-08  8:30',
+        },
+      ];
+
+      let [firstslot, secondslot] = GenerateTimeSlot(
+        start,
+        end,
+        timespan,
+        siestas
+      );
+      this.firstslot = firstslot;
+      this.secondslot = secondslot;
+      this.service
+        .GetBookSlot('3FA85F64-5717-4562-B3FC-2C963F66AFA6', date)
+        .subscribe((res) => {
+          for (var i = 0; i < res.length; i++) {
+            this.incomingslot.push(res[i].bookslot);
+          }
+          const duplicate = this.incomingslot;
+          let unique = [...new Set(duplicate)];
+          this.firstslot = firstslot.filter((val) => !unique.includes(val));
+          this.secondslot = secondslot.filter((val) => !unique.includes(val));
+        });
+    }
+  }
+
   onSubmit(): boolean {
     this.isSubmitted = true;
-    if (this.registrationForm.valid) {
-      //Diagnosics
-      this.diagnosicscheck = false;
-      //alert(JSON.stringify(this.registrationForm.value));
-      //var data = JSON.stringify(this.registrationForm.value);
-      var data = this.registrationForm.value;
 
-      //Date Time Logic
-      var myDate = new Date(data.calendardata);
+    if (this.AppointmentID != 'undefined') {
+      if (this.registrationForm.valid) {
+        //Diagnosics
+        this.diagnosicscheck = false;
+        //alert(JSON.stringify(this.registrationForm.value));
+        //var data = JSON.stringify(this.registrationForm.value);
+        var data = this.registrationForm.value;
 
-      //Time Split
-      var time = data.slotName.split('to');
+        //Date Time Logic
+        var myDate = new Date(data.calendardata);
 
-      //Split time
-      var hour = time[0].split(':');
+        //Time Split
+        var time = data.slotName.split('to');
 
-      // Set hours
-      myDate.setHours(hour[0]);
-      // Then set minutes
+        //Split time
+        var hour = time[0].split(':');
 
-      //myDate.setMinutes(hour[1]);
-      // Then set seconds
+        // Set hours
+        myDate.setHours(hour[0]);
+        // Then set minutes
 
-      //myDate.setSeconds(0);
+        //myDate.setMinutes(hour[1]);
+        // Then set seconds
 
-      var bookingdata: Booking = {
-        appointmentType: this.TextInput,
-        diagnosis: data.diagnosicsName,
-        appointmentStatus: 'pending',
-        isCompleted: false,
-        bookslot: data.slotName,
-        appointmentDateTime: myDate,
-        patientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-        physicianId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-        nurseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-      };
-      this.service
-        .BookAppointmentPost(bookingdata)
-        .then((response) => response.text())
-        .then((result) => {
-          this.Result += result;
-          if (this.Result == 'Success') {
-            this.registrationForm.reset();
-            this.registrationForm.controls['diagnosicsName'].setErrors(null);
-            this.registrationForm.controls['phsicianName'].setErrors(null);
-            this.registrationForm.controls['descriptionName'].setErrors(null);
-            this.registrationForm.controls['calendardata'].setErrors(null);
-            this.registrationForm.controls['slotName'].setErrors(null);
-            this.matExpansionPanelElement.close();
+        //myDate.setSeconds(0);
 
-            const snackBarRef = this._snackBar.open(
-              'Appointment Created',
-              'Done',
-              {
-                panelClass: 'success',
-                horizontalPosition: this.horizontalPosition,
-                verticalPosition: this.verticalPosition,
-                duration: 5000,
-              }
-            );
+        var bookingdata: Booking = {
+          appointmentType: this.TextInput,
+          diagnosis: data.diagnosicsName,
+          bookslot: data.slotName,
+          appointmentDateTime: myDate,
+          patientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          physicianId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          nurseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        };
+        this.service
+          .UpdateAppointment(this.AppointmentID, bookingdata)
+          .then((response) => response.text())
+          .then((result) => {
+            this.Result += result;
+            if (this.Result == 'Success') {
+              this.registrationForm.reset();
+              this.registrationForm.controls['diagnosicsName'].setErrors(null);
+              this.registrationForm.controls['phsicianName'].setErrors(null);
+              this.registrationForm.controls['descriptionName'].setErrors(null);
+              this.registrationForm.controls['calendardata'].setErrors(null);
+              this.registrationForm.controls['slotName'].setErrors(null);
+              this.matExpansionPanelElement.close();
 
-            snackBarRef.afterDismissed().subscribe((info) => {
-              if (info.dismissedByAction === true) {
-                // your code for handling this goes here
-                this.router.navigate(['/Calender']);
-              }
-            });
+              const snackBarRef = this._snackBar.open(
+                'Appointment  Updated',
+                'Done',
+                {
+                  panelClass: 'success',
+                  horizontalPosition: this.horizontalPosition,
+                  verticalPosition: this.verticalPosition,
+                  duration: 5000,
+                }
+              );
 
-            //this.router.navigate(['/Calender']);
-          }
-        })
-        .catch((error) => console.log('error', error));
-      //this.router.navigate(['/AdminCalender']);
-      return true;
+              snackBarRef.afterDismissed().subscribe((info) => {
+                if (info.dismissedByAction === true) {
+                  // your code for handling this goes here
+                  this.router.navigate(['/Calender']);
+                }
+              });
+
+              //this.router.navigate(['/Calender']);
+            }
+          })
+          .catch((error) => console.log('error', error));
+        //this.router.navigate(['/AdminCalender']);
+        return true;
+      } else {
+        var date = this.registrationForm.value['calendardata'];
+        var slot = this.registrationForm.value['slotName'];
+        this.diagnosicscheck = true;
+        if (date === '' || date === null) {
+          this.datecheck = true;
+        }
+        if (slot === '' || date === null) {
+          this.slotcheck = true;
+        }
+        return false;
+      }
     } else {
-      var date = this.registrationForm.value['calendardata'];
-      var slot = this.registrationForm.value['slotName'];
-      this.diagnosicscheck = true;
-      if (date === '' || date === null) {
-        this.datecheck = true;
+      if (this.registrationForm.valid) {
+        //Diagnosics
+        this.diagnosicscheck = false;
+        //alert(JSON.stringify(this.registrationForm.value));
+        //var data = JSON.stringify(this.registrationForm.value);
+        var data = this.registrationForm.value;
+
+        //Date Time Logic
+        var myDate = new Date(data.calendardata);
+
+        //Time Split
+        var time = data.slotName.split('to');
+
+        //Split time
+        var hour = time[0].split(':');
+
+        // Set hours
+        myDate.setHours(hour[0]);
+        // Then set minutes
+
+        //myDate.setMinutes(hour[1]);
+        // Then set seconds
+
+        //myDate.setSeconds(0);
+
+        var bookingdata: Booking = {
+          appointmentType: this.TextInput,
+          diagnosis: data.diagnosicsName,
+          appointmentStatus: 'pending',
+          isCompleted: false,
+          bookslot: data.slotName,
+          appointmentDateTime: myDate,
+          patientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          physicianId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          nurseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        };
+        this.service
+          .BookAppointmentPost(bookingdata)
+          .then((response) => response.text())
+          .then((result) => {
+            this.Result += result;
+            if (this.Result == 'Success') {
+              this.registrationForm.reset();
+              this.registrationForm.controls['diagnosicsName'].setErrors(null);
+              this.registrationForm.controls['phsicianName'].setErrors(null);
+              this.registrationForm.controls['descriptionName'].setErrors(null);
+              this.registrationForm.controls['calendardata'].setErrors(null);
+              this.registrationForm.controls['slotName'].setErrors(null);
+              this.matExpansionPanelElement.close();
+
+              const snackBarRef = this._snackBar.open(
+                'Appointment Created',
+                'Done',
+                {
+                  panelClass: 'success',
+                  horizontalPosition: this.horizontalPosition,
+                  verticalPosition: this.verticalPosition,
+                  duration: 5000,
+                }
+              );
+
+              snackBarRef.afterDismissed().subscribe((info) => {
+                if (info.dismissedByAction === true) {
+                  // your code for handling this goes here
+                  this.router.navigate(['/Calender']);
+                }
+              });
+
+              //this.router.navigate(['/Calender']);
+            }
+          })
+          .catch((error) => console.log('error', error));
+        //this.router.navigate(['/AdminCalender']);
+        return true;
+      } else {
+        var date = this.registrationForm.value['calendardata'];
+        var slot = this.registrationForm.value['slotName'];
+        this.diagnosicscheck = true;
+        if (date === '' || date === null) {
+          this.datecheck = true;
+        }
+        if (slot === '' || date === null) {
+          this.slotcheck = true;
+        }
+        return false;
       }
-      if (slot === '' || date === null) {
-        this.slotcheck = true;
-      }
-      return false;
     }
   }
 

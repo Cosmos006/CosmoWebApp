@@ -9,9 +9,14 @@ export interface Diagnosics {
 
 //constructor(public ID: number, Value: string) {}
 
+// export interface Physician {
+//   Id: number;
+//   PhysicianName: string;
+// }
+
 export interface Physician {
-  Id: number;
-  PhysicianName: string;
+  id: string;
+  physicianName: string;
 }
 
 // export interface Booking {

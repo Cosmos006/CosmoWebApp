@@ -28,48 +28,27 @@ export class AdminUsersService {
     //   'https://localhost:44321/api/UserDetails'
     // );
 
+    // return this.http.get<HospitalUser[]>(
+    //   'https://localhost:44318/api/EmployeRegister'
+    // );
+
     return this.http.get<HospitalUser[]>(
-      'https://localhost:44318/api/EmployeRegister'
+      'https://localhost:44318/api/AdminUserInfo'
     );
   }
 
-  AdminLockHospitalUsers(id: any) {
-    // alert(id)
-    console.log(id);
+  AdminLockHospitalUsers(id: string, Status: boolean, Type: string) {
     const PatientID = id;
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
 
-    var raw = JSON.stringify({
-      title: 'string',
-      firstName: 'string',
-      lastName: 'string',
-      contact: 0,
-      specialization: 'string',
-      email: 'string',
-      createdOn: '2022-01-10T13:21:09.002Z',
-      isActive: false,
-      isDisabled: false,
-      role: 'string',
-    });
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    fetch(`https://localhost:44321/api/UserDetails/IsActive/${PatientID}`, {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    })
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log('error', error));
-    //return this.http.post<any>('https://localhost:44321/api/UserDetails',);
+    return fetch(
+      `https://localhost:44318/api/AdminUserInfo/HospitalLocked/${PatientID}?Status=${Status}&Type=${Type}`,
+      {
+        method: 'PUT',
+        redirect: 'follow',
+      }
+    );
   }
 
   // return this.http.get<HospitalUser[]>(
