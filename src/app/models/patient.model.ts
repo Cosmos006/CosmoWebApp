@@ -27,6 +27,11 @@ export interface Physician {
 //   color: string;
 // }
 
+export interface Mode {
+  id: string;
+  modeType: string;
+}
+
 export class Booking {
   // public id: string,
   constructor(

@@ -11,7 +11,12 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 import { GenerateTimeSlot } from 'src/app/models/Globalfunctions';
 import { PatientService } from 'src/app/Services/patient.service';
 //Model Imports
-import { Booking, Diagnosics, Physician } from '../../../models/patient.model';
+import {
+  Booking,
+  Diagnosics,
+  Physician,
+  Mode,
+} from '../../../models/patient.model';
 //Router
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from 'src/app/Services/Url';
@@ -39,9 +44,11 @@ export class BookAppointmentComponent implements OnInit {
   diagnosics: Diagnosics[] = [];
   physician: Physician[] = [];
   TextInput?: string;
+  ModeTypes: Mode[] = [];
   //Form
   isSubmitted = false;
   diagnosicsName: string = '';
+  Mode: string = '';
   phsicianName: any;
   slot?: string;
   slotName: any;
@@ -95,6 +102,7 @@ export class BookAppointmentComponent implements OnInit {
   bookinglist: Booking[] = [];
 
   registrationForm = this.fb.group({
+    ModeType: ['', [Validators.required]],
     diagnosicsName: ['', [Validators.required]],
     phsicianName: ['', [Validators.required]],
     descriptionName: ['', [Validators.required]],
@@ -106,6 +114,11 @@ export class BookAppointmentComponent implements OnInit {
   matExpansionPanelElement!: MatExpansionPanel;
 
   ngOnInit() {
+    this.ModeTypes = [
+      { id: '1', modeType: 'Online' },
+      { id: '1', modeType: 'Offline' },
+    ];
+
     //Text input Bind
     this.route.paramMap.subscribe((res) => {
       this.UserType += res.get('Type');
@@ -149,6 +162,9 @@ export class BookAppointmentComponent implements OnInit {
         this.GlobalBookAppointment(this.UserType);
         break;
       case 'Admin':
+        this.GlobalBookAppointment(this.UserType);
+        break;
+      case 'Covid':
         this.GlobalBookAppointment(this.UserType);
         break;
       default:
@@ -224,6 +240,10 @@ export class BookAppointmentComponent implements OnInit {
           slotName: ['', [Validators.required]],
         });
       }
+    } else if (UserType == 'Covid') {
+      this.TextInput = 'Book Appointment For Covid';
+      this.registrationForm.controls['ModeType'].patchValue('Online');
+      this.registrationForm.controls['diagnosicsName'].patchValue('Covid');
     } else if (UserType == 'Nusre') {
     } else if (UserType == 'Physician') {
     } else if (UserType == 'Admin') {
@@ -259,6 +279,15 @@ export class BookAppointmentComponent implements OnInit {
         this.registrationForm.get('diagnosicsName')?.setValue(e.value) || '';
 
       this.diagnosicscheck = false;
+    }
+  }
+
+  changeMode(e: any) {
+    if (e.value != null) {
+      this.Mode =
+        this.registrationForm.get('ModeType')?.setValue(e.value) || '';
+      // alert(e.value);
+      // this.diagnosicscheck = false;
     }
   }
 

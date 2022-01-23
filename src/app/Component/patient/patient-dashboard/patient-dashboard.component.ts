@@ -31,11 +31,16 @@ import {
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PatientDashboardComponent implements OnInit {
-  TestLink() {
-    this.router.navigate(['PatientBookAppointment/Patient'], {
-      queryParams: { appointmentId: '209B85F4-77A1-45AA-5244-08D9D85C96B7' },
-    });
+  PatientLink(Type: string) {
+    if (Type == 'Covid') {
+      this.router.navigate(['PatientBookAppointment/Covid']);
+    } else if (Type == 'Appointment') {
+      this.router.navigate(['PatientBookAppointment/Patient'], {
+        queryParams: { appointmentId: '209B85F4-77A1-45AA-5244-08D9D85C96B7' },
+      });
+    }
   }
+
   //appointmentData: AppointmentData[];
   appointmentPastHeaderData: AppointmentPastHeaderData[] =
     appointmentPastHeaderData;

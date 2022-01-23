@@ -57,7 +57,29 @@
             <span>
               <mat-form-field appearance="outline">
                 <mat-label>title</mat-label>
-                <input matInput placeholder="Title" value="{{ TextInput }}" />
+                <input
+                  matInput
+                  placeholder="Title"
+                  readonly="true"
+                  value="{{ TextInput }}"
+                />
+              </mat-form-field>
+            </span>
+            <span>
+              <mat-form-field appearance="outline">
+                <mat-label>Mode</mat-label>
+                <mat-select
+                  (selectionChange)="changeMode($event)"
+                  formControlName="ModeType"
+                >
+                  <mat-option>Select</mat-option>
+                  <mat-option
+                    *ngFor="let item of ModeTypes"
+                    [value]="item.modeType"
+                  >
+                    {{ item.modeType }}</mat-option
+                  >
+                </mat-select>
               </mat-form-field>
             </span>
             <span>
