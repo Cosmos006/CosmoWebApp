@@ -30,7 +30,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     PatientDetailsComponent,
     PatientBookappointmentComponent,
     PatientViewdetailsComponent,
-    PatientDashboardComponent,
+    // PatientDashboardComponent,
     PreviouspatientvisitdetailsComponent,
   
   ],
