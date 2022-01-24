@@ -31,9 +31,28 @@ import {
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PatientDashboardComponent implements OnInit {
+  PatientLink(Type: string) {
+    if (Type == 'Covid') {
+      this.router.navigate(['PatientBookAppointment/Covid']);
+    } else if (Type == 'Appointment') {
+      this.router.navigate(['PatientBookAppointment/Patient'], {
+        queryParams: { appointmentId: '209B85F4-77A1-45AA-5244-08D9D85C96B7' },
+      });
+    }
+  }
+
+  //appointmentData: AppointmentData[];
   appointmentPastHeaderData: AppointmentPastHeaderData[] =
     appointmentPastHeaderData;
 
+  //dataSource = new MatTableDataSource(appointmentData);
+  //@ViewChild(MatPaginator) paginator!: MatPaginator;
+  //@ViewChild(MatSort, {}) sort!: MatSort;
+
+  //fakeData = appointmentData;
+  //pastResults = appointmentPastHeaderData;
+
+  //value?: string = 'abcd';
   allcolumns: any[] = [
     {
       columnDef: 'doctorName',
@@ -118,8 +137,6 @@ export class PatientDashboardComponent implements OnInit {
         this.griddata = x.filter((v) => new Date(v.appointmentDateTime) > new Date());
         this.filterAppointments('1');
       });
-      
-
   }
   
   filterAppointments(val: any, pagination: any = {}) {
@@ -212,7 +229,7 @@ export class PatientDashboardComponent implements OnInit {
   hideViewdetailModel() {
     this.showviewdetailModel = false;
   }
-  exporAll(){
+  exporAll() {
     const header = Object.keys(this.griddata[0]);
     let ar: AppointmentData[] = this.griddata;
     let csv = ar.map((row) =>

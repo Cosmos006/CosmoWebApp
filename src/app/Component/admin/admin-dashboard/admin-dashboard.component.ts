@@ -24,6 +24,11 @@ export class AdminDashboardComponent implements OnInit {
     const $http = this.adminservice.TempGetAdminData();
 
     const $data = $http.pipe(map((res) => alert(res)));
+
+    this.adminservice.TestData().subscribe((res) => {
+      console.log(res);
+      alert(res);
+    });
   }
 
   DashboardRedirectURL(navigate: any) {
