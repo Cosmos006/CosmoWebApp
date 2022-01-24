@@ -61,21 +61,38 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-6">
+            <!-- <div class="col-lg-3 col-6">
               <div class="small-box bg-success" style="padding: 11px">
                 <div class="inner">
-                  <h3 style="font-size: 20px">Online Covid Booking</h3>
+                  <h3 style="font-size: 20px">Book Appointment</h3>
                   <br />
-                  <a (click)="PatientLink('Covid')">
-                    <button type="button" class="btn btn-primary float-center">
-                      Click here
-                    </button>
-                  </a>
+                  <button (click)="demographicBtn()" type="button" class="btn btn-primary float-center">
+                    Click here
+                  </button>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
               </div>
+            </div> -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div
+                class="small-box bg-success"
+                style="padding: 34px"
+                routerLink="/PatientBookappointment"
+              >
+                <div class="inner">
+                  <h3></h3>
+                  <a (click)="DashboardRedirectURL('patient')"
+                    ><p>Book Appointment</p></a
+                  >
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+              </div>
+
             </div>
           </div>
           <!-- Main row -->
@@ -185,6 +202,139 @@
   <!-- ./wrapper -->
 </div>
 
+<!-- /.cancel Modal header -->
+<div
+  class="modal"
+  id="cancelModal"
+  [style.display]="showCancelModal ? 'block' : 'none'"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal header -->
+      <div class="header">
+        <h4 mat-dialog-title>Delete Appointment</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="hidetool()"
+        >
+          &times;
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div mat-dialog-content class="modalbody">
+        Are you sure you want to cancel this appointment?
+      </div>
+      <!-- Modal footer -->
+      <div mat-dialog-actions [align]="'end'" class="modalfooter">
+        <button
+          type="button"
+          class="btn btn-default"
+          data-dismiss="modal"
+          (click)="hidetool()"
+        >
+          No
+        </button>
+        &nbsp;
+        <button
+          type="button"
+          class="btn btn-success"
+          data-dismiss="modal"
+          (click)="canceltool()"
+        >
+          Yes
+        </button>
+        &nbsp; &nbsp; &nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- /.cancel ModalNew header -->
+<div
+  class="modal"
+  id="cancelModalNew"
+  [style.display]="showCancelModalNew ? 'block' : 'none'"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal header -->
+      <div class="header">
+        <h4 mat-dialog-title>Reason for cancel appointment.</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="hidetool()"
+        >
+          &times;
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div mat-dialog-content class="modalbody">
+        <textarea
+          placeholder="text here reason.."
+          style="width: 65%; height: 80px"
+        ></textarea>
+      </div>
+      <!-- Modal footer -->
+      <div mat-dialog-actions [align]="'end'" class="modalfooter">
+        <button
+          type="button"
+          class="btn btn-success"
+          data-dismiss="modal"
+          (click)="canceltool()"
+        >
+          Submit
+        </button>
+        &nbsp; &nbsp; &nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- msg -->
+<div
+  class="modal"
+  id="submitModal"
+  [style.display]="showSubmitModal ? 'block' : 'none'"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal header -->
+      <div>
+        <mat-icon class="header2" style="font-size: 60px"
+          >check_circle_outline</mat-icon
+        >
+      </div>
+      <!-- Modal body -->
+      <div mat-dialog-content>
+        <h5 style="text-align: center; padding-top: 10%; font-size: x-large">
+          Successfully Submitted.
+        </h5>
+      </div>
+      <!-- Modal footer -->
+      <div
+        mat-dialog-actions
+        [align]="'end'"
+        class="modalfooter"
+        style="font-size: large"
+      >
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="hidetool()"
+        >
+          Ok
+        </button>
+        &nbsp; &nbsp; &nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- /.Decline Modal header -->
 <div
   class="modal"
@@ -207,9 +357,9 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
-        <h5>Declined By : Patient</h5>
-        <h5>Reason : Date doesn't matched the schedule.</h5>
+      <div *ngIf="selectedAppointment" class="modal-body">
+        <h5>Declined By : {{ selectedAppointment.deletedBy }}</h5>
+        <h5>Reason : {{ selectedAppointment.deletedReason }}</h5>
       </div>
 
       <!-- Modal footer -->
@@ -248,9 +398,9 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
-        <h5>Declined By : Patient</h5>
-        <h5>Reason : Date doesn't matched the schedule.</h5>
+      <div *ngIf="selectedAppointment" class="modal-body">
+        <!-- <h5>Declined By : Patient</h5> -->
+        <h5>Reason : {{ selectedAppointment.deletedReason }}</h5>
       </div>
 
       <!-- Modal footer -->
@@ -291,15 +441,15 @@
 
       <!-- Modal body -->
       <div class="modal-body" *ngIf="selectedAppointment">
+                <h5>AppointmentStatus : {{ selectedAppointment.appointmentStatus }}</h5>
         <h5>Doctor : {{ selectedAppointment.doctorName }}</h5>
-        <h5>Nurse Name : {{ selectedAppointment.nurseName }}</h5>
+        <!-- <h5>Nurse Name : {{ selectedAppointment.nurseName }}</h5> -->
+        <h5>AppoinmentStatus : {{ selectedAppointment.appointmentStatus }}</h5>
         <h5>Diagnosis : {{ selectedAppointment.diagnosis }}</h5>
         <h5>
           Appointment Date :
-          {{ selectedAppointment.doctorName | date: "short" }}
+          {{ selectedAppointment.appointmentDateTime | date: "short" }}
         </h5>
-        <h5>Declined By : Patient</h5>
-        <h5>Reason : Date doesn't matched the schedule.</h5>
       </div>
 
       <!-- Modal footer -->

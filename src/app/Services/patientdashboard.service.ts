@@ -17,11 +17,21 @@ export class PatientDashboardService {
 
   GetAllUpcomingAppointmentList() {
     return this.http.get<AppointmentData[]>(
-      this.baseUrl + Patient.Appointment
+      this.baseUrl + Patient.UpcomingAppointment
     );
   }
-  GetAppointmentById(id : number) {
+  GetPastAppointmentList() {
     return this.http.get<AppointmentData[]>(
+      this.baseUrl + Patient.PastAppointment
+    );
+  }
+  GetDeclineAppointmentsList() {
+    return this.http.get<AppointmentData[]>(
+      this.baseUrl + Patient.DeclineAppointments
+    );
+  }
+  GetAppointmentById(id : string) {
+    return this.http.get<AppointmentData>(
       this.baseUrl + Patient.Appointment + '/'+id
     )
   }
