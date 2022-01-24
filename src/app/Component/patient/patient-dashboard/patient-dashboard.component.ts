@@ -41,18 +41,9 @@ export class PatientDashboardComponent implements OnInit {
     }
   }
 
-  //appointmentData: AppointmentData[];
   appointmentPastHeaderData: AppointmentPastHeaderData[] =
     appointmentPastHeaderData;
 
-  //dataSource = new MatTableDataSource(appointmentData);
-  //@ViewChild(MatPaginator) paginator!: MatPaginator;
-  //@ViewChild(MatSort, {}) sort!: MatSort;
-
-  //fakeData = appointmentData;
-  //pastResults = appointmentPastHeaderData;
-
-  //value?: string = 'abcd';
   allcolumns: any[] = [
     {
       columnDef: 'doctorName',
@@ -64,7 +55,8 @@ export class PatientDashboardComponent implements OnInit {
       columnDef: 'appointmentDateTime',
       isvisible: true,
       header: 'Appointment Date',
-      dataName: (row: { appointmentDateTime: Date }) => `${new Date(row.appointmentDateTime).toLocaleDateString('en-US')}`,
+      dataName: (row: { appointmentDateTime: Date }) =>
+        `${new Date(row.appointmentDateTime).toLocaleDateString('en-US')}`,
     },
     {
       columnDef: 'diagnosis',
@@ -73,10 +65,24 @@ export class PatientDashboardComponent implements OnInit {
       dataName: (row: { diagnosis: any }) => `${row.diagnosis}`,
     },
     {
+      columnDef: 'appointmentStatus',
+      isvisible: true,
+      header: 'AppointmentStatus',
+      dataName: (row: { appointmentStatus: any }) => `${row.appointmentStatus}`,
+    },
+    {
       columnDef: 'modifyBtn',
       header: 'Modify',
       type: 'button',
       icon: 'edit',
+      isvisible: true,
+      dataName: (row: { id: any }) => `${row.id}`,
+    },
+    {
+      columnDef: 'cancelBtn',
+      header: 'Cancel',
+      type: 'button',
+      icon: 'cancel',
       isvisible: true,
       dataName: (row: { id: any }) => `${row.id}`,
     },
@@ -114,6 +120,9 @@ export class PatientDashboardComponent implements OnInit {
   showviewdetailModel!: boolean;
   selectedAppointment!: AppointmentData;
   searchText!: string;
+  showCancelModal!: boolean;
+  showCancelModalNew!: boolean;
+  showSubmitModal!: boolean;
 
   appointments: Appointment[] = [
     { value: '1', viewValue: 'Upcoming Appointments' },
@@ -128,13 +137,16 @@ export class PatientDashboardComponent implements OnInit {
     public dialog: MatDialog,
     private changeDetection: ChangeDetectorRef,
     private patientDashboardService: PatientDashboardService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.showcolumns = this.allcolumns;
-    this.patientDashboardService.GetAllAppointmentList()
+    this.patientDashboardService
+      .GetAllAppointmentList()
       .subscribe((x: AppointmentData[]) => {
-        this.griddata = x.filter((v) => new Date(v.appointmentDateTime) > new Date());
+        this.griddata = x.filter(
+          (v) => new Date(v.appointmentDateTime) > new Date()
+        );
         this.filterAppointments('1');
       });
   }
@@ -142,7 +154,8 @@ export class PatientDashboardComponent implements OnInit {
   filterAppointments(val: any, pagination: any = {}) {
 
     if (val == '1') {
-      this.patientDashboardService.GetAllUpcomingAppointmentList()
+      this.patientDashboardService
+        .GetAllUpcomingAppointmentList()
         .subscribe((x: AppointmentData[]) => {
           this.showcolumns = this.allcolumns.filter(
             (e) =>
@@ -150,35 +163,44 @@ export class PatientDashboardComponent implements OnInit {
               e.columnDef != 'viewdetailBtn' &&
               e.columnDef != 'reasonBtn'
           );
-          this.griddata = x.filter((v) => new Date(v.appointmentDateTime) > new Date() && v.appointmentStatus != 'Rejected');
-          this.processPaginationAndFilter(pagination);
-
-        });
-    }
-    else if (val == '2') {
-      this.patientDashboardService.GetPastAppointmentList()
-        .subscribe((x: AppointmentData[]) => {
-
-          this.griddata = x.filter((v) => new Date(v.appointmentDateTime) < new Date());
-          this.showcolumns = this.allcolumns.filter(
-            (e) => e.columnDef != 'modifyBtn' && e.columnDef != 'reasonBtn'
+          this.griddata = x.filter(
+            (v) =>
+              new Date(v.appointmentDateTime) > new Date() &&
+              v.appointmentStatus != 'Rejected'
           );
           this.processPaginationAndFilter(pagination);
 
         });
-        
-    }
-    else {
-      this.patientDashboardService.GetDeclineAppointmentsList()
+    } else if (val == '2') {
+      this.patientDashboardService
+        .GetPastAppointmentList()
         .subscribe((x: AppointmentData[]) => {
-       if (val == '3') {
+          this.griddata = x.filter(
+            (v) => new Date(v.appointmentDateTime) < new Date()
+          );
+          this.showcolumns = this.allcolumns.filter(
+            (e) =>
+              e.columnDef != 'modifyBtn' &&
+              e.columnDef != 'reasonBtn' &&
+              e.columnDef != 'cancelBtn'
+          );
+          this.processPaginationAndFilter(pagination);
+
+        });
+    } else {
+      this.patientDashboardService
+        .GetDeclineAppointmentsList()
+
+        .subscribe((x: AppointmentData[]) => {
+          if (val == '3') {
         
             this.griddata = x.filter((v) => v.appointmentStatus == 'Rejected');
             this.showcolumns = this.allcolumns.filter(
               (e) =>
                 e.columnDef != 'prescriptionBtn' &&
                 e.columnDef != 'modifyBtn' &&
-                e.columnDef != 'viewdetailBtn'
+                e.columnDef != 'viewdetailBtn' &&
+                e.columnDef != 'cancelBtn'
             );
           } else {
             this.griddata = x;
@@ -190,13 +212,16 @@ export class PatientDashboardComponent implements OnInit {
   }
   processPaginationAndFilter(pagination: any = {}) {
     if (pagination != null && pagination.pageIndex >= 0) {
-      this.griddata = this.griddata.slice(pagination.pageIndex * pagination.pageSize,
-        (pagination.pageIndex + 1) * pagination.pageSize)
+      this.griddata = this.griddata.slice(
+        pagination.pageIndex * pagination.pageSize,
+        (pagination.pageIndex + 1) * pagination.pageSize
+      );
     }
-    if (this.searchText){
-      this.griddata = this.griddata.filter((v) =>
-        v.doctorName.includes(this.searchText)
-        || v.nurseName.includes(this.searchText)
+    if (this.searchText) {
+      this.griddata = this.griddata.filter(
+        (v) =>
+          v.doctorName.includes(this.searchText) ||
+          v.nurseName.includes(this.searchText)
       );
     }
   }
@@ -213,11 +238,34 @@ export class PatientDashboardComponent implements OnInit {
     this.showPrescriptionModal = true;
   }
   ModifyModel() {
-    // alert('hi..');
-    this.router.navigate(['/PatientDetails']);
+    this.router.navigate(['/PatientBookappointment']);
   }
   hide() {
     this.showDeclineModal = false;
+  }
+
+  CancelModel() {
+    this.showCancelModal = true;
+  }
+  hidetool() {
+    if (this.showCancelModal) {
+      this.showCancelModal = false;
+    } else if (this.showSubmitModal) {
+      this.showSubmitModal = false;
+    } else {
+      this.showCancelModalNew = false;
+    }
+  }
+  canceltool() {
+    if (this.showCancelModal) {
+      this.showCancelModal = false;
+      this.showCancelModalNew = true;
+    } else if (this.showSubmitModal) {
+      this.showSubmitModal = false;
+    } else {
+      this.showCancelModalNew = false;
+      this.showSubmitModal = true;
+    }
   }
   hidePrescriptionModel() {
     this.showPrescriptionModal = false;
@@ -266,12 +314,16 @@ export class PatientDashboardComponent implements OnInit {
     if (obj.columnDef == 'modifyBtn') {
       this.ModifyModel();
     }
+    if (obj.columnDef == 'cancelBtn') {
+      this.CancelModel();
+    }
     if (obj.columnDef == 'prescriptionBtn') {
       this.ShowPrescriptionModel();
     }
     if (obj.columnDef == 'viewdetailBtn') {
       var id = obj.guid;
-      let apointdata = this.patientDashboardService.GetAppointmentById(obj.guid)
+      let apointdata = this.patientDashboardService
+        .GetAppointmentById(obj.guid)
         .subscribe((v) => {
           //var data = v.find((e) => e.id == obj.guid)!;
           this.ShowViewdetailModel(v);
@@ -281,7 +333,8 @@ export class PatientDashboardComponent implements OnInit {
     if (obj.columnDef == 'reasonBtn') {
       
       var id = obj.guid;
-      let apointdata = this.patientDashboardService.GetAppointmentById(obj.guid)
+      let apointdata = this.patientDashboardService
+        .GetAppointmentById(obj.guid)
         .subscribe((v) => {
           //var data = v.find((e) => e.id == obj.guid)!;
           this.ShowDeclineInfo(v);
@@ -289,7 +342,7 @@ export class PatientDashboardComponent implements OnInit {
     }
   }
 
-  demographicBtn(){
+  demographicBtn() {
     this.router.navigate(['/PatientDetails']);
   }
 

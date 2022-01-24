@@ -54,18 +54,18 @@ export class DynamicTableComponent implements OnInit {
 }
 
   ngOnChanges() {
-//     if (this.columns !== undefined || this.columns !== null) {
-//       console.log(this.receivedData);
-//       this.dataSource = new MatTableDataSource(this.receivedData);
-// console.log("vamsi"+this.paginator)
-//       this.displayedColumns = this.columns.map((x) => x.columnDef);
-//       this.dataSource.paginator = this.paginator;
+    if (this.columns !== undefined || this.columns !== null) {
+      console.log(this.receivedData);
+      this.dataSource = new MatTableDataSource(this.receivedData);
+console.log("vamsi"+this.paginator)
+      this.displayedColumns = this.columns.map((x) => x.columnDef);
+      this.dataSource.paginator = this.paginator;
 
-//       // this.dataSource.paginator.pageSize = this.pageSize;
-//       this.dataSource.paginator.pageIndex = this.pageIndex;
+      // this.dataSource.paginator.pageSize = this.pageSize;
+      this.dataSource.paginator.pageIndex = this.pageIndex;
 
-//       this.dataSource.paginator.length = this.receivedData.length;
-//     }
+      this.dataSource.paginator.length = this.receivedData.length;
+    }
   }
 
   applyFilter(filterValue:any) {

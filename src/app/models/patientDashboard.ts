@@ -7,6 +7,7 @@ export interface AppointmentData {
   isDeclined: boolean;
   diagnosis:string;
   deletedReason:string;
+  deletedBy:string;
   
 }
 
