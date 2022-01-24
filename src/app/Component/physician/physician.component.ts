@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export interface UsersData {
   name: string;
@@ -38,9 +39,18 @@ export class PhysicianComponent implements OnInit {
   dataSource1 = ELEMENT_DATA;
   displayedColumns2: string[] = ['id', 'name', 'action'];
   dataSource2 = ELEMENT_DATA;
+  toppings = new FormControl();
+
+  toppingList: string[] = ['9:30 to 10:30', '10:30 to 11', '10:30 to 11:30', '9:30 to 10:30', '9:30 to 10:30', '9:30 to 10:30'];
 
   constructor() {}
 
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
   Patient: any = 10;
   ngOnInit(): void {}
+
+  
 }
