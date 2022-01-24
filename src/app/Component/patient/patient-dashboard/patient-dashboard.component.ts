@@ -31,6 +31,16 @@ import {
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PatientDashboardComponent implements OnInit {
+  PatientLink(Type: string) {
+    if (Type == 'Covid') {
+      this.router.navigate(['PatientBookAppointment/Covid']);
+    } else if (Type == 'Appointment') {
+      this.router.navigate(['PatientBookAppointment/Patient'], {
+        queryParams: { appointmentId: '209B85F4-77A1-45AA-5244-08D9D85C96B7' },
+      });
+    }
+  }
+
   //appointmentData: AppointmentData[];
   appointmentPastHeaderData: AppointmentPastHeaderData[] =
     appointmentPastHeaderData;
@@ -38,8 +48,6 @@ export class PatientDashboardComponent implements OnInit {
   //dataSource = new MatTableDataSource(appointmentData);
   //@ViewChild(MatPaginator) paginator!: MatPaginator;
   //@ViewChild(MatSort, {}) sort!: MatSort;
-
-
 
   //fakeData = appointmentData;
   //pastResults = appointmentPastHeaderData;
@@ -56,7 +64,8 @@ export class PatientDashboardComponent implements OnInit {
       columnDef: 'date',
       isvisible: true,
       header: 'Appointment Date',
-      dataName: (row: { date: Date }) => `${new Date(row.date).toLocaleDateString('en-US')}`,
+      dataName: (row: { date: Date }) =>
+        `${new Date(row.date).toLocaleDateString('en-US')}`,
     },
     {
       columnDef: 'nurseName',
@@ -114,7 +123,7 @@ export class PatientDashboardComponent implements OnInit {
     { value: '2', viewValue: 'Past Appointments' },
     { value: '3', viewValue: 'Decline Appointments' },
   ];
-  
+
   //gridheader: AppointmentPastHeaderData[] = [];
   //gridheader1: AppointmentHeaderData[] = [];
 
@@ -130,63 +139,63 @@ export class PatientDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.showcolumns = this.allcolumns;
-    this.patientDashboardService.GetAllAppointmentList()
-      .subscribe((x : AppointmentData[]) => {
+    this.patientDashboardService
+      .GetAllAppointmentList()
+      .subscribe((x: AppointmentData[]) => {
         this.griddata = x.filter((v) => new Date(v.date) > new Date());
         this.filterAppointments('1');
       });
-      
-
   }
-  filterAppointments(val: any, pagination: any={}) {
-    this.patientDashboardService.GetAllAppointmentList()
-    .subscribe((x : AppointmentData[]) => {
-    if (val == '1') {
-      this.showcolumns = this.allcolumns.filter(
-        (e) =>
-          e.columnDef != 'prescriptionBtn' &&
-          e.columnDef != 'viewdetailBtn' &&
-          e.columnDef != 'reasonBtn'
-      );
-      this.griddata = x.filter((v) => new Date(v.date) > new Date());
-    } else if (val == '2') {
-      // console.log('Hi..');
-      this.griddata = x.filter((v) => new Date(v.date) < new Date());
-      this.showcolumns = this.allcolumns.filter(
-        (e) => e.columnDef != 'modifyBtn' && e.columnDef != 'reasonBtn'
-      );
-    } else if (val == '3') {
+  filterAppointments(val: any, pagination: any = {}) {
+    this.patientDashboardService
+      .GetAllAppointmentList()
+      .subscribe((x: AppointmentData[]) => {
+        if (val == '1') {
+          this.showcolumns = this.allcolumns.filter(
+            (e) =>
+              e.columnDef != 'prescriptionBtn' &&
+              e.columnDef != 'viewdetailBtn' &&
+              e.columnDef != 'reasonBtn'
+          );
+          this.griddata = x.filter((v) => new Date(v.date) > new Date());
+        } else if (val == '2') {
+          // console.log('Hi..');
+          this.griddata = x.filter((v) => new Date(v.date) < new Date());
+          this.showcolumns = this.allcolumns.filter(
+            (e) => e.columnDef != 'modifyBtn' && e.columnDef != 'reasonBtn'
+          );
+        } else if (val == '3') {
+          this.griddata = x.filter((v) => v.isDeclined == true);
+          this.showcolumns = this.allcolumns.filter(
+            (e) =>
+              e.columnDef != 'prescriptionBtn' &&
+              e.columnDef != 'modifyBtn' &&
+              e.columnDef != 'viewdetailBtn'
+          );
+        } else {
+          this.griddata = x;
+          this.showcolumns = this.allcolumns;
+        }
+        if (this.searchText)
+          this.griddata = this.griddata.filter(
+            (v) =>
+              v.doctorName.includes(this.searchText) ||
+              v.nurseName.includes(this.searchText)
+          );
 
-      this.griddata = x.filter((v) => v.isDeclined == true);
-      this.showcolumns = this.allcolumns.filter(
-        (e) =>
-          e.columnDef != 'prescriptionBtn' &&
-          e.columnDef != 'modifyBtn' &&
-          e.columnDef != 'viewdetailBtn'
-      );
-    } else {
-      this.griddata = x;
-      this.showcolumns = this.allcolumns;
-    }
-    if (this.searchText)
-      this.griddata = this.griddata.filter((v) =>
-        v.doctorName.includes(this.searchText)
-        || v.nurseName.includes(this.searchText)
-      );
-
-    if(pagination != null && pagination.pageIndex >= 0)
-    {
-      this.griddata = this.griddata.slice(pagination.pageIndex * pagination.pageSize,
-        (pagination.pageIndex+1) * pagination.pageSize)
-    }
-  });
+        if (pagination != null && pagination.pageIndex >= 0) {
+          this.griddata = this.griddata.slice(
+            pagination.pageIndex * pagination.pageSize,
+            (pagination.pageIndex + 1) * pagination.pageSize
+          );
+        }
+      });
   }
-  searchAppointments(val:any)
-  {
+  searchAppointments(val: any) {
     this.searchText = val.target.value;
     this.filterAppointments(this.selectedValue);
   }
- 
+
   ShowDeclineInfo() {
     this.showDeclineModal = true;
   }
@@ -210,7 +219,7 @@ export class PatientDashboardComponent implements OnInit {
   hideViewdetailModel() {
     this.showviewdetailModel = false;
   }
-  exporAll(){
+  exporAll() {
     const header = Object.keys(this.griddata[0]);
     let ar: AppointmentData[] = this.griddata;
     let csv = ar.map((row) =>
@@ -252,12 +261,12 @@ export class PatientDashboardComponent implements OnInit {
     }
     if (obj.columnDef == 'viewdetailBtn') {
       var id = obj.guid;
-      let apointdata = this.patientDashboardService.GetAppointmentById(Number(obj.guid))
-      .subscribe((v)=>{
-       var data = v.find((e) => e.id == obj.guid)!;
-       this.ShowViewdetailModel(data);
-      });
-      
+      let apointdata = this.patientDashboardService
+        .GetAppointmentById(Number(obj.guid))
+        .subscribe((v) => {
+          var data = v.find((e) => e.id == obj.guid)!;
+          this.ShowViewdetailModel(data);
+        });
     }
     if (obj.columnDef == 'reasonBtn') {
       this.ShowDeclineInfo();

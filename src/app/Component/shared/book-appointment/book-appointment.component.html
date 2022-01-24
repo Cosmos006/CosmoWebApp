@@ -10,7 +10,14 @@
               Update
             </button> -->
 
-          <button mat-raised-button color="primary" type="button">Clear</button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="Clear()"
+          >
+            Clear
+          </button>
         </div>
       </mat-card>
     </div>
@@ -29,6 +36,7 @@
                   <mat-card class="demo-inline-calendar-card">
                     <mat-calendar
                       (selectedChange)="updateFormDate($event)"
+                      [minDate]="minDate"
                     ></mat-calendar>
                   </mat-card>
                   <!-- (selectedChange)="selected = $event" -->
@@ -49,36 +57,60 @@
             <span>
               <mat-form-field appearance="outline">
                 <mat-label>title</mat-label>
-                <input matInput placeholder="Title" value="{{ TextInput }}" />
+                <input
+                  matInput
+                  placeholder="Title"
+                  readonly="true"
+                  value="{{ TextInput }}"
+                />
               </mat-form-field>
             </span>
             <span>
-              <mat-form-field appearance="outline" style="border-color: black">
-                <mat-label style="color: black">Diagnosis</mat-label>
+              <mat-form-field appearance="outline">
+                <mat-label>Mode</mat-label>
+                <mat-select
+                  (selectionChange)="changeMode($event)"
+                  formControlName="ModeType"
+                >
+                  <mat-option>Select</mat-option>
+                  <mat-option
+                    *ngFor="let item of ModeTypes"
+                    [value]="item.modeType"
+                  >
+                    {{ item.modeType }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </span>
+            <span>
+              <mat-form-field
+                appearance="outline"
+                [class]="
+                  diagnosicscheck === true ? 'border-red' : 'border-black'
+                "
+              >
+                <mat-label>Diagnosis</mat-label>
                 <!-- Based on value items changes automatically [value]="item.Value" -->
 
                 <mat-select
                   (selectionChange)="changeDiagnosics($event)"
                   formControlName="diagnosicsName"
+                  [disabled]="editing"
                 >
                   <mat-option>Select</mat-option>
                   <mat-option
                     *ngFor="let item of diagnosics"
-                    [value]="item.Value"
+                    [value]="item.value"
                   >
-                    {{ item.Value }}</mat-option
+                    {{ item.value }}</mat-option
                   >
                 </mat-select>
                 <!-- error block -->
-                <!-- <div
-                    class="invalid-feedback"
-                    *ngIf="isSubmitted && diagnosicsName.errors?.required"
-                  >
-                    <sup>*</sup>Please Select Diagnosics
-                  </div> -->
-
-                <div class="invalid-feedback">
-                  <p>Please Select Diagnosics</p>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="isSubmitted && diagnosicscheck"
+                >
+                  <sup>*</sup>Please Select Diagnosics
                 </div>
               </mat-form-field>
             </span>
@@ -90,11 +122,8 @@
                   formControlName="phsicianName"
                 >
                   <mat-option>Select</mat-option>
-                  <mat-option
-                    *ngFor="let item of physician"
-                    [value]="item.PhysicianName"
-                  >
-                    {{ item.PhysicianName }}</mat-option
+                  <mat-option *ngFor="let item of physician" [value]="item.id">
+                    {{ item.physicianName }}</mat-option
                   >
                 </mat-select>
               </mat-form-field>
@@ -141,7 +170,13 @@
               <label><b>Section 2</b></label
               ><br />
               <div class="btn-group" *ngFor="let number of secondslot">
-                <button mat-raised-button style="background-color: #00ff00">
+                <button
+                  #test
+                  mat-raised-button
+                  style="background-color: #00ff00"
+                  id="{{ number }}"
+                  (click)="Slot(test)"
+                >
                   {{ number }}
                 </button>
               </div>

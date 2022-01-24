@@ -71,19 +71,19 @@ export class PatientBookappointmentComponent implements OnInit {
 
   ngOnInit() {
     //Text input Bind
-    this.TextInput = 'Book Appointment';
+    this.TextInput = 'Ram';
 
     //Bind DropDownn
-    this.diagnosics = [
-      { ID: 1, Value: 'Cold' },
-      { ID: 2, Value: 'Feaver' },
-      { ID: 3, Value: 'Thyroid' },
-    ];
+    // this.diagnosics = [
+    //   { ID: 1, Value: 'Cold' },
+    //   { ID: 2, Value: 'Feaver' },
+    //   { ID: 3, Value: 'Thyroid' },
+    // ];
 
     this.physician = [
-      { Id: 1, PhysicianName: 'Raj' },
-      { Id: 2, PhysicianName: 'Ram' },
-      { Id: 3, PhysicianName: 'Anand' },
+      { id: '1', physicianName: 'Raj' },
+      { id: '2', physicianName: 'Ram' },
+      { id: '3', physicianName: 'Anand' },
     ];
 
     //Mat expansion close

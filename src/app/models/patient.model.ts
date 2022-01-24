@@ -3,13 +3,20 @@ export class PatientBookAppointmentDetails {
 }
 
 export interface Diagnosics {
-  ID: number;
-  Value: string;
+  id: string;
+  value: string;
 }
 
+//constructor(public ID: number, Value: string) {}
+
+// export interface Physician {
+//   Id: number;
+//   PhysicianName: string;
+// }
+
 export interface Physician {
-  Id: number;
-  PhysicianName: string;
+  id: string;
+  physicianName: string;
 }
 
 // export interface Booking {
@@ -20,6 +27,11 @@ export interface Physician {
 //   color: string;
 // }
 
+export interface Mode {
+  id: string;
+  modeType: string;
+}
+
 export class Booking {
   // public id: string,
   constructor(
@@ -27,6 +39,32 @@ export class Booking {
     title: string,
     date: string,
     description: string,
-    color: string
+    color: string,
+    appointmentType: string,
+    diagnosis: string,
+    appointmentStatus: string,
+    isCompleted: boolean,
+    appointmentDateTime: string,
+    patientId: string,
+    physicianId: string,
+    nurseId: string,
+    bookslot: string
+  ) {}
+}
+
+export class Employee {
+  // public id: string,
+  constructor(
+    userName: string,
+    roleId: string,
+    employeeDetails: {
+      title: string;
+      firstName: string;
+      lastName: string;
+      dateOfBirth: string;
+      contact: string;
+      specialization: string;
+      email: string;
+    }
   ) {}
 }

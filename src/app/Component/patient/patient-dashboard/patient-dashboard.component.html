@@ -19,8 +19,6 @@
         </div>
       </div>
 
-
-
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -29,7 +27,9 @@
               <div class="small-box bg-info" style="padding: 13px">
                 <div class="inner">
                   <h3>10</h3>
-                  <p>Total Appointments</p>
+                  <a (click)="PatientLink('Appointment')">
+                    <p>Total Appointments</p>
+                  </a>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -64,11 +64,13 @@
             <div class="col-lg-3 col-6">
               <div class="small-box bg-success" style="padding: 11px">
                 <div class="inner">
-                  <h3 style="font-size: 20px">Add Demographic Details</h3>
+                  <h3 style="font-size: 20px">Online Covid Booking</h3>
                   <br />
-                  <button type="button" class="btn btn-primary float-center">
-                    Click here
-                  </button>
+                  <a (click)="PatientLink('Covid')">
+                    <button type="button" class="btn btn-primary float-center">
+                      Click here
+                    </button>
+                  </a>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
@@ -98,7 +100,6 @@
                         {{ appointment.viewValue }}
                       </mat-option>
                     </mat-select>
-
                   </mat-form-field>
                   <div class="card-tools">
                     <div
@@ -148,7 +149,6 @@
                       (filterEvent)="searchAppointments($event)"
                     >
                     </app-dynamic-table>
-
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -208,10 +208,8 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-
         <h5>Declined By : Patient</h5>
         <h5>Reason : Date doesn't matched the schedule.</h5>
- 
       </div>
 
       <!-- Modal footer -->
@@ -251,10 +249,8 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-
         <h5>Declined By : Patient</h5>
         <h5>Reason : Date doesn't matched the schedule.</h5>
-
       </div>
 
       <!-- Modal footer -->

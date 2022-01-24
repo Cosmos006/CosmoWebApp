@@ -11,7 +11,8 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plug
 
 //DataTable
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 
 //Datateble
 import { MatTabsModule } from '@angular/material/tabs';
@@ -22,9 +23,13 @@ import { HttpClientModule } from '@angular/common/http';
 // import { MatSort, MatTableDataSource } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 //Model Export
 import { EventMap } from '../admin/model/admin.model';
+
+//Snack Bar
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,6 +43,8 @@ import { LockedAccountComponent } from './locked-account/locked-account.componen
 import { AdminPatientComponent } from './admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './admin-hospital/admin-hospital.component';
 import { MatPaginator } from '@angular/material/paginator';
+//
+//MatSlideToggleModule;
 
 //Import Dynamic table
 
@@ -91,6 +98,7 @@ const routes: Routes = [
     FullCalendarModule,
     //Datatable
     MatTableModule,
+    MatTableDataSource,
     //Http
     HttpClientModule,
     //Paginator
@@ -108,6 +116,10 @@ const routes: Routes = [
     MatInputModule,
     //router
     RouterModule,
+    //Paginator
+    MatPaginatorModule,
+    //SnakBar
+    MatSnackBarModule,
   ],
 })
 export class AdminModule {}
