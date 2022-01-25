@@ -123,6 +123,15 @@
         >
           Patient Calendar
         </a>
+        <a
+          mat-button
+          class="companyName"
+          [routerLink]="['Subscription']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient"
+        >
+          Subscription
+        </a>
 
         <a
           mat-button

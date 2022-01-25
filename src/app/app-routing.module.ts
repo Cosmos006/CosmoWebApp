@@ -30,6 +30,7 @@ import { PreviouspatientvisitdetailsComponent } from './Component/patient/previo
 import { PhysicianComponent } from './Component/physician/physician.component';
 import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
+import { SubscriptionComponent } from './Component/shared/subscription/subscription.component';
 import { Role } from './models/Role';
 import { AuthGuard } from './_helpers';
 
@@ -219,6 +220,14 @@ const routes: Routes = [
   {
     component: BookAppointmentComponent,
     path: 'PatientBookAppointment/:Type',
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Role.Patient],
+    },
+  },
+  {
+    component: SubscriptionComponent,
+    path: 'Subscription',
     canActivate: [AuthGuard],
     data: {
       roles: [Role.Patient],
