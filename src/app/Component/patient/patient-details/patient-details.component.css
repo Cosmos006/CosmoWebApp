@@ -33,12 +33,9 @@ mat-form-field
 {
   width: 90%;
 }
-/* span
-{
-  margin-right: 10%;
-} */
-
+mat-radio-button{
+  margin-left: 5%;
+}
 .nextBtn{
-  width: 100%;
   text-align: right;
 }
