@@ -2,14 +2,14 @@
     <div>
       <mat-card>
         <div style="margin-left: 60%">
-          <button mat-raised-button color="primary" (click)="Addupdatepatientdetails(0)">
+          <button mat-raised-button color="primary" (click)="Addupdatepatientdetails()">
             Save
           </button>
   
-          <button mat-raised-button color="primary" (click)="Addupdatepatientdetails(1)">update</button>
+          <button mat-raised-button color="primary" (click)="Addupdatepatientdetails()">update</button>
   
           <button mat-raised-button color="primary" (click)="cleardata()">Clear</button>
-          <button mat-raised-button color="primary" (click)="fetchdata()">fetchdata</button>
+         
         </div>
       </mat-card>
     </div>
@@ -172,7 +172,7 @@
                           <mat-form-field appearance="outline" class="form-group">
                             <mat-label>Diagnosis Discription</mat-label>
                             
-                              <mat-select placeholder="Basic" (selectionChange)="ondiscriptionselect($event)"  formControlName="diagnosisdiscription">
+                              <mat-select placeholder="Basic" (selectionChange)="ondiscriptionselect($event)"  formControlName="diagnosisdiscription" multiple>
                                 <mat-select-filter [array]="listOfdiagnosisdiscription" (filteredReturn)="filteredList1 =$event"></mat-select-filter>
                                 <mat-option *ngFor="let item of filteredList1;" [value]="item">
                                   {{item}}
@@ -246,7 +246,7 @@
                               <mat-form-field appearance="outline" class="form-group">
                                 <mat-label>Procedure Discription</mat-label>
                                 
-                                  <mat-select placeholder="Basic" (selectionChange)="onselectprocedure($event)" formControlName="procedurediscription">
+                                  <mat-select placeholder="Basic" (selectionChange)="onselectprocedure($event)" formControlName="procedurediscription" multiple>
                                   <mat-select-filter [array]="listOfprocedurediscription" (filteredReturn)="filteredList2 =$event"></mat-select-filter>
                                     <mat-option *ngFor="let item of filteredList2" [value]="item">
                                       {{item}}

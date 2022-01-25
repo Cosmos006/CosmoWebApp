@@ -24,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatStepperModule } from '@angular/material/stepper';
 import {Ng2TelInputModule} from 'ng2-tel-input';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-
+import {MatCheckboxModule} from '@angular/material/checkbox'
 @NgModule({
   declarations: [
     PatientDetailsComponent,
@@ -55,7 +55,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     Ng2TelInputModule,
     NgxMatSelectSearchModule,
     MatStepperModule,
-    
+    MatCheckboxModule,
     //AppModule
   ],
   exports: [],

@@ -1,26 +1,30 @@
 import { Patientrelativedetails } from "./patientrelativedetails";
 
-export class Patientdetails {
-        Id!: string;
+export class PatientdetailsDemo {
+       
+        id?: string;
         firstName!: string;
         lastName!: string;
         dateofBirth!: Date;
-        age!: number;
+        age!: string;
         gender!: boolean;
         race!: string;
         ethinicity!: string;
         //languagesknown!: string;
         email!: string;
         address!: string;
-        pincode!: number;
+        pincode!: string;
         country!: string;
         state!: string;
-        contactnumber!: string;
-        allergyId!: string;
-        allergyType!: string;
+        contact!: string;
+        allergynameList!:string;
+        allergytypeList!:string;
+        clinicalInformation!:string;
         isFatal!: boolean;
-        PatientId!: number;
-        patientDetails!:string;
-        patientRelativeId!: string;
-        PatientRelativeDetails!: Patientrelativedetails ;
+        patientId!:string;
+        //patientDetails!:string;
+        createddate!:Date;
+        allergyDetails!:string;
+        allergyList!:string[];
+        patientRelativeDetails?: Patientrelativedetails ;
 }

@@ -324,8 +324,6 @@
                   <mat-label>Relationship</mat-label>
                   <mat-select
                   formControlName="emergancyrelationship"
-                    multiple
-                    
                     required
                   >
                     
@@ -390,6 +388,9 @@
                 </mat-error>
                 </mat-form-field>
               </span>
+              <section formControlName="checkbox">
+                <mat-checkbox (change)="setAll($event.checked)">select above address</mat-checkbox>
+              </section>
               <span>
                 <mat-form-field appearance="outline">
                   <mat-label>Home Address</mat-label>
@@ -498,13 +499,13 @@
                
                 <mat-form-field appearance="outline">
                   <mat-label>Allergytype</mat-label>
-                  <mat-select (selectionChange)="onAllergytypeselect($event)" formControlName="allergytype">
+                  <mat-select (selectionChange)="onAllergytypeselect($event)" formControlName="allergytype" [(ngModel)]="AllergyType" multiple>
                      <!-- <mat-select-filter [array]="listOfPosts" (filteredReturn)="filteredList=$event"></mat-select-filter>  -->
                      <mat-option
-                      *ngFor="let list of listOfAllergytype"
-                      [value]="list"
-                      
-                      >{{list}}</mat-option>
+                      *ngFor="let list of PostAllergyobj"
+                      [value]="list.allergyType"
+                     
+                      >{{list.allergyType}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </span>
@@ -512,13 +513,12 @@
               <span>
                 <mat-form-field appearance="outline">
                   <mat-label>Allergyname</mat-label>
-                  <mat-select   formControlName="allergyname">
+                  <mat-select formControlName="allergyname">
                     
                     <mat-option
                       *ngFor="let an of listOfAllergyName"
-                      [value]="an.AllergyName"
-                      
-                      >{{an.AllergyName}}</mat-option
+                      [value]="an.allergyName"
+                      >{{an.allergyName}}</mat-option
                     >
                   </mat-select>
                 </mat-form-field>

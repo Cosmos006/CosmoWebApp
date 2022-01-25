@@ -102,6 +102,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BarchartComponent } from './Component/nurse/barchart/barchart.component';
 import { NursedashboardgridComponent } from './Component/nurse/nursedashboardgrid/nursedashboardgrid.component';
 import { DoctorlistComponent } from './Component/nurse/doctorlist/doctorlist.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -192,6 +194,7 @@ FullCalendarModule.registerPlugins([
     NgxMatSelectSearchModule,
     MatSelectFilterModule,
     MatTooltipModule,
+    MatCheckboxModule,
     //Apex chart
     
   ],

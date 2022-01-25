@@ -1,17 +1,17 @@
 export class Patientrelativedetails 
     {
-            title!:string;
+            title?:string='Mrs';
             firstName!: string;
             lastName!: string;
-            relationship!: string;
+            relation!: string;
             email!: string;
             contact!: string;
             address!: string;
-            pincode!: number;
+            pincode!: string;
             country!: string;
             state!:string;
             patientDemographicsId!:string;
-            //Accessforpatientportal!: boolean;
+            isAccess!: boolean;
         
         
 
