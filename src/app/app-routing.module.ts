@@ -21,6 +21,7 @@ import { DynamicViewComponent } from './Component/nurse/dynamic-view/dynamic-vie
 import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
 import { NursedashboardgridComponent } from './Component/nurse/nursedashboardgrid/nursedashboardgrid.component';
+import { UpcomingAppointmentComponent } from './Component/nurse/upcoming-appointment/upcoming-appointment.component';
 import { PatientBookappointmentComponent } from './Component/patient/patient-bookappointment/patient-bookappointment.component';
 import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
@@ -128,7 +129,7 @@ const routes: Routes = [
   },
   {
     component: PatientBookappointmentComponent,
-    path: 'nurseBookappointment',
+    path: 'NurseBookappointment',
     canActivate: [AuthGuard],
     data: { roles: [Role.Nurse] },
   },
@@ -195,6 +196,24 @@ const routes: Routes = [
     path: 'previouspatientvisitdetails',
     canActivate: [AuthGuard],
     data: { roles: [Role.Patient] },
+  },
+   {
+    component: PreviouspatientvisitdetailsComponent,
+    path: 'NursePreviousVisitDetails',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Nurse] },
+  },
+  {
+    component: PatientViewdetailsComponent,
+    path: 'NursePatientViewdetails',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Nurse] },
+  },
+  {
+    component: UpcomingAppointmentComponent,
+    path: 'NurseUpcomingAppointmentComponent',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Nurse] },
   },
   { path: '**', redirectTo: '' },
   

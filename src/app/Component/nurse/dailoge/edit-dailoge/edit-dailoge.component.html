@@ -1,40 +1,48 @@
 <div class="container">
-    <form class="mat-dialog-content" #formControl="ngForm" >
+    <form class="mat-dialog-content" #formControl="ngForm" style="background-color: white;">
   <h3>Edit Appointment Details</h3>
         <div class="form">
-            <mat-form-field color="accent">
+            <mat-form-field >
                 <input matInput #input class="form-control" placeholder="Name" [(ngModel)]="this.name" name="name" maxlength="15" required>    
                                      
               </mat-form-field>
           </div>        
           <div class="form">
-            <mat-form-field color="accent">
+            <mat-form-field >
               <input matInput #input class="form-control" placeholder="Gender" [(ngModel)]="this.gender" name="gender" required>             
             </mat-form-field>
             &nbsp; &nbsp; &nbsp;
-            <mat-form-field color="accent">
-                <input matInput #input class="form-control" placeholder="Address" [(ngModel)]="this.address" name="address">             
+            <mat-form-field >
+                <input matInput #input class="form-control" placeholder="Mobile" [(ngModel)]="this.mobile" name="mobile">             
               </mat-form-field>
           </div>
           <div class="form" style="font-size: medium;">
-            <mat-form-field color="accent">
+            <mat-form-field >
                 <input matInput #input class="form-control" placeholder="Age" [(ngModel)]="this.age" name="age" required >             
               </mat-form-field>
               &nbsp; &nbsp; &nbsp;
-              <mat-form-field color="accent">
-                  <input matInput #input class="form-control" placeholder="BloodGroup" [(ngModel)]="this.bloodGroup"  name="bloodgroup" required >             
+              <mat-form-field >
+                <mat-select (selectionChange)="select($event)" class="form-control" placeholder="Physician" [(ngModel)]="this.id" name="physician" required>
+                  <!-- <mat-select-filter [array]="listOfPosts" (filteredReturn)="filteredList=$event"></mat-select-filter>  -->
+                  <mat-option
+                   *ngFor="let list of docters"
+                   [value]="list.id"
+                   
+                   >{{list.name}}</mat-option>
+               </mat-select>
+                <!-- <input matInput #input class="form-control" placeholder="Physician" [(ngModel)]="this.physician"  name="physician" required >              -->
                 </mat-form-field>
           </div>
           <div class="form">
-            <mat-form-field color="accent">
-                <input matInput #input class="form-control" placeholder="Temparature" [(ngModel)]="this.temparature"  name="temparature" required >             
+            <mat-form-field >
+                <input matInput #input class="form-control" placeholder="DateOfAppointment" [(ngModel)]="this.date"  name="date" required >             
               </mat-form-field>
               &nbsp; &nbsp; &nbsp;
-              <mat-form-field color="accent">
-                  <input matInput #input class="form-control" placeholder="SugarLevel" [(ngModel)]="this.sugarLevel" name="sugarlevel" required >             
+              <mat-form-field>
+                  <input matInput #input class="form-control" placeholder="Diagnosis" [(ngModel)]="this.diagnosis" name="diagnosis" required >             
                 </mat-form-field>
           </div>
-          <div class="form">
+          <!-- <div class="form">
             <mat-form-field color="accent">
                 <input matInput #input class="form-control" placeholder="Mobile" [(ngModel)]="this.mobile"  name="mobile" required >             
               </mat-form-field>
@@ -42,7 +50,7 @@
               <mat-form-field color="accent">
                   <input matInput #input class="form-control" placeholder="BloodPresure" [(ngModel)]="this.bloodPresure" name="bloodPresure" required >             
                 </mat-form-field>
-          </div>
+          </div> -->
           <div mat-dialog-actions>
             <button mat-button class="btn btn-success" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)=stopEdit() (click)=submit()>Save</button>
             <button mat-button class="btn btn-primary" (click)="onNoClick()" tabindex="-1">Cancel</button>
