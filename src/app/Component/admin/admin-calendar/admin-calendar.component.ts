@@ -23,6 +23,11 @@ export class AdminCalendarComponent implements OnInit {
   calendarVisible = false;
   listOfEvent: EventMap[] = [];
   value: EventMap[] = [];
+  Patient?: string;
+  Physician?: string;
+  Diagnosics?: string;
+  Description?: string;
+
   constructor(private adminService: AdminService) {}
 
   ngOnInit() {
@@ -34,7 +39,7 @@ export class AdminCalendarComponent implements OnInit {
           var title = this.listOfEvent[i].title;
           var start = DateType(this.listOfEvent[i].date);
           this.value.push({
-            Id: this.listOfEvent[i].Id,
+            publicId: this.listOfEvent[i].publicId,
             title: this.listOfEvent[i].title,
             date: this.listOfEvent[i].date,
             color: this.listOfEvent[i].color,
@@ -77,7 +82,7 @@ export class AdminCalendarComponent implements OnInit {
     // events: [
     //   {
     //     title: 'event 2',
-    //     date: '2021-12-04 13:15:30',
+    //     date: '2021-12-31 13:15:30',
     //     color: 'blue',
     //     id: '1234',
     //   },
@@ -124,6 +129,15 @@ export class AdminCalendarComponent implements OnInit {
     var time = dateparms?.toTimeString();
     var color = clickInfo.event._def?.ui.backgroundColor;
     this.date = date;
+    // const Patient = 'Ram';
+    // const Diagnosics = 'Cold';
+    // const Physician = ' Dr.Raj';
+    // const Description = 'Cold Diagnosics';
+    this.Patient = 'Ram';
+    this.Diagnosics = 'Cold';
+    this.Physician = 'Dr.Raj';
+    this.Description = 'Cold Diagnosics';
+
     if (color == 'red') {
       this.ApproveModal = true;
     } else {

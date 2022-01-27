@@ -63,7 +63,10 @@ import { BookAppointmentComponent } from './Component/shared/book-appointment/bo
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
-import { MY_FORMATS, PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+import {
+  MY_FORMATS,
+  PatientDetailsComponent,
+} from './Component/patient/patient-details/patient-details.component';
 import { RegisterComponent } from './Component/home/Register/register.component';
 import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
 import { UserService } from './Services/Userservice/userservice/user.service';
@@ -80,16 +83,17 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 // import { AuthService } from './Services/Authservice/auth.service';
 
 import { AuthInterceptor } from './auth/auth.interceptor';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthenticationService } from './Services';
 //import { AuthenticationService } from './Services';
 
 //Apex Chart
 
-
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { Ng2TelInputModule } from 'ng2-tel-input';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { PreviouspatientvisitdetailsComponent } from './Component/patient/previouspatientvisitdetails/previouspatientvisitdetails.component';
@@ -118,6 +122,11 @@ FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
 ]);
+
+//Location Strategy
+
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -202,9 +211,9 @@ FullCalendarModule.registerPlugins([
     NetworkStatusAngularModule.forRoot(),
     MatProgressSpinnerModule,
     //Apex chart
+    MatSnackBarModule,
     MatStepperModule,
     Ng2TelInputModule,
-    NgxMatSelectSearchModule,
     MatSelectFilterModule,
     MatTooltipModule,
     //Apex chart
@@ -229,9 +238,21 @@ FullCalendarModule.registerPlugins([
   ],
   exports: [],
   providers: [
-    UserService,AuthGuard,AuthenticationService, AlertService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    UserService,
+    AuthGuard,
+    AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    UserService,
+    AuthGuard,
+    AuthenticationService,
+    AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
     {
       provide: HTTP_INTERCEPTORS,
@@ -239,7 +260,7 @@ FullCalendarModule.registerPlugins([
       multi:true 
     },
     // provider used to create fake backend
-    fakeBackendProvider
+    fakeBackendProvider,
   ],
   bootstrap: [AppComponent],
 })

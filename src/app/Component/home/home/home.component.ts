@@ -32,16 +32,15 @@ export class HomeComponent {
     this.isLoggedIn$ = this.authenticationService.isLoggedIn; // {2}
     //const user = this.currentUser;
     const user = this.currentUser;
-    this.router.navigateByUrl('/NurseDashboard');
-    // if (user.role == 'Admin') {
-    //   this.router.navigateByUrl('/AdminDashboard');
-    // } else if (user.role == 'Physician') {
-    //   this.router.navigateByUrl('/');
-    // } else if (user.role == 'Patient') {
-    //   this.router.navigateByUrl('/PatientDashboard');
-    // } else if (user.role == 'Nurse') {
-    //   this.router.navigateByUrl('/NurseDashboard');
-    // }
+    if (user.role == 'ADMIN') {
+      this.router.navigateByUrl('/AdminDashboard');
+    } else if (user.role == 'PHYSICIAN') {
+      this.router.navigateByUrl('/');
+    } else if (user.role == 'PATIENT') {
+      this.router.navigateByUrl('/PatientDashboard');
+    } else if (user.role == 'NURSE') {
+      this.router.navigateByUrl('/NurseDashboard');
+    }
   }
   getuserbyId() {
     this.userService

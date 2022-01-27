@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:44359/api/'
+  apiUrl: 'http://localhost:4200',
+  LocalUrl: 'http://localhost:3000',
+  Url: 'https://localhost:44321/api/',
+  Appointment: 'https://localhost:44347/api/Appointments/',
 };
 
 /*
