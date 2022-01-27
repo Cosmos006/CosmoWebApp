@@ -32,6 +32,8 @@ import { InboxComponent } from './inbox/inbox.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTabsModule } from '@angular/material/tabs';
+
+import { SubscriptionComponent } from './subscription/subscription.component'; // a plug
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
@@ -45,7 +47,8 @@ FullCalendarModule.registerPlugins([
     PieChartComponent,
     BookAppointmentComponent,
     CalendarComponent,
-    InboxComponent
+    InboxComponent,
+    SubscriptionComponent,
   ],
   imports: [
     CommonModule,
