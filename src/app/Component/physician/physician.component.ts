@@ -1,5 +1,9 @@
+import { DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Attendance } from 'src/app/models/Attendance';
+import { PhysicianService } from 'src/app/Services/Physician/physician.service';
+
 
 export interface UsersData {
   name: string;
@@ -26,6 +30,9 @@ export interface Food {
   styleUrls: ['./physician.component.css'],
 })
 export class PhysicianComponent implements OnInit {
+
+  SlotList?: Array<string>;
+
   dataSource: Food[] = [
     { name: 'Yogurt', calories: 159, fat: 6, carbs: 24, protein: 4 },
     { name: 'Sandwich', calories: 237, fat: 9, carbs: 37, protein: 4 },
@@ -39,18 +46,66 @@ export class PhysicianComponent implements OnInit {
   dataSource1 = ELEMENT_DATA;
   displayedColumns2: string[] = ['id', 'name', 'action'];
   dataSource2 = ELEMENT_DATA;
-  toppings = new FormControl();
+  Slots = new FormControl();
 
-  toppingList: string[] = ['9:30 to 10:30', '10:30 to 11', '10:30 to 11:30', '9:30 to 10:30', '9:30 to 10:30', '9:30 to 10:30'];
+  listOfPosts: Attendance[] = [];
+  form: FormGroup = new FormGroup({});
+  empdata!: Attendance;
 
-  constructor() {}
 
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl(),
-  });
+
+
+  listOfslot: string[] = ['9:30 to 10:30', '10:30 to 11', '10:30 to 11:30', '9:30 to 10:30', '9:30 to 10:30', '9:30 to 10:30'];
+  makes: any[];
+  constructor(public physicianservice: PhysicianService) {
+    this.makes = [];
+  }
+
+
   Patient: any = 10;
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    var Get = localStorage.getItem('currentUser');
+    if (typeof Get === 'string') {
+      var id = JSON.parse(Get).id;
 
-  
+    }
+    this.form = new FormGroup({
+      physicianid: new FormControl(id, null),
+      date: new FormControl([Validators.required]),
+      timeslot: new FormControl([Validators.required]),
+
+    });
+    this.SlotList = ['9:30 to 10:30', '10:30 to 11', '10:30 to 11:30', '9:30 to 10:30', '9:30 to 10:30', '9:30 to 10:30'];
+  }
+
+
+  // getPhysicianDetails() {
+  //   this.physicianservice.getPhysicianDetails().subscribe((x) => {
+  //     this.listOfPosts.push(...x);
+  //     for (let i = 0; i < this.listOfPosts.length; i++) {
+  //       this.listOfslot.push(this.listOfPosts[i].timeslot.toString());
+  //       var mySet = new Set(this.listOfslot);
+  //       this.listOfslot = [...mySet];
+  //       console.log(mySet);
+  //     }
+  //   });
+  // }
+
+
+  AddPhysiciandetails(index: number) {
+    // console.log(this.form);
+    // var empdetails = new EmployeeDetails();
+    // empdetails.id = this.form.value.physicianid
+    //   , empdetails.date = this.form.value.date, empdetails.timeslot = this.form.value.timeslot;
+    // this.physicianservice.addPhysicianPost(empdetails);
+
+    var dataemployee:Attendance ={
+      physicianId: this.form.value.physicianid,
+      date: this.form.value.date,
+      timeSlotlist: this.form.value.timeslot,
+    }
+  this.physicianservice.addPhysicianPost(dataemployee);
+
 }
+}
+

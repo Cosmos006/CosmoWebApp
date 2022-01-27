@@ -477,7 +477,7 @@
               <span >
                 <mat-form-field appearance="outline">
                   <mat-label>Allergytype</mat-label>
-                  <mat-select (selectionChange)="onAllergytypeselect($event)" formControlName="allergytype">
+                  <mat-select  (selectionChange)="onAllergytypeselect($event)" formControlName="allergytype">
                      <!-- <mat-select-filter [array]="listOfPosts" (filteredReturn)="filteredList=$event"></mat-select-filter>  -->
                      <mat-option
                       *ngFor="let list of listOfAllergytype"

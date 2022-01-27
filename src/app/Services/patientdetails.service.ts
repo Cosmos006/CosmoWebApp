@@ -23,6 +23,8 @@ export class patientdetails {
   baseUrl = environment.LocalUrl;
   //patientdetailscreen
   addPost(post: Patientdetails) {
+
+    
     this.http.post('http://localhost:3000/posts', post).subscribe((res) => {
       console.log(res);
     });
