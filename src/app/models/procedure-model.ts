@@ -1,9 +1,9 @@
 export class procedure
 {
     constructor(
-        public  ID:string,
+        public  id:string,
         //public string ProcedureCode { get; set; }
-        public ProcedureDescription:string
+        public description:string
        // public Boolean IsDepricated { get; set; }
     )
     {}
