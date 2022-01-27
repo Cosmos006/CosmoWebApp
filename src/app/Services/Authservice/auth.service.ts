@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { UserDetails } from 'src/app/models/userdetails';
 import { FormGroup } from '@angular/forms';
 import { User } from 'src/app/models/User';
+import { Guid } from 'guid-typescript';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -49,14 +50,21 @@ export class AuthenticationService {
       
       getUserData(){
         this.httpClient
-        .get<UserDetails[]>(this.baseUrl + 'User/GetUser')
+        .get<UserDetails[]>(this.baseUrl + 'User/GetUsersData')
         .subscribe((res: UserDetails[]) => {
           this.userList.push(...res);
           console.log(this.userList)
         });
         return this.userList;
         }
-      
+        getUser(id : Guid| undefined){
+          this.httpClient.get(this.baseUrl + 'User/GetUser?id=' + id).subscribe({
+            next: (res: any) => {
+              localStorage.setItem('user', JSON.stringify(res))
+            },
+            error: (e) => console.error(e),
+          })
+        }
 
 
     // login(username: string, password: string) {

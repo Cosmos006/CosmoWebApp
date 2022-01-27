@@ -20,14 +20,18 @@ import { Guid } from 'guid-typescript';
 import { InboxService } from 'src/app/Services/Inbox/inbox.service';
 import { UserDetails } from 'src/app/models/userdetails';
 
-export interface Appointments {
+export interface Appointments { 
+  appointmentId : Guid
   meetingTitle: string;
-  description: string;
-  physician: string;
-  date: Date;
-
-  editHistory: boolean;
-  patientId?: BigInteger;
+  //description: string;
+  physicianName: string;
+  appointmentDateTime: Date;
+  //editHistory: boolean;
+  patientName: string;
+  // PhysicianId: Guid;
+  // NurseId: Guid;
+  //AppointmentType : string
+  diagnosis : string
 }
 
 export interface ReceivedNotes {
@@ -65,64 +69,64 @@ export interface SentNotes {
   message: string;
   date: Date;
 }
-const ELEMENT_DATA: Appointments[] = [
-  {
-    meetingTitle: 'Regular check up',
-    description: 'doses verification',
-    physician: 'Dr,John Doe',
-    date: new Date('06-10-2021 3:30'),
-    editHistory: true,
-  },
-  {
-    meetingTitle: 'Regular check up',
-    description: 'doses verification',
-    physician: 'Dr,John Doe',
-    date: new Date(),
-    editHistory: true,
-  },
-  {
-    meetingTitle: 'Regular check up',
-    description: 'doses verification',
-    physician: 'Dr,John Doe',
-    date: new Date(),
-    editHistory: false,
-  },
-  {
-    meetingTitle: 'Regular check up',
-    description: 'doses verification',
-    physician: 'Dr,John Doe',
-    date: new Date('12-10-2021 3:30'),
-    editHistory: true,
-  },
-  {
-    meetingTitle: 'Regular check up',
-    description: 'doses verification',
-    physician: 'Dr,John Doe',
-    date: new Date(),
-    editHistory: false,
-  },
-  {
-    meetingTitle: 'Regular check up',
-    description: 'doses verification',
-    physician: 'Dr,John Doe',
-    date: new Date('12-17-2021 3:30'),
-    editHistory: true,
-  },
-  {
-    meetingTitle: 'Regular check up',
-    description: 'doses verification',
-    physician: 'Dr,John Doe',
-    date: new Date('12-05-2021 3:30'),
-    editHistory: true,
-  },
-  {
-    meetingTitle: 'Regular check up',
-    description: 'doses verification',
-    physician: 'Dr,John Doe',
-    date: new Date('12-05-2021 3:30'),
-    editHistory: true,
-  },
-];
+const ELEMENT_DATA: Appointments[] = []
+//   {
+//     meetingTitle: 'Regular check up',
+//     description: 'doses verification',
+//     physician: 'Dr,John Doe',
+//     date: new Date('06-10-2021 3:30'),
+//     editHistory: true,
+//   },
+//   {
+//     meetingTitle: 'Regular check up',
+//     description: 'doses verification',
+//     physician: 'Dr,John Doe',
+//     date: new Date(),
+//     editHistory: true,
+//   },
+//   {
+//     meetingTitle: 'Regular check up',
+//     description: 'doses verification',
+//     physician: 'Dr,John Doe',
+//     date: new Date(),
+//     editHistory: false,
+//   },
+//   {
+//     meetingTitle: 'Regular check up',
+//     description: 'doses verification',
+//     physician: 'Dr,John Doe',
+//     date: new Date('12-10-2021 3:30'),
+//     editHistory: true,
+//   },
+//   {
+//     meetingTitle: 'Regular check up',
+//     description: 'doses verification',
+//     physician: 'Dr,John Doe',
+//     date: new Date(),
+//     editHistory: false,
+//   },
+//   {
+//     meetingTitle: 'Regular check up',
+//     description: 'doses verification',
+//     physician: 'Dr,John Doe',
+//     date: new Date('12-17-2021 3:30'),
+//     editHistory: true,
+//   },
+//   {
+//     meetingTitle: 'Regular check up',
+//     description: 'doses verification',
+//     physician: 'Dr,John Doe',
+//     date: new Date('12-05-2021 3:30'),
+//     editHistory: true,
+//   },
+//   {
+//     meetingTitle: 'Regular check up',
+//     description: 'doses verification',
+//     physician: 'Dr,John Doe',
+//     date: new Date('12-05-2021 3:30'),
+//     editHistory: true,
+//   },
+// ];
 
 export interface User {
   Id: Guid;
@@ -256,11 +260,11 @@ export class InboxComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = [
     'Meeting Title',
-    'Description',
-    'Physician',
+    'Diagnosis',
+    'Patient',
     'Date',
     'Time',
-    'Patient Details',
+    'Visit Details',
   ];
   dataSource = new MatTableDataSource<Appointments>(ELEMENT_DATA);
   showButton: boolean = false;
@@ -291,7 +295,19 @@ export class InboxComponent implements OnInit, AfterViewInit {
     var getuser = localStorage.getItem('user');
     if (typeof getuser === 'string') {
       var id = JSON.parse(getuser).id;
+    
     }
+
+    this.inboxService.GetAppointmentByEmployeeId(id).subscribe({
+      next:(res: any)=>{
+        this.dataSource.data = res;
+        this.dataSource._updateChangeSubscription();
+        console.log(this.dataSource.data)
+      },
+      error: (e: any) => console.error(e)
+      
+    });
+
     this.inboxService.GetEmployee().subscribe({
       next: (res: any) => {
         console.log(res);
@@ -325,7 +341,7 @@ export class InboxComponent implements OnInit, AfterViewInit {
 
     
 
-    ELEMENT_DATA.sort((x, y) => +new Date(x.date) - +new Date(y.date));
+    //ELEMENT_DATA.sort((x, y) => +new Date(x.date) - +new Date(y.date));
 
     this.form = this.fb.group({
       receiver: ['', Validators.required],

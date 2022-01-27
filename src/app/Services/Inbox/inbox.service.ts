@@ -50,6 +50,12 @@ export class InboxService{
       return this.httpClient.get(this.baseUrl + 'Notes/'+id);
   }
 
+  GetAppointmentByEmployeeId(id : Guid){
+    //https://localhost:44347/api/Appointments/GetAppointmentsByEmployeeId?
+    return this.httpClient.get('https://localhost:44347/api/Appointments/GetAppointmentsByEmployeeId?id='+ id);
+  }
+
+
     DeleteEmployee(id: Guid){
       console.log(id)
       var myHeaders = new Headers();

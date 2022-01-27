@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/Services';
 import { UserDetails } from 'src/app/models/userdetails';
+import { Guid } from 'guid-typescript';
 
 
 @Component({ templateUrl: 'login.component.html' })
@@ -79,7 +80,8 @@ export class LoginComponent implements OnInit {
             next: (res: any) => {
               console.log(res)
               localStorage.setItem('token', res.token);
-              localStorage.setItem('user', JSON.stringify(this.user))
+              localStorage.setItem('userDetails', JSON.stringify(this.user))
+              this.GetUser(this.user?.Id);
                 this.router.navigateByUrl('/Home');
             },
             error: (e) => console.error(e),
@@ -91,25 +93,7 @@ export class LoginComponent implements OnInit {
       }
     
 
-    // onSubmit() {
-    //     this.submitted = true;
-    //     if (this.loginForm.invalid) {
-    //         return;
-    //     }
-         
-    //     this.loading = true;
-    //     this.authenticationService.login(this.loginForm.controls['username'].value,this.loginForm.controls['password'].value )
-    //         .pipe(first())
-    //         .subscribe(
-    //             data => {
-    //                 this.router.navigate([this.returnUrl]);
-                 
-    //             },
-    //             error => {
-    //                 this.error = error;
-    //                 this.loading = false;
-    //             });
-    //       this.formSubmitAttempt = true;
-
-    // }
+      GetUser(id : Guid | undefined){
+       this.authenticationService.getUser(id)   
+      }
 }
