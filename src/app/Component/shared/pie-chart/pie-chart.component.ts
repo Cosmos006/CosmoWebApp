@@ -7,5 +7,6 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 export class PieChartComponent implements OnInit {
   
 
+ 
   ngOnInit(): void {}
 }

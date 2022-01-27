@@ -9,8 +9,8 @@ import {
 } from '@angular/common/http';
 import { Observable, of, SchedulerLike } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { Role } from '../Modules/Role';
-import { User } from '../Modules/User';
+import { Role } from '../models/Role';
+import { User } from '../models/User';
 
 export declare function throwError(
   error: any,
@@ -20,7 +20,7 @@ export declare function throwError(
 const users: User[] = [
   {
     id: 1,
-    username: 'admin',
+    userName: 'admin',
     password: 'admin',
     firstName: 'Admin',
     lastName: 'User',
@@ -29,7 +29,7 @@ const users: User[] = [
   },
   {
     id: 2,
-    username: 'user',
+    userName: 'user',
     password: 'user',
     firstName: 'Normal',
     lastName: 'User',
@@ -38,7 +38,7 @@ const users: User[] = [
   },
   {
     id: 3,
-    username: 'physician@gmail.com',
+    userName: 'physician@gmail.com',
     password: 'physician@123',
     firstName: 'Normal',
     lastName: 'User',
@@ -46,8 +46,8 @@ const users: User[] = [
     loggedIn: true,
   },
   {
-    id: 'E5939583-DE53-4DBD-A111-7E07B165BEFD',
-    username: 'patient@gmail.com',
+    id: 4,
+    userName: 'patient@gmail.com',
     password: 'patient@123',
     firstName: 'Normal',
     lastName: 'User',
@@ -56,7 +56,7 @@ const users: User[] = [
   },
   {
     id: 5,
-    username: 'nurse@gmail.com',
+    userName: 'nurse@gmail.com',
     password: 'nurse@123',
     firstName: 'Normal',
     lastName: 'User',
@@ -99,12 +99,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function authenticate() {
       const { username, password } = body;
       const user = users.find(
-        (x) => x.username === username && x.password === password
+        (x) => x.userName === username && x.password === password
       );
       if (!user) return error('Username or password is incorrect');
       return ok({
         id: user.id,
-        username: user.username,
+        username: user.userName,
         firstName: user.firstName,
         lastName: user.lastName,
         role: user.role,

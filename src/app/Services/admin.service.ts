@@ -63,7 +63,10 @@ export class AdminService {
 
   //List Of ALL Events
   GetListofData() {
-    return this.http.get<EventMap[]>(this.baseUrl + Admin.Event);
+    // return this.http.get<EventMap[]>(this.baseUrl + Admin.Event);
+    return this.http.get<EventMap[]>(
+      'https://localhost:44347/api/Appointments/GetAllAppointments'
+    );
   }
 
   GetAdminDashboard(): Observable<AdminDashboard[]> {
@@ -133,5 +136,37 @@ export class AdminService {
     } else {
       return this.http.get<any>(this.baseUrl + AddPhysycian.GetNurseEduaction);
     }
+  }
+
+  TestData(): Observable<any> {
+    return this.http.get<any>('https://localhost:44321/api/Appointments');
+    //   const $http = new Observable((observer) => {
+    //     fetch('https://localhost:44321/api/Appointments')
+    //       .then((res) => {
+    //         return res.json();
+    //       })
+    //       .then((body) => {
+    //         observer.next(body);
+    //         observer.complete();
+    //       })
+    //       .catch((err) => {
+    //         observer.error(err);
+    //       });
+    //   });
+
+    //   return $http;
+  }
+
+  PostPatient(value: any) {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    var raw = JSON.stringify(value);
+
+    return fetch('https://localhost:44318/api/EmployeRegister', {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    });
   }
 }

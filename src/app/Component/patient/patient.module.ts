@@ -30,7 +30,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
     PatientDetailsComponent,
     PatientBookappointmentComponent,
     PatientViewdetailsComponent,
-    PatientDashboardComponent,
+    // PatientDashboardComponent,
     PreviouspatientvisitdetailsComponent,
   
   ],
@@ -51,9 +51,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
     MatMomentDateModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatOption,
     HttpClientModule,
     Ng2TelInputModule,
-    NgxMatSelectSearchModule,
     MatStepperModule,
     MatCheckboxModule,
     //AppModule

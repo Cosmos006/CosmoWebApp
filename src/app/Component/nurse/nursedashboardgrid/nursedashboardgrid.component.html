@@ -1,5 +1,5 @@
 
-<h2>Patient Appointment Details</h2>
+<h2 style="color: blueviolet;">Next Patient Appointment Details</h2>
 
 <div class="example-container mat-elevation-z8" class="table-content" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;">
   <mat-form-field style="margin-left: 15px" style="width: 100%" >
@@ -18,37 +18,32 @@
 
     <!-- Second Column -->
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Name
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> PatientName
       </mat-header-cell>
       <mat-cell *matCellDef="let element" matTooltip={{element.name}}><span class="ellipsis">{{element.name}}</span> </mat-cell>
     </ng-container>
 
     <!-- Third Column -->
-    <ng-container matColumnDef="gender">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Gender </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.gender}}
+    <ng-container matColumnDef="physician">
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> AssignedPhysician </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.physician}}
       </mat-cell>
     </ng-container>
 
     <!-- Fourth Column -->
-    <ng-container matColumnDef="address">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Address </mat-header-cell>
-      <mat-cell *matCellDef="let element"matTooltip={{element.name}}><span class="ellipsis">{{element.name}}</span> </mat-cell>
+    <ng-container matColumnDef="diagnosis">
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> DiagnosisReason </mat-header-cell>
+      <mat-cell *matCellDef="let element"matTooltip={{element.diagnosis}}><span class="ellipsis">{{element.diagnosis}}</span> </mat-cell>
     </ng-container>
     
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Action </mat-header-cell>
       <mat-cell *matCellDef="let element"> <button mat-icon-button class="iconbutton"
           color="primary" (click)="OnVisit()">
-          <mat-icon matTooltip="Click To Record Vitals"> perm_identity </mat-icon>
+          <mat-icon matTooltip="Click To Move Into DoctorsQue"> verified_user </mat-icon>
         </button> </mat-cell>
+        
     </ng-container>
-    <ng-container matColumnDef="age">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Age </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.age}} </mat-cell>
-    </ng-container>
-   
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>

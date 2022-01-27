@@ -7,6 +7,7 @@ export interface Product {
     age:number;
     email:string;
     physician:string;
+    diagnosis?:string;
 }
 
 

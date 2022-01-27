@@ -66,7 +66,7 @@
           type="button"
           class="close"
           data-dismiss="modal"
-          (click)="Approvehide()"
+          (click)="ApproveRejectClose()"
         >
           &times;
         </button>
@@ -78,21 +78,107 @@
       <!-- Modal footer -->
 
       <div class="modal-footer">
+        <ng-container *ngIf="CheckPatient; else test">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Pending For Approval
+          </button>
+        </ng-container>
+
+        <ng-template #test>
+          <button
+            type="button"
+            class="btn btn-success"
+            data-dismiss="modal"
+            (click)="ApproveReject('Approved')"
+          >
+            Approve
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-dismiss="modal"
+            (click)="ApproveReject('Rejected')"
+          >
+            Reject
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="myModal"
+  [style.display]="AddAppointment ? 'block' : 'none'"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Appointment</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="AddAppointmentClose()"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <!-- <div class="modal-body">Create Appointment</div> -->
+
+      <div class="modal-body">Create Appointment</div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
         <button
           type="button"
           class="btn btn-success"
           data-dismiss="modal"
-          (click)="Approvehide()"
+          (click)="CreateAppointment()"
         >
-          Approve
+          Create
         </button>
         <button
           type="button"
           class="btn btn-danger"
           data-dismiss="modal"
-          (click)="Approvehide()"
+          (click)="AddAppointmentClose()"
         >
-          Reject
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModal" [style.display]="checkDate ? 'block' : 'none'">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Appointment</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="checkDateClose()"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="modal-body">Please Select Date Greater than Current Date</div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-dismiss="modal"
+          (click)="checkDateClose()"
+        >
+          Close
         </button>
       </div>
     </div>
