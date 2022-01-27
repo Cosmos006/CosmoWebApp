@@ -28,4 +28,10 @@ td > span.Elipsis {
     text-overflow: ellipsis;
     max-width: auto;
  }
+ /* th:nth-child(7){
+    width: 20px;
+ }
+ td:nth-child(7){
+    width: 20px;
+ } */
  

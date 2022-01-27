@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
+import { elementClosest } from '@fullcalendar/angular';
 
 import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
 import { Allergy } from 'src/app/models/allergy-model';
@@ -59,16 +60,8 @@ export class PatientViewdetailsComponent implements OnInit
     
   ngOnInit(): void 
   {
-    
-    // this.patient.Getpatientvisitdetailsfromid(1).subscribe((x)=>{console.log(x)});
-      
-    // // this.patient.Observeevent()
-    //     console.log(this.postobj);
-    
-    
-    //this.SetConditionforvisibility();
-    //console.log(this.previousdetails);
-    //this.fetchdata();
+    this.bindToUI();
+   this.postobj=new patientvisitdetails();
     this.SetConditionforvisibility();
     this. getdiscriptiondetails();
     
@@ -76,6 +69,7 @@ export class PatientViewdetailsComponent implements OnInit
     this.getproceduredetails();
     this.filteredList2= this.listOfprocedurediscription.slice();
     this.getmedicationdetails();
+    
     //this.filteredList3=this.listOfmedication.slice();
   this.route.queryParams.subscribe((params)=>
   {
@@ -96,103 +90,146 @@ export class PatientViewdetailsComponent implements OnInit
 
   
 
-Addupdatepatientdetails(index:number)
+Addupdatepatientdetails()
 {
   
-  if(this.nurseform.invalid || this.physicianform.invalid)
-  {
-    alert("check all fields are filled");
-    console.log(this.nurseform);
-  }
-  else
-  {
-  console.log(this.nurseform);
-  this.postobj.id=this.nurseform.value.id;
-  this.postobj.patientid;
-  this.postobj.height=this.nurseform.value.height;
-  this.postobj.weight=this.nurseform.value.weight;
-  this.postobj.bloodpressure=this.nurseform.value.bloodpressure;
-  this.postobj.bodytemprature=this.nurseform.value.bodytemprature;
-  this.postobj.respirationrate=this.nurseform.value.respirationrate;
-  
-  this.postobj.diagnosisid=this.physicianform.value.diagnosisid;
-  this.postobj.diagnosisdiscription=this.physicianform.value.diagnosisdiscription;
+  // if(this.nurseform.invalid)
+  // {
+  //   alert("check all fields are filled");
+  //   console.log(this.nurseform);
+  // }
+  // else
+  // {
+    let _that = this;
+    this.patient
+      .Getpatientvisitdetailsfromid(this.Guid)//need to change
+      .then(async response => {
+        response.text().then(responseData => {
+          var result = JSON.parse(responseData);
+          _that.postobj = result;
+          this.Guid=_that.postobj.id;
+          _that.bindToUI();
+          
+        });
+      })
+      var dat:patientvisitdetails=
+      {
+        height: this.nurseform.value.height,
+        weight: this.nurseform.value.weight,
+        bloodPressure: this.nurseform.value.bloodpressure,
+        bodyTemprature: this.nurseform.value.bodytemprature,
+        respirationRate: this.nurseform.value.respirationrate,
 
-  this.postobj.diagnosisdiscription=this.physicianform.value.diagnosisdiscription;
-  this.postobj.diagnosisisdepricated=this.physicianform.value.diagnosisisdepricated;
-  this.postobj.procedureid=this.physicianform.value.procedureid;
-  this.postobj.procedurediscription=this.physicianform.value.procedurediscription;
-  this.postobj.proceduredepricated=this.physicianform.value.proceduredepricated;
-  this.postobj.drugid=this.physicianform.value.drugid;
-  this.postobj.drugname=this.physicianform.value.drugname;
-  this.postobj.druggenericname=this.physicianform.value.druggenericname;
-  this.postobj.drugbrandname=this.physicianform.value.drugbrandname;
-  this.postobj.drugform=this.physicianform.value.drugform;
-  
-  if(index==0)
+        //diagnosisid:this.physicianform.value.diagnosisid,
+        //diagnosisList:this.physicianform.value.diagnosisdiscription,
+
+        //diagnosisid:this.physicianform.value.diagnosisid,
+        
+        diagnosislist:this.physicianform.value.diagnosisdiscription,
+        //diagnosisDescription: this.physicianform.value.diagnosisdiscription,
+        
+        //diagnosisisdepricated:this.physicianform.value.diagnosisisdepricated,
+        //procedureId:this.physicianform.value.procedureid,
+       // diagnosislist:JSON.parse(this.physicianform.value.diagnosisdiscription),
+       procedureslist:this.physicianform.value.procedurediscription,
+        //proceduredepricated:this.physicianform.value.proceduredepricated,
+        //drugid:this.physicianform.value.drugid,
+        druglist:['para','vicks'],
+        
+        doctorDescription: this.physicianform.value.diagnosisdiscriptionifother,
+        appointmentId: '93666A3C-9684-4BB1-73BA-08D9DD8C4FC3',
+        //appointments: ,
+        createddate: new Date(),
+       
+      };
+ // console.log(this.physicianform.value.diagnosisDescription);
+  if(this.postobj==null)
   {
+  
   this.patient.Addpatientvisitdetails(this.postobj);
    alert("PatietDetails saved succesfully");
   // this.fetchdata()
   }
   else
   {
-      this.patient.UpdatePatientvisitdetails(this.postobj,this.postobj.id).subscribe((result)=>
-      {
-           console.log(result);
-      });
-     
-      alert("successfully update record");
+    // if(this.physicianform.invalid)
+    // {
+
+    // }
+    // else{
+      this.patient.UpdatePatientvisitdetails(dat,this.Guid);
+      alert("PatietDetails saved succesfully");
+   // }
+      // this.fetchdata()
+  //}
   }
 }
-}
 
-fetchdata(Id?:number)
+fetchdata(Id:any)
 {
-  //alert(Id);
-   this.patient.Getpatientvisitdetailsfromid(Id?Id:0).subscribe(result => this.postobj = result);
-  // console.log(this.postobj);
-   this.nurseform=new FormGroup
-   ({
-    patientid:new FormControl(this.postobj.patientid?this.postobj.patientid:null,),
-    height:new FormControl(this.postobj.height?this.postobj.height:null,[Validators.required]),
-    weight:new FormControl(this.postobj.weight?this.postobj.weight:null,[Validators.required]),
-    bloodpressure:new FormControl(this.postobj.bloodpressure?this.postobj.bloodpressure:null,[Validators.required]),
-    bodytemprature:new FormControl(this.postobj.bodytemprature?this.postobj.bodytemprature:null,[Validators.required]),
-    respirationrate:new FormControl(this.postobj.respirationrate?this.postobj.respirationrate:null,[Validators.required])
-   });
-   this.physicianform=new FormGroup({
-    diagnosisid:new FormControl(this.postobj.diagnosisid?this.postobj.diagnosisid:null,),
-    diagnosisdiscription:new FormControl(this.postobj.diagnosisdiscription?this.postobj.diagnosisdiscription:null,[Validators.required]),
-    diagnosisdiscriptionifother:new FormControl({
-      value : '',
-      disabled: this.iseditable
-    }),
-    diagnosisisdepricated:new FormControl(this.postobj.diagnosisisdepricated?this.postobj.diagnosisisdepricated:null,),
-    procedureid:new FormControl(this.postobj.procedureid?this.postobj.procedureid:null,),
-    procedurediscription:new FormControl(this.postobj.procedurediscription?this.postobj.procedurediscription:null,[Validators.required]),
-    proceduredepricated:new FormControl(this.postobj.proceduredepricated?this.postobj.proceduredepricated:null,),
-    drugid:new FormControl(this.postobj.drugid?this.postobj.drugid:null,),
-    drugname:new FormControl(this.postobj.drugname?this.postobj.drugname:null,),
-    druggenericname:new FormControl(this.postobj.druggenericname?this.postobj.druggenericname:null,),
-    drugbrandname:new FormControl(this.postobj.drugbrandname?this.postobj.drugbrandname:null,),
-    drugform:new FormControl(this.postobj.drugform?this.postobj.drugform:null,[Validators.required]),
+  
+    let _that = this;
+    this.patient
+      .Getpatientvisitdetailsfromid(Id)
+      .then(async response => {
+        response.text().then(responseData => {
+           var result = JSON.parse(responseData);
+           _that.postobj = result;
+          console.log(_that.postobj.height);
+          _that.bindToUI();
+          
+        });
+      })
 
-    
-   
-    });
+  
   this.SetConditionforvisibility();
+    }
+
+  bindToUI() {
+    this.nurseform=new FormGroup
+    ({
+     //patientid:new FormControl(this.postobj.patientid?this.postobj.patientid:null,),
+     height:new FormControl(this.postobj?.height,[Validators.required]),
+     weight:new FormControl(this.postobj?.weight,[Validators.required]),
+     bloodpressure:new FormControl(this.postobj?.bloodPressure,[Validators.required]),
+     bodytemprature:new FormControl(this.postobj?.bodyTemprature,[Validators.required]),
+     respirationrate:new FormControl(this.postobj?.respirationRate,[Validators.required])
+    });
+    this.physicianform=new FormGroup({
+    diagnosisid:new FormControl(null,),
+     diagnosisdiscription:new FormControl(this.postobj.diagnosislist? this.postobj.diagnosislist:null,[Validators.required]),
+     diagnosisdiscriptionifother:new FormControl(
+      this.postobj?.doctorDescription
+     
+     ),
+    diagnosisisdepricated:new FormControl(null,),
+     procedureid:new FormControl(null,),
+     procedurediscription:new FormControl(this.postobj.procedureslist?this.postobj.procedureslist:null,[Validators.required]),
+     proceduredepricated:new FormControl(null,),
+    drugid:new FormControl(null,),
+     drugname:new FormControl(this.postobj.drugDescription?this.postobj.drugDescription:null,),
+     druggenericname:new FormControl(null,),
+    drugbrandname:new FormControl(null,),
+    drugform:new FormControl(null,[Validators.required]),
+    });
+
+    this.physicianform.patchValue(
+      {
+        procedurediscription : this.postobj.procedureDesciption
+      }
+    )
+    //this.physicianform.controls['procedurediscription'].setValue(this.postobj.procedureDesciption);
 }
 getdiscriptiondetails()
 {
   this.patient.GetDiagnosisdetails().subscribe((x) => {
     this.listOfdiagnosis.push(...x);
-   //console.log(this.listOfdiagnosis);
+   console.log(this.listOfdiagnosis);
     for (let i = 0; i < this.listOfdiagnosis.length; i++) {
-      this.listOfdiagnosisdiscription.push(this.listOfdiagnosis[i].Description);
+      this.listOfdiagnosisdiscription.push(this.listOfdiagnosis[i].description);
       var mySet = new Set(this.listOfdiagnosisdiscription);
       this.listOfdiagnosisdiscription = [...mySet];
-    // console.log(this.listOfdiagnosisdiscription);
+     console.log(this.listOfdiagnosisdiscription);
      
     }
     //console.log(this.listOfdiagnosisdiscription);
@@ -204,10 +241,10 @@ getproceduredetails()
     this.listOfprocedure.push(...x);
    //console.log(this.listOfprocedure);
     for (let i = 0; i < this.listOfprocedure.length; i++) {
-      this.listOfprocedurediscription.push(this.listOfprocedure[i].ProcedureDescription);
+      this.listOfprocedurediscription.push(this.listOfprocedure[i].description);
       var mySet = new Set(this.listOfprocedurediscription);
       this.listOfprocedurediscription = [...mySet];
-      //console.log(this.listOfprocedurediscription);
+      console.log(this.listOfprocedurediscription);
      //console.log(myArr);
     }
     
@@ -224,7 +261,7 @@ SetConditionforvisibility()
   if(this.role=="nurse")
   {
    // logKeyValuePairs(this.physicianform,1)
-    this.physicianform.disable();
+    //this.physicianform.disable();
   }
   else if(this.role=="physician")
   {
@@ -265,9 +302,9 @@ ondiscriptionselect(event:any)
         {
           this.physicianform.controls['diagnosisid'].setValue('0');
         }
-       else if(event.value===this.diagnosisidlist[i].Description)
+       else if(event.value===this.diagnosisidlist[i].description)
         {
-          this.physicianform.controls['diagnosisid'].setValue(this.diagnosisidlist[i].ID);
+          this.physicianform.controls['diagnosisid'].setValue(this.diagnosisidlist[i].id);
         }
       }
       
@@ -298,9 +335,9 @@ onselectprocedure(event:any)
         {
           this.physicianform.controls['procedureid'].setValue('0');
         }
-       else if(event.value===this.listOfprocedure[i].ProcedureDescription)
+       else if(event.value===this.listOfprocedure[i].description)
         {
-          this.physicianform.controls['procedureid'].setValue(this.listOfprocedure[i].ID);
+          this.physicianform.controls['procedureid'].setValue(this.listOfprocedure[i].id);
         }
       }
       

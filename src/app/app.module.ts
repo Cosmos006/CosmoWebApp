@@ -100,13 +100,15 @@ import { MatSelectFilterModule } from 'mat-select-filter';
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 
 //ngb-bootstrap
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NursedashboardgridComponent } from './Component/nurse/nursedashboardgrid/nursedashboardgrid.component';
 import { BarchartComponent } from './Component/nurse/barchart/barchart.component';
 import { DoctorlistComponent } from './Component/nurse/doctorlist/doctorlist.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
@@ -168,7 +170,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatFormFieldModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgbModule,
+    //NgbModule,
     //Material Component
     MaterialModule,
     FlexLayoutModule,
@@ -209,6 +211,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     Ng2TelInputModule,
     MatSelectFilterModule,
     MatTooltipModule,
+    MatCheckboxModule,
     //Apex chart
   ],
   exports: [],
