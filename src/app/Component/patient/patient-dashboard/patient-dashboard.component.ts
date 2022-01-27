@@ -150,9 +150,8 @@ export class PatientDashboardComponent implements OnInit {
         this.filterAppointments('1');
       });
   }
-  
-  filterAppointments(val: any, pagination: any = {}) {
 
+  filterAppointments(val: any, pagination: any = {}) {
     if (val == '1') {
       this.patientDashboardService
         .GetAllUpcomingAppointmentList()
@@ -169,7 +168,6 @@ export class PatientDashboardComponent implements OnInit {
               v.appointmentStatus != 'Rejected'
           );
           this.processPaginationAndFilter(pagination);
-
         });
     } else if (val == '2') {
       this.patientDashboardService
@@ -185,7 +183,6 @@ export class PatientDashboardComponent implements OnInit {
               e.columnDef != 'cancelBtn'
           );
           this.processPaginationAndFilter(pagination);
-
         });
     } else {
       this.patientDashboardService
@@ -193,7 +190,6 @@ export class PatientDashboardComponent implements OnInit {
 
         .subscribe((x: AppointmentData[]) => {
           if (val == '3') {
-        
             this.griddata = x.filter((v) => v.appointmentStatus == 'Rejected');
             this.showcolumns = this.allcolumns.filter(
               (e) =>
@@ -328,10 +324,8 @@ export class PatientDashboardComponent implements OnInit {
           //var data = v.find((e) => e.id == obj.guid)!;
           this.ShowViewdetailModel(v);
         });
-
     }
     if (obj.columnDef == 'reasonBtn') {
-      
       var id = obj.guid;
       let apointdata = this.patientDashboardService
         .GetAppointmentById(obj.guid)
@@ -349,8 +343,9 @@ export class PatientDashboardComponent implements OnInit {
   DashboardRedirectURL(navigate: any) {
     if (navigate == 'locked') {
       this.router.navigateByUrl('/LockedAccount');
-    } else if (navigate == 'patient') {
-      this.router.navigateByUrl('/AdminPatient');
+    } else if (navigate == 'Covid') {
+      //this.router.navigateByUrl('/AdminPatient');
+      this.router.navigate(['PatientBookAppointment/Covid']);
     }
   }
 }

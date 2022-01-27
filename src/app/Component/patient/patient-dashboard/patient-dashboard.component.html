@@ -61,12 +61,16 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="col-lg-3 col-6">
+            <div class="col-lg-3 col-6">
               <div class="small-box bg-success" style="padding: 11px">
                 <div class="inner">
-                  <h3 style="font-size: 20px">Book Appointment</h3>
+                  <h3 style="font-size: 20px">Covid Book Appointment</h3>
                   <br />
-                  <button (click)="demographicBtn()" type="button" class="btn btn-primary float-center">
+                  <button
+                    (click)="DashboardRedirectURL('Covid')"
+                    type="button"
+                    class="btn btn-primary float-center"
+                  >
                     Click here
                   </button>
                 </div>
@@ -74,26 +78,21 @@
                   <i class="ion ion-pie-graph"></i>
                 </div>
               </div>
-            </div> -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div
-                class="small-box bg-success"
-                style="padding: 34px"
-                routerLink="/PatientBookappointment"
-              >
+            </div>
+            <!-- <div class="col-lg-3 col-6">
+              <div class="small-box bg-success" style="padding: 34px">
                 <div class="inner">
-                  <h3></h3>
-                  <a (click)="DashboardRedirectURL('patient')"
-                    ><p>Book Appointment</p></a
-                  >
+                  <button class="btn btn-primary" style="height: 47px">
+                    <a (click)="DashboardRedirectURL('Covid')"
+                      ><p>Covid Booking</p></a
+                    >
+                  </button>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
               </div>
-
-            </div>
+            </div> -->
           </div>
           <!-- Main row -->
           <div class="row">
@@ -441,7 +440,7 @@
 
       <!-- Modal body -->
       <div class="modal-body" *ngIf="selectedAppointment">
-                <h5>AppointmentStatus : {{ selectedAppointment.appointmentStatus }}</h5>
+        <h5>AppointmentStatus : {{ selectedAppointment.appointmentStatus }}</h5>
         <h5>Doctor : {{ selectedAppointment.doctorName }}</h5>
         <!-- <h5>Nurse Name : {{ selectedAppointment.nurseName }}</h5> -->
         <h5>AppoinmentStatus : {{ selectedAppointment.appointmentStatus }}</h5>
