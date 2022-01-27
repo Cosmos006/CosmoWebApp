@@ -28,11 +28,9 @@ export class PaymentService {
     );
   }
 
-  OrderConfirmationId(PatientId: string, Amount: string) {
-    var amount = Number(Amount);
-
+  OrderConfirmationId(PatientId: string, paymentId: string, orderId: string) {
     return fetch(
-      `https://localhost:44318/api/PaymentApi/CreateOrder/${'938742D3-F965-47A4-8E2B-697CF5310C87'}?Amount=${amount}`,
+      `https://localhost:44318/api/PaymentApi/Complete/${PatientId}?paymentId=${paymentId}&orderId=${orderId}`,
       {
         method: 'POST',
         redirect: 'follow',

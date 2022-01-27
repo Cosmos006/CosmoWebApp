@@ -38,12 +38,12 @@ export class SubscriptionComponent implements OnInit {
           //alert(Data.amount);
           const options: any = {
             key: Data.razorpayKey,
-            //amount: Data.amount, // amount should be in paise format to display Rs 1255 without decimal point
+            amount: Data.amount, // amount should be in paise format to display Rs 1255 without decimal point
             currency: 'INR',
             name: 'Cosmos Hospital', // company name or product name
             description: '', // product description
             //image: 'https://photos.app.goo.gl/ogT1qH7uGkxEbZf66 ', // company logo or product image
-            order_id: 'order_IoefBUjeJuRJEK', // order_id created by you in backend
+            order_id: Data.orderId, // order_id created by you in backend
             prefill: {
               name: Data.name,
               email: Data.email,
@@ -66,7 +66,25 @@ export class SubscriptionComponent implements OnInit {
             var orderId = response.razorpay_order_id;
             var paymentId = response.razorpay_payment_id;
             var signature = response.razorpay_signature;
+
+            // alert(response.razorpay_payment_id);
+            // alert(response.razorpay_order_id);
+
             if (response != null) {
+              this.auth
+                .OrderConfirmationId(
+                  '938742D3-F965-47A4-8E2B-697CF5310C87',
+                  paymentId,
+                  orderId
+                )
+                .then((response) => response.text())
+                .then((result) => {
+                  if (result == 'Success') {
+                    alert('Success');
+                  } else {
+                    alert('Failure');
+                  }
+                });
             }
           };
           options.modal.ondismiss = () => {
