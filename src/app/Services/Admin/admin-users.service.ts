@@ -6,6 +6,19 @@ import { environment } from 'src/environments/environment';
 import { GetAdminHospiatlUser } from '../Url';
 import { HospitalUser } from 'src/app/models/HospitalUser';
 import { AnyObject } from 'chart.js/types/basic';
+
+export interface ICustomWindow extends Window {
+  _custom_global_stuff: string;
+}
+function getWindow(): any {
+  return window;
+}
+
+function _window(): any {
+  // return the global native browser window object
+  return window;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -60,5 +73,13 @@ export class AdminUsersService {
     return this.http.get<AdminPatient>(
       this.baseUrl + GetAdminHospiatlUser.GetAdminHospiatlUsers
     );
+  }
+
+  // get nativeWidow(): ICustomWindow {
+  //   return getWindow();
+  // }
+
+  get nativeWindow(): any {
+    return _window();
   }
 }

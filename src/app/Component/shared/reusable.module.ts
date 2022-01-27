@@ -27,7 +27,8 @@ import { CalendarComponent } from './calendar/calendar.component';
 //full Calender
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
-import interactionPlugin from '@fullcalendar/interaction'; // a plug
+import interactionPlugin from '@fullcalendar/interaction';
+import { SubscriptionComponent } from './subscription/subscription.component'; // a plug
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
@@ -41,6 +42,7 @@ FullCalendarModule.registerPlugins([
     PieChartComponent,
     BookAppointmentComponent,
     CalendarComponent,
+    SubscriptionComponent,
   ],
   imports: [
     CommonModule,
