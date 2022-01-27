@@ -24,4 +24,14 @@ export class CalendarService {
       }
     );
   }
+
+  GetZoomLink(Id: any, Role: string) {
+    return fetch(
+      `https://localhost:44347/api/Appointments/GetZoomLink/${Id}?Role=${Role}`,
+      {
+        method: 'GET',
+        redirect: 'follow',
+      }
+    );
+  }
 }

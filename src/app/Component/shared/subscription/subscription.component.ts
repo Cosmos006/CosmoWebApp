@@ -29,8 +29,12 @@ export class SubscriptionComponent implements OnInit {
   }
 
   Payment(amount: any) {
+    var Get = localStorage.getItem('currentUser');
+    if (typeof Get === 'string') {
+      var id = JSON.parse(Get).id;
+    }
     this.auth
-      .GenerateOrderId('938742D3-F965-47A4-8E2B-697CF5310C87', amount)
+      .GenerateOrderId(id, amount)
       .then((response) => response.text())
       .then((result) => {
         if (result != null) {
@@ -66,17 +70,14 @@ export class SubscriptionComponent implements OnInit {
             var orderId = response.razorpay_order_id;
             var paymentId = response.razorpay_payment_id;
             var signature = response.razorpay_signature;
-
-            // alert(response.razorpay_payment_id);
-            // alert(response.razorpay_order_id);
+            var Get = localStorage.getItem('currentUser');
+            if (typeof Get === 'string') {
+              var id = JSON.parse(Get).id;
+            }
 
             if (response != null) {
               this.auth
-                .OrderConfirmationId(
-                  '938742D3-F965-47A4-8E2B-697CF5310C87',
-                  paymentId,
-                  orderId
-                )
+                .OrderConfirmationId(id, paymentId, orderId)
                 .then((response) => response.text())
                 .then((result) => {
                   if (result == 'Success') {
