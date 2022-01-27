@@ -77,6 +77,7 @@ AllergyType:any
    this.bindToUI();
    this.fetchdata(id);
    this.getAllergyDetails();
+   
   }
 
   getAllergyDetails() {
@@ -186,7 +187,7 @@ AllergyType:any
         response.text().then(responseData => {
           var result = JSON.parse(responseData);
           _that.postobj = result;
-
+          
           this.Demographicid=_that.postobj.id;
           _that.bindToUI();
           console.log(this.Demographicid);
