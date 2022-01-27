@@ -11,13 +11,13 @@ export class patientvisitdetails {
  bodyTemprature?: number;
  respirationRate?: number;
  doctorDescription?:string;
- procedureDescription?:string;
+ procedureDesciption  ?:string;
  diagnosisDescription?:string;
  drugDescription?:string;
  appointmentId?:string;
  appointments?:Appointment;
  createddate?:Date;
- diagnosisList!:string[];
- proceduresList!:string[];
- drugList!:string[];
+ diagnosislist!:string[];
+ procedureslist!:string[];
+ druglist!:string[];
 }

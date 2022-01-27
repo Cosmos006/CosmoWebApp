@@ -275,7 +275,7 @@ AllergyType:any
       emergancycountry: new FormControl(this.postobj.patientRelativeDetails?.country),
       accessforpatientportal: new FormControl(this.postobj.patientRelativeDetails?.isAccess, [Validators.required]),
       allergyid: new FormControl(null),
-      allergytype: new FormControl(this.postobj.allergyList),//this.AllergyType=this.postobj.allergyList.join(', ')
+      allergytype: new FormControl(this.postobj?.allergyList),//this.AllergyType=this.postobj.allergyList.join(', ')
       allergyname: new FormControl(this.postobj?.allergynameList),
       allergydetails: new FormControl(this.postobj?.allergyDetails),
       allergydescription: new FormControl(null),

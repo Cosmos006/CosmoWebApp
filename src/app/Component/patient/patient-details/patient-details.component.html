@@ -237,7 +237,7 @@
                       <span class='col-md-6'>
                         <mat-form-field appearance="outline">
                           <mat-label>Relationship</mat-label>
-                          <mat-select formControlName="emergancyrelationship" multiple required>
+                          <mat-select formControlName="emergancyrelationship" required>
 
                             <mat-option *ngFor="let Relation of RelationshipList" [value]="Relation">{{ Relation }}
                             </mat-option>

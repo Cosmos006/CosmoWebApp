@@ -125,16 +125,16 @@ Addupdatepatientdetails()
 
         //diagnosisid:this.physicianform.value.diagnosisid,
         
-        diagnosisList:this.physicianform.value.diagnosisdiscription,
+        diagnosislist:this.physicianform.value.diagnosisdiscription,
         //diagnosisDescription: this.physicianform.value.diagnosisdiscription,
         
         //diagnosisisdepricated:this.physicianform.value.diagnosisisdepricated,
         //procedureId:this.physicianform.value.procedureid,
        // diagnosislist:JSON.parse(this.physicianform.value.diagnosisdiscription),
-       proceduresList:this.physicianform.value.procedurediscription,
+       procedureslist:this.physicianform.value.procedurediscription,
         //proceduredepricated:this.physicianform.value.proceduredepricated,
         //drugid:this.physicianform.value.drugid,
-        drugList:['para','vicks'],
+        druglist:['para','vicks'],
         
         doctorDescription: this.physicianform.value.diagnosisdiscriptionifother,
         appointmentId: '93666A3C-9684-4BB1-73BA-08D9DD8C4FC3',
@@ -197,14 +197,14 @@ fetchdata(Id:any)
     });
     this.physicianform=new FormGroup({
     diagnosisid:new FormControl(null,),
-     diagnosisdiscription:new FormControl(this.postobj.diagnosisList?this.postobj.diagnosisList:null,[Validators.required]),
+     diagnosisdiscription:new FormControl(this.postobj.diagnosislist? this.postobj.diagnosislist:null,[Validators.required]),
      diagnosisdiscriptionifother:new FormControl(
       this.postobj?.doctorDescription
      
      ),
     diagnosisisdepricated:new FormControl(null,),
      procedureid:new FormControl(null,),
-     procedurediscription:new FormControl(this.postobj.procedureDescription?this.postobj.procedureDescription:null,[Validators.required]),
+     procedurediscription:new FormControl(this.postobj.procedureslist?this.postobj.procedureslist:null,[Validators.required]),
      proceduredepricated:new FormControl(null,),
     drugid:new FormControl(null,),
      drugname:new FormControl(this.postobj.drugDescription?this.postobj.drugDescription:null,),
@@ -212,6 +212,13 @@ fetchdata(Id:any)
     drugbrandname:new FormControl(null,),
     drugform:new FormControl(null,[Validators.required]),
     });
+
+    this.physicianform.patchValue(
+      {
+        procedurediscription : this.postobj.procedureDesciption
+      }
+    )
+    //this.physicianform.controls['procedurediscription'].setValue(this.postobj.procedureDesciption);
 }
 getdiscriptiondetails()
 {
