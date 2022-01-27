@@ -25,7 +25,7 @@ export class EditDailogeComponent implements OnInit {
   diagnosis!:string;
   sugarLevel!:string;
   docters!:Doctor[];
- 
+  selectedFoods = 1;
   constructor(public dialogRef: MatDialogRef<EditDailogeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,public dailogueservice:DailogeService,private formBuilder: FormBuilder) { }
 
@@ -33,7 +33,7 @@ export class EditDailogeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data.data);
-    this.id=this.data.data.id
+   // this.selectedFoods=this.data.data.id
     console.log(this.id)
     this.name=this.data.data.name
     this.age=this.data.data.age
@@ -74,8 +74,9 @@ export class EditDailogeComponent implements OnInit {
     });
   }
   select(docid: any) {
-    let itemvalue = docid.target.value;   
-    console.log(docid.target.value);
+    console.log(docid.value);
+    // let itemvalue = docid.target.value;   
+    // console.log(docid.target.value);
    
 
     }

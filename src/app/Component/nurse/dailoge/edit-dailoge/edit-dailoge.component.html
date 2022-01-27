@@ -22,7 +22,8 @@
               </mat-form-field>
               &nbsp; &nbsp; &nbsp;
               <mat-form-field >
-                <mat-select (selectionChange)="select($event)" class="form-control" placeholder="Physician" [(ngModel)]="this.id" name="physician" required>
+                <mat-select  class="form-control"  [ngModel]="selectedFoods" 
+                 name="physician" required>
                   <!-- <mat-select-filter [array]="listOfPosts" (filteredReturn)="filteredList=$event"></mat-select-filter>  -->
                   <mat-option
                    *ngFor="let list of docters"
