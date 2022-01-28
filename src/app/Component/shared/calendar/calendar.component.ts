@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CalendarOptions,
   DateSelectArg,
@@ -6,14 +7,16 @@ import {
   EventApi,
   EventInput,
 } from '@fullcalendar/angular';
+import { Role } from 'src/app/models/Role';
 import { AdminService } from 'src/app/Services/admin.service';
+import { CalendarService } from 'src/app/Services/Calendar/calendar.service';
 import { PatientService } from 'src/app/Services/patient.service';
 import { INITIAL_EVENTS, createEventId } from '../../../models/event.utils';
 
 export class EventMap {
   // public id: string,
   constructor(
-    public Id: string,
+    public publicId: string,
     public title: string,
     public date: string,
     public color: string
@@ -26,35 +29,43 @@ export class EventMap {
   styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent implements OnInit {
+  UserType: string = '';
+  CheckPatient: boolean = false;
   name!: string;
   date?: string;
   showModal!: boolean;
   ApproveModal!: boolean;
+  AddAppointment!: boolean;
+  checkDate: boolean = false;
   calendarVisible = false;
   listOfEvent: EventMap[] = [];
   value: EventMap[] = [];
-  constructor(private adminService: AdminService) {}
+  //Date
+  selectdate?: string;
+  minDate: any;
+
+  //user
+  AppointmentId?: string;
+
+  constructor(
+    private adminService: AdminService,
+    private admim: CalendarService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    var CurrentDate = new Date();
+    this.minDate = CurrentDate;
+  }
 
   ngOnInit() {
-    var data = 'Nurse';
+    this.route.paramMap.subscribe((res) => {
+      this.UserType += res.get('Type');
+    });
 
-    // switch (true) {
-    //   case data === 'Patient':
-    //     this.PatientService();
-    //     break;
-    //   case data === 'Physician':
-    //     this.PhysicianService();
-    //     break;
-    //   case data === 'Nurse':
-    //     this.NurseService();
-    //     break;
-    //   case data === 'Admin':
-    //     this.AdminService();
-    //     break;
-    //   default:
-    //     this.Default();
-    //     break;
-    // }
+    if (this.UserType == 'Patient') {
+      //alert('patient');
+      this.CheckPatient = true;
+    }
 
     this.adminService
       .GetListofData()
@@ -64,7 +75,7 @@ export class CalendarComponent implements OnInit {
           var title = this.listOfEvent[i].title;
           var start = DateType(this.listOfEvent[i].date);
           this.value.push({
-            Id: this.listOfEvent[i].Id,
+            publicId: this.listOfEvent[i].publicId,
             title: this.listOfEvent[i].title,
             date: this.listOfEvent[i].date,
             color: this.listOfEvent[i].color,
@@ -84,18 +95,6 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  // Servicecall() {
-  //   this.PatientCalendar();
-  //   {
-  //   }
-  // }
-
-  PatientCalendar() {}
-  PhysicianCalendar() {}
-  NurseCalendar() {}
-  AdminCalendar() {}
-  DefaultCalendar() {}
-
   calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
@@ -109,7 +108,7 @@ export class CalendarComponent implements OnInit {
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
-    //select: this.handleDateSelect.bind(this),
+    select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
     height: 500,
@@ -142,19 +141,11 @@ export class CalendarComponent implements OnInit {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
-
-    calendarApi.unselect(); // clear date selection
-
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title: 'New Even Created',
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-      });
+    this.selectdate = selectInfo.startStr;
+    if (new Date(this.selectdate) < this.minDate) {
+      this.checkDate = true;
+    } else {
+      this.AddAppointment = true;
     }
   }
 
@@ -162,6 +153,7 @@ export class CalendarComponent implements OnInit {
     this.name = clickInfo.event.title;
     var dateparms = clickInfo.event._instance?.range.start;
     var ID = clickInfo.event._def?.publicId;
+    this.AppointmentId = clickInfo.event._def?.extendedProps['publicId'];
     var date = dateparms?.toDateString();
     var time = dateparms?.toTimeString();
     var color = clickInfo.event._def?.ui.backgroundColor;
@@ -179,7 +171,68 @@ export class CalendarComponent implements OnInit {
   hide() {
     this.showModal = false;
   }
-  Approvehide() {
+
+  ApproveReject(Type: string) {
+    // alert(Type);
+    // alert(this.AppointmentId);
+
+    var AppointmentID = this.AppointmentId?.toString();
+
+    this.admim
+      .ApproveReject(AppointmentID, Type)
+      .then((response) => response.text())
+      .then((result) => {
+        if (result == 'Success') {
+          window.location.reload();
+        }
+      })
+      .catch((error) => console.log('error', error));
+
+    //this.ApproveModal = false;
+  }
+
+  ApproveRejectClose() {
     this.ApproveModal = false;
+  }
+  AddAppointmentClose() {
+    this.AddAppointment = false;
+  }
+  checkDateClose() {
+    this.checkDate = false;
+  }
+  CreateAppointment() {
+    this.router.navigate(['/BookAppointment/Patient']);
+  }
+
+  JoinMeeting() {
+    var Get = localStorage.getItem('currentUser');
+    if (typeof Get === 'string') {
+      var id = JSON.parse(Get).id;
+      var role = JSON.parse(Get).role;
+    }
+
+    var AppointmentID = this.AppointmentId?.toString();
+
+    this.admim
+      .GetZoomLink(AppointmentID, role)
+      .then((response) => response.text())
+      .then((result) => {
+        if (result != null) {
+          var data = JSON.parse(result);
+          var patientMeetingLink = data[0].patientMeetingLink;
+          var physicianMeetingLink = data[0].physicianMeetingLink;
+          if (role == 'PATIENT') {
+            window.open(patientMeetingLink, '_blank');
+          } else if (
+            role == 'PHYSICIAN' ||
+            role == 'NURSE' ||
+            role == 'ADMIN'
+          ) {
+            window.open(physicianMeetingLink, '_blank');
+            this.hide();
+          }
+        }
+      })
+      .catch((error) => console.log('error', error));
   }
 }

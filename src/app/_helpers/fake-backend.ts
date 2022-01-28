@@ -20,7 +20,7 @@ export declare function throwError(
 const users: User[] = [
   {
     id: 1,
-    username: 'admin',
+    userName: 'admin',
     password: 'admin',
     firstName: 'Admin',
     lastName: 'User',
@@ -29,7 +29,7 @@ const users: User[] = [
   },
   {
     id: 2,
-    username: 'user',
+    userName: 'user',
     password: 'user',
     firstName: 'Normal',
     lastName: 'User',
@@ -38,7 +38,7 @@ const users: User[] = [
   },
   {
     id: 3,
-    username: 'physician@gmail.com',
+    userName: 'physician@gmail.com',
     password: 'physician@123',
     firstName: 'Normal',
     lastName: 'User',
@@ -47,7 +47,7 @@ const users: User[] = [
   },
   {
     id: 4,
-    username: 'patient@gmail.com',
+    userName: 'patient@gmail.com',
     password: 'patient@123',
     firstName: 'Normal',
     lastName: 'User',
@@ -56,7 +56,7 @@ const users: User[] = [
   },
   {
     id: 5,
-    username: 'nurse@gmail.com',
+    userName: 'nurse@gmail.com',
     password: 'nurse@123',
     firstName: 'Normal',
     lastName: 'User',
@@ -99,12 +99,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function authenticate() {
       const { username, password } = body;
       const user = users.find(
-        (x) => x.username === username && x.password === password
+        (x) => x.userName === username && x.password === password
       );
       if (!user) return error('Username or password is incorrect');
       return ok({
         id: user.id,
-        username: user.username,
+        username: user.userName,
         firstName: user.firstName,
         lastName: user.lastName,
         role: user.role,

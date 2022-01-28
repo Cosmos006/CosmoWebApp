@@ -61,7 +61,10 @@ import { BookAppointmentComponent } from './Component/shared/book-appointment/bo
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
 //Internet Check
 import { NetworkStatusAngularModule } from 'network-status-angular';
-import { MY_FORMATS, PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
+import {
+  MY_FORMATS,
+  PatientDetailsComponent,
+} from './Component/patient/patient-details/patient-details.component';
 import { RegisterComponent } from './Component/home/Register/register.component';
 import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
 import { UserService } from './Services/Userservice/userservice/user.service';
@@ -81,10 +84,12 @@ import { AuthenticationService } from './Services';
 
 //Apex Chart
 
-
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { Ng2TelInputModule } from 'ng2-tel-input';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { PreviouspatientvisitdetailsComponent } from './Component/patient/previouspatientvisitdetails/previouspatientvisitdetails.component';
@@ -94,13 +99,15 @@ import { MatSelectFilterModule } from 'mat-select-filter';
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 
 //ngb-bootstrap
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTablegridComponent } from './Component/nurse/mat-tablegrid/mat-tablegrid.component';
 import { NurseDashboardComponent } from './Component/nurse/nurse-dashboard/nurse-dashboard.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NursedashboardgridComponent } from './Component/nurse/nursedashboardgrid/nursedashboardgrid.component';
 import { BarchartComponent } from './Component/nurse/barchart/barchart.component';
 import { DoctorlistComponent } from './Component/nurse/doctorlist/doctorlist.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
@@ -113,6 +120,11 @@ FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
 ]);
+
+//Location Strategy
+
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -146,7 +158,6 @@ FullCalendarModule.registerPlugins([
     DoctorlistComponent,
     AdminPatientComponent,
     AdminHospitalComponent,
-
   ],
   imports: [
     HttpClientModule,
@@ -160,7 +171,7 @@ FullCalendarModule.registerPlugins([
     MatFormFieldModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgbModule,
+    //NgbModule,
     //Material Component
     MaterialModule,
     FlexLayoutModule,
@@ -196,22 +207,35 @@ FullCalendarModule.registerPlugins([
     NetworkStatusAngularModule.forRoot(),
     MatProgressSpinnerModule,
     //Apex chart
+    MatSnackBarModule,
     MatStepperModule,
     Ng2TelInputModule,
-    NgxMatSelectSearchModule,
     MatSelectFilterModule,
     MatTooltipModule,
+    MatCheckboxModule,
     //Apex chart
-    
   ],
   exports: [],
   providers: [
     UserService,AuthGuard,AuthenticationService, AlertService, PhysicianService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    UserService,
+    AuthGuard,
+    AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    UserService,
+    AuthGuard,
+    AuthenticationService,
+    AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
     // provider used to create fake backend
-    fakeBackendProvider
+    fakeBackendProvider,
   ],
   bootstrap: [AppComponent],
 })

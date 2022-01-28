@@ -28,7 +28,9 @@ import { PatientViewdetailsComponent } from './Component/patient/patient-viewdet
 import { PreviouspatientvisitdetailsComponent } from './Component/patient/previouspatientvisitdetails/previouspatientvisitdetails.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
+import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
+import { SubscriptionComponent } from './Component/shared/subscription/subscription.component';
 import { Role } from './models/Role';
 import { AuthGuard } from './_helpers';
 
@@ -99,11 +101,11 @@ const routes: Routes = [
     path: 'AppointmentView',
   },
   {
-    component: BarchartComponent ,
+    component: BarchartComponent,
     path: 'BarchartView',
   },
   {
-    component: NursedashboardgridComponent ,
+    component: NursedashboardgridComponent,
     path: 'NursegridView',
   },
   {
@@ -124,7 +126,7 @@ const routes: Routes = [
     component: PatientBookappointmentComponent,
     path: 'PatientBookappointment',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Patient]  },
+    data: { roles: [Role.Patient] },
   },
   {
     component: PatientBookappointmentComponent,
@@ -161,14 +163,29 @@ const routes: Routes = [
   },
   {
     component: CalendarComponent,
-    path: 'NurseAdminCalender',
+    path: 'Calender',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Nurse] },
+    data: {
+      roles: [Role.Admin] || [Role.Nurse] || [Role.Physician],
+    },
   },
   {
-
+    component: CalendarComponent,
+    path: 'PatientCalender/:Type',
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Role.Patient],
+    },
+  },
+  {
     component: PatientBookappointmentComponent,
-    path: 'AdminBookappointment',
+    path: 'AdminBookappointment/:type',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] },
+  },
+  {
+    component: PatientBookappointmentComponent,
+    path: 'PatientBookappointment/:type',
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] },
   },
@@ -188,7 +205,33 @@ const routes: Routes = [
     component: AdminHospitalComponent,
     path: 'AdminHospital',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] },
+    data: {
+      roles: [Role.Admin] || [Role.Patient] || [Role.Nurse] || [Role.Physician],
+    },
+  },
+  {
+    component: BookAppointmentComponent,
+    path: 'BookAppointment/:Type',
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Role.Admin],
+    },
+  },
+  {
+    component: BookAppointmentComponent,
+    path: 'PatientBookAppointment/:Type',
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Role.Patient],
+    },
+  },
+  {
+    component: SubscriptionComponent,
+    path: 'Subscription',
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Role.Patient],
+    },
   },
   {
     component: PreviouspatientvisitdetailsComponent,
@@ -197,7 +240,6 @@ const routes: Routes = [
     data: { roles: [Role.Patient] },
   },
   { path: '**', redirectTo: '' },
-  
 ];
 
 @NgModule({

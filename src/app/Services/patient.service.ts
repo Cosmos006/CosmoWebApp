@@ -22,28 +22,16 @@ export class PatientService {
   }
 
   Edit(value: any) {
-    //alert(value);
-
-    // for(var i=0;i<value.length;i++)
-    // {
-
-    // }
-
-    // const data = {
-    //   id: guid(),
-    //   title: 'Event Today',
-    //   date: '2021-12-04 13:15:30',
-    //   color: 'green',
-    // };
-    // this.http.patch<any>(
-    //   'http://localhost:3000/INITIAL_EVENTS/' + `${id}`,
-    //   data
-    // );
-
     this.http
       .post<any>('http://localhost:3000/INITIAL_EVENTS/', value)
       .subscribe((value) => {
         console.log(value);
       });
+  }
+
+  GetPatientAppointmentDetailsById(AppointmentID: string) {
+    return this.http.get<any>(
+      `https://localhost:44347/api/Appointments/GetEditBookAppointmentDetails/${AppointmentID}`
+    );
   }
 }

@@ -1,5 +1,5 @@
 <!-- <p>dynamic-table works!</p> -->
-
+<div >
 <mat-card class="search-results">
   
   <mat-card-header>
@@ -17,30 +17,31 @@
       <input matInput  (change)="applyFilter($event)" autocomplete="off" />
     </mat-form-field>
   
-    <table mat-table #table [dataSource]="dataSource" style="width: 100%">
+    <table mat-table #table [dataSource]="dataSource">
       <ng-container
         *ngFor="let column of columns"
         [matColumnDef]="column.columnDef" 
       >
         <div *ngIf="column.columnDef !== 'detailBtn' && column.type !== 'button'">
           <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
-          <td  mat-cell *matCellDef="let row">
+          <td  mat-cell *matCellDef="let row" style="max-width: 30rem;">
             <span class="Elipsis">{{ column.dataName(row) }}</span> 
           </td>
         </div>
 
         <div *ngIf="column.columnDef === 'detailBtn' || (column.type === 'button')">
           <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
-          <td mat-cell *matCellDef="let row">
+          <td mat-cell *matCellDef="let row" style="max-width: 30rem;">
             <button
               mat-raised-button
               color="primary"
               id="column.dataName(row)"
+             
               (click)="viewItem(column.dataName(row),column.columnDef)"
             >
             {{ column.header }}
             </button>
-          </td>pu
+          </td>
         </div>
       </ng-container>
 
@@ -52,6 +53,7 @@
       ></tr>
     </table>
 
+  
     <mat-paginator
     #paginator 
     [pageSize]="5" 
@@ -62,5 +64,6 @@
     ></mat-paginator>
   </mat-card-content>
 </mat-card>
+</div>
 
 
