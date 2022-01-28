@@ -26,7 +26,7 @@ export class DailogeService  {
 
   getAppointmentData(): Observable<Product[]>{
     
-         return this.http.get<Product[]>(this.baseUrl + Appointment.AppointmentGrid);
+         return this.http.get<Product[]>('https://localhost:44318/api/NurseDash/GetNurseAppointment');
   }
   updateIssue(product: Product): void {
     this.appointmentData = product;
