@@ -78,6 +78,15 @@
           Nurse
         </a>
         <a
+        mat-button
+        class="companyName"
+        [routerLink]="['Inbox']"
+        routerLinkActive="router-link-active"
+        *ngIf="isNurse || isPhysician"
+      >
+        Inbox
+      </a>
+        <a
           mat-button
           class="companyName"
           [routerLink]="['DynamicView']"
@@ -271,14 +280,7 @@
       >
         Calendar
       </a>
-      <a
-        mat-button
-        [routerLink]="['Inbox']"
-        routerLinkActive="router-link-active"
-        *ngIf="isNurse"
-      >
-        Inbox
-      </a>
+     
     </div>
   </mat-sidenav>
 </div>

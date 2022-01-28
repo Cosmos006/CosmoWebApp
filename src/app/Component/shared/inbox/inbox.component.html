@@ -315,29 +315,29 @@
               </td>
             </ng-container>
   
-            <ng-container matColumnDef="Description">
+            <ng-container matColumnDef="Diagnosis">
               <th class="widthcol1" mat-header-cell *matHeaderCellDef>
-                Description
+                Diagnosis
               </th>
               <td
                 [style.color]="getBackgroundColor(element.date)"
                 mat-cell
                 *matCellDef="let element"
               >
-                {{ element.description }}
+                {{ element.diagnosis }}
               </td>
-            </ng-container>
+            </ng-container> 
   
-            <ng-container matColumnDef="Physician">
+            <ng-container matColumnDef="Patient">
               <th class="widthcol2" mat-header-cell *matHeaderCellDef>
-                Physician
+                Patient
               </th>
               <td
                 [style.color]="getBackgroundColor(element.date)"
                 mat-cell
                 *matCellDef="let element"
               >
-                {{ element.physician }}
+                {{ element.patientName }}
               </td>
             </ng-container>
   
@@ -348,7 +348,7 @@
                 mat-cell
                 *matCellDef="let element"
               >
-                {{ element.date | date: "dd-MMM-yy" }}
+                {{ element.appointmentDateTime | date: "dd-MMM-yy" }}
               </td>
             </ng-container>
   
@@ -359,11 +359,11 @@
                 mat-cell
                 *matCellDef="let element"
               >
-                {{ element.date | date: "h:mm:ss a z" }}
+                {{ element.appointmentDateTime | date: "h:mm:ss" }}
               </td>
             </ng-container>
   
-            <ng-container matColumnDef="Patient Details">
+            <ng-container matColumnDef="Visit Details">
               <th class="widthcol2" mat-header-cell *matHeaderCellDef>
                 Patient Details
               </th>
@@ -398,10 +398,10 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
-  
+<!--   
           <div *ngIf="dataSource.data.length === 0">
             <h3>There are no appointments this week</h3>
-          </div>
+          </div> -->
           <mat-paginator
             #paginator
             class="paginator"

@@ -54,7 +54,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   get isNurse() {
-    return true;
-    //return this.currentUser && this.currentUser.role === Role.Nurse;
+    //return true;
+    return this.currentUser && this.currentUser.role === Role.Nurse;
   }
 }
