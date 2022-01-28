@@ -322,8 +322,6 @@ export class InboxComponent implements OnInit, AfterViewInit {
         }
         //this.users.push();
        
-
-        
           //alert(id);
           this.currentEmployee = this.users.filter((x) => x.UserId == id);
           console.log(this.currentEmployee)
