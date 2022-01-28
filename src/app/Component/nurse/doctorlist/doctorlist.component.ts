@@ -16,7 +16,7 @@ import { Doctor } from 'src/app/models/doctordata';
 })
 export class DoctorlistComponent implements OnInit {
 countries!:Doctor[];
-  displayedColumns = ['id', 'name', 'specailization', 'status'];
+  displayedColumns = ['id', 'userName', 'specialization', 'status'];
   dataSource1 !: MatTableDataSource<Doctor>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;

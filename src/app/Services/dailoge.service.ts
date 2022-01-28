@@ -17,7 +17,7 @@ export class DailogeService  {
   constructor(private http: HttpClient) {}
 
   //Url Route
-  private readonly API_URL = 'http://localhost:3000/DoctorList';
+  private readonly API_URL = 'https://localhost:44318/api/PhysicianAvailablity';
   private readonly BAR_URL = 'http://localhost:3000/BarList';
   baseUrl = environment.LocalUrl;
   appointmentData: any;
