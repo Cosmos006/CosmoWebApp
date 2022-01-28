@@ -19,7 +19,7 @@ export class DailogeService  {
   //Url Route
   private readonly API_URL = 'http://localhost:3000/DoctorList';
   private readonly BAR_URL = 'https://localhost:44355/api/NurseDash/GetallBarChartDetails';
-  private readonly UP_URL = 'http://localhost:3000/UPCOMINGAPPOINTMENT_DATA';
+  private readonly UP_URL = 'https://localhost:44318/api/NurseDash/GetNurseUpComingAppointment';
   
   baseUrl = environment.LocalUrl;
   appointmentData: any;

@@ -30,7 +30,7 @@ export class UpcomingAppointmentComponent implements OnInit {
     this.appoiService.getUpcomingAppointments().subscribe(data => {
       this.dataSource1 = new MatTableDataSource(data)    
       this.dataSource1.paginator = this.paginator;
-      console.log(this.dataSource1)
+      console.log(data)
     });
   }
   startEdit(data: any[]) {    
