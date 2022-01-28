@@ -8,6 +8,7 @@ export interface Product {
     email:string;
     physician:string;
     diagnosis?:string;
+    date?:string;
 }
 
 

@@ -106,7 +106,7 @@ console.log(pageIndex,pageSize);
   }
   Onsubmitbook(){
     console.log("vamsiclicked")
-    this.router.navigateByUrl('/nurseBookappointment');
+    this.router.navigateByUrl('/NurseBookappointment');
   }
   Onsubmitbar(){
     console.log("vamsiclickedt")
@@ -114,7 +114,7 @@ console.log(pageIndex,pageSize);
   }
   Ondoctorlist(){
     console.log("VamsiOnDoctor")
-    this.router.navigateByUrl('/Doctorlist');
+    this.router.navigateByUrl('/NurseUpcomingAppointmentComponent');
   }
   Oncalender(){
     this.router.navigateByUrl('/NurseAdminCalender');

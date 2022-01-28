@@ -8,16 +8,14 @@ import { Product } from 'src/app/models/appointment';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
-/**
- * @title Table with sorting
- */
 @Component({
-  selector: 'app-appointment-view',
-  templateUrl: './appointment-view.component.html',
-  styleUrls: ['./appointment-view.component.css']
+  selector: 'app-upcoming-appointment',
+  templateUrl: './upcoming-appointment.component.html',
+  styleUrls: ['./upcoming-appointment.component.css']
 })
-export class AppointmentViewComponent {
-  displayedColumns = ['id', 'name', 'gender', 'diagnosis', 'mobile', 'age', 'email','physician','edit', 'pastvisit','delete'];
+export class UpcomingAppointmentComponent implements OnInit {
+
+  displayedColumns = ['id', 'name', 'gender', 'diagnosis', 'mobile', 'age', 'date','physician','edit','delete'];
   dataSource1 !: MatTableDataSource<Product>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
@@ -29,10 +27,10 @@ export class AppointmentViewComponent {
     this.getdata();
   }
   getdata() {
-    this.appoiService.getAppointmentData().subscribe(data => {
+    this.appoiService.getUpcomingAppointments().subscribe(data => {
       this.dataSource1 = new MatTableDataSource(data)    
       this.dataSource1.paginator = this.paginator;
-      console.log(data)
+      console.log(this.dataSource1)
     });
   }
   startEdit(data: any[]) {    

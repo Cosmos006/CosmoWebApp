@@ -18,7 +18,9 @@ export class DailogeService  {
 
   //Url Route
   private readonly API_URL = 'http://localhost:3000/DoctorList';
-  private readonly BAR_URL = 'http://localhost:3000/BarList';
+  private readonly BAR_URL = 'https://localhost:44355/api/NurseDash/GetallBarChartDetails';
+  private readonly UP_URL = 'http://localhost:3000/UPCOMINGAPPOINTMENT_DATA';
+  
   baseUrl = environment.LocalUrl;
   appointmentData: any;
 
@@ -62,6 +64,11 @@ export class DailogeService  {
     
         return this.http.get<Doctor[]>(this.API_URL);
       }
+     
+      getUpcomingAppointments(): Observable<Product[]>{
+    
+        return this.http.get<Product[]>(this.UP_URL);
+ }
       getBartData() : Observable<Bardata[]>{
     
         return this.http.get<Bardata[]>(this.BAR_URL);
