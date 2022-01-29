@@ -18,8 +18,8 @@ export class EditDailogeComponent implements OnInit {
   id !:string;
   gender !: string;
   address!: string;
-  mobile!: number;
-  age!:number;
+  contact!: number;
+  bookedslot:string="1";
   physician!:string;
   date!:string;
   diagnosis!:string;
@@ -34,25 +34,39 @@ export class EditDailogeComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data.data);
    // this.selectedFoods=this.data.data.id
-    console.log(this.id)
-    this.name=this.data.data.name
-    this.age=this.data.data.age
-    this.gender=this.data.data.gender
-    this.mobile=this.data.data.mobile
-    this.physician=this.data.data.physician
-    this.diagnosis=this.data.data.diagnosis
-    this.sugarLevel=this.data.data.sugarLevel
-    this.date=this.data.data.date
+    
+    
   
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required,Validators.maxLength(10)],
+      id:[''],
+      name: [''],
             // validates date format yyyy-mm-dd
       // dob: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
       // email: ['', [Validators.required, Validators.email]],
       // password: ['', [Validators.required, Validators.minLength(6)]],
-      // confirmPassword: ['', Validators.required],
+      diagnosis: [''],
       // acceptTerms: [false, Validators.requiredTrue]
+      gender: [''],
+      contact: [''],
+      bookslot: ['',Validators.required],
+      physician: [''],
+      appointmentDateTime: ['',Validators.required],
+
+
       });   
+      this.registerForm.controls['name'].setValue(this.data.data.name)
+      this.registerForm.controls['name'].disable()
+      this.registerForm.controls['bookslot'].setValue(this.data.data.bookSlot)
+      this.registerForm.controls['gender'].setValue(this.data.data.gender)
+      this.registerForm.controls['gender'].disable()
+      this.registerForm.controls['contact'].setValue(this.data.data.contact)
+      this.registerForm.controls['contact'].disable()
+      this.registerForm.controls['physician'].setValue(this.data.data.physicanName)
+      this.registerForm.controls['physician'].disable()
+      this.registerForm.controls['diagnosis'].setValue(this.data.data.diagnosis)
+      this.registerForm.controls['diagnosis'].disable()
+      this.registerForm.controls['appointmentDateTime'].setValue(this.data.data.appointmentDateTime)
+      this.registerForm.controls['id'].setValue(this.data.data.id)
         this.getdoctordata() 
   }
 
@@ -62,10 +76,10 @@ export class EditDailogeComponent implements OnInit {
     this.dialogRef.close();
 
   }
-  stopEdit(): void {
-    this.dailogueservice.updateIssue(this.data);
-    console.log("saveclicked");
-  }
+  // stopEdit(): void {
+  //   this.dailogueservice.updateIssue(this.data);
+  //   console.log("saveclicked");
+  // }
   getdoctordata() {
     this.dailogueservice.getDoctorListData().subscribe(data => {
       this.docters=data;  
@@ -82,7 +96,12 @@ export class EditDailogeComponent implements OnInit {
     }
   submit() {
     
-    this.dailogueservice.addAppoinmentData(this.data);
-    console.log("postclicked");
+    // this.dailogueservice.addAppoinmentData(this.data);
+    // console.log("postclicked");
+
+    let data=this.registerForm.value;
+    let id=data['id']
+    console.log(data['id']);
+    this.dailogueservice.updateIssue(id,data)
   }
 }

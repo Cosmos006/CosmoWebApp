@@ -42,14 +42,14 @@
       <mat-cell *matCellDef="let element"> {{element.contact}} </mat-cell>
     </ng-container>
     <!-- Action Column -->
-    <ng-container matColumnDef="age">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Age </mat-header-cell>
-      <mat-cell *matCellDef="let element" > {{element.age}} </mat-cell>
+    <ng-container matColumnDef="bookslot">
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> BookedSlot </mat-header-cell>
+      <mat-cell *matCellDef="let element" > {{element.bookSlot}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="date">
+    <ng-container matColumnDef="appointmentdatetime">
       <mat-header-cell *matHeaderCellDef mat-sort-header  style="font-size: medium;"> DateOfAppointment </mat-header-cell>
-      <mat-cell *matCellDef="let element" matTooltip={{element.date}}><span class="ellipsis">{{element.date}}</span> </mat-cell>
+      <mat-cell *matCellDef="let element" matTooltip={{element.appointmentDateTime}}><span class="ellipsis">{{element.appointmentDateTime|date:'shortDate'}}</span> </mat-cell>
     </ng-container>
     <ng-container matColumnDef="physician">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Physician </mat-header-cell>

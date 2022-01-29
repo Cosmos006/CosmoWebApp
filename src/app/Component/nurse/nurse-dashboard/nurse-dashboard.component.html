@@ -46,7 +46,7 @@
               <!-- small box -->
               <div class="small-box bg-gradient-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3>{{appointmentCount}}</h3>
 
                   <p> Today Appointments</p>
                 </div>
@@ -63,7 +63,7 @@
               <!-- small box -->
               <div class="small-box bg-gradient-success">
                 <div class="inner">
-                  <h3>53</h3>
+                  <h3>{{upappointmentCount}}</h3>
 
                   <p>Upcoming Appointments</p>
                 </div>
@@ -80,7 +80,7 @@
               <!-- small box -->
               <div class="small-box bg-gradient-danger">
                 <div class="inner">
-                  <h3>53</h3>
+                  <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i></h3>
 
                   <p>Book Appointment</p>
                 </div>
@@ -97,7 +97,7 @@
               <!-- small box -->
               <div class="small-box bg-gradient-primary">
                 <div class="inner">
-                  <h3>53</h3>
+                  <h3><i class="fa fa-calendar-check-o" aria-hidden="true"></i></h3>
 
                   <p>Calender</p>
                 </div>
@@ -367,109 +367,13 @@
               <!-- Map card -->
               <div class="card bg-white">
                 <app-barchart ></app-barchart>
-                <div class="card-body">
-                 
-                </div>
-                <!-- /.card-body-->
-                <!-- <div class="card-footer bg-transparent">
-                  <div class="row">
-                    <div class="col-4 text-center">
-                      <div id="sparkline-1"></div>
-                      <div class="text-white">Diagnosis Data</div>
-                    </div>
-                    <!-- ./col -->
-                    <!-- <div class="col-4 text-center">
-                        <div id="sparkline-2"></div>
-                        <div class="text-white">Online</div>
-                      </div>
-                      
-                      <div class="col-4 text-center">
-                        <div id="sparkline-3"></div>
-                        <div class="text-white">Sales</div>
-                      </div> -->
-                    <!-- ./col -->
+                <div class="card-body">                
+                </div>              
                   </div>
-                  <!-- /.row -->
-                <!-- </div> --> 
-              <!-- </div> -->
-              <!-- /.card -->
-
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title" style="color:blueviolet;">Doctors List</h3>
-                </div>
-                <!-- /.card-header -->
-                <!-- <div class="card-body p-0">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Task</th>
-                        <th>Progress</th>
-                        <th style="width: 40px">Label</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1.</td>
-                        <td>Update software</td>
-                        <td>
-                          <div class="progress progress-xs">
-                            <div
-                              class="progress-bar progress-bar-danger"
-                              style="width: 55%"
-                            ></div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-danger">55%</span></td>
-                      </tr>
-                      <tr>
-                        <td>2.</td>
-                        <td>Clean database</td>
-                        <td>
-                          <div class="progress progress-xs">
-                            <div
-                              class="progress-bar bg-warning"
-                              style="width: 70%"
-                            ></div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-warning">70%</span></td>
-                      </tr>
-                      <tr>
-                        <td>3.</td>
-                        <td>Cron job running</td>
-                        <td>
-                          <div
-                            class="progress progress-xs progress-striped active"
-                          >
-                            <div
-                              class="progress-bar bg-primary"
-                              style="width: 30%"
-                            ></div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-primary">30%</span></td>
-                      </tr>
-                      <tr>
-                        <td>4.</td>
-                        <td>Fix and squish bugs</td>
-                        <td>
-                          <div
-                            class="progress progress-xs progress-striped active"
-                          >
-                            <div
-                              class="progress-bar bg-success"
-                              style="width: 90%"
-                            ></div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-success">90%</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div> -->
-                <!-- /.card-body -->
+                </div>              
                 <app-doctorlist></app-doctorlist>
               </div>
 

@@ -49,9 +49,12 @@ export class NursedashboardgridComponent implements OnInit {
     this.appoiService.deletePostapp(rowid);
     this.getdata();
   }
-  OnVisit(){
-    console.log("vamsiclicked")
-    this.router.navigateByUrl('/PatientDetails');
+  OnVisit(data:any){
+    console.log(data)
+    let id=data['id']
+    console.log(id)
+  this.appoiService.UpdateStatus(id,data);
+  this.getdata()
   }
 
 }

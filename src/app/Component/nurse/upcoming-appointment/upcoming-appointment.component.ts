@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class UpcomingAppointmentComponent implements OnInit {
 
-  displayedColumns = ['id', 'name', 'gender', 'diagnosis', 'mobile', 'age', 'date','physician','edit','delete'];
+  displayedColumns = ['id', 'name', 'gender', 'diagnosis', 'mobile', 'bookslot', 'appointmentdatetime','physician','edit','delete'];
   dataSource1 !: MatTableDataSource<Product>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
@@ -49,6 +49,11 @@ export class UpcomingAppointmentComponent implements OnInit {
     this.appoiService.deletePostapp(rowid);
     this.getdata();
   }
+  onUpdate(rowid: number,product: Product) {
+    this.appoiService.deletePostapp(rowid);
+    this.getdata();
+  }
+
   OnVisit(){
     
     console.log("vamsiclicked")

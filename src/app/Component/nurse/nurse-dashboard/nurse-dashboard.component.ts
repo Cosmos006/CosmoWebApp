@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { AdminService } from 'src/app/Services/admin.service';
 import { data } from '../../../models/dynamic_data';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AdminUsersService } from 'src/app/Services/Admin/admin-users.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DailogeService } from 'src/app/Services/dailoge.service';
 
 @Component({
   selector: 'app-nurse-dashboard',
@@ -19,6 +22,8 @@ export class NurseDashboardComponent implements OnInit {
   results = data;
   allResults = data;
   fakeData: any;
+  appointmentCount!:any;
+  upappointmentCount!:any;
 
   //row: any;
 
@@ -51,16 +56,19 @@ export class NurseDashboardComponent implements OnInit {
   pageSize = 5;
   metaCount?: number;
 
-  constructor(private userService: AdminService,private router:Router) {
+  constructor(private userService: AdminUsersService,public dialogService: MatDialog, public appoiService: DailogeService, private router:Router) {
     this.fakeData = data;
   }
 
   ngOnInit() {
+    this.getAppointmentCount();
+    this. getUpAppointmentCount();
     this.productSearchForm = new FormGroup({
       productSearchBox: new FormControl('', {
         validators: [Validators.required],
       }),
     });
+   
   }
 
   onSubmit() {
@@ -70,6 +78,19 @@ export class NurseDashboardComponent implements OnInit {
   getProductsSearched(searchTerm: any) {
     alert(searchTerm)
     this.allResults = this.fakeData;
+  }
+
+  getAppointmentCount() {
+    this.appoiService.getAppointmentData().subscribe(data => {
+      this.appointmentCount=data.length;
+      console.log(data)
+    });
+  }
+  getUpAppointmentCount() {
+    this.appoiService.getUpcomingAppointments().subscribe(data => {
+      this.upappointmentCount=data.length;
+      console.log(data)
+    });
   }
 
   getAllProducts(pageIndex: number, pageSize: number) {
