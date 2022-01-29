@@ -5,7 +5,7 @@
     &nbsp;
     <select (change)="onSelect($event)" style="width: auto;">
       <option value="0">Select Doctor On Specialization</option>
-      <option *ngFor="let country of countries" value= {{country.id}} style="border-radius: 2%;">{{country.specialization}} </option>
+      <option *ngFor="let doctor of doctorlist" value= {{doctor.id}} style="border-radius: 2%;">{{doctor.specialization}} </option>
     </select>
    </div>
    <div>
@@ -19,20 +19,21 @@
       </ng-container>
   
       <!-- Second Column -->
-      <ng-container matColumnDef="name">
+      <ng-container matColumnDef="firstName">
         <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Name
         </mat-header-cell>
-        <mat-cell *matCellDef="let element" matTooltip={{element.name}}><span class="ellipsis">{{element.name}}</span></mat-cell>
+        <!-- matTooltip={{element.userName}} -->
+        <mat-cell *matCellDef="let element" ><span class="ellipsis">{{element.firstName}}</span></mat-cell>
       </ng-container>
-      <ng-container matColumnDef="specailization">
+      <ng-container matColumnDef="specialization">
         <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Specailization
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.specailization}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.specialization}} </mat-cell>
       </ng-container>
       <!-- Third Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Status </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.status}}
+        <mat-cell *matCellDef="let element">{{element.isAvailablity}}
         </mat-cell>
       </ng-container>
 

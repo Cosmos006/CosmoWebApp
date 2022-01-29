@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Role } from 'src/app/models/Role';
@@ -27,12 +28,15 @@ export class NavMenuComponent implements OnInit {
   currentUser?: User;
 
   constructor(
-    private authService: AuthenticationService,
+    private authService: AuthenticationService,private titleService: Title,
     private router: Router
   ) {
     this.authService.currentUser.subscribe((x) => (this.currentUser = x));
   }
-
+  
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
+  }
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
   }

@@ -14,9 +14,10 @@ import { Doctor } from 'src/app/models/doctordata';
   templateUrl: './doctorlist.component.html',
   styleUrls: ['./doctorlist.component.css']
 })
+
 export class DoctorlistComponent implements OnInit {
-countries!:Doctor[];
-  displayedColumns = ['id', 'userName', 'specialization', 'status'];
+doctorlist!:Doctor[];
+  displayedColumns = ['id', 'firstName', 'specialization', 'status'];
   dataSource1 !: MatTableDataSource<Doctor>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
@@ -49,13 +50,13 @@ countries!:Doctor[];
  
   getdoctordata() {
     this.appoiService.getDoctorListData().subscribe(data => {
-      this.countries=data;     
+      this.doctorlist=data;     
       
     });
   }
-  onSelect(countryid: any) {
-    let itemvalue = countryid.target.value;   
-    console.log(countryid.target.value);
+  onSelect(id: any) {
+    let itemvalue = id.target.value;   
+    console.log(id.target.value);
     if (itemvalue!=0){
       this.dataSource1.filter = itemvalue.trim().toLowerCase();
     }
