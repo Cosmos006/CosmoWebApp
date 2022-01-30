@@ -13,6 +13,9 @@ td{
     color:grey;
    align-items: center;
    padding-left:10px !important;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   max-width: 200px;
 }
 mat-card
 {
@@ -23,10 +26,10 @@ mat-label
     font-size: small;
 }
 td > span.Elipsis {
-   white-space: nowrap;     
+   white-space: normal;     
      /* overflow: hidden; */
     text-overflow: ellipsis;
-    max-width: auto;
+    max-width: 30rem;
  }
  mat-card-header
 {
@@ -38,24 +41,15 @@ th{
     color:black;   
     padding: 10px !important;
 }
-td{
-    font-size: small;
-    color:grey;
-   align-items: center;
-   padding-left:10px !important;
-}
+
 mat-card
 {
-    border:1px grey
+    border:1px grey;
+    max-width: 100vw;
 }
 mat-label
 {
     font-size: small;
 }
-td > span.Elipsis {
-   white-space: nowrap;     
-     /* overflow: hidden; */
-    text-overflow: ellipsis;
-    max-width: auto;
- }
+
  

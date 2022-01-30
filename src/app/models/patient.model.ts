@@ -48,7 +48,8 @@ export class Booking {
     patientId: string,
     physicianId: string,
     nurseId: string,
-    bookslot: string
+    bookslot: string,
+    Mode: string
   ) {}
 }
 

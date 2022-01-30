@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import {
   AdminUsersService,
   ICustomWindow,
 } from 'src/app/Services/Admin/admin-users.service';
@@ -19,18 +24,51 @@ export class SubscriptionComponent implements OnInit {
   private cachedImages = new Map<string, HTMLImageElement>();
   fullImagePath?: string;
 
-  constructor(private auth: PaymentService) {
+  //horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  //Button Disbale
+  basic: boolean = false;
+  standard: boolean = false;
+  premium: boolean = false;
+
+  constructor(private auth: PaymentService, private _snackBar: MatSnackBar) {
     // this.cachedImages.set('myImage', 'src/assets/Images/CosmosLogo.png');
     this.fullImagePath = 'src/assets/Images/CosmosLogo.png';
   }
 
   ngOnInit() {
-    var Image = '../';
+    var Get = localStorage.getItem('currentUser');
+    if (typeof Get === 'string') {
+      var id = JSON.parse(Get).id;
+    }
+    this.auth
+      .GetSubscribedData(id)
+      .then((response) => response.text())
+      .then((result) => {
+        if (result != null) {
+          var data = JSON.parse(result);
+          var amount = data[0].amount;
+
+          if (amount == 199) {
+            this.basic = false;
+          } else if (amount == 499) {
+            this.standard = true;
+          } else if (amount == 999) {
+            this.premium = true;
+          }
+        }
+      })
+      .catch((error) => console.log('error', error));
   }
 
   Payment(amount: any) {
+    var Get = localStorage.getItem('currentUser');
+    if (typeof Get === 'string') {
+      var id = JSON.parse(Get).id;
+    }
     this.auth
-      .GenerateOrderId('938742D3-F965-47A4-8E2B-697CF5310C87', amount)
+      .GenerateOrderId(id, amount)
       .then((response) => response.text())
       .then((result) => {
         if (result != null) {
@@ -66,30 +104,94 @@ export class SubscriptionComponent implements OnInit {
             var orderId = response.razorpay_order_id;
             var paymentId = response.razorpay_payment_id;
             var signature = response.razorpay_signature;
-
-            // alert(response.razorpay_payment_id);
-            // alert(response.razorpay_order_id);
+            var Get = localStorage.getItem('currentUser');
+            if (typeof Get === 'string') {
+              var id = JSON.parse(Get).id;
+            }
 
             if (response != null) {
               this.auth
-                .OrderConfirmationId(
-                  '938742D3-F965-47A4-8E2B-697CF5310C87',
-                  paymentId,
-                  orderId
-                )
+                .OrderConfirmationId(id, paymentId, orderId)
                 .then((response) => response.text())
                 .then((result) => {
                   if (result == 'Success') {
-                    alert('Success');
+                    this._snackBar.open('Subscription Activated', 'Done', {
+                      panelClass: 'success',
+                      //horizontalPosition: this.horizontalPosition,
+                      verticalPosition: this.verticalPosition,
+                      duration: 5000,
+                    });
+                    //alert('Success');
+                    // const snackBarRef = this._snackBar.open(
+                    //   'Subscription Activated',
+                    //   'Done',
+                    //   {
+                    //     panelClass: 'success',
+                    //     horizontalPosition: this.horizontalPosition,
+                    //     verticalPosition: this.verticalPosition,
+                    //     duration: 5000,
+                    //   }
+                    // );
+                    // snackBarRef.afterDismissed().subscribe((info) => {
+                    //   if (info.dismissedByAction === true) {
+                    //     // your code for handling this goes here
+                    //     window.location.reload();
+                    //   }
+                    // });
                   } else {
-                    alert('Failure');
+                    this._snackBar.open('Subscription Failed', 'Done', {
+                      panelClass: 'success',
+                      verticalPosition: this.verticalPosition,
+                      duration: 5000,
+                    });
+                    // alert('Failure');
+                    // const snackBarRef = this._snackBar.open(
+                    //   'Subscription Failed',
+                    //   'Done',
+                    //   {
+                    //     panelClass: 'success',
+                    //     horizontalPosition: this.horizontalPosition,
+                    //     verticalPosition: this.verticalPosition,
+                    //     duration: 5000,
+                    //   }
+                    // );
+                    // snackBarRef.afterDismissed().subscribe((info) => {
+                    //   if (info.dismissedByAction === true) {
+                    //     // your code for handling this goes here
+                    //     window.location.reload();
+                    //   }
+                    // });
                   }
                 });
             }
           };
           options.modal.ondismiss = () => {
             // handle the case when user closes the form while transaction is in progress
-            alert('Transaction cancelled.');
+            //alert('Transaction cancelled.');
+
+            this._snackBar.open('Subscription Closed', 'Done', {
+              panelClass: 'failure',
+              verticalPosition: this.verticalPosition,
+              duration: 5000,
+            });
+
+            // const snackBarRef = this._snackBar.open(
+            //   'Subscription Closed',
+            //   'Done',
+            //   {
+            //     panelClass: 'success',
+            //     horizontalPosition: this.horizontalPosition,
+            //     verticalPosition: this.verticalPosition,
+            //     duration: 5000,
+            //   }
+            // );
+
+            // snackBarRef.afterDismissed().subscribe((info) => {
+            //   if (info.dismissedByAction === true) {
+            //     // your code for handling this goes here
+            //     window.location.reload();
+            //   }
+            // });
           };
 
           this.rzp = new this.auth.nativeWindow.Razorpay(options);

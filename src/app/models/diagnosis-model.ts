@@ -3,9 +3,9 @@ export class diagnosis
     constructor(
 
     
-        public  ID :string,
+        public  id :string,
         // public  DiagnosisCode:string,
-        public Description:string,
+        public description:string,
         // public  IsDepricated:boolean
     ) 
     {

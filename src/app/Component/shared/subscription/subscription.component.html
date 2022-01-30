@@ -30,9 +30,9 @@
               </div>
               <div class="card-body" style="height: 182px">
                 <ol>
-                  <li>5 Online Appointment</li>
-                  <li>5 Online Free Delivery Of Medicine</li>
-                  <li>5 Online Customer Care Queries</li>
+                  <li>10 Online Appointment</li>
+                  <li>10 Online Free Delivery Of Medicine</li>
+                  <li>10 Online Customer Care Queries</li>
                 </ol>
               </div>
               <div class="card-body">
@@ -40,6 +40,7 @@
                   type="button"
                   class="btn btn-success"
                   (click)="Payment('199')"
+                  [disabled]="basic"
                 >
                   Buy Now
                 </button>
@@ -60,9 +61,9 @@
               </div>
               <div class="card-body" style="height: 182px">
                 <ol>
-                  <li>10 Online Appointment</li>
-                  <li>10 Online Free Delivery Of Medicine</li>
-                  <li>10 Online Customer Care Queries</li>
+                  <li>30 Online Appointment</li>
+                  <li>30 Online Free Delivery Of Medicine</li>
+                  <li>30 Online Customer Care Queries</li>
                   <li>5% Discount on Medicine</li>
                   <li>2% Discount on Medical Bill</li>
                   <li>Doctor Follow up Post appointment</li>
@@ -73,6 +74,7 @@
                   type="button"
                   class="btn btn-success"
                   (click)="Payment('499')"
+                  [disabled]="standard"
                 >
                   Buy Now
                 </button>
@@ -91,9 +93,9 @@
               </div>
               <div class="card-body">
                 <ol>
-                  <li>Unlimited Online Appointment</li>
-                  <li>Unlimited Online Free Delivery Of Medicine</li>
-                  <li>Unlimited Online Customer Care Queries</li>
+                  <li>99 Online Appointment</li>
+                  <li>99 Online Free Delivery Of Medicine</li>
+                  <li>99 Online Customer Care Queries</li>
                   <li>40% Discount on Medicine</li>
                   <li>5% Discount on Medical Bill</li>
                   <li>Doctor Follow up Post appointment</li>
@@ -104,6 +106,7 @@
                   type="button"
                   class="btn btn-success"
                   (click)="Payment('999')"
+                  [disabled]="premium"
                 >
                   Buy Now
                 </button>
