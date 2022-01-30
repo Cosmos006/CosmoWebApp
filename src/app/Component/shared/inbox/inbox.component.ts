@@ -63,71 +63,13 @@ export interface Notes {
   isSentOrRecieved: string;
 }
 
-export interface SentNotes {
-  senderName: string;
-  designation: string;
-  message: string;
-  date: Date;
-}
+// export interface SentNotes {
+//   senderName: string;
+//   designation: string;
+//   message: string;
+//   date: Date;
+// }
 const ELEMENT_DATA: Appointments[] = []
-//   {
-//     meetingTitle: 'Regular check up',
-//     description: 'doses verification',
-//     physician: 'Dr,John Doe',
-//     date: new Date('06-10-2021 3:30'),
-//     editHistory: true,
-//   },
-//   {
-//     meetingTitle: 'Regular check up',
-//     description: 'doses verification',
-//     physician: 'Dr,John Doe',
-//     date: new Date(),
-//     editHistory: true,
-//   },
-//   {
-//     meetingTitle: 'Regular check up',
-//     description: 'doses verification',
-//     physician: 'Dr,John Doe',
-//     date: new Date(),
-//     editHistory: false,
-//   },
-//   {
-//     meetingTitle: 'Regular check up',
-//     description: 'doses verification',
-//     physician: 'Dr,John Doe',
-//     date: new Date('12-10-2021 3:30'),
-//     editHistory: true,
-//   },
-//   {
-//     meetingTitle: 'Regular check up',
-//     description: 'doses verification',
-//     physician: 'Dr,John Doe',
-//     date: new Date(),
-//     editHistory: false,
-//   },
-//   {
-//     meetingTitle: 'Regular check up',
-//     description: 'doses verification',
-//     physician: 'Dr,John Doe',
-//     date: new Date('12-17-2021 3:30'),
-//     editHistory: true,
-//   },
-//   {
-//     meetingTitle: 'Regular check up',
-//     description: 'doses verification',
-//     physician: 'Dr,John Doe',
-//     date: new Date('12-05-2021 3:30'),
-//     editHistory: true,
-//   },
-//   {
-//     meetingTitle: 'Regular check up',
-//     description: 'doses verification',
-//     physician: 'Dr,John Doe',
-//     date: new Date('12-05-2021 3:30'),
-//     editHistory: true,
-//   },
-// ];
-
 export interface User {
   Id: Guid;
   name: string;
@@ -143,134 +85,45 @@ export interface User {
 })
 export class InboxComponent implements OnInit, AfterViewInit {
   
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'John',
-  //     designation: 'Senior Doctor  & Specialist',
-  //     //isSent: false,
-  //     message: 'High doses of this medicine can cause side effects',
-  //     notesDateTime: new Date('12-10-2021 3:30'),
-  //   },
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'Sam',
-  //     designation: 'Senior Dr',
-  //     message: 'my message',
-  //     //isSent: false,
-  //     notesDateTime: new Date('12-10-2020 3:30'),
-  //   },
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'Katy',
-  //     designation: 'Senior Dr',
-  //     message: 'my message',
-  //     //isSent: false,
-  //     notesDateTime: new Date('12-06-2021 3:30'),
-  //   },
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'Alex',
-  //     designation: 'Senior Dr',
-  //     message: 'my message',
-  //     //isSent: false,
-  //     notesDateTime: new Date('12-15-2021 3:30'),
-  //   },
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'Dolph',
-  //     designation: 'Senior Dr',
-  //     message: 'my message',
-  //     //isSent: false,
-  //     notesDateTime: new Date(),
-  //   },
-  // ];
-  //declare a class member in component
-  //displayedColumns1: string[] = ['Date and Time', 'Sender Name', 'Designation', 'Message','Reply','Delete'];
   ELEMENT_DATA1: Notes[] = []
   displayedColumns1: string[] = [
     'Sender Name',
     'Designation',
     'Message',
-    'Date and Time',
+    'DateTime',
     'Action',
   ];
   RecieveddataSource = new MatTableDataSource<Notes>(this.ELEMENT_DATA1);
   @ViewChild('paginator1') paginator1!: MatPaginator;
+  @ViewChild('sentsort', {read: MatSort}) sentsort!: MatSort;
 
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'John',
-  //     designation: 'Senior Doctor  & Specialist',
-  //     //isSent: true,
-  //     message: 'High doses of this medicine can cause side effects',
-  //     notesDateTime: new Date('12-10-2021 3:30'),
-  //   },
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'Sam',
-  //     designation: 'Senior Dr',
-  //     message: 'my message',
-  //     //isSent: true,
-  //     notesDateTime: new Date('12-10-2020 3:30'),
-  //   },
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'Katy',
-  //     designation: 'Senior Dr',
-  //     message: 'my message',
-  //     //isSent: true,
-  //     notesDateTime: new Date('12-06-2021 3:30'),
-  //   },
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'Alex',
-  //     designation: 'Senior Dr',
-  //     message: 'my message',
-  //     //isSent: true,
-  //     notesDateTime: new Date('12-15-2021 3:30'),
-  //   },
-  //   {
-  //     id: Guid.createEmpty(),
-  //     employeeName: 'Dolph',
-  //     designation: 'Senior Dr',
-  //     message: 'my message',
-  //     //isSent: true,
-  //     notesDateTime: new Date(),
-  //   },
-  // ];
-  //declare a class member in component
-  //displayedColumns1: string[] = ['Date and Time', 'Sender Name', 'Designation', 'Message','Reply','Delete'];
-  
   ELEMENT_DATA2: Notes[] = []
   displayedColumns2: string[] = [
     'Reciever Name',
     'Designation',
     'Message',
-    'Date and Time',
+    'DateTime',
     'Delete',
   ];
   SentdataSource = new MatTableDataSource<Notes>(this.ELEMENT_DATA2);
   @ViewChild('paginator2') paginator2!: MatPaginator;
+  @ViewChild('recievedsort', {read: MatSort}) recievedsort!: MatSort;
 
-  //temp:ReceivedNotes={senderName:'',designation:'',message:'',reply:false,date:new Date()}
-  //;
- 
   replyicon: string = '<mat-icon >replay</mat-icon>';
   repliedicon: string = '<mat-icon >done</mat-icon>';
 
   displayedColumns: string[] = [
     'Meeting Title',
     'Diagnosis',
-    'Patient',
-    'Date',
-    'Time',
+    'Patient Name',
+    'DateTime',
     'Visit Details',
   ];
   dataSource = new MatTableDataSource<Appointments>(ELEMENT_DATA);
   showButton: boolean = false;
   newReceivedMsg: number = 10;
   @ViewChild('paginator') paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('appointmentsort', {read: MatSort}) appointmentsort!: MatSort;
 
   control = new FormControl();
   form!: FormGroup;
@@ -302,6 +155,7 @@ export class InboxComponent implements OnInit, AfterViewInit {
       next:(res: any)=>{
         this.dataSource.data = res;
         this.dataSource._updateChangeSubscription();
+        this.dataSource.sort = this.appointmentsort;
         console.log(this.dataSource.data)
       },
       error: (e: any) => console.error(e)
@@ -323,7 +177,8 @@ export class InboxComponent implements OnInit, AfterViewInit {
         //this.users.push();
        
           //alert(id);
-          this.currentEmployee = this.users.filter((x) => x.UserId == id);
+          this.currentEmployee = this.users.filter((x) => x.Id == id);
+
           console.log(this.currentEmployee)
           this.GetNotes(this.currentEmployee[0].Id)
           var index = this.users.indexOf(this.currentEmployee[0])
@@ -367,6 +222,8 @@ export class InboxComponent implements OnInit, AfterViewInit {
         this.RecieveddataSource.data = res.filter((x :Notes) => x.isSentOrRecieved === 'RECIEVED')
         this.SentdataSource._updateChangeSubscription()
         this.RecieveddataSource._updateChangeSubscription()
+        this.SentdataSource.sort = this.sentsort;
+        this.RecieveddataSource.sort = this.recievedsort;
         console.log(this.SentdataSource.data)
         console.log(this.RecieveddataSource.data)
       },
@@ -383,8 +240,9 @@ export class InboxComponent implements OnInit, AfterViewInit {
     this.SentdataSource.paginator = this.paginator2;
     this.RecieveddataSource.paginator = this.paginator1;
     this.dataSource.paginator = this.paginator;
-
-    this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.appointmentsort;
+    this.dataSource.sort = this.sentsort;
+    this.dataSource.sort = this.recievedsort;
   }
 
   getBackgroundColor(date: Date) {

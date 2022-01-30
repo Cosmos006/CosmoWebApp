@@ -76,7 +76,7 @@ export class AuthenticationService {
   }
 
   getUser(id : Guid| undefined){
-    this.http.get('https://localhost:44359/api/User/GetUser/GetUserData?id=' + id).subscribe({
+    this.http.get('https://localhost:44359/api/User/' + id).subscribe({
       next: (res: any) => {
         localStorage.setItem('user', JSON.stringify(res))
       },
