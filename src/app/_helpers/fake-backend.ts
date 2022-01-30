@@ -11,59 +11,60 @@ import { Observable, of, SchedulerLike } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { Role } from '../models/Role';
 import { User } from '../models/User';
+import { Guid } from 'guid-typescript';
 
 export declare function throwError(
   error: any,
   scheduler?: SchedulerLike
 ): Observable<never>;
 
-const users: User[] = [
-  {
-    id: 1,
-    userName: 'admin',
-    password: 'admin',
-    firstName: 'Admin',
-    lastName: 'User',
-    role: Role.Admin,
-    loggedIn: true,
-  },
-  {
-    id: 2,
-    userName: 'user',
-    password: 'user',
-    firstName: 'Normal',
-    lastName: 'User',
-    role: Role.User,
-    loggedIn: true,
-  },
-  {
-    id: 3,
-    userName: 'physician@gmail.com',
-    password: 'physician@123',
-    firstName: 'Normal',
-    lastName: 'User',
-    role: Role.Physician,
-    loggedIn: true,
-  },
-  {
-    id: 4,
-    userName: 'patient@gmail.com',
-    password: 'patient@123',
-    firstName: 'Normal',
-    lastName: 'User',
-    role: Role.Patient,
-    loggedIn: true,
-  },
-  {
-    id: 5,
-    userName: 'nurse@gmail.com',
-    password: 'nurse@123',
-    firstName: 'Normal',
-    lastName: 'User',
-    role: Role.Nurse,
-    loggedIn: true,
-  },
-];
+ const users: User[] = []
+//   {
+//     id: 1,
+//     userName: 'admin',
+//     password: 'admin',
+//     firstName: 'Admin',
+//     lastName: 'User',
+//     role: Role.Admin,
+//     loggedIn: true,
+//   },
+//   {
+//     id: 2,
+//     userName: 'user',
+//     password: 'user',
+//     firstName: 'Normal',
+//     lastName: 'User',
+//     role: Role.User,
+//     loggedIn: true,
+//   },
+//   {
+//     id: 3,
+//     userName: 'physician@gmail.com',
+//     password: 'physician@123',
+//     firstName: 'Normal',
+//     lastName: 'User',
+//     role: Role.Physician,
+//     loggedIn: true,
+//   },
+//   {
+//     id: 4,
+//     userName: 'patient@gmail.com',
+//     password: 'patient@123',
+//     firstName: 'Normal',
+//     lastName: 'User',
+//     role: Role.Patient,
+//     loggedIn: true,
+//   },
+//   {
+//     id: 5,
+//     userName: 'nurse@gmail.com',
+//     password: 'nurse@123',
+//     firstName: 'Normal',
+//     lastName: 'User',
+//     role: Role.Nurse,
+//     loggedIn: true,
+//   },
+// ];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -166,13 +167,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function currentUser() {
       if (!isLoggedIn()) return;
-      const id = parseInt(headers.get('Authorization') || '{}'.split('.')[1]);
-      return users.find((x) => x.id === id);
+      const id = (headers.get('Authorization') || '{}'.split('.')[1]);
+      var idnew = Guid.parse(id)
+      return users.find((x) => x.id === idnew);
     }
 
     function idFromUrl() {
       const urlParts = url.split('/');
-      return parseInt(urlParts[urlParts.length - 1]);
+      return Guid.parse(urlParts[urlParts.length - 1]);
     }
   }
 }

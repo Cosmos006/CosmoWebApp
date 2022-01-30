@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+//import { AuthGuard } from './auth/auth.guard';
 import { AddPhysicianComponent } from './Component/admin/add-physician/add-physician.component';
 import { AdminCalendarComponent } from './Component/admin/admin-calendar/admin-calendar.component';
 import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
@@ -30,18 +31,18 @@ import { PreviouspatientvisitdetailsComponent } from './Component/patient/previo
 import { PhysicianComponent } from './Component/physician/physician.component';
 import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
 import { CalendarComponent } from './Component/shared/calendar/calendar.component';
+import { InboxComponent } from './Component/shared/inbox/inbox.component';
 import { SubscriptionComponent } from './Component/shared/subscription/subscription.component';
 import { Role } from './models/Role';
 import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'Home',
     component: HomeComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'login',
+},
+  { 
+    path: '',
     component: LoginComponent,
   },
 
@@ -87,7 +88,6 @@ const routes: Routes = [
   },
   {
     component: ForgotpasswordComponent,
-
     path: 'forgotpassword',
   },
   {
@@ -238,6 +238,12 @@ const routes: Routes = [
     path: 'previouspatientvisitdetails',
     canActivate: [AuthGuard],
     data: { roles: [Role.Patient] },
+  },
+  {
+    component: InboxComponent,
+    path: 'Inbox',
+    //canActivate: [AuthGuard],
+    
   },
   { path: '**', redirectTo: '' },
 ];

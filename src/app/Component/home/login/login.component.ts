@@ -14,8 +14,13 @@ import { AlertService } from 'src/app/Services/Alert/alert.service';
 import { Location } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/User';
+import { UserDetails } from 'src/app/models/userdetails';
+import { Guid } from 'guid-typescript';
 
-@Component({ templateUrl: 'login.component.html' })
+@Component( {selector: 'app-login',
+templateUrl: './login.component.html',
+styleUrls: ['./login.component.css']
+})
 export class LoginComponent implements OnInit {
   showModal!: boolean;
   forgotModal!: boolean;
@@ -79,27 +84,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  // open(content:any) {
-  //   this.modalService.open(content,
-  //  {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //   }, (reason) => {
-  //     this.closeResult =
-  //        `Dismissed ${this.getDismissReason(reason)}`;
-  //   });
-
-  // }
-
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
-
   close() {
     this.modalService.dismissAll();
   }
@@ -120,21 +104,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // convenience getter for easy access to form fields
-
-  //     get form(): { [key: string]: AbstractControl; }
-  // {
-  //     return this.loginForm.controls;
-  // }
-  // get f() { return this.loginForm.controls; }
-
-  isFieldInvalid(field: string) {
-    return (
-      (!this.loginForm.value.valid && this.loginForm.value.touched) ||
-      (this.loginForm.value.untouched && this.formSubmitAttempt)
-    );
-  }
-
+ 
+ 
   onSubmit() {
     this.submitted = true;
     if (this.loginForm.invalid) {
@@ -151,6 +122,7 @@ export class LoginComponent implements OnInit {
     if (this.user !== undefined && this.loginForm.valid) {
       //  this.errorstatus = false;
       this.authenticationService.login(this.loginForm, this.user);
+      this.GetUser(this.user?.id);
     } else {
       // this.errorstatus = true;
     }
@@ -171,26 +143,15 @@ export class LoginComponent implements OnInit {
     this.OldpassWordGenerated = true;
   }
 
-  //   ResetPassword() {
+    isFieldInvalid(field: string) {
+        return (
+          (!this.loginForm.value.valid && this.loginForm.value.touched) ||
+          (this.loginForm.value.untouched && this.formSubmitAttempt)
+        );
+      }
+    
 
-  //     this.errorMessage = "";
-  //     // if (this.oldpasswordInmailGenerated != this.oldpassword) {
-  //     //   this.errorMessage += "Entered old Password is incorrect";
-  //     //   return;
-  //     // }
-  //     // if (this.newpassword != this.confirmpassword) {
-  //     //   this.errorMessage += "Passwords are not same";
-  //     //   return;
-  //     // }
-
-  //     if (this.newpassword.length < 8) {
-  //       this.errorMessage += "Password cannot be less than 8 characters";
-  //       return;
-  //     }
-
-  //     this.modalService.dismissAll();
-
-  //     close() ;
-  //  //   this.location.back();
-  //   }
+      GetUser(id : Guid | undefined){
+       this.authenticationService.getUser(id)   
+      }
 }

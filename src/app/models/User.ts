@@ -1,5 +1,7 @@
+import { Guid } from "guid-typescript";
+
 export class User {
-  id?: number;
+  id?: Guid;
   userName!: string;
   password!: string;
   firstName!: string;

@@ -41,3 +41,32 @@ font-weight: 700;
 .simple-keyboard {
   max-width: 850px;
 }
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.success{
+  background-color: green;
+}
+
+.error{
+  background-color: reds;
+}
+
+
+section
+{
+  background-image: url("../../../../assets/Images/Bg6.jpg");
+  align-items: center;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
