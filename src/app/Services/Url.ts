@@ -19,6 +19,7 @@ export enum Patient {
   UpcomingAppointment = '/api/Appointments/UpcomingAppointments',
   PastAppointment = '/api/Appointments/PastAppointments',
   DeclineAppointments = '/api/Appointments/DeclineAppointments',
+  ApproveReject = '/api/Appointments/ApproveReject'
 }
 
 export enum AddPhysycian {

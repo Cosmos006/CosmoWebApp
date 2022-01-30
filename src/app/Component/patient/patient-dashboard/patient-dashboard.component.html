@@ -272,10 +272,14 @@
       </div>
       <!-- Modal body -->
       <div mat-dialog-content class="modalbody">
-        <textarea
-          placeholder="text here reason.."
-          style="width: 65%; height: 80px"
-        ></textarea>
+        <form [formGroup]="addReasonform">
+          <textarea
+            [(ngModel)]="addReason"
+            formControlName='textReason'
+            placeholder="text here reason.."
+            style="width: 65%; height: 80px"
+          ></textarea>
+      </form>
       </div>
       <!-- Modal footer -->
       <div mat-dialog-actions [align]="'end'" class="modalfooter">
@@ -357,7 +361,7 @@
 
       <!-- Modal body -->
       <div *ngIf="selectedAppointment" class="modal-body">
-        <h5>Declined By : {{ selectedAppointment.deletedBy }}</h5>
+        <h5>Declined By : {{ currentUser.role }}</h5>
         <h5>Reason : {{ selectedAppointment.deletedReason }}</h5>
       </div>
 
@@ -385,7 +389,7 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Presciption</h4>
+        <h4 class="modal-title">Prescription</h4>
         <button
           type="button"
           class="close"
@@ -442,7 +446,6 @@
       <div class="modal-body" *ngIf="selectedAppointment">
         <h5>AppointmentStatus : {{ selectedAppointment.appointmentStatus }}</h5>
         <h5>Doctor : {{ selectedAppointment.doctorName }}</h5>
-        <!-- <h5>Nurse Name : {{ selectedAppointment.nurseName }}</h5> -->
         <h5>AppoinmentStatus : {{ selectedAppointment.appointmentStatus }}</h5>
         <h5>Diagnosis : {{ selectedAppointment.diagnosis }}</h5>
         <h5>
