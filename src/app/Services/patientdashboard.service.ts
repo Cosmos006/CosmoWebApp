@@ -36,6 +36,10 @@ export class PatientDashboardService {
     )
   }
 
- 
+  CancelAppointmentById(id : string, status: string, deletedReason: string){
+    return this.http.patch<AppointmentData>(
+      this.baseUrl + Patient.ApproveReject +'/'+id + '?Status='+  status + '&DeletedReason='+  deletedReason ,""
+      )
+   }
 
 }
