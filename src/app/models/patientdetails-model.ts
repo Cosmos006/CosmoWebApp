@@ -1,34 +1,30 @@
-export class Patientdetails {
-  constructor(
-    public id: number,
-    public firstname: string,
-    public lastname: string,
-    public dateofbirth: Date,
-    public age: number,
-    public gender: boolean,
-    public race: string,
-    public ethnicity: string,
-    public languagesknown: string,
-    public email: string,
-    public homeaddress: string,
-    public pincode: number,
-    public country: string,
-    public state: string,
-    public contactnumber: string,
-    public emergancyfirstname: string,
-    public emergancylastname: string,
-    public emergancyrelationship: string,
-    public emergancyemail: string,
-    public emergancycontactnumber: string,
-    public emergancyaddress: string,
-    public emergancypincode: number,
-    public emergancycountry: string,
-    public accessforpatientportal: boolean,
-    public allergyid: number,
-    public allergytype: string,
-    public allergyname: string,
-    public allergydetails: string,
-    public allergydescription: string,
-    public clinicalinformation: string,) 
-    {}
+import { Patientrelativedetails } from "./patientrelativedetails";
+
+export class PatientdetailsDemo {
+       
+        id?: string;
+        firstName!: string;
+        lastName!: string;
+        dateofBirth!: Date;
+        age!: string;
+        gender!: boolean;
+        race!: string;
+        ethinicity!: string;
+        //languagesknown!: string;
+        email!: string;
+        address!: string;
+        pincode!: string;
+        country!: string;
+        state!: string;
+        contact!: string;
+        allergynameList!:string;
+        allergytypeList!:string;
+        clinicalInformation!:string;
+        isFatal!: boolean;
+        patientId!:string;
+        //patientDetails!:string;
+        createddate!:Date;
+        allergyDetails!:string;
+        allergyList!:string[];
+        patientRelativeDetails?: Patientrelativedetails ;
 }

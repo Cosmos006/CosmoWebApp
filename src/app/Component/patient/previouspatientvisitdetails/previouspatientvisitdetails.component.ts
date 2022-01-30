@@ -109,11 +109,12 @@ export class PreviouspatientvisitdetailsComponent implements OnInit {
        
       }),
     });
+      this.patient.Getpatientvisitdetailsfrompatientid(1).subscribe(result=>
+        {
+          this.Data=result
+         console.log(this.Data);
 
-    this.patient.Getpatientvisitdetailsfrompatientid(1).subscribe(result=>
-      {
-         this.Data=result
-      })
+        })
 
   }
 
@@ -152,7 +153,7 @@ export class PreviouspatientvisitdetailsComponent implements OnInit {
     let value =JSON.stringify(data);
     let parse = JSON.parse(value);
     var guidId=parse.guid
-    console.log("edit worked",parse.guid);
+    console.log("edit worked",guidId);
     //alert('hii')
     
    //this.router.navigateByUrl(`PatientViewdetails/${parse.guid}`);

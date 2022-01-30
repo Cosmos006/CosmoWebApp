@@ -357,7 +357,7 @@
       "diagnosisdiscription": "Unspecified dementia",
       "diagnosisisdepricated": true,
       "procedureid": "0016074",
-      "procedurediscription": "Bypass Cerebral Ventricle to Pleural Cavity with Autologous Tissue Substitute",
+      "procedurediscription": "Bypass Substitute xyz Bypass Substitute xyzBypass Substitute xyzBypass Substitute xyzBypass Substitute xyzBypass Substitute xyzBypass Substitute xyzBypass Substitute xyz ",
       "proceduredepricated": true,
       "drugid": "zopi",
       "drugname": "Zopi",
@@ -377,7 +377,7 @@
       "diagnosisdiscription": "Unspecified dementia",
       "diagnosisisdepricated": true,
       "procedureid": "0016074",
-      "procedurediscription": "Bypass Cerebral Ventricle to Pleural Cavity with Autologous Tissue Substitute",
+      "procedurediscription": "Bypass Cerebral",
       "proceduredepricated": true,
       "drugid": "zopi",
       "drugname": "Zopi",
@@ -397,7 +397,7 @@
       "diagnosisdiscription": "Unspecified dementia",
       "diagnosisisdepricated": true,
       "procedureid": "0016074",
-      "procedurediscription": "Bypass Cerebral Ventricle to Pleural Cavity with Autologous Tissue Substitute",
+      "procedurediscription": "Bypass",
       "proceduredepricated": true,
       "drugid": "zopi",
       "drugname": "Zopi",
@@ -445,6 +445,7 @@
   "previousvisitdetails": [
     {
       "ID": "1",
+      "Date":"2021-12-15T19:36:26.026Z",
       "PatientID": "4",
       "Diagnosisdetails": "Vascular dementia",
       "Proceduredescription": " Bypass",
@@ -453,8 +454,10 @@
       "Drugbrandname": "Abacavir sulfate",
       "Drugform": "Abacavir sulfate"
     },
+    
     {
       "ID": "2",
+      "Date":"2021-12-15T19:36:26.026Z",
       "PatientID": "4",
       "Diagnosisdetails": "Vascular dementia",
       "Proceduredescription": " Bypass Cerebral",
@@ -465,6 +468,7 @@
     },
     {
       "ID": "3",
+      "Date":"2021-12-15T19:36:26.026Z",
       "PatientID": "3",
       "Diagnosisdetails": "Vascular dementia",
       "Proceduredescription": " Bypass",
@@ -475,10 +479,99 @@
     },
     {
       "ID": "4",
+      "Date":"2021-12-15T19:36:26.026Z",
       "PatientID": "3",
       "Diagnosisdetails": "Vascular dementia",
       "Proceduredescription": " Bypass",
       "Drugname": "Abacavir",
+      "Druggenericname": "xyz",
+      "Drugbrandname": "Abacavir sulfate",
+      "Drugform": "Abacavir sulfate"
+    },
+    {
+      "ID": "5",
+      "Date":"2021-12-15T19:36:26.026Z",
+      "PatientID": "4",
+      "Diagnosisdetails": "Vascular dementia",
+      "Proceduredescription": " Bypass",
+      "Drugname": "Abacavir sulfate",
+      "Druggenericname": "xyz",
+      "Drugbrandname": "Abacavir sulfate",
+      "Drugform": "Abacavir sulfate"
+    },
+    {
+      "ID": "5",
+      "Date":"2021-12-15T19:36:26.026Z",
+      "PatientID": "4",
+      "Diagnosisdetails": "Vascular dementia",
+      "Proceduredescription": " Bypass",
+      "Drugname": "Abacavir sulfate",
+      "Druggenericname": "xyz",
+      "Drugbrandname": "Abacavir sulfate",
+      "Drugform": "Abacavir sulfate"
+    },
+    {
+      "ID": "6",
+      "Date":"2021-12-15T19:36:26.026Z",
+      "PatientID": "4",
+      "Diagnosisdetails": "Vascular dementia",
+      "Proceduredescription": " Bypass",
+      "Drugname": "Abacavir sulfate",
+      "Druggenericname": "xyz",
+      "Drugbrandname": "Abacavir sulfate",
+      "Drugform": "Abacavir sulfate"
+    },
+    {
+      "ID": "7",
+      "Date":"2021-12-15T19:36:26.026Z",
+      "PatientID": "4",
+      "Diagnosisdetails": "Vascular dementia",
+      "Proceduredescription": " Bypass",
+      "Drugname": "Abacavir sulfate",
+      "Druggenericname": "xyz",
+      "Drugbrandname": "Abacavir sulfate",
+      "Drugform": "Abacavir sulfate"
+    },
+    {
+      "ID": "8",
+      "Date":"2021-12-15T19:36:26.026Z",
+      "PatientID": "4",
+      "Diagnosisdetails": "Vascular dementia",
+      "Proceduredescription": " Bypass",
+      "Drugname": "Abacavir sulfate",
+      "Druggenericname": "xyz",
+      "Drugbrandname": "Abacavir sulfate",
+      "Drugform": "Abacavir sulfate"
+    },
+    {
+      "ID": "9",
+      "Date":"2021-12-15T19:36:26.026Z",
+      "PatientID": "4",
+      "Diagnosisdetails": "Vascular dementia",
+      "Proceduredescription": " Bypass",
+      "Drugname": "Abacavir sulfate",
+      "Druggenericname": "xyz",
+      "Drugbrandname": "Abacavir sulfate",
+      "Drugform": "Abacavir sulfate"
+    },
+    {
+      "ID": "10",
+      "Date":"2021-12-15T19:36:26.026Z",
+      "PatientID": "4",
+      "Diagnosisdetails": "Vascular dementia",
+      "Proceduredescription": " Bypass",
+      "Drugname": "Abacavir sulfate",
+      "Druggenericname": "xyz",
+      "Drugbrandname": "Abacavir sulfate",
+      "Drugform": "Abacavir sulfate"
+    },
+    {
+      "ID": "11",
+      "Date":"2021-12-15T19:36:26.026Z",
+      "PatientID": "4",
+      "Diagnosisdetails": "Vascular dementia",
+      "Proceduredescription": " Bypass",
+      "Drugname": "Abacavir sulfate",
       "Druggenericname": "xyz",
       "Drugbrandname": "Abacavir sulfate",
       "Drugform": "Abacavir sulfate"

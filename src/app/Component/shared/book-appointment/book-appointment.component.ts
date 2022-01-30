@@ -83,6 +83,9 @@ export class BookAppointmentComponent implements OnInit {
   IncomingDiagnosics?: string;
   IncomingPhysicianName?: string;
 
+  //Physician ID
+  PhysicianId?: string;
+
   constructor(
     private patientservice: PatientService,
     public fb: FormBuilder,
@@ -301,6 +304,7 @@ export class BookAppointmentComponent implements OnInit {
       this.datecheck = true;
       return false;
     } else if (e.value != null && diagnosics != '' && date != '') {
+      this.PhysicianId = e.value;
       this.diagnosicscheck = false;
       this.datecheck = false;
       this.matExpansionPanelElement.open();
@@ -405,6 +409,12 @@ export class BookAppointmentComponent implements OnInit {
 
     if (this.AppointmentID != 'undefined') {
       if (this.registrationForm.valid) {
+        //PatientID
+        var Get = localStorage.getItem('currentUser');
+        if (typeof Get === 'string') {
+          var id = JSON.parse(Get).id;
+        }
+
         //Diagnosics
         this.diagnosicscheck = false;
         //alert(JSON.stringify(this.registrationForm.value));
@@ -433,10 +443,11 @@ export class BookAppointmentComponent implements OnInit {
           appointmentType: this.TextInput,
           diagnosis: data.diagnosicsName,
           bookslot: data.slotName,
-          appointmentDateTime: myDate,
-          patientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-          physicianId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-          nurseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          appointmentDateTime: myDate.toISOString(),
+          patientId: id,
+          physicianId: data.phsicianName,
+          Mode: data.ModeType,
+          // nurseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
         };
         this.service
           .UpdateAppointment(this.AppointmentID, bookingdata)
@@ -490,6 +501,11 @@ export class BookAppointmentComponent implements OnInit {
       }
     } else {
       if (this.registrationForm.valid) {
+        //PatientID
+        var Get = localStorage.getItem('currentUser');
+        if (typeof Get === 'string') {
+          var id = JSON.parse(Get).id;
+        }
         //Diagnosics
         this.diagnosicscheck = false;
         //alert(JSON.stringify(this.registrationForm.value));
@@ -521,9 +537,10 @@ export class BookAppointmentComponent implements OnInit {
           isCompleted: false,
           bookslot: data.slotName,
           appointmentDateTime: myDate,
-          patientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-          physicianId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-          nurseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          patientId: id,
+          physicianId: data.phsicianName,
+          //nurseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          Mode: data.ModeType,
         };
         this.service
           .BookAppointmentPost(bookingdata)
