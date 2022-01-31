@@ -28,6 +28,12 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plug
+import { InboxComponent } from './inbox/inbox.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatTabsModule } from '@angular/material/tabs';
+
+import { SubscriptionComponent } from './subscription/subscription.component'; // a plug
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
@@ -41,6 +47,8 @@ FullCalendarModule.registerPlugins([
     PieChartComponent,
     BookAppointmentComponent,
     CalendarComponent,
+    InboxComponent,
+    SubscriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -62,6 +70,22 @@ FullCalendarModule.registerPlugins([
     MatButtonModule,
     //Full Calender
     FullCalendarModule,
+
+    //Inbox
+    MatTabsModule,
+    MatTableModule,
+    MatBadgeModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule
   ],
 })
 export class ReusableModule {}

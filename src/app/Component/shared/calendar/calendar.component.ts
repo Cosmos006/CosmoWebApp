@@ -7,6 +7,7 @@ import {
   EventApi,
   EventInput,
 } from '@fullcalendar/angular';
+import { Role } from 'src/app/models/Role';
 import { AdminService } from 'src/app/Services/admin.service';
 import { CalendarService } from 'src/app/Services/Calendar/calendar.service';
 import { PatientService } from 'src/app/Services/patient.service';
@@ -201,5 +202,37 @@ export class CalendarComponent implements OnInit {
   }
   CreateAppointment() {
     this.router.navigate(['/BookAppointment/Patient']);
+  }
+
+  JoinMeeting() {
+    var Get = localStorage.getItem('currentUser');
+    if (typeof Get === 'string') {
+      var id = JSON.parse(Get).id;
+      var role = JSON.parse(Get).role;
+    }
+
+    var AppointmentID = this.AppointmentId?.toString();
+
+    this.admim
+      .GetZoomLink(AppointmentID, role)
+      .then((response) => response.text())
+      .then((result) => {
+        if (result != null) {
+          var data = JSON.parse(result);
+          var patientMeetingLink = data[0].patientMeetingLink;
+          var physicianMeetingLink = data[0].physicianMeetingLink;
+          if (role == 'PATIENT') {
+            window.open(patientMeetingLink, '_blank');
+          } else if (
+            role == 'PHYSICIAN' ||
+            role == 'NURSE' ||
+            role == 'ADMIN'
+          ) {
+            window.open(physicianMeetingLink, '_blank');
+            this.hide();
+          }
+        }
+      })
+      .catch((error) => console.log('error', error));
   }
 }

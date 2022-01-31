@@ -12,6 +12,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { PatientDashboardService } from 'src/app/Services/patientdashboard.service';
+import { AuthenticationService } from 'src/app/Services';
+import { User } from 'src/app/models/User';
 
 import {
   //appointmentData,
@@ -23,6 +25,7 @@ import {
   appointmentHeaderData,
   AppointmentHeaderData,
 } from 'src/app/models/patientDashboard';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -123,7 +126,13 @@ export class PatientDashboardComponent implements OnInit {
   showCancelModal!: boolean;
   showCancelModalNew!: boolean;
   showSubmitModal!: boolean;
-
+  addReason!: string;
+  addReasonform:FormGroup=new FormGroup(
+    {
+      textReason:new FormControl(null,[Validators.required]),
+  });
+  selectedRow: any;
+  userRole: any;
   appointments: Appointment[] = [
     { value: '1', viewValue: 'Upcoming Appointments' },
     { value: '2', viewValue: 'Past Appointments' },
@@ -131,13 +140,19 @@ export class PatientDashboardComponent implements OnInit {
   ];
 
   griddata: AppointmentData[] = [];
+  currentUser: User;
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private changeDetection: ChangeDetectorRef,
-    private patientDashboardService: PatientDashboardService
-  ) {}
+    private patientDashboardService: PatientDashboardService,
+    private authenticationService: AuthenticationService,
+  ) {
+
+    this.currentUser = this.authenticationService.currentUserValue;
+
+  }
 
   ngOnInit(): void {
     this.showcolumns = this.allcolumns;
@@ -150,9 +165,8 @@ export class PatientDashboardComponent implements OnInit {
         this.filterAppointments('1');
       });
   }
-  
-  filterAppointments(val: any, pagination: any = {}) {
 
+  filterAppointments(val: any, pagination: any = {}) {
     if (val == '1') {
       this.patientDashboardService
         .GetAllUpcomingAppointmentList()
@@ -169,7 +183,6 @@ export class PatientDashboardComponent implements OnInit {
               v.appointmentStatus != 'Rejected'
           );
           this.processPaginationAndFilter(pagination);
-
         });
     } else if (val == '2') {
       this.patientDashboardService
@@ -185,7 +198,6 @@ export class PatientDashboardComponent implements OnInit {
               e.columnDef != 'cancelBtn'
           );
           this.processPaginationAndFilter(pagination);
-
         });
     } else {
       this.patientDashboardService
@@ -193,7 +205,6 @@ export class PatientDashboardComponent implements OnInit {
 
         .subscribe((x: AppointmentData[]) => {
           if (val == '3') {
-        
             this.griddata = x.filter((v) => v.appointmentStatus == 'Rejected');
             this.showcolumns = this.allcolumns.filter(
               (e) =>
@@ -233,12 +244,13 @@ export class PatientDashboardComponent implements OnInit {
   ShowDeclineInfo(item: AppointmentData) {
     this.selectedAppointment = item;
     this.showDeclineModal = true;
+    this.currentUser.role
   }
   ShowPrescriptionModel() {
     this.showPrescriptionModal = true;
   }
   ModifyModel() {
-    this.router.navigate(['/PatientBookappointment']);
+    // this.router.navigate(['/PatientBookappointment']);
   }
   hide() {
     this.showDeclineModal = false;
@@ -252,6 +264,7 @@ export class PatientDashboardComponent implements OnInit {
       this.showCancelModal = false;
     } else if (this.showSubmitModal) {
       this.showSubmitModal = false;
+      this.router.navigate([PatientDashboardComponent]);
     } else {
       this.showCancelModalNew = false;
     }
@@ -263,8 +276,18 @@ export class PatientDashboardComponent implements OnInit {
     } else if (this.showSubmitModal) {
       this.showSubmitModal = false;
     } else {
-      this.showCancelModalNew = false;
-      this.showSubmitModal = true;
+      if(this.addReasonform.invalid){
+        alert('Please text some reason...');
+      }
+      else{
+        this.showCancelModalNew = false;
+        let apointdata = this.patientDashboardService
+          .CancelAppointmentById(this.selectedRow.guid, 'Rejected',this.addReason )
+          .subscribe((v) => {
+            console.log(v.id, v.appointmentStatus);
+          });
+        this.showSubmitModal = true;
+      }
     }
   }
   hidePrescriptionModel() {
@@ -312,26 +335,35 @@ export class PatientDashboardComponent implements OnInit {
 
   viewItem(obj: any) {
     if (obj.columnDef == 'modifyBtn') {
-      this.ModifyModel();
+      // this.ModifyModel();
+      var id = obj.guid;
+      let apointdata = this.patientDashboardService
+        .GetAppointmentById(obj.guid)
+        .subscribe((v) => {
+          this.router.navigate(['PatientBookAppointment/Patient'], {
+            queryParams: { appointmentId: v.id },
+          });
+        });
     }
     if (obj.columnDef == 'cancelBtn') {
+      var id = obj.guid;
+      this.selectedRow = obj;
       this.CancelModel();
     }
     if (obj.columnDef == 'prescriptionBtn') {
       this.ShowPrescriptionModel();
     }
     if (obj.columnDef == 'viewdetailBtn') {
-      var id = obj.guid;
-      let apointdata = this.patientDashboardService
-        .GetAppointmentById(obj.guid)
-        .subscribe((v) => {
-          //var data = v.find((e) => e.id == obj.guid)!;
-          this.ShowViewdetailModel(v);
-        });
-
+      // this.router.navigate(['/PatientViewdetails']);
+      // var id = obj.guid;
+      // let apointdata = this.patientDashboardService
+      //   .GetAppointmentById(obj.guid)
+      //   .subscribe((v) => {
+      //     //var data = v.find((e) => e.id == obj.guid)!;
+      //     this.ShowViewdetailModel(v);
+      //   });
     }
     if (obj.columnDef == 'reasonBtn') {
-      
       var id = obj.guid;
       let apointdata = this.patientDashboardService
         .GetAppointmentById(obj.guid)
@@ -349,8 +381,9 @@ export class PatientDashboardComponent implements OnInit {
   DashboardRedirectURL(navigate: any) {
     if (navigate == 'locked') {
       this.router.navigateByUrl('/LockedAccount');
-    } else if (navigate == 'patient') {
-      this.router.navigateByUrl('/AdminPatient');
+    } else if (navigate == 'Covid') {
+      //this.router.navigateByUrl('/AdminPatient');
+      this.router.navigate(['PatientBookAppointment/Covid']);
     }
   }
 }
