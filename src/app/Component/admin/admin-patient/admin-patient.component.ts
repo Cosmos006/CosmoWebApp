@@ -8,6 +8,7 @@ import {
   AdminPatient,
   SoftDelete,
 } from 'src/app/models/admin.model';
+import { AdminUsersService } from 'src/app/Services/Admin/admin-users.service';
 import { UsersData } from '../../physician/physician.component';
 
 const Deactive_DATA: Deactivate[] = [
@@ -88,70 +89,74 @@ const SoftDelete_DATA: SoftDelete[] = [
 
 const User_DATA: AdminPatient[] = [
   {
-    title: 'Mr',
     firstName: 'Ram',
-    lastName: 'Sham',
+    // lastName: 'Sham',
     contact: 7898765456,
     specialization: 'Test',
     email: 'Test@123',
-    createdOn: '2022-01-07T05:39:25.716',
     isActive: false,
-    id: 1,
+    isLocked: true,
+    userId: 1,
   },
   {
-    title: 'Mr',
+    //title: 'Mr',
     firstName: 'Alen',
-    lastName: 'K',
+    //lastName: 'K',
     contact: 7898765456,
     specialization: 'Test',
     email: 'AlenTest@123',
-    createdOn: '2022-01-07T05:39:25.716',
+    //createdOn: '2022-01-07T05:39:25.716',
     isActive: true,
-    id: 2,
+    isLocked: true,
+    userId: 2,
   },
   {
-    title: 'Mr',
+    //title: 'Mr',
     firstName: 'Bob',
-    lastName: 'K',
+    //lastName: 'K',
     contact: 7898765456,
     specialization: 'Test',
     email: 'BobTest@123',
-    createdOn: '2022-01-07T05:39:25.716',
+    //createdOn: '2022-01-07T05:39:25.716',
     isActive: true,
-    id: 3,
+    isLocked: true,
+    userId: 3,
   },
   {
-    title: 'Mr',
+    //title: 'Mr',
     firstName: 'Jhon',
-    lastName: 'K',
+    //lastName: 'K',
     contact: 7898765456,
     specialization: 'Test',
     email: 'JhonTest@123',
-    createdOn: '2022-01-07T05:39:25.716',
+    //createdOn: '2022-01-07T05:39:25.716',
     isActive: true,
-    id: 4,
+    isLocked: false,
+    userId: 4,
   },
   {
-    title: 'Mr',
+    //title: 'Mr',
     firstName: 'Carl',
-    lastName: 'K',
+    //lastName: 'K',
     contact: 7898765456,
     specialization: 'Test',
     email: 'CarlTest@123',
-    createdOn: '2022-01-07T05:39:25.716',
+    //createdOn: '2022-01-07T05:39:25.716',
     isActive: true,
-    id: 5,
+    isLocked: false,
+    userId: 5,
   },
   {
-    title: 'Mr',
+    //title: 'Mr',
     firstName: 'Carl',
-    lastName: 'K',
+    //lastName: 'K',
     contact: 7898765456,
     specialization: 'Test',
     email: 'CarlTest@123',
-    createdOn: '2022-01-07T05:39:25.716',
+    //createdOn: '2022-01-07T05:39:25.716',
     isActive: false,
-    id: 6,
+    isLocked: false,
+    userId: 6,
   },
 ];
 
@@ -164,14 +169,20 @@ export class AdminPatientComponent implements AfterViewInit {
   PatientdataSource: MatTableDataSource<AdminPatient>;
   DeactivePatientdataSource: MatTableDataSource<Deactivate>;
   SoftDeletePatientdataSource: MatTableDataSource<SoftDelete>;
+  User_DATA: AdminPatient[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor() {
-    // Create 100 users
-    // Assign the data to the data source for the table to render
-    this.PatientdataSource = new MatTableDataSource(User_DATA);
+  constructor(private serive: AdminUsersService) {
+    this.PatientdataSource = new MatTableDataSource(this.User_DATA);
     this.DeactivePatientdataSource = new MatTableDataSource(Deactive_DATA);
     this.SoftDeletePatientdataSource = new MatTableDataSource(SoftDelete_DATA);
+  }
+
+  ngOnInit(): void {
+    this.serive.GetPatientHospitalUsers().subscribe((res) => {
+      this.User_DATA.push(...res);
+      this.PatientdataSource._updateChangeSubscription();
+    });
   }
 
   displayedoneColumns: string[] = [
@@ -189,20 +200,45 @@ export class AdminPatientComponent implements AfterViewInit {
     'isActive',
   ];
   displayedthreeColumns: string[] = [
-    'id',
+    //'id',
     'firstName',
     'contact',
-    'specialization',
+    'email',
     'isActive',
+    'isLocked',
   ];
   // patientdatasource = new MatTableDataSource<Patient>(User_DATA);
 
   updateActiveStatus(element: any) {
-    console.log(element);
-    //alert('Original:' + element.isActive);
-    var change = (element.activate = !element.activate);
-    //alert('Changes1:' + change);
-    alert('Changes2:' + !element.isActive);
+    var Id = element.userId;
+    var Status = !element.isActive;
+    this.serive
+      .PatientLockHospitalUsers(Id, Status, 'Active')
+      .then((response) => response.text())
+      .then((result) =>
+        result === 'Success'
+          ? this.refreshTableSorce()
+          : alert('Please try again')
+      )
+      .catch((error) => console.log('error', error));
+  }
+
+  updateIsLockedStatus(element: any) {
+    var Id = element.userId;
+    var Status = !element.isLocked;
+    this.serive
+      .PatientLockHospitalUsers(Id, Status, 'Locked')
+      .then((response) => response.text())
+      .then((result) =>
+        result === 'Success'
+          ? this.refreshTableSorce()
+          : alert('Please try again')
+      )
+      .catch((error) => console.log('error', error));
+  }
+
+  refreshTableSorce() {
+    window.location.reload();
   }
 
   DeactivaeapplyFilter(event: Event) {
@@ -219,7 +255,6 @@ export class AdminPatientComponent implements AfterViewInit {
     // alert(event);
     const filterValue = (event.target as HTMLInputElement).value;
     this.DeactivePatientdataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.DeactivePatientdataSource.paginator) {
       this.DeactivePatientdataSource.paginator.firstPage();
     }

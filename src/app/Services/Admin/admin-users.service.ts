@@ -37,20 +37,23 @@ export class AdminUsersService {
     );
   }
 
-  // return this.http.get<HospitalUser[]>(
-  //   this.baseUrl + GetAdminHospiatlUser.GetAdminHospiatlUsers
-  // );
-  //Patient Users
-
-  GetAdminPatientUsers(): Observable<AdminPatient> {
-    return this.http.get<AdminPatient>(
-      this.baseUrl + GetAdminHospiatlUser.GetAdminHospiatlUsers
+  GetPatientHospitalUsers() {
+    return this.http.get<AdminPatient[]>(
+      'https://localhost:44318/api/AdminUserInfo/GetPatientUsers'
     );
   }
 
-  GetAdminPatientLockedUser(): Observable<AdminPatient> {
-    return this.http.get<AdminPatient>(
-      this.baseUrl + GetAdminHospiatlUser.GetAdminHospiatlUsers
+  PatientLockHospitalUsers(id: string, Status: boolean, Type: string) {
+    const PatientID = id;
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    return fetch(
+      `https://localhost:44318/api/AdminUserInfo/PatientActive/${PatientID}?Status=${Status}&Type=${Type}`,
+      {
+        method: 'PUT',
+        redirect: 'follow',
+      }
     );
   }
 }
