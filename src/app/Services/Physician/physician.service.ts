@@ -34,7 +34,7 @@ export class PhysicianService {
 
  //localhost:44318/api/PhysicianAvailablity/
 
-  fetch("https://localhost:44318/api/PhysicianAvailablity", {
+  fetch("https://localhost:44318/api/PhysicianDashboard", {
     method: 'POST',
     headers: myHeaders,
     body: raw,

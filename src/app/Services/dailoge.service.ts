@@ -22,7 +22,7 @@ export class DailogeService  {
   private readonly BAR_URL = 'https://localhost:44318/api/NurseDash/GetallBarChartDetails';
   private readonly UP_URL = 'https://localhost:44318/api/NurseDash/GetNurseUpComingAppointment';
   
-  private readonly API_URL1 = 'https://localhost:44318/api/PhysicianAvailablity/GetAvailablePhysicianDetails';
+  private readonly API_URL1 = 'https://localhost:44318/api/PhysicianDashboard/GetAvailablePhysicianDetails';
   private readonly BAR_URL1 = 'http://localhost:3000/BarList';
   baseUrl = environment.LocalUrl;
   appointmentData: any;

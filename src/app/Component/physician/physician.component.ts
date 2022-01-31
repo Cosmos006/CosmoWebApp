@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { guid } from '@fullcalendar/angular';
 import { Attendance } from 'src/app/models/Attendance';
 import { Booking } from 'src/app/models/patient.model';
+import { AlertService } from 'src/app/Services/Alert/alert.service';
 import { PhysicianService } from 'src/app/Services/Physician/physician.service';
 
 
@@ -76,7 +77,7 @@ export class PhysicianComponent implements OnInit {
  SlotList : string[] = ['9:30 to 10:30', '10:30 to 11', '10:30 to 11:30', '9:30 to 10:30', '9:30 to 10:30', '9:30 to 10:30'];
   
  
-  constructor(public physicianservice: PhysicianService,private titleService:Title,private router:Router) {
+  constructor(public physicianservice: PhysicianService,private titleService:Title,private router:Router,private alterservice:AlertService) {
   
   }
 
@@ -100,25 +101,11 @@ export class PhysicianComponent implements OnInit {
   }
 
 
-  // getPhysicianDetails() {
-  //   this.physicianservice.getPhysicianDetails().subscribe((x) => {
-  //     this.listOfPosts.push(...x);
-  //     for (let i = 0; i < this.listOfPosts.length; i++) {
-  //       this.listOfslot.push(this.listOfPosts[i].timeslot.toString());
-  //       var mySet = new Set(this.listOfslot);
-  //       this.listOfslot = [...mySet];
-  //       console.log(mySet);
-  //     }
-  //   });
-  // }
+  
 
 
   AddPhysiciandetails(index: number) {
-    // console.log(this.form);
-    // var empdetails = new EmployeeDetails();
-    // empdetails.id = this.form.value.physicianid
-    //   , empdetails.date = this.form.value.date, empdetails.timeslot = this.form.value.timeslot;
-    // this.physicianservice.addPhysicianPost(empdetails);
+    
 
     var dataemployee:Attendance ={
      
@@ -131,6 +118,12 @@ export class PhysicianComponent implements OnInit {
  
 }
 
+onSubmit() {
+  if (this.form.valid) {
+    this.alterservice.success("Attendance Submitted!");
+    this.form.reset();
+  }
+}
 getdata() {
   this.physicianservice.getAppoinmentListData().subscribe(data => {
     this.dataSource1 = new MatTableDataSource(data)    
