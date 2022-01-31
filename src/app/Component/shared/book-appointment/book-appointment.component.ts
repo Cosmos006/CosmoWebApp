@@ -84,7 +84,7 @@ export class BookAppointmentComponent implements OnInit {
   IncomingPhysicianName?: string;
 
   //Physician ID
-  PhysicianId?: string;
+  PhysicianId!: string;
 
   constructor(
     private patientservice: PatientService,
@@ -136,19 +136,6 @@ export class BookAppointmentComponent implements OnInit {
     //alert(this.AppointmentID);
 
     this.TextInput = 'Book Appointment';
-
-    //Bind DropDownn
-    // this.diagnosics = [
-    //   { id: '1', value: 'Cold' },
-    //   { id: '2', value: 'Feaver' },
-    //   { id: '3', value: 'Thyroid' },
-    // ];
-
-    // this.physician = [
-    //   { Id: 1, PhysicianName: 'Raj' },
-    //   { Id: 2, PhysicianName: 'Ram' },
-    //   { Id: 3, PhysicianName: 'Anand' },
-    // ];
 
     //Mat expansion close
     this.matExpansionPanelElement.close();
@@ -328,7 +315,7 @@ export class BookAppointmentComponent implements OnInit {
       this.secondslot = secondslot;
       this.service
         .GetBookSlot(
-          '3FA85F64-5717-4562-B3FC-2C963F66AFA6',
+          this.PhysicianId,
           date._i.year + '-' + date._i.month + 1 + '-' + date._i.date
         )
         .subscribe((res) => {
