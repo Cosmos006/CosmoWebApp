@@ -1,18 +1,4 @@
 <div style="margin-left: 3px">
-  <!-- <div>
-      <mat-card>
-        <div style="margin-left: 60%">
-          <button mat-raised-button color="primary" (click)="Addupdatepatientdetails()">
-            Save
-          </button>
-  
-          <button mat-raised-button color="primary" (click)="Addupdatepatientdetails()">update</button>
-  
-          <button mat-raised-button color="primary" (click)="cleardata()">Clear</button>
-         
-        </div>
-      </mat-card>
-    </div> -->
   <mat-card-content>
     <div class="container">
       <div fxLayout="row" fxFlex="1 0 0" fxLayoutGap="0px" fxLayputAlign="center center">
@@ -105,22 +91,13 @@
                         <mat-step>
                           <div class="row">
                             <ng-template matStepLabel>Diagnosis Details</ng-template>
-                            <span class="col-md-6">
-                              <mat-form-field appearance="outline" class="form-group">
-                                <mat-label>Diagnosis ID</mat-label>
-                                <input matInput placeholder="DiagnosisId" formControlName='diagnosisid' />
-                                <mat-error
-                                  *ngIf="physicianform.controls['diagnosisid']?.errors?.['required'] && physicianform.controls['diagnosisid']?.touched">
-                                  This field cannot be empty.
-                                </mat-error>
-                              </mat-form-field>
-                            </span>
+                            
                             <span class="col-md-6">
                               <mat-form-field appearance="outline" class="form-group">
                                 <mat-label>Diagnosis Discription</mat-label>
                         
                                 <mat-select placeholder="Basic" (selectionChange)="ondiscriptionselect($event)"
-                                  formControlName="diagnosisdiscription">
+                                  formControlName="diagnosisdiscription" multiple>
                                   <mat-select-filter [array]="listOfdiagnosisdiscription" (filteredReturn)="filteredList1 =$event">
                                   </mat-select-filter>
                                   <mat-option *ngFor="let item of filteredList1;" [value]="item">
@@ -143,15 +120,7 @@
                               </mat-form-field>
                             </span>
                             
-                            <span class="col-md-6">
-                              <label>Diagnosisisdepricated </label>
-                              <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
-                                formControlName="diagnosisisdepricated">
-                                <mat-radio-button class="example-radio-button" *ngFor="let selection of selectionlist" [value]="selection">
-                                  {{ selection }}
-                                </mat-radio-button>
-                              </mat-radio-group>
-                            </span>
+                            
                         
                             <div>
                               <button mat-button matStepperPrevious>Back</button>
@@ -163,22 +132,13 @@
                         <mat-step>
                           <ng-template matStepLabel>Procedure Details</ng-template>
 
-                          <span>
-                            <mat-form-field appearance="outline" class="form-group">
-                              <mat-label>Procedure ID</mat-label>
-                              <input matInput placeholder="ProcedureId" formControlName='procedureid' />
-                              <mat-error
-                                *ngIf="physicianform.controls['procedureid']?.errors?.['required'] && physicianform.controls['procedureid']?.touched">
-                                This field cannot be empty.
-                              </mat-error>
-                            </mat-form-field>
-                          </span>
+                          
                           <span>
                             <mat-form-field appearance="outline" class="form-group">
                               <mat-label>Procedure Discription</mat-label>
 
                               <mat-select placeholder="Basic" (selectionChange)="onselectprocedure($event)"
-                                formControlName="procedurediscription">
+                                formControlName="procedurediscription" multiple>
                                 <mat-select-filter [array]="listOfprocedurediscription"
                                   (filteredReturn)="filteredList2 =$event"></mat-select-filter>
                                 <mat-option *ngFor="let item of filteredList2" [value]="item">
@@ -198,18 +158,7 @@
 
                             </mat-form-field>
                           </span> -->
-                          <span>
-                            <label>Procedure Is Depricated </label>
-
-                            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
-                              formControlName="proceduredepricated">
-                              <mat-radio-button class="example-radio-button" *ngFor="let selection of selectionlist"
-                                [value]="selection">
-                                {{ selection }}
-                              </mat-radio-button>
-                            </mat-radio-group>
-                          </span>
-
+                          
                           <div>
                             <button mat-button matStepperPrevious>Back</button>
                             <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
@@ -219,16 +168,7 @@
 
                         <mat-step>
                           <ng-template matStepLabel>Medication Details</ng-template>
-                          <span>
-                            <mat-form-field appearance="outline" class="form-group">
-                              <mat-label>Drug ID</mat-label>
-                              <input matInput placeholder="drugId" formControlName='drugid' />
-                              <mat-error
-                                *ngIf="physicianform.controls['drugid']?.errors?.['required'] && physicianform.controls['bloodpressure']?.touched">
-                                This field cannot be empty.
-                              </mat-error>
-                            </mat-form-field>
-                          </span>
+                          
                           <span>
                             <mat-form-field appearance="outline" class="form-group">
                               <mat-label>Drug Name</mat-label>
@@ -242,11 +182,11 @@
                               </mat-select>
                             </mat-form-field>
                           </span>
-                          <span>
+                           <!-- <span>
                             <mat-form-field appearance="outline" class="form-group">
                               <mat-label>Drug Generic Name</mat-label>
                               <mat-select formControlName='druggenericname' multiple>
-                                <!-- <mat-select-filter [array]="listOfmedication" (filteredReturn)="filteredList3 =$event"></mat-select-filter> -->
+                                 <mat-select-filter [array]="listOfmedication" (filteredReturn)="filteredList3 =$event"></mat-select-filter> 
                                 <mat-option *ngFor="let item of listOfmedication" [value]="item.DrugGenricname">
                                   {{item.DrugGenricname}}
                                 </mat-option>
@@ -260,8 +200,8 @@
                               <mat-label>Drug BrandName</mat-label>
                               <mat-select formControlName='drugbrandname'>
 
-                                <!-- <mat-select-filter [array]="listOfmedication" (filteredReturn)="filteredList3 =$event"></mat-select-filter> -->
-                                <mat-option *ngFor="let item of listOfmedication" [value]="item.DrugBrandname"> -->
+                                 <mat-select-filter [array]="listOfmedication" (filteredReturn)="filteredList3 =$event"></mat-select-filter>
+                                <mat-option *ngFor="let item of listOfmedication" [value]="item.DrugBrandname"> 
                                   {{item.DrugBrandname}}
                                 </mat-option>
                               </mat-select>
@@ -274,18 +214,18 @@
                               <mat-label>Drug Form</mat-label>
 
                               <mat-select placeholder="Basic" multiple formControlName="drugform">
-                                <!-- <mat-select-filter [array]="listOfmedication" (filteredReturn)="filteredList3 =$event"></mat-select-filter> -->
-                                <mat-option *ngFor="let item of listOfmedication" [value]="item.DrugForm">
+                                 <mat-select-filter [array]="listOfmedication" (filteredReturn)="filteredList3 =$event"></mat-select-filter> -->
+                                <!-- <mat-option *ngFor="let item of listOfmedication" [value]="item.DrugForm">
                                   {{item.DrugForm}}
-                                </mat-option>
+                                </mat-option> -->
 
-                              </mat-select>
+                              <!-- </mat-select>
                               <mat-error
                                 *ngIf="physicianform.controls['drugform']?.errors?.['required'] && physicianform.controls['drugform']?.touched">
                                 Kindly provide responce.
                               </mat-error>
                             </mat-form-field>
-                          </span>
+                          </span>  --> 
 
 
                           <div>
@@ -309,13 +249,13 @@
   <div>
     <mat-card>
       <div style="margin-left: 60%">
-        <button mat-raised-button color="primary" (click)="Addupdatepatientdetails()">
+        <button mat-raised-button color="" (click)="Addupdatepatientdetails()" #Savebtn>
           Save
         </button>
 
-        <button mat-raised-button color="primary" (click)="Addupdatepatientdetails()">update</button>
+        <button mat-raised-button color="" (click)="updatepatientdetails()">update</button>
 
-        <button mat-raised-button color="primary" (click)="cleardata()">Clear</button>
+        <button mat-raised-button color="Red" (click)="cleardata()">Clear</button>
         
       </div>
     </mat-card>

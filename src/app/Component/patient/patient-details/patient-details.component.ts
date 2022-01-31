@@ -33,7 +33,7 @@ export class PatientDetailsComponent implements OnInit {
   value: any;
   Allergytype: string = '';
   AllergyId: string = '';
-  role: string = 'admin';
+ 
   Countrycode: string = '';
   Pincode: Number = 0;
   step = 0;
@@ -53,6 +53,7 @@ AllergyType:any
   relativeobj!:Patientrelativedetails;
   form!: FormGroup;
   postal!: Postal;
+  patientid?:string;
  // postobj: Patientdetails = new Patientdetails();
   patientAddressdetailslist: Postal[] | undefined;
   RelationshipList: string[] = [
@@ -72,10 +73,13 @@ AllergyType:any
     this.postobj = new PatientdetailsDemo();
     this.relativeobj=new Patientrelativedetails();
     if (typeof Get === 'string') {
-      var id = JSON.parse(Get).id;
+       var id= JSON.parse(Get).id;
+       this.patientid =id;
+       
+
     }
    this.bindToUI();
-   this.fetchdata(id);
+   this.fetchdata(this.patientid);
    this.getAllergyDetails();
    
   }
@@ -91,23 +95,40 @@ AllergyType:any
       });
     })
     
-    
-    
-     //.catch(error => console.log('error', error));
-    
   }
 
   getAllergyNameDetails(Allergytype: string) {
     
     let _that = this;
-     this.patient.getAllerynamefromallergytype(Allergytype)
+    var allergynameselection=this.Allergytype ;
+
+    var checkmultiple = allergynameselection.includes(',');
+
+   
+  
+    if(checkmultiple==true)
+    {
+      this.patient.getallergydata()
       .then(async response => {
         response.text().then(responseData => {
           _that.listOfAllergyName = JSON.parse(responseData);
-          console.log(_that.listOfAllergyName);
-        console.log(responseData)
+       
         });
       });
+    }
+    else
+    {
+      window.setInterval(()=>{
+        this.patient.getAllerynamefromallergytype(Allergytype)
+        .then(async response => {
+          response.text().then(responseData => {
+            _that.listOfAllergyName = JSON.parse(responseData);
+           
+          });
+        });
+      },5000)
+    
+    }
   }
 
   Addupdatepatientdetails() {
@@ -141,9 +162,9 @@ AllergyType:any
          address: this.form.value.emergancyaddress,
          pincode: this.form.value.emergancypincode,
          country: this.form.value.emergancycountry,
-         isAccess: this.form.value.accessforpatientportal,
+         isAccess: true,
          state: 'Maharastra',
-         patientDemographicsId: this.Demographicid,
+         patientDemographicsId:this.Demographicid,
        },
        // this.postobj.allergyid = this.form.value.allergyid;
        allergyList: this.form.value.allergytype,
@@ -154,7 +175,7 @@ AllergyType:any
        clinicalInformation: this.form.value.clinicalinformation,
        dateofBirth: this.form.value.dateofBirth,
        isFatal: false,
-       patientId: 'E5939583-DE53-4DBD-A111-7E07B165BEFD',
+       patientId: this.patientid,
        createddate: new Date,
        allergytypeList: ''
      }
@@ -173,7 +194,7 @@ AllergyType:any
       })
       
       .catch(error => console.log('error', error));
-      alert("hii")
+      //alert("hii")
     }
     
   }
@@ -325,21 +346,17 @@ AllergyType:any
   }
 
   addEvent(event: MatDatepickerInputEvent<Date>) {
-    //alert(event.value);
+    
     var dateValue = event.value!;
     var selectedYear = new Date(dateValue).getFullYear();
     var currentYear = new Date().getFullYear();
     var age = currentYear - selectedYear;
-    alert("TimeDi"+ age);
+    
     if (event.value) {
-      //var timeDiff = Math.abs(Date.now() - event.value?.getTime());
-      //var age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
-      //alert("TimeDiff : " + timeDiff + "Date Selected : " + age);
+     
       
     }
-    //var date = new Date(event.value)
-    //var year = date.getFullYear();
-    //alert(event.value?.getFullYear);
+   
   }
 
   onChangeEvent(event: any){
@@ -354,10 +371,8 @@ AllergyType:any
    }
    onAllergytypeselect(event:any)
   {
-
       this.Allergytype=event.value;
-
-     this.getAllergyNameDetails(this.Allergytype);
+      this.getAllergyNameDetails(this.Allergytype);
   }
   radioChange(event:any) {
     if(event.value=='No')

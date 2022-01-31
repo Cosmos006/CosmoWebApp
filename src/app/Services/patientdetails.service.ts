@@ -23,14 +23,14 @@ export class patientdetails {
   baseUrl = environment.LocalUrl;
   //patientdetailscreen
   addPost(post: PatientdetailsDemo) {
-    this.http.post('https://localhost:44315/api/Demographicsdetails/PostPatientdemographicsdetails', post).subscribe((res) => {
+    this.http.post('https://localhost:5001/api/Demographicsdetails/PostPatientdemographicsdetails', post).subscribe((res) => {
       console.log(res);
     });
   }
 
   fetchfrombackendfromid1(id: any) {
 
-    return fetch(`https:localhost:44315/api/Demographicsdetails?Patientid=${id}`, {
+    return fetch(`https://localhost:5001/api/Demographicsdetails?Patientid=${id}`, {
       method: 'GET',
       redirect: 'follow'
     })
@@ -44,27 +44,20 @@ export class patientdetails {
       console.log(res);
     });
   }
-  UpdatePatientdetails(demoid:string,postobj: PatientdetailsDemo) {
-    // alert("hiiservice
-    // console.log(postobj);  
-    // return this.http.put(`https://localhost:44315/api/Demographicsdetails/UpdateDemographic`,postobj);
- console.log(demoid);
+  UpdatePatientdetails(demoid: string, postobj: PatientdetailsDemo) {
+    console.log(demoid);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
-
-
     var raw = JSON.stringify(postobj);
-    //var result = raw.slice(1, -1);
-   // var result = JSON.parse(raw);
-
-   return fetch(`https://localhost:44315/api/Demographicsdetails/UpdateDemographic?Demoid=${demoid}`, {
+    console.log(raw);
+    
+    return fetch(`https://localhost:5001/api/Demographicsdetails/UpdateDemographic/${demoid}`, {
       method: 'PUT',
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
-    })
-      
+    });
+
 
   }
 
@@ -79,13 +72,16 @@ export class patientdetails {
   //get allergy list for dropdown
   getallergydata() {
 
-    return fetch(`https://localhost:44315/api/Master/GetallAllergydetails`, {
+    return fetch(`https://localhost:5001/api/Master/GetallAllergydetails`, {
       method: 'GET',
       redirect: 'follow'
     })
   }
   getAllerynamefromallergytype(AllergyType: string) {
-    return fetch(`https://localhost:44315/api/Master/GetdetailsfromAllergytype?AllergyType=${AllergyType}`, {
+
+    
+
+    return fetch(`https://localhost:5001/api/Master/GetdetailsfromAllergytype?AllergyType=${AllergyType}`, {
       method: 'GET',
       redirect: 'follow'
     })
@@ -96,14 +92,12 @@ export class patientdetails {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-
+  
 
     var raw = JSON.stringify(patientvisitobj);
     console.log(raw);
-    //var result = raw.slice(1, -1);
-   // var result = JSON.parse(raw);
 
-    fetch("https://localhost:44315/api/PatientDetails", {
+    fetch("https://localhost:5001/api/PatientDetails", {
       method: 'POST',
       headers: myHeaders,
       body: raw,
@@ -112,20 +106,18 @@ export class patientdetails {
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
-alert('hii');
+    
   }
 
   UpdatePatientvisitdetails(
     patientvisitdetailsobj: patientvisitdetails,
-    patientid: number
+    visitid:string
   ) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(patientvisitdetailsobj);
-    //var result = raw.slice(1, -1);
-   // var result = JSON.parse(raw);
-console.log(raw);
-    fetch("https://localhost:44315/api/PatientDetails/PutPatientDetails?id=CD0F9BD5-4320-496E-8C3F-08D9DD8C9F7B", {
+   console.log(raw);
+    fetch(`https://localhost:5001/api/PatientDetails/PutPatientDetails?id=${visitid}`, {
       method: 'PUT',
       headers: myHeaders,
       body: raw,
@@ -134,33 +126,41 @@ console.log(raw);
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
+     
   }
 
 
-  Getpatientvisitdetailsfromid(id: number) {
+  Getpatientvisitdetailsfromid(id:string) {
     const getuser = localStorage.getItem('USerID');
-     return fetch(`https://localhost:44315/api/PatientDetails?Appointmentid=93666A3C-9684-4BB1-73BA-08D9DD8C4FC3`, {
-        method: 'GET',
-        redirect: 'follow'
-      });
+    return fetch(`https://localhost:5001/api/PatientDetails?Appointmentid=78871310-CDF2-46C9-99EE-08D9E24B6FE1`, {
+      method: 'GET',
+      redirect: 'follow'
+    });
   }
 
 
-  Getpatientvisitdetailsfrompatientid(id: any)
+  Getpatientvisitdetailsfrompatientid(id: any) {
+    const getuser = localStorage.getItem('USerID');
+
+    return this.http.get<any>('https://localhost:5001/api/Master/Getdiagnosisdetails');
+
+  }
+  GetRole(id:any)
   {
-    const getuser = localStorage.getItem('USerID');
-    
-    return this.http.get<any>('https://localhost:44315/api/Master/Getdiagnosisdetails');
-    
+    alert(id + 'hii');
+    return fetch(`https://localhost:5001/api/Master?id=${id}`, {
+      method: 'GET',
+      redirect: 'follow'
+    })
   }
   GetDiagnosisdetails() {
-    return this.http.get<any>('https://localhost:44315/api/Master/Getdiagnosisdetails');
+    return this.http.get<any>('https://localhost:5001/api/Master/Getdiagnosisdetails');
   }
   GetProceduredetails() {
-    return this.http.get<any>('https://localhost:44315/api/Master/Getproceduredetails');
+    return this.http.get<any>('https://localhost:5001/api/Master/Getproceduredetails');
   }
   GetMedicationdetails() {
-    return this.http.get<any>('https://localhost:44315/api/Master/Getdrugdetails');
+    return this.http.get<any>('https://localhost:5001/api/Master/Getdrugdetails');
   }
   GetidfromDiagnosisdetails(diagnosisdetails: string) {
     return this.http.get<any>(
