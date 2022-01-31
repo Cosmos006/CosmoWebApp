@@ -4,9 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDailogeComponent } from '../dailoge/edit-dailoge/edit-dailoge.component';
 import { DailogeService } from 'src/app/Services/dailoge.service';
-import { Product } from 'src/app/models/appointment';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/models/appointment';
 
 @Component({
   selector: 'app-nursedashboardgrid',

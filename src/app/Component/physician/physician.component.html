@@ -9,14 +9,7 @@
             <div class="col-sm-6">
               <h1 class="m-0">Physician DashBoard</h1>
             </div>
-            <!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-              </ol>
-            </div>
-            <!-- /.col -->
+
           </div>
           <!-- /.row -->
         </div>
@@ -40,9 +33,8 @@
                 <div class="icon">
                   <i class="fa-calendar-alt"></i>
                 </div>
-                <a href="#" class="small-box-footer text-black bg-white"
-                  ><b>More info </b><i class="fa fa-arrow-circle-right"></i
-                ></a>
+                <a href="#" class="small-box-footer text-black bg-white"><b>More info </b><i
+                    class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -57,9 +49,8 @@
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer text-black bg-white"
-                  ><b>More info </b><i class="fa fa-arrow-circle-right"></i
-                ></a>
+                <a href="#" class="small-box-footer text-black bg-white"><b>More info </b><i
+                    class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -74,9 +65,8 @@
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer text-black bg-white"
-                  ><b>More info </b><i class="fa fa-arrow-circle-right"></i
-                ></a>
+                <a href="#" class="small-box-footer text-black bg-white"><b>More info </b><i
+                    class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -91,27 +81,24 @@
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer text-black bg-white"
-                  ><b>More info </b><i class="fa fa-arrow-circle-right"></i
-                ></a>
+                <a href="#" class="small-box-footer text-black bg-white"><b>More info </b><i
+                    class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
           </div>
-          <!-- /.row -->
-          <!-- Main row -->
+
           <div class="row">
-            <!-- Left col -->
-            <section class="col-lg-7 connectedSortable">
-              <!-- Custom tabs (Charts with tabs)-->
-              <div class="card">
+
+            <section class="row w-100 connectedSortable">
+              <div class="col-6">
                 <div class="card-header">
                   <h3 class="card-title font-weight-bold">
                     <i class="fas fa-chart-pie mr-1"></i>
                     Today Appoinment
                   </h3>
-                  <div class="container text-center">
-                    <button
+                  <div class=" ">
+                    <!-- <button
                       mat-button
                       mat-flat-button
                       color="primary"
@@ -119,91 +106,195 @@
                       style="color: white; float: right; background-color: grey"
                     >
                       Add New
-                    </button>
+                    </button> -->
 
-                    <table
-                      mat-table
-                      [dataSource]="dataSource1"
-                      #mytable
-                      class="my-table mat-elevation-z8"
-                    >
-                      <!--- Note that these columns can be defined in any order.
-                                              The actual rendered columns are set as a property on the row definition" -->
+                    <table mat-table [dataSource]="dataSource1" #mytable class="my-table mat-elevation-z8">
 
-                      <!-- Id Column -->
-                      <ng-container matColumnDef="id">
-                        <th
-                          mat-header-cell
-                          *matHeaderCellDef
-                          style="padding-left: 60px"
-                        >
-                          ID.
+
+                      <ng-container matColumnDef="appointmentType">
+                        <th mat-header-cell *matHeaderCellDef style="padding-left: 10px">
+                          AppointmentType
                         </th>
                         <td mat-cell *matCellDef="let element">
-                          {{ element.id }}
+                          {{ element.appointmentType }}
                         </td>
                       </ng-container>
 
-                      <!-- Name Column -->
-                      <ng-container matColumnDef="name">
-                        <th
-                          mat-header-cell
-                          *matHeaderCellDef
-                          style="padding-left: 60px"
-                        >
-                          Name
+                      <ng-container matColumnDef="diagnosis">
+                        <th mat-header-cell *matHeaderCellDef style="padding-left: 15px">
+                          Diagnosis
                         </th>
                         <td mat-cell *matCellDef="let element">
-                          {{ element.name }}
+                          {{ element.diagnosis }}
                         </td>
                       </ng-container>
 
-                      <ng-container matColumnDef="Status">
+                      <ng-container matColumnDef="isCompleted">
+                        <th mat-header-cell *matHeaderCellDef style="padding-left: 10px">
+                          IsCompleted
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.isCompleted }}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="appointmentDateTime">
+                        <th mat-header-cell *matHeaderCellDef style="padding-left: 15px">
+                          AppointmentDateTime
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.appointmentDateTime }}
+                        </td>
+                      </ng-container>
+                      <!-- <ng-container matColumnDef="modifiedDate">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          style="padding-left: 10px"
+                        >
+                        ModifiedDate
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.modifiedDate}}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="deletedBy">
                         <th
                           mat-header-cell
                           *matHeaderCellDef
                           style="padding-left: 15px"
                         >
-                          Status
+                        DeletedBy
                         </th>
                         <td mat-cell *matCellDef="let element">
-                          {{ element.Status }}
+                          {{ element.deletedBy }}
+                        </td>
+                      </ng-container> <ng-container matColumnDef="deletedDate">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          style="padding-left: 10px"
+                        >
+                        DeletedDate
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.deletedDate }}
+                        </td>
+                      </ng-container> -->
+
+                      <ng-container matColumnDef="patientId" [style.display]="'none'">
+
+                        <th [style.display]="'none'" mat-header-cell *matHeaderCellDef style="padding-left: 15px">
+                          patientId
+                        </th>
+                        <td [style.display]="'none'" mat-cell *matCellDef="let element">
+                          {{ element.patientId }}
+                        </td>
+
+                      </ng-container>
+
+                      <ng-container matColumnDef="nurseId" [style.display]="'none'">
+
+                        <th [style.display]="'none'" mat-header-cell *matHeaderCellDef style="padding-left: 15px">
+                          nurseId
+                        </th>
+                        <td [style.display]="'none'" mat-cell *matCellDef="let element">
+                          {{ element.nurseId }}
+                        </td>
+
+                      </ng-container>
+                      <ng-container matColumnDef="id" [style.display]="'none'">
+
+                        <th [style.display]="'none'" mat-header-cell *matHeaderCellDef style="padding-left: 15px">
+                          nurseId
+                        </th>
+                        <td [style.display]="'none'" mat-cell *matCellDef="let element">
+                          {{ element.id }}
+                        </td>
+
+                      </ng-container>
+                      <ng-container matColumnDef="physicianId" >
+
+                        <th [style.display]="'none'" mat-header-cell *matHeaderCellDef style="padding-left: 15px">
+                          physicianId
+                        </th>
+                        <td [style.display]="'none'" mat-cell *matCellDef="let element">
+                          {{ element.physicianId }}
+                        </td>
+
+                      </ng-container>
+
+                      <ng-container matColumnDef="appointmentStatus">
+                        <th mat-header-cell *matHeaderCellDef style="padding-left: 15px">
+                          AppointmentStatus
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.appointmentStatus }}
                         </td>
                       </ng-container>
                       <!-- Action Column -->
                       <ng-container matColumnDef="action">
-                        <th
-                          mat-header-cell
-                          *matHeaderCellDef
-                          style="padding-left: 60px"
-                        >
+                        <th mat-header-cell *matHeaderCellDef>
                           Action
                         </th>
-                        <td
-                          mat-cell
-                          *matCellDef="let element"
-                          class="action-link"
+                        <td mat-cell *matCellDef="let element" class="action-link">
+                        
+                          <a
+                          mat-button
+                          class="companyName"
+                          [routerLink]="['CurrentPatient']"
+                          routerLinkActive="router-link-active" (click)="setTitle('CurrentPatient')"
                         >
-                          <a>Edit</a> |
-                          <a>Delete</a>
+                        Currentpatient
+                        </a> 
                         </td>
                       </ng-container>
-
-                      <tr
-                        mat-header-row
-                        *matHeaderRowDef="displayedColumns1"
-                      ></tr>
-                      <tr
-                        mat-row
-                        *matRowDef="let row; columns: displayedColumns1"
-                      ></tr>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsappoinment"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumnsappoinment"></tr>
                     </table>
                   </div>
                 </div>
               </div>
-              <!-- /.card -->
+              <div class=" col-6 card bg-light">
 
-              <!-- TO DO List -->
+                <form [formGroup]="form">
+                  <span class="row">
+                    <h5 class="  pl-3 col-4 mt-2">
+          
+                      Attendence Date
+                    </h5>
+                    <h5 class="pl-2 col-4 mt-2">Not AVailable Slots</h5>
+                  </span>
+                  <div class="card-tools row ">
+                    <span class="col-4">
+                      <input placeholder="Today Date" formControlName='date' type="date">
+                    </span>
+                    <span class="col-4" style="display: none;">
+                      <mat-label></mat-label>
+                      <input placeholder="Today Date" formControlName='physicianid' type="date">
+                    </span>
+                    <span class="col-4">
+
+                      <mat-form-field class="p-0 m-0">
+                        <mat-select placeholder="Select Not Availableslot" formControlName="timeSlot"  multiple>
+                            <mat-option *ngFor="let list of SlotList" [value]="list">{{list}}</mat-option>
+                        </mat-select>
+                       </mat-form-field>
+                    </span>
+                    <span class="col-2">
+          
+                      <mat-label>IsAbsent </mat-label>
+                      <input  formControlName='isAbsent' type="checkbox">
+          
+                    </span>
+                  </div>
+          
+                    <button type="submit" class="btn btn-success mb-1 ml-1 mt-2" (click)="AddPhysiciandetails(0)">Submit</button>
+                </form>
+          
+              </div>
+              <!--             
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
@@ -228,15 +319,12 @@
                       #mytable
                       class="my-table mat-elevation-z8"
                     >
-                      <!--- Note that these columns can be defined in any order.
-                                              The actual rendered columns are set as a property on the row definition" -->
-
-                      <!-- Id Column -->
+                     
                       <ng-container matColumnDef="id">
                         <th
                           mat-header-cell
                           *matHeaderCellDef
-                          style="padding-left: 60px"
+                          style="padding-left: 10px"
                         >
                           ID.
                         </th>
@@ -245,12 +333,12 @@
                         </td>
                       </ng-container>
 
-                      <!-- Name Column -->
+                     
                       <ng-container matColumnDef="name">
                         <th
                           mat-header-cell
                           *matHeaderCellDef
-                          style="padding-left: 60px"
+                          style="padding-left: 10px"
                         >
                           Name
                         </th>
@@ -259,7 +347,7 @@
                         </td>
                       </ng-container>
 
-                      <!-- Action Column -->
+                     
                       <ng-container matColumnDef="action">
                         <th
                           mat-header-cell
@@ -289,27 +377,19 @@
                     </table>
                   </div>
                 </div>
-                <!-- /.card-header -->
+             
+              </div> -->
 
-                <!-- /.card-body -->
-                <!-- <div class="card-footer clearfix">
-                                    <button type="button" class="btn btn-primary float-right">
-                                        <i class="fas fa-plus"></i> Add item
-                                    </button>
-                                </div> -->
-              </div>
-              <!-- /.card -->
             </section>
-            <!-- /.Left col -->
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg-5 connectedSortable">
-              <!-- Map card -->
+
+            <!-- <section class="col-lg-5 connectedSortable">
+            
               <div class="card bg-white">
                 <div class="card-header">
                   <h3 class="card-title">
                     <b>Next Patient Details</b>
 
-                    <!-- <i class="fas fa-map-marker-alt mr-1"></i> -->
+                  
                   </h3>
                   <table
                     mat-table
@@ -352,12 +432,10 @@
                       *matRowDef="let row; columns: displayedColumns"
                     ></tr>
                   </table>
-                  <!-- Copyright 2021 Google LLC. All Rights Reserved.
-                                          Use of this source code is governed by an MIT-style license that
-                                          can be found in the LICENSE file at https://angular.io/license -->
+                
                 </div>
 
-                <!-- /.card-body-->
+              
                 <div class="card-footer bg-transparent">
                   <div class="row">
                     <div class="col-4 text-center">
@@ -366,80 +444,39 @@
                         Phone Number
                       </button>
                     </div>
-                    <!-- ./col -->
+                  
                     <div class="col-4 text-center">
                       <div id="sparkline-2"></div>
                       <button class="text-white bg-primary btn">
                         Document
                       </button>
                     </div>
-                    <!-- ./col -->
+                   
                     <div class="col-4 text-center">
                       <div id="sparkline-3"></div>
                       <button class="text-white bg-primary btn">Chat</button>
                     </div>
-                    <!-- ./col -->
                   </div>
-                  <!-- /.row -->
+              
                 </div>
               </div>
-              <!-- /.card -->
-
-              <!-- solid sales graph -->
-              <div class="card bg-light">
-
-                <form [formGroup]="form">
-               <span class="row">
-                  <h5 class="  pl-3 col-6">
-                  
-                 Attendence Date
-                  </h5>
-                  <h5 class="pl-2 col-5">Not AVailable Slots</h5>
-                </span>
-                  <div class="card-tools">
-                    <span>
-                  
-                      <mat-label>Enter a date </mat-label>
-                        <input  placeholder="Today Date"
-                        formControlName='date' type="date">
-                  
-                  </span>
-<span>
-                   
-                      <mat-select  formControlName="timeslot" multiple>
-                         <mat-option
-                          *ngFor="let list of SlotList" [value]="list"
-                          >{{list}}
-                        </mat-option>
-                      </mat-select>
-                    </span>
-                     <button type="submit" class="btn btn-success mb-1 ml-1" (click)="AddPhysiciandetails(0)">Submit</button>
-                </div>
-                </form>
              
-              </div>
+            
            
-            </section>
-          
+            </section> -->
+
           </div>
         </div>
-        <!-- /.container-fluid -->
+
       </section>
-      <!-- /.content -->
 
-      <!-- Main content -->
-
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 
-    <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
     </aside>
-    <!-- /.control-sidebar -->
 
-    <!-- Main Footer -->
+   
+
   </div>
-  <!-- ./wrapper -->
+
 </div>

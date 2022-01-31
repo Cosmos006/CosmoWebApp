@@ -3,6 +3,7 @@ export const environment = {
   ProductionUrl: 'http://example.com/api',
   LocalUrl: 'https://localhost:44318/api',
   postal: 'https://api.postalpincode.in/',
+  AppointmentUrl:'https://localhost:44347/api',
 };
 
 export enum Admin {

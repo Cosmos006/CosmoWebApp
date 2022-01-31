@@ -26,6 +26,7 @@ import { PatientDashboardComponent } from './Component/patient/patient-dashboard
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 import { PreviouspatientvisitdetailsComponent } from './Component/patient/previouspatientvisitdetails/previouspatientvisitdetails.component';
+import { CurrentPatientComponent } from './Component/physician/CurrentPatient/current-patient.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
 import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
@@ -48,6 +49,12 @@ const routes: Routes = [
   {
     component: PhysicianComponent,
     path: 'Physician',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Physician] },
+  },
+  {
+    component: CurrentPatientComponent,
+    path: 'CurrentPatient',
     canActivate: [AuthGuard],
     data: { roles: [Role.Physician] },
   },

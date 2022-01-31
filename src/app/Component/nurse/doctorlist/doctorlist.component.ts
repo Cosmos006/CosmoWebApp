@@ -4,10 +4,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDailogeComponent } from '../dailoge/edit-dailoge/edit-dailoge.component';
 import { DailogeService } from 'src/app/Services/dailoge.service';
-import { Product } from 'src/app/models/appointment';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Doctor } from 'src/app/models/doctordata';
+import { Attendance } from 'src/app/models/Attendance';
 
 @Component({
   selector: 'app-doctorlist',
@@ -16,9 +17,9 @@ import { Doctor } from 'src/app/models/doctordata';
 })
 
 export class DoctorlistComponent implements OnInit {
-doctorlist!:Doctor[];
-  displayedColumns = ['id', 'firstName', 'specialization', 'status'];
-  dataSource1 !: MatTableDataSource<Doctor>;
+doctorlist!:Attendance[];
+  displayedColumns = ['id', 'physicianId', 'timeSlot' , 'dateTime' , 'isAbsent' ];
+  dataSource1 !: MatTableDataSource<Attendance>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
 

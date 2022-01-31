@@ -159,6 +159,16 @@
         >
           Calendar
         </a>
+
+        <a
+        mat-button
+        class="companyName"
+        [routerLink]="['CurrentPatient']"
+        routerLinkActive="router-link-active" (click)="setTitle('CurrentPatient')"
+        *ngIf="isPhysician"
+      >
+      Current Patient
+      </a>
       </span>
 
       <!-- <button routerLink="login"><b>Login</b></button> -->
