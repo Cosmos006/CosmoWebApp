@@ -11,47 +11,48 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-nursedashboardgrid',
   templateUrl: './nursedashboardgrid.component.html',
-  styleUrls: ['./nursedashboardgrid.component.css']
+  styleUrls: ['./nursedashboardgrid.component.css'],
 })
 export class NursedashboardgridComponent implements OnInit {
+  displayedColumns = ['id', 'name', 'physician', 'diagnosis', 'edit'];
+  dataSource1!: MatTableDataSource<Product>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort, {}) sort!: MatSort;
 
-  displayedColumns = ['id', 'name', 'physician', 'diagnosis','edit'];
-  dataSource1 !: MatTableDataSource<Product>;
-  @ViewChild(MatPaginator) paginator !: MatPaginator;
-  @ViewChild(MatSort, {}) sort !: MatSort;
-
-  pastVisit:string="PastVisit";
-  constructor(public dialogService: MatDialog, public appoiService: DailogeService, private router:Router) { }
+  pastVisit: string = 'PastVisit';
+  constructor(
+    public dialogService: MatDialog,
+    public appoiService: DailogeService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getdata();
   }
   getdata() {
-    this.appoiService.getAppointmentData().subscribe(data => {
-      this.dataSource1 = new MatTableDataSource(data)    
+    this.appoiService.getAppointmentData().subscribe((data) => {
+      this.dataSource1 = new MatTableDataSource(data);
       this.dataSource1.paginator = this.paginator;
-      console.log(this.dataSource1)
+      console.log(this.dataSource1);
     });
   }
-  startEdit(data: any[]) {    
+  startEdit(data: any[]) {
     const dialogRef = this.dialogService.open(EditDailogeComponent, {
-      data: { data }
+      data: { data },
     });
-    dialogRef.afterClosed()
+    dialogRef.afterClosed();
   }
   applyFilter(filterValue: any) {
-    let itemvalue = filterValue.target.value;   
+    let itemvalue = filterValue.target.value;
     this.dataSource1.filter = itemvalue.trim().toLowerCase();
     this.dataSource1.paginator = this.paginator;
-
   }
   onDelete(rowid: number) {
     this.appoiService.deletePostapp(rowid);
     this.getdata();
   }
-  OnVisit(){
-    console.log("vamsiclicked")
+  OnVisit() {
+    console.log('vamsiclicked');
     this.router.navigateByUrl('/PatientDetails');
   }
-
 }
