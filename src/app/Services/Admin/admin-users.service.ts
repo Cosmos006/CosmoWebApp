@@ -7,18 +7,6 @@ import { GetAdminHospiatlUser } from '../Url';
 import { HospitalUser } from 'src/app/models/HospitalUser';
 import { AnyObject } from 'chart.js/types/basic';
 
-export interface ICustomWindow extends Window {
-  _custom_global_stuff: string;
-}
-function getWindow(): any {
-  return window;
-}
-
-function _window(): any {
-  // return the global native browser window object
-  return window;
-}
-
 @Injectable({
   providedIn: 'root',
 })
@@ -30,21 +18,6 @@ export class AdminUsersService {
   //Hospital Users
 
   GetAdminHospitalUsers() {
-    // return this.http.get<HospitalUser[]>(
-    //   this.baseUrl + GetAdminHospiatlUser.GetAdminHospiatlUsers
-    // );
-    // return this.http.get<HospitalUser[]>(
-    //   this.baseUrl + GetAdminHospiatlUser.UserDetails
-    // );
-
-    // return this.http.get<HospitalUser[]>(
-    //   'https://localhost:44321/api/UserDetails'
-    // );
-
-    // return this.http.get<HospitalUser[]>(
-    //   'https://localhost:44318/api/EmployeRegister'
-    // );
-
     return this.http.get<HospitalUser[]>(
       'https://localhost:44318/api/AdminUserInfo'
     );
@@ -75,11 +48,9 @@ export class AdminUsersService {
     );
   }
 
-  // get nativeWidow(): ICustomWindow {
-  //   return getWindow();
-  // }
-
-  get nativeWindow(): any {
-    return _window();
+  GetAdminPatientLockedUser(): Observable<AdminPatient> {
+    return this.http.get<AdminPatient>(
+      this.baseUrl + GetAdminHospiatlUser.GetAdminHospiatlUsers
+    );
   }
 }
