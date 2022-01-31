@@ -18,28 +18,23 @@
           </div>
           <div class="form" style="font-size: medium;">
             <mat-form-field >
-               <mat-select  class="form-control"  placeholder="BookedSlot" [(value)]="bookedslot" formControlName="bookslot" required >                  
-                  <mat-option [value]="'1'" >9:30 - 10:30 </mat-option>
-                  <mat-option [value]="'10:30 - 11:30'" >10:30 - 11:30 </mat-option>
-                  <mat-option [value]="'11:30 - 12:30'" >11:30 - 12:30 </mat-option>
-                  <mat-option [value]="'14:30 - 15:30'" >14:30 - 15:30 </mat-option>
-                  <mat-option [value]="'15:30 - 16:30'" >15:30 - 16:30 </mat-option>
-                  <mat-option [value]="'16:30 - 05:30'" >16:30 - 05:30 </mat-option>
-                  <mat-option [value]="'9:30 - 10:30'" >9:30 - 10:30 </mat-option>
-                  <mat-option [value]="'9:30 - 10:30'" >9:30 - 10:30 </mat-option>
-               </mat-select>
-                <!-- <input matInput #input class="form-control" placeholder="BookedSlot" formControlName="bookslot" required >              -->
+               
+               <mat-select
+                  formControlName="bookslot"
+                >
+                  <mat-option>Select</mat-option>
+                  <mat-option
+                    *ngFor="let item of firstslot"
+                    [value]="item"
+                  >
+                    {{ item }}</mat-option
+                  >
+                </mat-select>
+               
               </mat-form-field>
               &nbsp; &nbsp; &nbsp;
               <mat-form-field >
-                <!-- <mat-select  class="form-control"  formControlName="physician" required> -->
-                  <!-- <mat-select-filter [array]="listOfPosts" (filteredReturn)="filteredList=$event"></mat-select-filter>  -->
-                  <!-- <mat-option
-                   *ngFor="let list of docters"
-                   [value]="list.id"
-                   
-                   >{{list.name}}</mat-option>
-               </mat-select> -->
+               
                 <input matInput #input class="form-control" placeholder="Physician" formControlName="physician" >             
                 </mat-form-field>
           </div>
@@ -52,15 +47,7 @@
                   <input matInput #input class="form-control" placeholder="Diagnosis"  formControlName="diagnosis"  >             
                 </mat-form-field>
           </div>
-          <!-- <div class="form">
-            <mat-form-field color="accent">
-                <input matInput #input class="form-control" placeholder="Mobile" [(ngModel)]="this.mobile"  name="mobile" required >             
-              </mat-form-field>
-              &nbsp; &nbsp; &nbsp;
-              <mat-form-field color="accent">
-                  <input matInput #input class="form-control" placeholder="BloodPresure" [(ngModel)]="this.bloodPresure" name="bloodPresure" required >             
-                </mat-form-field>
-          </div> -->
+          
           <div mat-dialog-actions>
             <button mat-button class="btn btn-success"  [mat-dialog-close]="1"  (click)=submit()>Save</button>
             <button mat-button class="btn btn-primary" (click)="onNoClick()" tabindex="-1">Cancel</button>

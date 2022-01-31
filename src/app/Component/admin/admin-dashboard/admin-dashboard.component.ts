@@ -42,6 +42,10 @@ export class AdminDashboardComponent implements OnInit {
       this.router.navigateByUrl('/AdminHospital');
     }
   }
+  Onappointment(){
+    
+    this.router.navigateByUrl('/AppointmentView');
+  }
   getAppointmentCount() {
     this.appoiService.getAppointmentData().subscribe(data => {
       this.Appointments=data.length;
