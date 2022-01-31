@@ -116,6 +116,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
 import { AlertService } from './Services/Alert/alert.service';
+import { UpcomingAppointmentComponent } from './Component/nurse/upcoming-appointment/upcoming-appointment.component';
 import { InboxComponent } from './Component/shared/inbox/inbox.component';
 import { MatTabsModule } from '@angular/material/tabs';
 //Edit Table
@@ -129,6 +130,7 @@ FullCalendarModule.registerPlugins([
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -162,6 +164,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     DoctorlistComponent,
     AdminPatientComponent,
     AdminHospitalComponent,
+    UpcomingAppointmentComponent,
     InboxComponent
 
   ],

@@ -26,7 +26,7 @@
     <!-- Third Column -->
     <ng-container matColumnDef="physician">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> AssignedPhysician </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.physician}}
+      <mat-cell *matCellDef="let element">{{element.physicanName}}
       </mat-cell>
     </ng-container>
 
@@ -39,7 +39,7 @@
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Action </mat-header-cell>
       <mat-cell *matCellDef="let element"> <button mat-icon-button class="iconbutton"
-          color="primary" (click)="OnVisit()">
+          color="primary" (click)="OnVisit(element)">
           <mat-icon matTooltip="Click To Move Into DoctorsQue"> verified_user </mat-icon>
         </button> </mat-cell>
         
