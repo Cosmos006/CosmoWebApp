@@ -41,8 +41,8 @@ const routes: Routes = [
   {
     path: 'Home',
     component: HomeComponent,
-},
-  { 
+  },
+  {
     path: '',
     component: LoginComponent,
   },
@@ -240,7 +240,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.Patient] },
   },
-   {
+  {
     component: PreviouspatientvisitdetailsComponent,
     path: 'NursePreviousVisitDetails',
     canActivate: [AuthGuard],
@@ -253,7 +253,7 @@ const routes: Routes = [
     data: { roles: [Role.Nurse] },
   },
   {
-    component: AdminCalendarComponent,
+    component: CalendarComponent,
     path: 'NurseAdminCalender',
     canActivate: [AuthGuard],
     data: { roles: [Role.Nurse] },
@@ -262,14 +262,12 @@ const routes: Routes = [
     component: UpcomingAppointmentComponent,
     path: 'NurseUpcomingAppointmentComponent',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Nurse] 
-    }
+    data: { roles: [Role.Nurse] },
   },
   {
     component: InboxComponent,
     path: 'Inbox',
     //canActivate: [AuthGuard],
-    
   },
   { path: '**', redirectTo: '' },
 ];

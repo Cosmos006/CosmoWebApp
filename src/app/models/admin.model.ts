@@ -37,15 +37,16 @@ export interface SoftDelete {
 }
 
 export interface AdminPatient {
-  id: number;
-  title: string;
+  userId: number;
+  // title: string;
   firstName: string;
-  lastName: string;
+  //lastName: string;
   contact: number;
   specialization: string;
   email: string;
-  createdOn: string;
+  //createdOn: string;
   isActive: boolean;
+  isLocked: boolean;
 }
 
 //Hospital
