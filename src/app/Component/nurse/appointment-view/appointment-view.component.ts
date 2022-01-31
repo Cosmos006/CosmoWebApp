@@ -58,8 +58,13 @@ export class AppointmentViewComponent {
   }
   OnVitalRecord(){
     
-    console.log("vamsiclicked")
-    this.router.navigateByUrl('/NursePatientViewdetails');
+    
+    // this.router.navigateByUrl('/NursePatientViewdetails');
+    this.router.navigate(['NursePatientViewdetails'], {
+
+      queryParams: { appointmentId: '209B85F4-77A1-45AA-5244-08D9D85C96B7' },
+
+    });
   }
   OnProviousVisit(){
     
