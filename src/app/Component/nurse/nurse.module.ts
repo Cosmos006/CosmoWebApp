@@ -29,6 +29,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BarchartComponent } from './barchart/barchart.component';
 import { NursedashboardgridComponent } from './nursedashboardgrid/nursedashboardgrid.component';
 import { DoctorlistComponent } from './doctorlist/doctorlist.component';
+import { UpcomingAppointmentComponent } from './upcoming-appointment/upcoming-appointment.component';
 
 
 
@@ -48,6 +49,9 @@ import { DoctorlistComponent } from './doctorlist/doctorlist.component';
     BarchartComponent,
     NursedashboardgridComponent,
     DoctorlistComponent,
+    UpcomingAppointmentComponent,
+    UpcomingAppointmentComponent,
+    
     
   ],
   imports: [

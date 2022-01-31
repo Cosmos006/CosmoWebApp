@@ -9,13 +9,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-nursedashboardgrid',
-  templateUrl: './nursedashboardgrid.component.html',
-  styleUrls: ['./nursedashboardgrid.component.css']
+  selector: 'app-upcoming-appointment',
+  templateUrl: './upcoming-appointment.component.html',
+  styleUrls: ['./upcoming-appointment.component.css']
 })
-export class NursedashboardgridComponent implements OnInit {
+export class UpcomingAppointmentComponent implements OnInit {
 
-  displayedColumns = ['id', 'name', 'physician', 'diagnosis','edit'];
+  displayedColumns = ['id', 'name', 'gender', 'diagnosis', 'mobile', 'bookslot', 'appointmentdatetime','physician','edit','delete'];
   dataSource1 !: MatTableDataSource<Product>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
@@ -27,10 +27,10 @@ export class NursedashboardgridComponent implements OnInit {
     this.getdata();
   }
   getdata() {
-    this.appoiService.getAppointmentData().subscribe(data => {
+    this.appoiService.getUpcomingAppointments().subscribe(data => {
       this.dataSource1 = new MatTableDataSource(data)    
       this.dataSource1.paginator = this.paginator;
-      console.log(this.dataSource1)
+      console.log(data)
     });
   }
   startEdit(data: any[]) {    
@@ -49,12 +49,30 @@ export class NursedashboardgridComponent implements OnInit {
     this.appoiService.deletePostapp(rowid);
     this.getdata();
   }
-  OnVisit(data:any){
-    console.log(data)
-    let id=data['id']
-    console.log(id)
-  this.appoiService.UpdateStatus(id,data);
-  this.getdata()
+  onUpdate(rowid: number,product: Product) {
+    this.appoiService.deletePostapp(rowid);
+    this.getdata();
   }
 
+  OnVisit(){
+    
+    console.log("vamsiclicked")
+    this.router.navigateByUrl('/nurseBookappointment');
+  }
+  OnVitalRecord(){
+    
+    console.log("vamsiclicked")
+    this.router.navigateByUrl('/NursePatientViewdetails');
+  }
+  OnProviousVisit(){
+    
+    console.log("vamsiclicked")
+    this.router.navigateByUrl('/NursePreviousVisitDetails');
+  }
 }
+
+
+function ELEMENT_DATA(ELEMENT_DATA: any) {
+  throw new Error('Function not implemented.');
+}
+
