@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   ProductionUrl: 'http://example.com/api',
-  LocalUrl: 'http://localhost:3000',
+  LocalUrl: 'https://localhost:44318/api',
   postal: 'https://api.postalpincode.in/',
   BaseURI : 'https://localhost:44311/api/'
 };

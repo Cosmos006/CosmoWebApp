@@ -10,7 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {  MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
@@ -119,6 +118,8 @@ import { AlertService } from './Services/Alert/alert.service';
 import { UpcomingAppointmentComponent } from './Component/nurse/upcoming-appointment/upcoming-appointment.component';
 import { InboxComponent } from './Component/shared/inbox/inbox.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { PhysicianService } from './Services/Physician/physician.service';
+import {  MatFormFieldModule } from '@angular/material/form-field';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -132,6 +133,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PatientDynamicTableComponent } from './Component/shared/patientdynamic-table/patientdynamic-table.component';
 
+import { CurrentPatientComponent } from './Component/physician/CurrentPatient/current-patient.component';
 
 @NgModule({
   declarations: [
@@ -139,6 +141,7 @@ import { PatientDynamicTableComponent } from './Component/shared/patientdynamic-
     NavMenuComponent,
     LoginComponent,
     HomeComponent,
+    CurrentPatientComponent,
     PhysicianComponent,
     AppointmentViewComponent,
     PatientDetailsComponent,
@@ -246,6 +249,7 @@ import { PatientDynamicTableComponent } from './Component/shared/patientdynamic-
   ],
   exports: [],
   providers: [
+    UserService,AuthGuard,AuthenticationService, AlertService, PhysicianService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     UserService,
     AuthGuard,
     AuthenticationService,

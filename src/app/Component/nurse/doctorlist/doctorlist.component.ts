@@ -4,20 +4,22 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDailogeComponent } from '../dailoge/edit-dailoge/edit-dailoge.component';
 import { DailogeService } from 'src/app/Services/dailoge.service';
-import { Product } from 'src/app/models/appointment';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Doctor } from 'src/app/models/doctordata';
+import { Attendance } from 'src/app/models/Attendance';
 
 @Component({
   selector: 'app-doctorlist',
   templateUrl: './doctorlist.component.html',
   styleUrls: ['./doctorlist.component.css']
 })
+
 export class DoctorlistComponent implements OnInit {
-countries!:Doctor[];
-  displayedColumns = ['id', 'name', 'specailization', 'status'];
-  dataSource1 !: MatTableDataSource<Doctor>;
+doctorlist!:Attendance[];
+  displayedColumns = ['id', 'physicianId', 'timeSlot' , 'dateTime' , 'isAbsent' ];
+  dataSource1 !: MatTableDataSource<Attendance>;
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
 
@@ -49,13 +51,13 @@ countries!:Doctor[];
  
   getdoctordata() {
     this.appoiService.getDoctorListData().subscribe(data => {
-      this.countries=data;     
+      this.doctorlist=data;     
       
     });
   }
-  onSelect(countryid: any) {
-    let itemvalue = countryid.target.value;   
-    console.log(countryid.target.value);
+  onSelect(id: any) {
+    let itemvalue = id.target.value;   
+    console.log(id.target.value);
     if (itemvalue!=0){
       this.dataSource1.filter = itemvalue.trim().toLowerCase();
     }

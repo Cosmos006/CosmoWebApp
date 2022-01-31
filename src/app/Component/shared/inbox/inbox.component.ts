@@ -18,7 +18,6 @@ import {
 } from '@angular/forms';
 import { Guid } from 'guid-typescript';
 import { InboxService } from 'src/app/Services/Inbox/inbox.service';
-import { UserDetails } from 'src/app/models/userdetails';
 
 export interface Appointments { 
   appointmentId : Guid
