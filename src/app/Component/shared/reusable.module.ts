@@ -32,6 +32,7 @@ import { InboxComponent } from './inbox/inbox.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTabsModule } from '@angular/material/tabs';
+import { PatientDynamicTableComponent } from './patientdynamic-table/patientdynamic-table.component';
 
 import { SubscriptionComponent } from './subscription/subscription.component'; // a plug
 FullCalendarModule.registerPlugins([
@@ -49,6 +50,7 @@ FullCalendarModule.registerPlugins([
     CalendarComponent,
     InboxComponent,
     SubscriptionComponent,
+    PatientDynamicTableComponent
   ],
   imports: [
     CommonModule,

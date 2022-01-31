@@ -16,7 +16,6 @@ import { AuthenticationService } from 'src/app/Services';
 import { User } from 'src/app/models/User';
 
 import {
-  //appointmentData,
   AppointmentData,
   appointments,
   Appointment,
@@ -24,6 +23,9 @@ import {
   AppointmentPastHeaderData,
   appointmentHeaderData,
   AppointmentHeaderData,
+  DrugData,
+  drugHeaderData,
+  DrugHeaderData,
 } from 'src/app/models/patientDashboard';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -113,9 +115,51 @@ export class PatientDashboardComponent implements OnInit {
       isvisible: false,
       dataName: (row: { id: any }) => `${row.id}`,
     },
+    {
+      columnDef: 'exportBtn',
+      header: 'export',
+      type: 'button',
+      icon: 'get_app',
+      isvisible: false,
+      dataName: (row: { id: any }) => `${row.id}`,
+    },
+  ];
+  allPrescriptionsColumns: any[] = [
+    {
+      columnDef: 'drugName',
+      isvisible: true,
+      header: 'Drug',
+      dataName: (row: { drugName: any }) => `${row.drugName}`,
+    },
+    {
+      columnDef: 'drugForm',
+      isvisible: true,
+      header: 'DrugForm',
+      dataName: (row: { drugForm: any }) => `${row.drugForm}`,
+    },
+    {
+      columnDef: 'drugGenericName',
+      isvisible: true,
+      header: 'DrugGenericName',
+      dataName: (row: { drugGenericName: any }) => `${row.drugGenericName}`,
+    },
+    {
+      columnDef: 'drugManufacturerName',
+      isvisible: true,
+      header: 'DrugManufacturerName',
+      dataName: (row: { drugManufacturerName: any }) =>
+        `${row.drugManufacturerName}`,
+    },
+    // {
+    //   columnDef: 'drugStrength',
+    //   isvisible: true,
+    //   header: 'DrugStrength',
+    //   dataName: (row: { drugStrength: any }) => `${row.drugStrength}`,
+    // },
   ];
   showcolumns!: any[];
   metaCount?: number;
+  showprescriptionscolumns!: any[];
 
   selectedValue: string = '1';
   showDeclineModal!: boolean;
@@ -127,9 +171,8 @@ export class PatientDashboardComponent implements OnInit {
   showCancelModalNew!: boolean;
   showSubmitModal!: boolean;
   addReason!: string;
-  addReasonform:FormGroup=new FormGroup(
-    {
-      textReason:new FormControl(null,[Validators.required]),
+  addReasonform: FormGroup = new FormGroup({
+    textReason: new FormControl(null, [Validators.required]),
   });
   selectedRow: any;
   userRole: any;
@@ -141,17 +184,16 @@ export class PatientDashboardComponent implements OnInit {
 
   griddata: AppointmentData[] = [];
   currentUser: User;
+  gridDrugData: DrugData[] = [];
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private changeDetection: ChangeDetectorRef,
     private patientDashboardService: PatientDashboardService,
-    private authenticationService: AuthenticationService,
+    private authenticationService: AuthenticationService
   ) {
-
     this.currentUser = this.authenticationService.currentUserValue;
-
   }
 
   ngOnInit(): void {
@@ -175,7 +217,8 @@ export class PatientDashboardComponent implements OnInit {
             (e) =>
               e.columnDef != 'prescriptionBtn' &&
               e.columnDef != 'viewdetailBtn' &&
-              e.columnDef != 'reasonBtn'
+              e.columnDef != 'reasonBtn' &&
+              e.columnDef != 'exportBtn'
           );
           this.griddata = x.filter(
             (v) =>
@@ -211,7 +254,8 @@ export class PatientDashboardComponent implements OnInit {
                 e.columnDef != 'prescriptionBtn' &&
                 e.columnDef != 'modifyBtn' &&
                 e.columnDef != 'viewdetailBtn' &&
-                e.columnDef != 'cancelBtn'
+                e.columnDef != 'cancelBtn' &&
+                e.columnDef != 'exportBtn'
             );
           } else {
             this.griddata = x;
@@ -244,10 +288,17 @@ export class PatientDashboardComponent implements OnInit {
   ShowDeclineInfo(item: AppointmentData) {
     this.selectedAppointment = item;
     this.showDeclineModal = true;
-    this.currentUser.role
+    this.currentUser.role;
   }
   ShowPrescriptionModel() {
     this.showPrescriptionModal = true;
+    this.showprescriptionscolumns = this.allPrescriptionsColumns;
+    let apointdata = this.patientDashboardService
+      .GetPrescriptionsbyId(this.selectedRow.guid)
+      .subscribe((x: DrugData[]) => {
+        this.gridDrugData = x;
+        console.log(x);
+      });
   }
   ModifyModel() {
     // this.router.navigate(['/PatientBookappointment']);
@@ -276,16 +327,20 @@ export class PatientDashboardComponent implements OnInit {
     } else if (this.showSubmitModal) {
       this.showSubmitModal = false;
     } else {
-      if(this.addReasonform.invalid){
+      if (this.addReasonform.invalid) {
         alert('Please text some reason...');
-      }
-      else{
+      } else {
         this.showCancelModalNew = false;
         let apointdata = this.patientDashboardService
-          .CancelAppointmentById(this.selectedRow.guid, 'Rejected',this.addReason )
+          .CancelAppointmentById(
+            this.selectedRow.guid,
+            'Rejected',
+            this.addReason
+          )
           .subscribe((v) => {
             console.log(v.id, v.appointmentStatus);
           });
+          this.router.navigate([PatientDashboardComponent]);
         this.showSubmitModal = true;
       }
     }
@@ -300,35 +355,26 @@ export class PatientDashboardComponent implements OnInit {
   hideViewdetailModel() {
     this.showviewdetailModel = false;
   }
-  exporAll() {
-    const header = Object.keys(this.griddata[0]);
-    let ar: AppointmentData[] = this.griddata;
-    let csv = ar.map((row) =>
-      header
-        .map((fieldName) => JSON.stringify((row as any)[fieldName]))
-        .join(',')
-    );
-    csv.unshift(header.join(','));
-    let csvArray = csv.join('\r\n');
+  exportPrescription() {
+    let apointdata = this.patientDashboardService
+      .GetPrescriptionsbyId(this.selectedRow.guid)
+      .subscribe((x: DrugData[]) => {
+        this.gridDrugData = x;
+        const header = Object.keys(this.gridDrugData[0]);
+        let ar: DrugData[] = this.gridDrugData;
+        let csv = ar.map((row) =>
+          header
+            .map((fieldName) => JSON.stringify((row as any)[fieldName]))
+            .join(',')
+        );
+        csv.unshift(header.join(','));
+        let csvArray = csv.join('\r\n');
+    
+        var blob = new Blob([csvArray], { type: 'text/csv' });
+        saveAs(blob, 'myFile.csv');
 
-    var blob = new Blob([csvArray], { type: 'text/csv' });
-    saveAs(blob, 'myFile.csv');
-  }
-  export(data: AppointmentData) {
-    //data=this.griddata;
-    const header = Object.keys(this.griddata[0]);
-    let ar: AppointmentData[] = [data];
-    let csv = ar.map((row) =>
-      header
-        .map((fieldName) => JSON.stringify((row as any)[fieldName]))
-        .join(',')
-    );
-    csv.unshift(header.join(','));
-    let csvArray = csv.join('\r\n');
-
-    var blob = new Blob([csvArray], { type: 'text/csv' });
-    saveAs(blob, 'myFile.csv');
-  }
+      });
+    }
   updatePagination(event: any) {
     this.filterAppointments(this.selectedValue, event);
   }
@@ -351,25 +397,41 @@ export class PatientDashboardComponent implements OnInit {
       this.CancelModel();
     }
     if (obj.columnDef == 'prescriptionBtn') {
+      var id = obj.guid;
+      this.selectedRow = obj;
       this.ShowPrescriptionModel();
     }
+    if (obj.columnDef == 'exportBtn') {
+      var id = obj.guid;
+      this.selectedRow = obj;
+      this.exportPrescription();
+    }
     if (obj.columnDef == 'viewdetailBtn') {
-      // this.router.navigate(['/PatientViewdetails']);
-      // var id = obj.guid;
-      // let apointdata = this.patientDashboardService
-      //   .GetAppointmentById(obj.guid)
-      //   .subscribe((v) => {
-      //     //var data = v.find((e) => e.id == obj.guid)!;
-      //     this.ShowViewdetailModel(v);
-      //   });
+      this.router.navigate(['/PatientViewdetails']);
+      var id = obj.guid;
+      let apointdata = this.patientDashboardService
+        .GetAppointmentById(obj.guid)
+        .subscribe((v) => {
+          console.log(v.id);
+        });
     }
     if (obj.columnDef == 'reasonBtn') {
       var id = obj.guid;
       let apointdata = this.patientDashboardService
         .GetAppointmentById(obj.guid)
         .subscribe((v) => {
-          //var data = v.find((e) => e.id == obj.guid)!;
           this.ShowDeclineInfo(v);
+        });
+    }
+    if (obj.columnDef == 'modifyBtn') {
+      // this.ModifyModel();
+      var id = obj.guid;
+      let apointdata = this.patientDashboardService
+        .GetAppointmentById(obj.guid)
+        .subscribe((v) => {
+          this.router.navigate(['PatientBookAppointment/Patient'], {
+            queryParams: { appointmentId: v.id },
+          });
         });
     }
   }
@@ -382,7 +444,6 @@ export class PatientDashboardComponent implements OnInit {
     if (navigate == 'locked') {
       this.router.navigateByUrl('/LockedAccount');
     } else if (navigate == 'Covid') {
-      //this.router.navigateByUrl('/AdminPatient');
       this.router.navigate(['PatientBookAppointment/Covid']);
     }
   }
