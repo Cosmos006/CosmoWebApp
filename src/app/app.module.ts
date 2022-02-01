@@ -129,6 +129,7 @@ FullCalendarModule.registerPlugins([
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ChangepasswordComponent } from './Component/home/changepassword/changepassword.component';
 
 @NgModule({
   declarations: [
@@ -162,7 +163,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     DoctorlistComponent,
     AdminPatientComponent,
     AdminHospitalComponent,
-    InboxComponent
+    InboxComponent,
+    ChangepasswordComponent
 
   ],
   imports: [

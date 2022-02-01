@@ -10,6 +10,7 @@ import { AdminPatientComponent } from './Component/admin/admin-patient/admin-pat
 import { LockedAccountComponent } from './Component/admin/locked-account/locked-account.component';
 import { PatientUserComponent } from './Component/admin/patient-user/patient-user.component';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
+import { ChangepasswordComponent } from './Component/home/changepassword/changepassword.component';
 import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
 import { HomeComponent } from './Component/home/home/home.component';
 import { LoginComponent } from './Component/home/login/login.component';
@@ -242,6 +243,12 @@ const routes: Routes = [
   {
     component: InboxComponent,
     path: 'Inbox',
+    canActivate: [AuthGuard],
+    
+  },
+  {
+    component: ChangepasswordComponent,
+    path: 'Changepassword',
     //canActivate: [AuthGuard],
     
   },
