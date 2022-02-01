@@ -70,17 +70,24 @@ AllergyType:any
   constructor(private patient: patientdetails) {}
 
   ngOnInit(): void {
-    var Get = localStorage.getItem('Currentuser');
+    var Get = localStorage.getItem('currentUser');
     this.postobj = new PatientdetailsDemo();
     this.relativeobj=new Patientrelativedetails();
     if (typeof Get === 'string') {
        var id= JSON.parse(Get).id;
-       this.patientid =id;
-       alert(this.patientid)
+       
+
 
     }
+    this.patient.GetPatientId(id) .then(async response => {
+      response.text().then(responseData => {
+         this.patientid = responseData; 
+        // alert(this.patientid);
+        this.fetchdata(this.patientid);
+      })
+    });
    this.bindToUI();
-   this.fetchdata(this.patientid);
+   
    this.getAllergyDetails();
    
   }

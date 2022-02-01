@@ -174,6 +174,14 @@ export class patientdetails {
     );
   }
   Updatepreviousvisitdetails() { }
+  GetPatientId(UserID:any)
+  {
+    return fetch(`https://localhost:5001/api/Master/GetPatientId?userid=${UserID}`, {
+      method: 'GET',
+      redirect: 'follow'
+    })
+    
+  }
 
   Observeevent() {
     const $http = new Observable((observer) => {

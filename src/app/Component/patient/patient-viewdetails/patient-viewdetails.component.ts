@@ -70,10 +70,10 @@ export class PatientViewdetailsComponent implements OnInit
        this.patientid =id;
       
     }
-
+    
 
    this.postobj=new patientvisitdetails();
-    this.SetConditionforvisibility();
+    
     this. getdiscriptiondetails();
     
     this.filteredList1= this.listOfdiagnosisdiscription.slice();
@@ -134,7 +134,7 @@ Addupdatepatientdetails()
        procedureslist:this.physicianform.value.procedurediscription,
         //proceduredepricated:this.physicianform.value.proceduredepricated,
         //drugid:this.physicianform.value.drugid,
-        druglist:['para','vicks'],
+        druglist:this.physicianform.value.drugname,
         
         doctorDescription: this.physicianform.value.diagnosisdiscriptionifother,
         appointmentId: 'F15B843F-E04B-46A4-3817-08D9E5551C14',
@@ -304,8 +304,7 @@ SetConditionforvisibility()
   this.patient.GetRole(this.patientid) .then(async response => {
     response.text().then(responseData => {
        this.Rolename = responseData; 
-    })
-  });
+       
  
   if((this.Rolename=="nurse") || (this.Rolename=="NURSE"))
   {
@@ -320,14 +319,16 @@ SetConditionforvisibility()
    this.patientvisitbuttonupdate=true;
     this.nurseform.disable();
   }
-  else
+  else if(this.Rolename=="PATIENT" || this.Rolename=='patient')
   {
-    this.patientvisitbuttonsave=false;
-    this.patientvisitbuttonupdate=false;
+    
     this.physicianform.disable();
     this.nurseform.disable();
+    this.patientvisitbuttonsave=false;
+    this.patientvisitbuttonupdate=false;
   }
-
+})
+});
 }
 cleardata()
 {
