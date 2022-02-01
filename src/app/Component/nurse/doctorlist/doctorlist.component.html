@@ -26,19 +26,19 @@
         <mat-cell *matCellDef="let element"  [style.display]="'none'"><span class="ellipsis">{{element.physicianId}}</span></mat-cell>
       </ng-container>
       <ng-container matColumnDef="timeSlot">
-        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Not Available Slots
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Not Available Slots
         </mat-header-cell>
         <mat-cell *matCellDef="let element" matTooltip="{{element.timeSlot}}"> {{element.timeSlot}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="dateTime">
-        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Date
+        <mat-header-cell *matHeaderCellDef mat-sort-header > Date
         </mat-header-cell>
         <mat-cell *matCellDef="let element" matTooltip="{{element.dateTime}}"> {{element.dateTime}} </mat-cell>
       </ng-container>
       <!-- Third Column -->
       <ng-container matColumnDef="isAbsent">
-        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Status </mat-header-cell>
-        <mat-cell  *matCellDef="let element">{{element.isAbsent ? 'Absent' : 'Present'}}
+        <mat-header-cell *matHeaderCellDef mat-sort-header > Status </mat-header-cell>
+        <mat-cell  *matCellDef="let element" > <span  [ngClass]="element.isAbsent ? 'red': 'green'">{{element.isAbsent ? 'Absent' : 'Present'}}</span>
         </mat-cell>
       </ng-container>
 

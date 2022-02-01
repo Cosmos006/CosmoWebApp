@@ -1,6 +1,11 @@
 /* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~material-design-icons/iconfont/material-icons.css'; */
-
+.green {
+ color:green;
+}
+.red {
+ color: red;
+}
 .no-wrap {
     white-space: nowrap;
   }
