@@ -15,6 +15,13 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Employee } from 'src/app/models/patient.model';
+import {
+  Department,
+  Designation,
+  Eduaction,
+  Gender,
+  Specalization,
+} from 'src/app/models/admin.model';
 
 @Component({
   selector: 'app-add-physician',
@@ -28,16 +35,18 @@ export class AddPhysicianComponent implements OnInit {
   loading = false;
   submitted = false;
   Gender: any;
-  genderdata: any;
-  designationdata: any;
+  genderdata: Gender[] = [];
+  designationdata: Specalization[] = [];
   designation: any;
-  educationdata: any;
+  educationdata: Eduaction[] = [];
   eduaction: any;
   department: any;
-  departmentdata: any;
+  departmentdata: Designation[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   Result: string = '';
+
+  specalization: Specalization[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,7 +62,7 @@ export class AddPhysicianComponent implements OnInit {
     });
 
     this.adminservice.Gender().subscribe((res) => {
-      this.genderdata = res.gender;
+      this.genderdata.push(...res);
     });
 
     // this.genderdata = ['Male', 'Female', 'Other'];
@@ -62,15 +71,19 @@ export class AddPhysicianComponent implements OnInit {
 
       if (this.UserType === 'physician') {
         this.adminservice.EduactionList(this.Type).subscribe((res) => {
-          this.educationdata = res.physician;
+          this.educationdata.push(...res);
         });
 
         this.adminservice.Designation(this.Type).subscribe((res) => {
-          this.designationdata = res.physician;
+          this.designationdata.push(...res);
+        });
+
+        this.adminservice.Specialization(this.Type).subscribe((res) => {
+          this.specalization.push(...res);
         });
 
         this.adminservice.Department(this.Type).subscribe((res) => {
-          this.departmentdata = res.physician;
+          this.departmentdata.push(...res);
         });
       }
     } else if (this.UserType === 'nurse') {
@@ -78,14 +91,17 @@ export class AddPhysicianComponent implements OnInit {
 
       if (this.UserType === 'nurse') {
         this.adminservice.EduactionList(this.Type).subscribe((res) => {
-          this.educationdata = res.nurse;
+          this.educationdata.push(...res);
         });
         this.adminservice.Designation(this.Type).subscribe((res) => {
-          this.designationdata = res.nurse;
+          this.designationdata.push(...res);
+        });
+        this.adminservice.Specialization(this.Type).subscribe((res) => {
+          this.specalization.push(...res);
         });
 
         this.adminservice.Department(this.Type).subscribe((res) => {
-          this.departmentdata = res.nurse;
+          this.departmentdata.push(...res);
         });
       }
     }
@@ -244,6 +260,7 @@ export class AddPhysicianComponent implements OnInit {
             contact: MobileData.toString(),
             specialization: data.designation,
             email: data.Email,
+            Designation: data.department,
           },
         };
 
