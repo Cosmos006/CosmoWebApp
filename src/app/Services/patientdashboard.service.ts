@@ -10,9 +10,7 @@ export class PatientDashboardService {
   constructor(private http: HttpClient) {}
 
   GetAllAppointmentList() {
-    return this.http.get<AppointmentData[]>(
-      this.baseUrl + Patient.Appointment
-    );
+    return this.http.get<AppointmentData[]>(this.baseUrl + Patient.Appointment);
   }
 
   GetAllUpcomingAppointmentList() {
@@ -30,22 +28,29 @@ export class PatientDashboardService {
       this.baseUrl + Patient.DeclineAppointments
     );
   }
-  GetAppointmentById(id : string) {
+  GetAppointmentById(id: string) {
     return this.http.get<AppointmentData>(
-      this.baseUrl + Patient.Appointment + '/'+id
-    )
+      this.baseUrl + Patient.Appointment + '/' + id
+    );
   }
 
-  CancelAppointmentById(id : string, status: string, deletedReason: string){
+  CancelAppointmentById(id: string, status: string, deletedReason: string) {
     return this.http.patch<AppointmentData>(
-      this.baseUrl + Patient.ApproveReject +'/'+id + '?Status='+  status + '&DeletedReason='+  deletedReason ,""
-      )
-   }
+      this.baseUrl +
+        Patient.ApproveReject +
+        '/' +
+        id +
+        '?Status=' +
+        status +
+        '&DeletedReason=' +
+        deletedReason,
+      ''
+    );
+  }
 
-   GetPrescriptionsbyId(id : string){
+  GetPrescriptionsbyId(id: string) {
     return this.http.get<DrugData[]>(
-      this.baseUrl + Patient.GetPrescriptions +'/'+id 
-      )
-   }
-
+      this.baseUrl + Patient.GetPrescriptions + '/' + id
+    );
+  }
 }
