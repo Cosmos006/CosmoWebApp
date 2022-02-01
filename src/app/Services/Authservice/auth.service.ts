@@ -8,6 +8,8 @@ import { User } from 'src/app/models/User';
 import { FormGroup } from '@angular/forms';
 import { AnyObject } from 'chart.js/types/basic';
 import { Guid } from 'guid-typescript';
+import { UserDetails } from 'src/app/models/userdetails';
+import { Changepassword } from 'src/app/models/changepassword';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -49,6 +51,7 @@ export class AuthenticationService {
       });
   }
 
+
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
@@ -59,15 +62,60 @@ export class AuthenticationService {
       password: '',
       firstName: '',
       lastName: '',
+      isFirstLogin : false,
+      isLocked: false,
+      isActive: false,
+      email:'',
       role: '',
       token: '',
       loggedIn: '',
+      NoOfAteempt:0
     };
     this.currentUserSubject.next(emptyDataResult);
     //this.router.navigateByUrl('/login');
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
     });
+  }
+
+  Resetpassword(obj : UserDetails){
+    console.log('Hii')
+    
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify(obj);
+    fetch("https://localhost:44359/api/User/ForgotPassword", {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    })
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    
+    //return this.http.post('https://localhost:44359/api/User/ForgotPassword', obj)
+  }
+
+  SendEmail(email: string, user:string){
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    //var raw = JSON.stringify(obj);
+    fetch(`https://localhost:44359/api/User/SendEmail/${email}?username=${user}`,{
+      method: 'POST',
+      redirect: 'follow',
+
+    })
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    
+    //https://localhost:44359/api/User/SendEmail/Alex123?username=Alex123"
+    // return this.http.post(`https://localhost:44359/api/User/SendEmail/${email}?username=${user}`,{
+    //   method: 'POST',
+    //   redirect: 'follow',
+
+    // });
   }
 
   getUserData() {
@@ -81,5 +129,37 @@ export class AuthenticationService {
       },
       error: (e) => console.error(e),
     })
+  }
+
+  lockAccount(user: UserDetails ){
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify(user);
+    fetch("https://localhost:44359/api/User/LockAccount", {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    })
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  }
+
+  changepassword(obj : Changepassword){
+    //https://localhost:44359/api/User/ChangePassword
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify(obj);
+    fetch("https://localhost:44359/api/User/ChangePassword",{
+      body: raw,
+      headers: myHeaders,
+      method: 'POST',
+      redirect: 'follow',
+
+    })
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   }
 }
