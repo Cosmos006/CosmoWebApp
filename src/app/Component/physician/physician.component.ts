@@ -63,7 +63,7 @@ export class PhysicianComponent implements OnInit {
   //   'physicianId' 
   //    , 'nurseId'
   dataSource1 !: MatTableDataSource<Booking>;
-  @ViewChild(MatPaginator) paginator !: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
 
 
