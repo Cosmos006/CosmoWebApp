@@ -49,7 +49,7 @@
           *ngIf="isAdmin"
           mat-button
         >
-          Register Physician
+          Add Physician
         </a>
         <a
           class="companyName"
@@ -67,7 +67,7 @@
           routerLinkActive="router-link-active"
           *ngIf="isPhysician"
         >
-          View Physician
+          Calendar
         </a>
         <a
           class="companyName"
@@ -80,12 +80,21 @@
         <a
           mat-button
           class="companyName"
+          [routerLink]="['Inbox']"
+          routerLinkActive="router-link-active"
+          *ngIf="isNurse || isPhysician"
+        >
+          Inbox
+        </a>
+        <!-- <a
+          mat-button
+          class="companyName"
           [routerLink]="['DynamicView']"
           routerLinkActive="router-link-active"
           *ngIf="isNurse"
         >
           Nurse1
-        </a>
+        </a> -->
         <a
           mat-button
           class="companyName"
@@ -140,7 +149,16 @@
           routerLinkActive="router-link-active"
           *ngIf="isPatient"
         >
-          Patient
+          Patient Visit Details
+        </a>
+        <a
+          mat-button
+          class="companyName"
+          [routerLink]="['previouspatientvisitdetails']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient"
+        >
+          Previouspatient Visit Details
         </a>
         <a
           mat-button
@@ -213,14 +231,14 @@
       >
         Nurse
       </a>
-      <a
+      <!-- <a
         mat-button
         [routerLink]="['DynamicView']"
         routerLinkActive="router-link-active"
         *ngIf="isNurse"
       >
         Nurse1
-      </a>
+      </a> -->
 
       <a
         mat-button

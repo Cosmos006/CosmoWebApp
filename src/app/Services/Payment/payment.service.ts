@@ -37,4 +37,14 @@ export class PaymentService {
       }
     );
   }
+
+  GetSubscribedData(PatientId: string) {
+    return fetch(
+      `https://localhost:44318/api/PaymentApi/GetSubscribedData/${PatientId}`,
+      {
+        method: 'GET',
+        redirect: 'follow',
+      }
+    );
+  }
 }

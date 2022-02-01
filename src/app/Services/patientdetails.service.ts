@@ -132,7 +132,7 @@ export class patientdetails {
 
   Getpatientvisitdetailsfromid(id:string) {
     const getuser = localStorage.getItem('USerID');
-    return fetch(`https://localhost:5001/api/PatientDetails?Appointmentid=78871310-CDF2-46C9-99EE-08D9E24B6FE1`, {
+    return fetch(`https://localhost:5001/api/PatientDetails?Appointmentid=F15B843F-E04B-46A4-3817-08D9E5551C14`, {
       method: 'GET',
       redirect: 'follow'
     });
@@ -147,7 +147,8 @@ export class patientdetails {
   }
   GetRole(id:any)
   {
-    alert(id + 'hii');
+   
+    
     return fetch(`https://localhost:5001/api/Master?id=${id}`, {
       method: 'GET',
       redirect: 'follow'

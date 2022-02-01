@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Patient, environment } from './Url';
-import { AppointmentData } from '../models/patientDashboard';
+import { AppointmentData, DrugData } from '../models/patientDashboard';
 @Injectable({
   providedIn: 'root',
 })
@@ -36,6 +36,16 @@ export class PatientDashboardService {
     )
   }
 
- 
+  CancelAppointmentById(id : string, status: string, deletedReason: string){
+    return this.http.patch<AppointmentData>(
+      this.baseUrl + Patient.ApproveReject +'/'+id + '?Status='+  status + '&DeletedReason='+  deletedReason ,""
+      )
+   }
+
+   GetPrescriptionsbyId(id : string){
+    return this.http.get<DrugData[]>(
+      this.baseUrl + Patient.GetPrescriptions +'/'+id 
+      )
+   }
 
 }

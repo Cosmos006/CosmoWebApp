@@ -1,11 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+ /* You can add global styles to this file, and also import other style files
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; */
 
 .mat-dialog-container{
     box-shadow: none;
     background:none;
-    color: #0000;
+    /* color: #0000; */
     width: 100%;
 }
 .pointer{
@@ -17,8 +17,8 @@
   }
   .mat-input-element {
     font: inherit;
-     background: white!important;
-    color: white;
+    background: white!important;
+    color: black;
     border: none;
     outline: none;
     padding: 0;
@@ -30,7 +30,7 @@
     box-sizing: content-box;
 }
 .mat-form-field-appearance-legacy .mat-form-field-label {
-    color: white!important;
+    color: black !important;
 }
 .mat-form-field.mat-form-field .mat-form-field-label{
     color:black!important;
@@ -40,4 +40,17 @@
 
 .mat-form-field.mat-form-field-invalid .mat-form-field-label {
     color: #f44336!important;
+}
+
+
+ */
+
+
+ .fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: x-large;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

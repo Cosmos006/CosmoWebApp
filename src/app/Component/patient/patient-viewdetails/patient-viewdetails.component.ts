@@ -29,7 +29,8 @@ export class PatientViewdetailsComponent implements OnInit
   @Input() index = 0;
   @Input() previousdetails! : patientvisitdetails
   
-  
+  patientvisitbuttonsave:boolean=false;
+  patientvisitbuttonupdate:boolean=false;
   nurseform:FormGroup=new FormGroup({});
   physicianform:FormGroup=new FormGroup({});
   panelOpenState = false;
@@ -136,7 +137,7 @@ Addupdatepatientdetails()
         druglist:['para','vicks'],
         
         doctorDescription: this.physicianform.value.diagnosisdiscriptionifother,
-        appointmentId: '78871310-CDF2-46C9-99EE-08D9E24B6FE1',
+        appointmentId: 'F15B843F-E04B-46A4-3817-08D9E5551C14',
         //appointments: ,
         createddate: new Date(),
        
@@ -196,17 +197,17 @@ updatepatientdetails()
         druglist:['para','vicks'],
         
         doctorDescription: this.physicianform.value.diagnosisdiscriptionifother,
-        appointmentId: '78871310-CDF2-46C9-99EE-08D9E24B6FE1',
+        appointmentId: 'F15B843F-E04B-46A4-3817-08D9E5551C14',
         //appointments: ,
         createddate: new Date(),
        
       };
       
       this.patient.UpdatePatientvisitdetails(dat,this.VisitId);
-      
+      alert("PatietDetails saved succesfully");
    
       this.fetchdata(this.Guid)
-    }
+   }
   
   }
 
@@ -222,7 +223,7 @@ fetchdata(Id:any)
            _that.postobj = result;
           this.VisitId=_that.postobj.id;
          
-
+          
           _that.bindToUI();
           
         });
@@ -308,20 +309,23 @@ SetConditionforvisibility()
  
   if((this.Rolename=="nurse") || (this.Rolename=="NURSE"))
   {
-    
+    this.patientvisitbuttonsave=true;
+    this.patientvisitbuttonupdate=true;
     this.physicianform.disable();
     
   }
   else if(this.Rolename=="physician" || this.Rolename=='PHYSICIAN')
   {
-   
+   this.patientvisitbuttonsave=false;
+   this.patientvisitbuttonupdate=true;
     this.nurseform.disable();
   }
   else
   {
-   
-    //this.physicianform.disable();
-    //this.nurseform.disable();
+    this.patientvisitbuttonsave=false;
+    this.patientvisitbuttonupdate=false;
+    this.physicianform.disable();
+    this.nurseform.disable();
   }
 
 }

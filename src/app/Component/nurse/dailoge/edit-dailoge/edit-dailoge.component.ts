@@ -1,7 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup ,FormControl, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { DailogeService } from 'src/app/Services/dailoge.service';
+import { Appointment } from 'src/app/models/patientDashboard';
+import { Product } from 'src/app/models/appointment';
+import { Doctor } from 'src/app/models/doctordata';
+import { id } from 'date-fns/locale';
+import { Mode } from 'src/app/models/patient.model';
+import { GenerateTimeSlot } from 'src/app/models/Globalfunctions';
+import { BookAppointmentService } from 'src/app/Services/BookAppointment/book-appointment.service';
 
 @Component({
   selector: 'app-edit-dailoge',
@@ -10,61 +17,154 @@ import { DailogeService } from 'src/app/Services/dailoge.service';
 })
 export class EditDailogeComponent implements OnInit {
   registerForm !: FormGroup;
-  name !:string;
+  name !: string;
+  id !: string;
   gender !: string;
   address!: string;
-  mobile!: number;
-  age!:number;
-  bloodGroup!:string;
-  temparature!:string;
-  bloodPresure!:string;
-  sugarLevel!:string;
+  contact!: number;
+  bookedslot: string = "1";
+  physician!: string;
+  date!: string;
+  diagnosis!: string;
+  sugarLevel!: string;
+  docters!: Doctor[];
+  selectedFoods = 1;
+  ModeTypes?: Array<string>;
+  diagnosicscheck?: boolean;
+  datecheck?: boolean;
+  firstslot!: Array<string>;
+  secondslot!: Array<string>;
+  incomingslot: Array<string> = [];
+  outgoingslot!: Array<string>;
 
- 
-  constructor(public dialogRef: MatDialogRef<EditDailogeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,public dailogueservice:DailogeService,private formBuilder: FormBuilder) { }
+  constructor( private service: BookAppointmentService,public dialogRef: MatDialogRef<EditDailogeComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any, public dailogueservice: DailogeService, private formBuilder: FormBuilder) {
+
+      }
 
 
 
   ngOnInit(): void {
-    console.log(this.data.data.userID);
-    console.log(this.data["userID"])
-
-    this.name=this.data.data.name
-    this.age=this.data.data.age
-    this.gender=this.data.data.gender
-    this.mobile=this.data.data.mobile
-    this.bloodGroup=this.data.data.bloodGroup
-    this.bloodPresure=this.data.data.bloodPresure
-    this.sugarLevel=this.data.data.sugarLevel
-    this.temparature=this.data.data.temparature
-    this.address=this.data.data.address
-
+   
     
-    this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required,Validators.maxLength(10)],
-            // validates date format yyyy-mm-dd
-      // dob: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
-      // email: ['', [Validators.required, Validators.email]],
-      // password: ['', [Validators.required, Validators.minLength(6)]],
-      // confirmPassword: ['', Validators.required],
-      // acceptTerms: [false, Validators.requiredTrue]
-      });    
+    var date = new Date();
+    var full =
+      date.getDate() +
+      '-' +
+      date.getMonth() +
+      1 +
+      '-' +
+      date.getFullYear();
+
+    var SendDatetoSlot =
+      date.getFullYear() +
+      '-' +
+      date.getMonth() +
+      1 +
+      '-' +
+      date.getDate();
+    var slot= this.SlotGenerator('Nurse', SendDatetoSlot);
+   
+    this.getdoctordata()
+    this.setdata();
   }
 
   get f() { return this.registerForm.controls; }
-  
-  onNoClick(): void{
+
+  onNoClick(): void {
     this.dialogRef.close();
 
   }
-  stopEdit(): void {
-    this.dailogueservice.updateIssue(this.data);
-    console.log("saveclicked");
+ 
+  getdoctordata() {
+    this.dailogueservice.getDoctorListData().subscribe(data => {
+      this.docters = data;
+      console.log(this.docters)
+
+    });
   }
+  setdata(){
+   
+  
+    this.registerForm = this.formBuilder.group({
+      id: [''],
+      name: [''],
+      diagnosis: [''],
+      gender: [''],
+      contact: [''],
+      bookslot: ['', Validators.required],
+      physician: [''],
+      appointmentDateTime: ['', Validators.required],
+    });
+    this.registerForm.controls['name'].setValue(this.data.data.name)
+    this.registerForm.controls['name'].disable()
+   
+    this.registerForm.controls['bookslot'].setValue(this.data.data.bookSlot)
+    this.registerForm.controls['gender'].setValue(this.data.data.gender)
+    this.registerForm.controls['gender'].disable()
+    this.registerForm.controls['contact'].setValue(this.data.data.contact)
+    this.registerForm.controls['contact'].disable()
+    this.registerForm.controls['physician'].setValue(this.data.data.physicanName)
+    this.registerForm.controls['physician'].disable()
+    this.registerForm.controls['diagnosis'].setValue(this.data.data.diagnosis)
+    this.registerForm.controls['diagnosis'].disable()
+    this.registerForm.controls['appointmentDateTime'].setValue(this.data.data.appointmentDateTime)
+    this.registerForm.controls['id'].setValue(this.data.data.id)
+  }
+  
   submit() {
+
     
-    this.dailogueservice.addAppoinmentData(this.data);
-    console.log("postclicked");
+
+    let data = this.registerForm.value;
+    let id = data['id']
+    console.log(data['id']);
+    this.dailogueservice.updateIssue(id, data)
+  }
+
+  SlotGenerator(UserType: string, date: string):any  
+   {
+    if (UserType == 'Nurse') 
+    {
+      this.diagnosicscheck = false;
+      this.datecheck = false;
+      const start = new Date('2019-08-08 09:00');
+      const end = new Date('2019-08-08 20:00');
+      const timespan = 30 * 60; // 30 minutes
+      const siestas = [
+        {
+          start: '2019-08-08 8:00',
+          end: '2019-08-08  8:30',
+        },
+      ];
+
+      let [firstslot, secondslot] = GenerateTimeSlot(
+        start,
+        end,
+        timespan,
+        siestas
+      );
+      this.firstslot = firstslot;
+      this.secondslot = secondslot;
+      this.service
+        .GetBookSlot('2791E8B4-CF75-451A-9C30-A00D173879AB', date)
+        .subscribe((res: string | any[]) => {
+          for (var i = 0; i < res.length; i++) {
+            this.incomingslot.push(res[i].bookslot);
+          }
+          const duplicate = this.incomingslot;
+          let unique = [...new Set(duplicate)];
+          this.firstslot = firstslot.filter((val: any) => !unique.includes(val));
+          this.secondslot = secondslot.filter((val: any) => !unique.includes(val));
+          console.log(this.firstslot)
+        
+         this.ModeTypes = this.firstslot;
+          
+          
+        })
+       
+
+            
+    }
   }
 }

@@ -249,13 +249,13 @@
   <div>
     <mat-card>
       <div style="margin-left: 60%">
-        <button mat-raised-button color="Green" (click)="Addupdatepatientdetails()" #Savebtn>
+        <button mat-raised-button color="Green" (click)="Addupdatepatientdetails()" [disabled]='patientvisitbuttonsave'>
           Save
         </button>
 
-        <button mat-raised-button color="Green" (click)="updatepatientdetails()">update</button>
+        <button mat-raised-button color="Green" (click)="updatepatientdetails()" [disabled]='patientvisitbuttonupdate'>update</button>
 
-        <button mat-raised-button color="Red" (click)="cleardata()">Clear</button>
+        <button mat-raised-button color="Red" (click)="cleardata()" >Clear</button>
         
       </div>
     </mat-card>

@@ -39,7 +39,7 @@
     <!-- Action Column -->
     <ng-container matColumnDef="mobile">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Mobile </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.mobile}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.contact}} </mat-cell>
     </ng-container>
     <!-- Action Column -->
     <ng-container matColumnDef="age">
@@ -53,12 +53,12 @@
     </ng-container>
     <ng-container matColumnDef="physician">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Physician </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.physician}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.physicanName}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;">  </mat-header-cell>
       <mat-cell *matCellDef="let element"> <button mat-icon-button class="iconbutton"
-          color="primary" (click)="OnVisit()">
+          color="primary" (click)="OnVitalRecord()">
           <mat-icon matTooltip="Click To Record Vitals"> perm_identity </mat-icon>
         </button> </mat-cell>
     </ng-container>
@@ -66,7 +66,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;">  </mat-header-cell>
       <mat-cell *matCellDef="let element" >
          <button mat-icon-button class="iconbutton"
-          color="primary" (click)="OnVisit()">
+          color="primary" (click)="OnProviousVisit()">
           <mat-icon matTooltip="Previous Visit Details"> history </mat-icon>
         </button> </mat-cell>
     </ng-container>

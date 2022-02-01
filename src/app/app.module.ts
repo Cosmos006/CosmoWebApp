@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {  MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
@@ -30,6 +30,7 @@ import { AppointmentViewComponent } from './Component/nurse/appointment-view/app
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
+
 //khushabu
 //import { MatMomentDateModule } from '@angular/material-moment-adapter';
 //import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -43,7 +44,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // must go before pl
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plug
 //Http
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
 //Component
 import { AppComponent } from './app.component';
@@ -74,12 +75,14 @@ import { EditDailogeComponent } from './Component/nurse/dailoge/edit-dailoge/edi
 import { PatientDashboardComponent } from './Component/patient/patient-dashboard/patient-dashboard.component';
 //fakebackend
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
 // used to create fake backend
 import { AuthGuard, fakeBackendProvider } from './_helpers';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+
+// import { AuthService } from './Services/Authservice/auth.service';
+
+import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthenticationService } from './Services';
 //import { AuthenticationService } from './Services';
 
@@ -113,6 +116,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPatientComponent } from './Component/admin/admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './Component/admin/admin-hospital/admin-hospital.component';
 import { AlertService } from './Services/Alert/alert.service';
+import { UpcomingAppointmentComponent } from './Component/nurse/upcoming-appointment/upcoming-appointment.component';
+import { InboxComponent } from './Component/shared/inbox/inbox.component';
+import { MatTabsModule } from '@angular/material/tabs';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -124,6 +130,8 @@ FullCalendarModule.registerPlugins([
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PatientDynamicTableComponent } from './Component/shared/patientdynamic-table/patientdynamic-table.component';
+
 
 @NgModule({
   declarations: [
@@ -157,6 +165,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     DoctorlistComponent,
     AdminPatientComponent,
     AdminHospitalComponent,
+    UpcomingAppointmentComponent,
+    InboxComponent,
+    PatientDynamicTableComponent
+
   ],
   imports: [
     HttpClientModule,
@@ -213,6 +225,24 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTooltipModule,
     MatCheckboxModule,
     //Apex chart
+
+    //Inbox
+    MatTabsModule,
+    MatTableModule,
+    MatBadgeModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSnackBarModule
+    
   ],
   exports: [],
   providers: [
@@ -232,6 +262,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true 
+    },
     // provider used to create fake backend
     fakeBackendProvider,
   ],
