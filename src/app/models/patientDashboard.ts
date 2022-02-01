@@ -11,6 +11,35 @@ export interface AppointmentData {
   
 }
 
+export interface DrugData{
+  id: number;
+  drugName: string;
+  drugGenericName : string;
+  drugManufacturerName: string;
+  isDrugData: boolean;
+  drugForm:string;
+  drugStrength:string;
+}
+export interface DrugHeaderData {
+  // id: number;
+  drugName: string;
+  drugGenericName : string;
+  drugManufacturerName: string;
+  drugForm:string;
+  drugStrength:string;
+  // isDeclined: boolean;
+}
+
+export const drugHeaderData: DrugHeaderData[] = [
+  {
+    drugName: 'Paracitamol',
+    drugGenericName : 'Fever',
+    drugManufacturerName: 'Tablet',
+    drugForm:'Tablet',
+    drugStrength: '1'
+  }
+];
+
 // export const appointmentData: AppointmentData[] = [
   
 // ];
