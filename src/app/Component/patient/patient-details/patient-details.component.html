@@ -344,7 +344,7 @@
                       <span class='col-md-6'>
                         <mat-form-field appearance="outline">
                           <mat-label>Allergyname</mat-label>
-                          <mat-select formControlName="allergyname">
+                          <mat-select formControlName="allergyname" multiple>
 
                             <mat-option *ngFor="let an of listOfAllergyName" [value]="an.allergyName">{{an.allergyName}}
                             </mat-option>

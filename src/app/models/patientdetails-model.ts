@@ -26,5 +26,6 @@ export class PatientdetailsDemo {
         createddate!:Date;
         allergyDetails!:string;
         allergyList!:string[];
+        allergyListname!:string[];
         patientRelativeDetails?: Patientrelativedetails ;
 }

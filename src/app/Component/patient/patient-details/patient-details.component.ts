@@ -54,6 +54,7 @@ AllergyType:any
   form!: FormGroup;
   postal!: Postal;
   patientid?:string;
+  age!:any;
  // postobj: Patientdetails = new Patientdetails();
   patientAddressdetailslist: Postal[] | undefined;
   RelationshipList: string[] = [
@@ -140,7 +141,8 @@ AllergyType:any
     else {
      var dat:PatientdetailsDemo ={
        firstName: this.form.value.firstname,
-       lastName: this.form.value.lastName,
+
+       lastName: this.form.value.lastname,
        age: this.form.value.age,
        gender: this.form.value.gender,
        race: this.form.value.race,
@@ -149,7 +151,7 @@ AllergyType:any
        email: this.form.value.email,
        address: this.form.value.homeaddress,
        pincode: this.form.value.pincode,
-       country: this.form.value.country,
+       country: this.form.value.country1,
        state: this.form.value.state,
        contact: this.form.value.contactnumber,
        patientRelativeDetails: {
@@ -163,30 +165,31 @@ AllergyType:any
          pincode: this.form.value.emergancypincode,
          country: this.form.value.emergancycountry,
          isAccess: true,
-         state: 'Maharastra',
-         patientDemographicsId:this.Demographicid,
+         state: '',
+         patientDemographicsId: this.Demographicid,
        },
        // this.postobj.allergyid = this.form.value.allergyid;
        allergyList: this.form.value.allergytype,
-       allergynameList: this.form.value.allergyname,
+       allergynameList: '',
        allergyDetails: this.form.value.allergydetails,
 
        //this.postobj.allergydescription = this.form.value.allergydescription;
        clinicalInformation: this.form.value.clinicalinformation,
-       dateofBirth: this.form.value.dateofBirth,
+       dateofBirth: this.form.value.dateofbirth,
        isFatal: false,
        patientId: this.patientid,
        createddate: new Date,
-       allergytypeList: ''
+       allergytypeList: '',
+       allergyListname: this.form.value.allergyname,
      }
-
+ 
       this.patient
       .UpdatePatientdetails(this.Demographicid,dat)
       .then(response => response.text())
       .then(result =>{
         if(result=='Success')
         {
-          alert("Added Successfully");
+          alert("Update Successfully");
         }
         else{
           alert("Not Added");
@@ -298,7 +301,7 @@ AllergyType:any
       accessforpatientportal: new FormControl(this.postobj.patientRelativeDetails?.isAccess, [Validators.required]),
       allergyid: new FormControl(null),
       allergytype: new FormControl(this.postobj?.allergyList),//this.AllergyType=this.postobj.allergyList.join(', ')
-      allergyname: new FormControl(this.postobj?.allergynameList),
+      allergyname: new FormControl(this.postobj?.allergyListname),
       allergydetails: new FormControl(this.postobj?.allergyDetails),
       allergydescription: new FormControl(null),
       clinicalinformation: new FormControl(this.postobj?.clinicalInformation),
@@ -350,8 +353,8 @@ AllergyType:any
     var dateValue = event.value!;
     var selectedYear = new Date(dateValue).getFullYear();
     var currentYear = new Date().getFullYear();
-    var age = currentYear - selectedYear;
-    
+    this.age = currentYear - selectedYear;
+    this.form.controls['age'].setValue(this.age);
     if (event.value) {
      
       
@@ -400,9 +403,9 @@ setAll(completed: boolean) {
     this.form.controls['emergancypincode'].setValue(this.form.controls['pincode'].value);
     this.form.controls['emergancycountry'].setValue(this.form.controls['country1'].value);
    
-    this.form.controls['emergancyaddress'].disable();
-    this.form.controls['emergancypincode'].disable();
-    this.form.controls['emergancycountry'].disable();
+    // this.form.controls['emergancyaddress'].disable();
+    // this.form.controls['emergancypincode'].disable();
+    // this.form.controls['emergancycountry'].disable();
 
   }
   else{

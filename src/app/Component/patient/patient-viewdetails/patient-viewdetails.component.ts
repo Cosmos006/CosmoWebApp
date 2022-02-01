@@ -203,7 +203,7 @@ updatepatientdetails()
       };
       
       this.patient.UpdatePatientvisitdetails(dat,this.VisitId);
-      alert("PatietDetails saved succesfully");
+      
    
       this.fetchdata(this.Guid)
     }
@@ -222,7 +222,7 @@ fetchdata(Id:any)
            _that.postobj = result;
           this.VisitId=_that.postobj.id;
          
-          
+
           _that.bindToUI();
           
         });
