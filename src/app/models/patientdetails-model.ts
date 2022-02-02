@@ -21,10 +21,11 @@ export class PatientdetailsDemo {
         allergytypeList!:string;
         clinicalInformation!:string;
         isFatal!: boolean;
-        patientId!:string;
+        patientId?:string;
         //patientDetails!:string;
         createddate!:Date;
         allergyDetails!:string;
         allergyList!:string[];
+        allergyListname!:string[];
         patientRelativeDetails?: Patientrelativedetails ;
 }
