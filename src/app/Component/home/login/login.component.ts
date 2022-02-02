@@ -15,6 +15,7 @@ import { Location } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { Guid } from 'guid-typescript';
+import { UserDetails } from 'src/app/models/userdetails';
 
 @Component({
   selector: 'app-login',

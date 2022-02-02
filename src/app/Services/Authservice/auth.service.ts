@@ -8,8 +8,8 @@ import { User } from 'src/app/models/User';
 import { FormGroup } from '@angular/forms';
 import { AnyObject } from 'chart.js/types/basic';
 import { Guid } from 'guid-typescript';
-import { UserDetails } from 'src/app/models/userdetails';
 import { Changepassword } from 'src/app/models/changepassword';
+import { UserDetails } from 'src/app/models/userdetails';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
