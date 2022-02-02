@@ -40,14 +40,17 @@ import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
   {
+    path: '',
+    component: HomeComponent,
+  },
+  {
     path: 'Home',
     component: HomeComponent,
   },
   {
-    path: '',
+    path: 'Login',
     component: LoginComponent,
   },
-
   {
     component: PhysicianComponent,
     path: 'Physician',
@@ -269,7 +272,6 @@ const routes: Routes = [
     component: InboxComponent,
     path: 'Inbox',
     canActivate: [AuthGuard],
-    
   },
   {
     component: ChangepasswordComponent,
