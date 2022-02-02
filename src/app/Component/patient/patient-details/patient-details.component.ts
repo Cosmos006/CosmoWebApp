@@ -33,7 +33,7 @@ export class PatientDetailsComponent implements OnInit {
   value: any;
   Allergytype: string = '';
   AllergyId: string = '';
-  role: string = 'admin';
+ 
   Countrycode: string = '';
   Pincode: Number = 0;
   step = 0;
@@ -53,6 +53,8 @@ AllergyType:any
   relativeobj!:Patientrelativedetails;
   form!: FormGroup;
   postal!: Postal;
+  patientid?:string;
+  age!:any;
  // postobj: Patientdetails = new Patientdetails();
   patientAddressdetailslist: Postal[] | undefined;
   RelationshipList: string[] = [
@@ -72,10 +74,20 @@ AllergyType:any
     this.postobj = new PatientdetailsDemo();
     this.relativeobj=new Patientrelativedetails();
     if (typeof Get === 'string') {
-      var id = JSON.parse(Get).id;
+       var id= JSON.parse(Get).id;
+       
+
+
     }
+    this.patient.GetPatientId(id) .then(async response => {
+      response.text().then(responseData => {
+         this.patientid = responseData; 
+        // alert(this.patientid);
+        this.fetchdata(this.patientid);
+      })
+    });
    this.bindToUI();
-   this.fetchdata(id);
+   
    this.getAllergyDetails();
    
   }
@@ -91,23 +103,40 @@ AllergyType:any
       });
     })
     
-    
-    
-     //.catch(error => console.log('error', error));
-    
   }
 
   getAllergyNameDetails(Allergytype: string) {
     
     let _that = this;
-     this.patient.getAllerynamefromallergytype(Allergytype)
+    var allergynameselection=this.Allergytype ;
+
+    var checkmultiple = allergynameselection.includes(',');
+
+   
+  
+    if(checkmultiple==true)
+    {
+      this.patient.getallergydata()
       .then(async response => {
         response.text().then(responseData => {
           _that.listOfAllergyName = JSON.parse(responseData);
-          console.log(_that.listOfAllergyName);
-        console.log(responseData)
+       
         });
       });
+    }
+    else
+    {
+      window.setInterval(()=>{
+        this.patient.getAllerynamefromallergytype(Allergytype)
+        .then(async response => {
+          response.text().then(responseData => {
+            _that.listOfAllergyName = JSON.parse(responseData);
+           
+          });
+        });
+      },5000)
+    
+    }
   }
 
   Addupdatepatientdetails() {
@@ -119,7 +148,8 @@ AllergyType:any
     else {
      var dat:PatientdetailsDemo ={
        firstName: this.form.value.firstname,
-       lastName: this.form.value.lastName,
+
+       lastName: this.form.value.lastname,
        age: this.form.value.age,
        gender: this.form.value.gender,
        race: this.form.value.race,
@@ -128,7 +158,7 @@ AllergyType:any
        email: this.form.value.email,
        address: this.form.value.homeaddress,
        pincode: this.form.value.pincode,
-       country: this.form.value.country,
+       country: this.form.value.country1,
        state: this.form.value.state,
        contact: this.form.value.contactnumber,
        patientRelativeDetails: {
@@ -141,31 +171,32 @@ AllergyType:any
          address: this.form.value.emergancyaddress,
          pincode: this.form.value.emergancypincode,
          country: this.form.value.emergancycountry,
-         isAccess: this.form.value.accessforpatientportal,
-         state: 'Maharastra',
+         isAccess: true,
+         state: '',
          patientDemographicsId: this.Demographicid,
        },
        // this.postobj.allergyid = this.form.value.allergyid;
        allergyList: this.form.value.allergytype,
-       allergynameList: this.form.value.allergyname,
+       allergynameList: '',
        allergyDetails: this.form.value.allergydetails,
 
        //this.postobj.allergydescription = this.form.value.allergydescription;
        clinicalInformation: this.form.value.clinicalinformation,
-       dateofBirth: this.form.value.dateofBirth,
+       dateofBirth: this.form.value.dateofbirth,
        isFatal: false,
-       patientId: 'E5939583-DE53-4DBD-A111-7E07B165BEFD',
+       patientId: this.patientid,
        createddate: new Date,
-       allergytypeList: ''
+       allergytypeList: '',
+       allergyListname: this.form.value.allergyname,
      }
-
+ 
       this.patient
       .UpdatePatientdetails(this.Demographicid,dat)
       .then(response => response.text())
       .then(result =>{
         if(result=='Success')
         {
-          alert("Added Successfully");
+          alert("Update Successfully");
         }
         else{
           alert("Not Added");
@@ -173,7 +204,7 @@ AllergyType:any
       })
       
       .catch(error => console.log('error', error));
-      alert("hii")
+      //alert("hii")
     }
     
   }
@@ -277,7 +308,7 @@ AllergyType:any
       accessforpatientportal: new FormControl(this.postobj.patientRelativeDetails?.isAccess, [Validators.required]),
       allergyid: new FormControl(null),
       allergytype: new FormControl(this.postobj?.allergyList),//this.AllergyType=this.postobj.allergyList.join(', ')
-      allergyname: new FormControl(this.postobj?.allergynameList),
+      allergyname: new FormControl(this.postobj?.allergyListname),
       allergydetails: new FormControl(this.postobj?.allergyDetails),
       allergydescription: new FormControl(null),
       clinicalinformation: new FormControl(this.postobj?.clinicalInformation),
@@ -325,21 +356,17 @@ AllergyType:any
   }
 
   addEvent(event: MatDatepickerInputEvent<Date>) {
-    //alert(event.value);
+    
     var dateValue = event.value!;
     var selectedYear = new Date(dateValue).getFullYear();
     var currentYear = new Date().getFullYear();
-    var age = currentYear - selectedYear;
-    alert("TimeDi"+ age);
+    this.age = currentYear - selectedYear;
+    this.form.controls['age'].setValue(this.age);
     if (event.value) {
-      //var timeDiff = Math.abs(Date.now() - event.value?.getTime());
-      //var age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
-      //alert("TimeDiff : " + timeDiff + "Date Selected : " + age);
+     
       
     }
-    //var date = new Date(event.value)
-    //var year = date.getFullYear();
-    //alert(event.value?.getFullYear);
+   
   }
 
   onChangeEvent(event: any){
@@ -354,10 +381,8 @@ AllergyType:any
    }
    onAllergytypeselect(event:any)
   {
-
       this.Allergytype=event.value;
-
-     this.getAllergyNameDetails(this.Allergytype);
+      this.getAllergyNameDetails(this.Allergytype);
   }
   radioChange(event:any) {
     if(event.value=='No')
@@ -385,9 +410,9 @@ setAll(completed: boolean) {
     this.form.controls['emergancypincode'].setValue(this.form.controls['pincode'].value);
     this.form.controls['emergancycountry'].setValue(this.form.controls['country1'].value);
    
-    this.form.controls['emergancyaddress'].disable();
-    this.form.controls['emergancypincode'].disable();
-    this.form.controls['emergancycountry'].disable();
+    // this.form.controls['emergancyaddress'].disable();
+    // this.form.controls['emergancypincode'].disable();
+    // this.form.controls['emergancycountry'].disable();
 
   }
   else{
