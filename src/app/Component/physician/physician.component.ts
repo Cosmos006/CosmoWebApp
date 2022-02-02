@@ -7,9 +7,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { guid } from '@fullcalendar/angular';
+import { Product } from 'src/app/models/appointment';
 import { Attendance } from 'src/app/models/Attendance';
 import { Booking } from 'src/app/models/patient.model';
 import { AlertService } from 'src/app/Services/Alert/alert.service';
+import { DailogeService } from 'src/app/Services/dailoge.service';
 import { PhysicianService } from 'src/app/Services/Physician/physician.service';
 
 
@@ -57,16 +59,17 @@ export class PhysicianComponent implements OnInit {
   // Slots = new FormControl();
 
   
-  displayedColumnsappoinment = ['id', 'appointmentType' , 'diagnosis' ,  'isCompleted' , 'appointmentDateTime'   , 'patientId' ,
-   'physicianId' , 'nurseId' ,'appointmentStatus' ,'action'];
+  displayedColumnsappoinment = ['id', 'name', 'gender', 'diagnosis' , 'mobile', 'age', 'physician' , 
+   'physicianId' , 'nurseId' ,'patientId','action'];
   // 'isCompleted' , 'AppointmentDateTime' , 'modifiedDate' , 'deletedBy' , 'deletedDate' , 'patientId' ,
   //   'physicianId' 
   //    , 'nurseId'
-  dataSource1 !: MatTableDataSource<Booking>;
+  dataSource1 !: MatTableDataSource<Product>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
 
-
+  displayedColumnspatient = ['id', 'name', 'physician', 'diagnosis','edit'];
+  
   listOfPosts: Attendance[] = [];
   form: FormGroup = new FormGroup({});
   empdata!: Attendance;
@@ -77,7 +80,7 @@ export class PhysicianComponent implements OnInit {
  SlotList : string[] = ['9:30 to 10:30', '10:30 to 11', '10:30 to 11:30', '9:30 to 10:30', '9:30 to 10:30', '9:30 to 10:30'];
   
  
-  constructor(public physicianservice: PhysicianService,private titleService:Title,private router:Router,private alterservice:AlertService) {
+  constructor(public dialogservice: DailogeService,private physicianservice:PhysicianService,private titleService:Title,private router:Router,private alterservice:AlertService) {
   
   }
 
@@ -97,10 +100,16 @@ export class PhysicianComponent implements OnInit {
       isAbsent: new FormControl([Validators.required]),
     });
 
-  this.getdata();
+  this.getTodayAppoinmentdata();
   }
 
-
+  OnVisit(data: any) {
+    console.log(data);
+    let id = data['id'];
+    console.log(id);
+    this.dialogservice.UpdateStatus(id, data);
+    this.getTodayAppoinmentdata();
+  }
   
 
 
@@ -124,8 +133,8 @@ onSubmit() {
     this.form.reset();
   }
 }
-getdata() {
-  this.physicianservice.getAppoinmentListData().subscribe(data => {
+getTodayAppoinmentdata() {
+  this.physicianservice.getAppointmentnextpatientData().subscribe(data => {
     this.dataSource1 = new MatTableDataSource(data)    
     this.dataSource1.paginator = this.paginator;
     console.log(this.dataSource1)
