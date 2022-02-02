@@ -8,6 +8,7 @@ import { Product } from '../models/appointment';
 import { Observable } from 'rxjs';
 import { Doctor } from '../models/doctordata';
 import { Bardata } from '../models/bardata';
+import { Attendance } from '../models/Attendance';
 // import { EventData } from '../Component/admin/admin-calendar/admin-calendar.component';
 
 @Injectable({
@@ -21,6 +22,8 @@ export class DailogeService  {
   private readonly BAR_URL = 'https://localhost:44318/api/NurseDash/GetallBarChartDetails';
   private readonly UP_URL = 'https://localhost:44318/api/NurseDash/GetNurseUpComingAppointment';
   
+  private readonly API_URL1 = 'https://localhost:44318/api/PhysicianDashboard/GetAvailablePhysicianDetails';
+  private readonly BAR_URL1 = 'http://localhost:3000/BarList';
   baseUrl = environment.LocalUrl;
   appointmentData: any;
   id:any;
@@ -91,9 +94,10 @@ export class DailogeService  {
       );
     
       }
-    getDoctorListData() : Observable<Doctor[]>{
     
-        return this.http.get<Doctor[]>(this.API_URL);
+    getDoctorListData() : Observable<Attendance[]>{
+    
+        return this.http.get<Attendance[]>(this.API_URL1);
       }
      
       getUpcomingAppointments(): Observable<Product[]>{

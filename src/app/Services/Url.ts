@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
-  ProductionUrl: 'http://example.com/api',
-  LocalUrl: 'http://localhost:3000',
+  ProductionUrl: 'https://example.com/api',
+  LocalUrl: 'https://localhost:44347',
   postal: 'https://api.postalpincode.in/',
-  BaseURI : 'https://localhost:44311/api/'
+  BaseURI: 'https://localhost:44311/api/',
 };
 
 export enum Admin {
@@ -21,7 +21,7 @@ export enum Patient {
   PastAppointment = '/api/Appointments/PastAppointments',
   DeclineAppointments = '/api/Appointments/DeclineAppointments',
   ApproveReject = '/api/Appointments/ApproveReject',
-  GetPrescriptions = '/api/Appointments/GetPrescriptions'
+  GetPrescriptions = '/api/Appointments/GetPrescriptions',
 }
 
 export enum AddPhysycian {

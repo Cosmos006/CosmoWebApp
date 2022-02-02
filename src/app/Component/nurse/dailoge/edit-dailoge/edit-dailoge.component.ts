@@ -29,7 +29,7 @@ export class EditDailogeComponent implements OnInit {
   date!: string;
   diagnosis!: string;
   sugarLevel!: string;
-  docters!: Doctor[];
+  // docters!: Doctor[];
   selectedFoods = 1;
   ModeTypes?: Array<string>;
   diagnosicscheck?: boolean;
@@ -71,7 +71,7 @@ export class EditDailogeComponent implements OnInit {
       date.getDate();
     var slot= this.SlotGenerator('Nurse', SendDatetoSlot);
    
-    this.getdoctordata()
+   // this.getdoctordata()
     this.setdata();
   }
 
@@ -82,13 +82,13 @@ export class EditDailogeComponent implements OnInit {
 
   }
  
-  getdoctordata() {
-    this.dailogueservice.getDoctorListData().subscribe(data => {
-      this.docters = data;
-      console.log(this.docters)
+  // getdoctordata() {
+  //   this.dailogueservice.getDoctorListData().subscribe(data => {
+  //     this.docters = data;
+  //     console.log(this.docters)
 
-    });
-  }
+  //   });
+  // }
   setdata(){
    
   

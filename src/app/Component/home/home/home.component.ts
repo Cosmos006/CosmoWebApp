@@ -30,12 +30,13 @@ export class HomeComponent {
   ngOnInit() {
     this.loading = true;
     this.isLoggedIn$ = this.authenticationService.isLoggedIn; // {2}
-    //const user = this.currentUser;
     const user = this.currentUser;
-    if (user.role == 'ADMIN') {
+    if (user == null) {
+      this.router.navigateByUrl('/Login');
+    } else if (user.role == 'ADMIN') {
       this.router.navigateByUrl('/AdminDashboard');
     } else if (user.role == 'PHYSICIAN') {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/Physician');
     } else if (user.role == 'PATIENT') {
       this.router.navigateByUrl('/PatientDashboard');
     } else if (user.role == 'NURSE') {

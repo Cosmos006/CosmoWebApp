@@ -166,17 +166,17 @@ export class BookAppointmentComponent implements OnInit {
   GlobalBookAppointment(UserType: string) {
     if (UserType == 'Patient') {
       this.TextInput = 'Book Appointment';
-      this.service.GetDiagnosics().subscribe((res) => {
+      // this.service.GetDiagnosics().subscribe((res) => {
+      //   this.diagnosics.push(...res);
+      // });
+
+      this.service.GetSpecialization().subscribe((res) => {
         this.diagnosics.push(...res);
       });
 
-      this.service.GetDiagnosics().subscribe((res) => {
-        this.diagnosics.push(...res);
-      });
-
-      this.service.GetPhysician().subscribe((res) => {
-        this.physician.push(...res);
-      });
+      // this.service.GetPhysician().subscribe((res) => {
+      //   this.physician.push(...res);
+      // });
 
       if (this.AppointmentID != 'undefined') {
         this.patientservice
@@ -269,6 +269,10 @@ export class BookAppointmentComponent implements OnInit {
         this.registrationForm.get('diagnosicsName')?.setValue(e.value) || '';
 
       this.diagnosicscheck = false;
+
+      this.service.GetPhysicianById(e.value).subscribe((res) => {
+        this.physician.push(...res);
+      });
     }
   }
 
@@ -464,7 +468,7 @@ export class BookAppointmentComponent implements OnInit {
               snackBarRef.afterDismissed().subscribe((info) => {
                 if (info.dismissedByAction === true) {
                   // your code for handling this goes here
-                  this.router.navigate(['/Calender']);
+                  this.router.navigate(['/PatientCalender/Patient']);
                 }
               });
 
@@ -557,7 +561,7 @@ export class BookAppointmentComponent implements OnInit {
               snackBarRef.afterDismissed().subscribe((info) => {
                 if (info.dismissedByAction === true) {
                   // your code for handling this goes here
-                  this.router.navigate(['/Calender']);
+                  this.router.navigate(['/PatientCalender/Patient']);
                 }
               });
 

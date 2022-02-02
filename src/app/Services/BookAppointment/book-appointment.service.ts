@@ -23,10 +23,22 @@ export class BookAppointmentService {
     );
   }
 
+  GetSpecialization() {
+    return this.http.get<Diagnosics[]>(
+      'https://localhost:44347/api/Appointments/Specialization'
+    );
+  }
+
   //GEt Physician
-  GetPhysician() {
+  // GetPhysician() {
+  //   return this.http.get<Physician[]>(
+  //     'https://localhost:44347/api/Appointments/GetAllPhysician'
+  //   );
+  // }
+
+  GetPhysicianById(Diagnosics: string) {
     return this.http.get<Physician[]>(
-      'https://localhost:44347/api/Appointments/GetAllPhysician'
+      `https://localhost:44347/api/Appointments/GetPhysicianByDiagnosics/${Diagnosics}`
     );
   }
 

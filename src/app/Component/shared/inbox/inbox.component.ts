@@ -18,7 +18,6 @@ import {
 } from '@angular/forms';
 import { Guid } from 'guid-typescript';
 import { InboxService } from 'src/app/Services/Inbox/inbox.service';
-import { UserDetails } from 'src/app/models/userdetails';
 
 export interface Appointments { 
   appointmentId : Guid
@@ -279,17 +278,17 @@ export class InboxComponent implements OnInit, AfterViewInit {
       }
       var date =new Date();
       //let latest_date =this.datepipe.transform(date, 'yyyy-MM-dd hh:mm:ss');
-      this.currentnotes = {
-        id: Guid.createEmpty(),
-        message: this.form.value.message,
-        notesDateTime: this.todayDate,
-        recieverName: filtereduser?.name,
-        senderName: this.currentEmployee[0].name,
-        designation: filtereduser?.designation,
-        isSentOrRecieved : 'SENT'
-      };
-      this.SentdataSource.data.push(this.currentnotes)
-      this.SentdataSource._updateChangeSubscription();
+      // this.currentnotes = {
+      //   id: Guid.createEmpty(),
+      //   message: this.form.value.message,
+      //   notesDateTime: this.todayDate,
+      //   recieverName: filtereduser?.name,
+      //   senderName: this.currentEmployee[0].name,
+      //   designation: filtereduser?.designation,
+      //   isSentOrRecieved : 'SENT'
+      // };
+      // this.SentdataSource.data.push(this.currentnotes)
+      // this.SentdataSource._updateChangeSubscription();
 
       var notes = {
         Message: this.form.value.message,
@@ -303,6 +302,7 @@ export class InboxComponent implements OnInit, AfterViewInit {
       console.log(notes);
 
       this.inboxService.SendNotes(notes);
+      this.GetNotes(this.currentEmployee[0].Id)
       this.form.reset()
     }
   }

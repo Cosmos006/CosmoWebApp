@@ -9,13 +9,16 @@ import { DailogeService } from 'src/app/Services/dailoge.service';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
-  Appointments!:any;
+  Appointments!: any;
   LockedAccount: number = 0;
-  constructor(private adminservice: AdminService,public appoiService: DailogeService, private router:Router) {}
+  constructor(
+    private adminservice: AdminService,
+    public appoiService: DailogeService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.getAppointmentCount();
     this.adminservice.GetAdminDashboard().subscribe((x) => {
-      
       this.LockedAccount = x[0].LockedAccount;
     });
 
@@ -42,14 +45,13 @@ export class AdminDashboardComponent implements OnInit {
       this.router.navigateByUrl('/AdminHospital');
     }
   }
-  Onappointment(){
-    
+  Onappointment() {
     this.router.navigateByUrl('/AppointmentView');
   }
   getAppointmentCount() {
-    this.appoiService.getAppointmentData().subscribe(data => {
-      this.Appointments=data.length;
-      console.log(data)
+    this.appoiService.getAppointmentData().subscribe((data) => {
+      this.Appointments = data.length;
+      console.log(data);
     });
   }
 }

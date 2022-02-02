@@ -78,11 +78,12 @@
 
               </div>
 
-              <!-- <mat-error *ngIf="errorstatus && (this.loginForm.status === 'VALID')" style="color:red">
-                Username or Password is incorrect
+              <mat-error *ngIf="errorstatus && (this.loginForm.status === 'VALID')" style="color:red">
+                {{ errormessage }}
                 
-              </mat-error> -->
-              <span class="float-right text-right mt-0"><a href="#">Forgot Password</a></span>
+                
+              </mat-error>
+              <span class="float-right text-right mt-0" (click)="open(content)"><a href="#">Forgot Password</a></span>
               <div class="text-center">
                 <button  class="btn btn-primary text-center border-dark submit" style="font-weight:700">Login</button>
               </div>
@@ -102,7 +103,8 @@
 
 </section>
 
-<!-- 
+
+<section>
 <ng-template #content let-modal>
 	<div class="modal-header p-0">
 		<h2 class="justify-content-center w-100 mt-3 text-center"
@@ -113,7 +115,7 @@
     id="modal-basic-title" *ngIf="OldpassWordGenerated">
   Reset-Password
   </h2>
-  <button type="button" class=" close btn-white" (click)="close()">
+  <button type="  " class=" close btn-white" (click)="close()">
     <span aria-hidden="true">&times;</span>
   </button>
 
@@ -128,7 +130,7 @@
                 <div class="form-group" *ngIf="!OldpassWordGenerated">
                   <input class="form-control text-black input-lg" placeholder="E-mail Address" [(ngModel)]="userEmail" name="email" type="email">
                 </div>
-                <button class="btn btn-md btn-primary btn-block" (click)="GenerateOtp()" *ngIf="!OldpassWordGenerated"><span >Recover Password Request</span></button>
+                <button class="btn btn-md btn-primary btn-block" (click)="SendEmail()" *ngIf="!OldpassWordGenerated"><span >Recover Password Request</span></button>
                
                 <div *ngIf="OldpassWordGenerated"  class="form-group">
                   <input class="mt-2 form-control text-black input-lg" [(ngModel)]="oldpassword" placeholder="Enter Old Password" name="Old Password" type="password"/>
@@ -143,12 +145,12 @@
                 <div>
                   <span style="color:red">{{errorMessage}}</span>
                 </div>
-                <button *ngIf="OldpassWordGenerated" class="mt-2 btn btn-md btn-primary btn-block" [disabled]="!oldpassword || !newpassword || !confirmpassword"  (click)="modal.close('Save click')"  data-dismiss="modal">Reset Password</button>
-
+                <button *ngIf="OldpassWordGenerated" class="mt-2 btn btn-md btn-primary btn-block" [disabled]="!oldpassword || !newpassword || !confirmpassword"  (click)="ResetPassword()"  data-dismiss="modal">Reset Password</button>
+<!-- 
                 <div>
                   <span style="color:red">{{errorMessage}}</span>
                 </div> 
-              
+               -->
               
               </fieldset>
             </div>
@@ -157,8 +159,63 @@
         </div>
       </div>
     </div>
-  
-</section> -->
+  </div>
+</ng-template>
+
+
+
+<!--ChangePassword-->>
+
+<!-- <ng-template #changepasscontent  let-modal>
+	<div class="modal-header p-0" *ngIf="isFirstLogin">
+    <h2 class="justify-content-center mt-3  w-100 text-center"
+    id="modal-basic-title">
+  Change Password
+  </h2>
+  <button type="button" class=" close btn-white" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+	</div>
+  <div class="modal-body" *ngIf="isFirstLogin">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="text-center">
+            <div class="panel-body" >
+              <fieldset>
+                <div class="form-group">
+                  <input class="mt-2 form-control text-black input-lg" [(ngModel)]="oldpassword" placeholder="Enter Old Password" name="Old Password" type="password"/>
+                 
+         
+                  <input class="mt-2 form-control text-black input-lg" [(ngModel)]="newpassword" placeholder="Enter New Password" name="password" type="password" />
+                 
+                  <input class="mt-2 form-control text-black input-lg" [(ngModel)]="confirmpassword" placeholder="Confirm New Password" name="confirmpassword" type="password" />
+                 
+                </div>
+
+                <div>
+                  <span style="color:red">{{errorMessage}}</span>
+                </div>
+                <button class="mt-2 btn btn-md btn-primary btn-block" [disabled]="!oldpassword || !newpassword || !confirmpassword"  data-dismiss="modal">Reset Password</button>
+
+                <div>
+                  <span style="color:red">{{errorMessage}}</span>
+                </div> 
+              </fieldset>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template> -->
+
+
+</section>
+
+
   
   
   

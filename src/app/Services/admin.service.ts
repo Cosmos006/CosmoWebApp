@@ -100,61 +100,41 @@ export class AdminService {
   //Gender
 
   Gender() {
-    return this.http.get<any>(this.baseUrl + AddPhysycian.GetGender);
+    return this.http.get<any>(
+      `https://localhost:44318/api/MasterData/GetGender`
+    );
+  }
+
+  //Designation
+  Specialization(type: any) {
+    return this.http.get<any>(
+      `https://localhost:44318/api/MasterData/Specialization/${type}`
+    );
   }
 
   //Designation
   Designation(type: any) {
-    if (type === 'Physician') {
-      return this.http.get<any>(
-        this.baseUrl + AddPhysycian.GetPhysicianDesignation
-      );
-    } else {
-      return this.http.get<any>(
-        this.baseUrl + AddPhysycian.GetNurseDesignation
-      );
-    }
+    return this.http.get<any>(
+      `https://localhost:44318/api/MasterData/Specialization/${type}`
+    );
   }
 
   //Department
   Department(type: any) {
-    if (type === 'Physician') {
-      return this.http.get<any>(
-        this.baseUrl + AddPhysycian.GetPhysicianDepartment
-      );
-    } else {
-      return this.http.get<any>(this.baseUrl + AddPhysycian.GetNurseDepartment);
-    }
+    return this.http.get<any>(
+      `https://localhost:44318/api/MasterData/GetDesignation/${type}`
+    );
   }
 
   //Physician/Nurse/EduactionList
   EduactionList(type: any) {
-    if (type === 'Physician') {
-      return this.http.get<any>(
-        this.baseUrl + AddPhysycian.GetPhysicianEduaction
-      );
-    } else {
-      return this.http.get<any>(this.baseUrl + AddPhysycian.GetNurseEduaction);
-    }
+    return this.http.get<any>(
+      `https://localhost:44318/api/MasterData/GetEducation/${type}`
+    );
   }
 
   TestData(): Observable<any> {
     return this.http.get<any>('https://localhost:44321/api/Appointments');
-    //   const $http = new Observable((observer) => {
-    //     fetch('https://localhost:44321/api/Appointments')
-    //       .then((res) => {
-    //         return res.json();
-    //       })
-    //       .then((body) => {
-    //         observer.next(body);
-    //         observer.complete();
-    //       })
-    //       .catch((err) => {
-    //         observer.error(err);
-    //       });
-    //   });
-
-    //   return $http;
   }
 
   PostPatient(value: any) {
