@@ -66,6 +66,7 @@ export class Employee {
       contact: string;
       specialization: string;
       email: string;
+      Designation: string;
     }
   ) {}
 }
