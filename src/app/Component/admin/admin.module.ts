@@ -43,6 +43,8 @@ import { LockedAccountComponent } from './locked-account/locked-account.componen
 import { AdminPatientComponent } from './admin-patient/admin-patient.component';
 import { AdminHospitalComponent } from './admin-hospital/admin-hospital.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { BarchartComponent } from '../nurse/barchart/barchart.component';
+import { DoctorlistComponent } from '../nurse/doctorlist/doctorlist.component';
 //
 //MatSlideToggleModule;
 
@@ -90,6 +92,8 @@ const routes: Routes = [
     LockedAccountComponent,
     AdminPatientComponent,
     AdminHospitalComponent,
+    BarchartComponent,
+    DoctorlistComponent,
   ],
   imports: [
     CommonModule,

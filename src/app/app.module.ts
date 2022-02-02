@@ -131,6 +131,7 @@ FullCalendarModule.registerPlugins([
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PatientDynamicTableComponent } from './Component/shared/patientdynamic-table/patientdynamic-table.component';
+import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -167,7 +168,8 @@ import { PatientDynamicTableComponent } from './Component/shared/patientdynamic-
     AdminHospitalComponent,
     UpcomingAppointmentComponent,
     InboxComponent,
-    PatientDynamicTableComponent
+    PatientDynamicTableComponent,
+    AdminDashboardComponent
 
   ],
   imports: [
