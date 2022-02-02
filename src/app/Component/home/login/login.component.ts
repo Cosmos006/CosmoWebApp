@@ -15,6 +15,7 @@ import { Location } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { Guid } from 'guid-typescript';
+import { MainUserDetails } from 'src/app/models/MainUserDeatils';
 
 @Component({
   selector: 'app-login',
@@ -51,7 +52,7 @@ export class LoginComponent implements OnInit {
   isFirstLogin: boolean = false;
   userList: User[] = [];
   user!: User | undefined;
-  userDetail!: UserDetails | undefined;
+  userDetail!: MainUserDetails | undefined;
   count: number = 0;
   errorstatus!: boolean;
 
@@ -243,7 +244,7 @@ export class LoginComponent implements OnInit {
     //v = localStorage.getItem('user')
 
     //let  = this.userList.splice(index,1)
-    var user: UserDetails = {
+    var user: MainUserDetails = {
       Id: this.user?.id,
       Password: this.newpassword,
       UserName: '',
