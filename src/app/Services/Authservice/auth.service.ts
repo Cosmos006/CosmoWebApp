@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 import { AnyObject } from 'chart.js/types/basic';
 import { Guid } from 'guid-typescript';
 import { Changepassword } from 'src/app/models/changepassword';
-import { UserDetails } from 'src/app/models/userdetails';
+import { MainUserDetails } from 'src/app/models/MainUserDeatils';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -78,7 +78,7 @@ export class AuthenticationService {
     });
   }
 
-  Resetpassword(obj: UserDetails) {
+  Resetpassword(obj: MainUserDetails) {
     console.log('Hii');
 
     var myHeaders = new Headers();
@@ -133,7 +133,7 @@ export class AuthenticationService {
     });
   }
 
-  lockAccount(user: UserDetails) {
+  lockAccount(user: MainUserDetails) {
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     var raw = JSON.stringify(user);
