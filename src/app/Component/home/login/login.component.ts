@@ -14,7 +14,6 @@ import { AlertService } from 'src/app/Services/Alert/alert.service';
 import { Location } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/User';
-import { UserDetails } from 'src/app/models/userdetails';
 import { Guid } from 'guid-typescript';
 
 @Component({
