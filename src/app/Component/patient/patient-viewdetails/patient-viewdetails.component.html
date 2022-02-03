@@ -43,6 +43,10 @@
                               <mat-error *ngIf="nurseform.controls['weight']?.errors?.['pattern'] && nurseform.controls['weight']?.touched">
                                 Please provide patient weight in upto 2 decimal only.
                               </mat-error>
+                              <mat-error
+                                *ngIf="(nurseform.controls['weight']?.errors?.['max'] && nurseform.controls['weight']?.touched) || nurseform.controls['weight']?.errors?.['maxlength']">
+                                Please insert proper weight
+                              </mat-error>
                             </mat-form-field>
                           </span>
                           <span class="col-md-6">
@@ -65,6 +69,10 @@
                                 *ngIf="nurseform.controls['bodytemprature']?.errors?.['required'] && nurseform.controls['bodytemprature']?.touched">
                                 Please provide patient bodytemprature.
                               </mat-error>
+                              <mat-error
+                                *ngIf="(nurseform.controls['bodytemprature']?.errors?.['max'] && nurseform.controls['bodytemprature']?.touched) || nurseform.controls['bodytemprature']?.errors?.['maxlength']">
+                                Please insert proper bodytemprature
+                              </mat-error>
                             </mat-form-field>
                           </span>
                           <span class="col-md-6">
@@ -76,6 +84,10 @@
                                 *ngIf="nurseform.controls['respirationrate']?.errors?.['required'] && nurseform.controls['respirationrate']?.touched">
                                 Please provide patient respirationrate in BPM.
                               </mat-error>
+                              <mat-error
+                              *ngIf="(nurseform.controls['respirationrate']?.errors?.['max'] && nurseform.controls['respirationrate']?.touched) || nurseform.controls['respirationrate']?.errors?.['maxlength']">
+                              Respiration rate should below 22 BPM
+                            </mat-error>
                             </mat-form-field>
                           </span>
                     
