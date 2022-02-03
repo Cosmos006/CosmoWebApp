@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementClosest } from '@fullcalendar/angular';
+import { th } from 'date-fns/locale';
 
 
 import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
@@ -82,23 +83,18 @@ export class PatientViewdetailsComponent implements OnInit
     this.getmedicationdetails();
     this.fetchdata(this.Guid);
     //this.filteredList3=this.listOfmedication.slice();
-  // this.route.queryParams.subscribe((params)=>
-  // {
-  //    this.Guid+=params['guidId'];
-     
-  // })
+  this.route.queryParams.subscribe(params=>
+  {
+     var appid =params['appointmentId'];
+     this.Guid=appid;   
+  })
 
-  // if(this.Guid!=null)
-  // {
-    //this.fetchdata(this.Guid);
- // }
-
+  if(this.Guid!=null)
+  {
+    this.fetchdata(this.Guid);
+ }
   
-  
-  }
-
-
-  
+  } 
 
 Addupdatepatientdetails()
 {
@@ -106,8 +102,7 @@ Addupdatepatientdetails()
   if(this.nurseform.invalid)
   {
     alert("check all fields are filled");
-  
-    console.log(this.nurseform);
+   
   }
   else
   {
@@ -137,7 +132,7 @@ Addupdatepatientdetails()
         druglist:this.physicianform.value.drugname,
         
         doctorDescription: this.physicianform.value.diagnosisdiscriptionifother,
-        appointmentId: 'F15B843F-E04B-46A4-3817-08D9E5551C14',
+        appointmentId: this.Guid,
         //appointments: ,
         createddate: new Date(),
        
@@ -164,12 +159,9 @@ Addupdatepatientdetails()
 }
 updatepatientdetails()
 {
+  
   if(this.physicianform.invalid)
-  {
-    alert("check all fields are filled");
-   
-  }
-  else
+  
   {
     
       var dat:patientvisitdetails=
