@@ -23,14 +23,14 @@ export class patientdetails {
   baseUrl = environment.LocalUrl;
   //patientdetailscreen
   addPost(post: PatientdetailsDemo) {
-    this.http.post('https://localhost:5001/api/Demographicsdetails/PostPatientdemographicsdetails', post).subscribe((res) => {
+    this.http.post('https://localhost:44315/api/Demographicsdetails/PostPatientdemographicsdetails', post).subscribe((res) => {
       console.log(res);
     });
   }
 
   fetchfrombackendfromid1(id: any) {
 
-    return fetch(`https://localhost:5001/api/Demographicsdetails?Patientid=${id}`, {
+    return fetch(`https://localhost:44315/api/Demographicsdetails?Patientid=${id}`, {
       method: 'GET',
       redirect: 'follow'
     })
@@ -51,7 +51,7 @@ export class patientdetails {
     var raw = JSON.stringify(postobj);
     console.log(raw);
     
-    return fetch(`https://localhost:5001/api/Demographicsdetails/UpdateDemographic/${demoid}`, {
+    return fetch(`https://localhost:44315/api/Demographicsdetails/UpdateDemographic/${demoid}`, {
       method: 'PUT',
       headers: myHeaders,
       body: raw,
@@ -72,7 +72,7 @@ export class patientdetails {
   //get allergy list for dropdown
   getallergydata() {
 
-    return fetch(`https://localhost:5001/api/Master/GetallAllergydetails`, {
+    return fetch(`https://localhost:44315/api/Master/GetallAllergydetails`, {
       method: 'GET',
       redirect: 'follow'
     })
@@ -81,7 +81,7 @@ export class patientdetails {
 
     
 
-    return fetch(`https://localhost:5001/api/Master/GetdetailsfromAllergytype?AllergyType=${AllergyType}`, {
+    return fetch(`https://localhost:44315/api/Master/GetdetailsfromAllergytype?AllergyType=${AllergyType}`, {
       method: 'GET',
       redirect: 'follow'
     })
@@ -97,7 +97,7 @@ export class patientdetails {
     var raw = JSON.stringify(patientvisitobj);
     console.log(raw);
 
-   return fetch("https://localhost:5001/api/PatientDetails", {
+   return fetch("https://localhost:44315/api/PatientDetails", {
       method: 'POST',
       headers: myHeaders,
       body: raw,
@@ -114,7 +114,7 @@ export class patientdetails {
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(patientvisitdetailsobj);
    console.log(raw);
-   return fetch(`https://localhost:5001/api/PatientDetails/PutPatientDetails?id=${visitid}`, {
+   return fetch(`https://localhost:44315/api/PatientDetails/PutPatientDetails?id=${visitid}`, {
       method: 'PUT',
       headers: myHeaders,
       body: raw,
@@ -127,7 +127,7 @@ export class patientdetails {
 
   Getpatientvisitdetailsfromid(id:string) {
     const getuser = localStorage.getItem('USerID');
-    return fetch(`https://localhost:5001/api/PatientDetails?Appointmentid=${id}`, {
+    return fetch(`https://localhost:44315/api/PatientDetails?Appointmentid=${id}`, {
       method: 'GET',
       redirect: 'follow'
     });
@@ -137,26 +137,26 @@ export class patientdetails {
   Getpatientvisitdetailsfrompatientid(id: any) {
     const getuser = localStorage.getItem('USerID');
 
-    return this.http.get<any>('https://localhost:5001/api/Master/Getdiagnosisdetails');
+    return this.http.get<any>('https://localhost:44315/api/Master/Getdiagnosisdetails');
 
   }
   GetRole(id:any)
   {
    
     
-    return fetch(`https://localhost:5001/api/Master?id=${id}`, {
+    return fetch(`https://localhost:44315/api/Master?id=${id}`, {
       method: 'GET',
       redirect: 'follow'
     })
   }
   GetDiagnosisdetails() {
-    return this.http.get<any>('https://localhost:5001/api/Master/Getdiagnosisdetails');
+    return this.http.get<any>('https://localhost:44315/api/Master/Getdiagnosisdetails');
   }
   GetProceduredetails() {
-    return this.http.get<any>('https://localhost:5001/api/Master/Getproceduredetails');
+    return this.http.get<any>('https://localhost:44315/api/Master/Getproceduredetails');
   }
   GetMedicationdetails() {
-    return this.http.get<any>('https://localhost:5001/api/Master/Getdrugdetails');
+    return this.http.get<any>('https://localhost:44315/api/Master/Getdrugdetails');
   }
   GetidfromDiagnosisdetails(diagnosisdetails: string) {
     return this.http.get<any>(
@@ -171,7 +171,7 @@ export class patientdetails {
   Updatepreviousvisitdetails() { }
   GetPatientId(UserID:any)
   {
-    return fetch(`https://localhost:5001/api/Master/GetPatientId?userid=${UserID}`, {
+    return fetch(`https://localhost:44315/api/Master/GetPatientId?userid=${UserID}`, {
       method: 'GET',
       redirect: 'follow'
     })
