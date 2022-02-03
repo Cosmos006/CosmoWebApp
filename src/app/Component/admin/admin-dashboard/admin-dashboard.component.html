@@ -411,6 +411,52 @@
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <br>
+                      <h3 class="card-title">Import Masters</h3> 
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                      <br>
+                      <mat-form-field appearance="fill" style="width: 80%; padding-left: 2%;">
+                        <mat-label>Select Master</mat-label>
+                        <mat-select
+                        (selectionChange)="filterMasters(selectedValue)"
+                          [(ngModel)]="selectedValue"
+                          name="master"
+                        >
+                          <mat-option
+                            *ngFor="let master of masters"
+                            [value]="master.value"
+                          >
+                            {{ master.viewValue }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <button type="button" (click)="import()" class="btn btn-primary float-right">
+                        Import
+                    </button>
+                    </div>
+                    <div style="width: 80%; padding-left: 2%; padding-top: 3%; padding-bottom: 5%;">
+                      <input type="file" class="file-upload" (change)="onFileSelected($event)" #fileUpload>
+                    </div>
+                    <div class="col-md-4">
+                      <span class="upload" *ngIf="progress > 0">
+                        {{progress}}%
+                      </span>
+                      <span class="upload" *ngIf="message">
+                        {{message}}
+                      </span>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+                </div>
+              </div>
+
               <!-- /.card -->
             </section>
             <!-- /.Left col -->
@@ -472,78 +518,11 @@
 
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Doctor List</h3>
+                  <h3 class="card-title">Physician List</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Task</th>
-                        <th>Progress</th>
-                        <th style="width: 40px">Label</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1.</td>
-                        <td>Update software</td>
-                        <td>
-                          <div class="progress progress-xs">
-                            <div
-                              class="progress-bar progress-bar-danger"
-                              style="width: 55%"
-                            ></div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-danger">55%</span></td>
-                      </tr>
-                      <tr>
-                        <td>2.</td>
-                        <td>Clean database</td>
-                        <td>
-                          <div class="progress progress-xs">
-                            <div
-                              class="progress-bar bg-warning"
-                              style="width: 70%"
-                            ></div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-warning">70%</span></td>
-                      </tr>
-                      <tr>
-                        <td>3.</td>
-                        <td>Cron job running</td>
-                        <td>
-                          <div
-                            class="progress progress-xs progress-striped active"
-                          >
-                            <div
-                              class="progress-bar bg-primary"
-                              style="width: 30%"
-                            ></div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-primary">30%</span></td>
-                      </tr>
-                      <tr>
-                        <td>4.</td>
-                        <td>Fix and squish bugs</td>
-                        <td>
-                          <div
-                            class="progress progress-xs progress-striped active"
-                          >
-                            <div
-                              class="progress-bar bg-success"
-                              style="width: 90%"
-                            ></div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-success">90%</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <app-doctorlist></app-doctorlist>
                 </div>
                 <!-- /.card-body -->
               </div>

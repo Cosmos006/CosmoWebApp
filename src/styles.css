@@ -54,3 +54,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+
+
+/* .mat-header-cell {
+    background-color:gray !important;
+    color:white!important;
+    text-align: center;
+    font-size: 1.3vm !important;
+} */
