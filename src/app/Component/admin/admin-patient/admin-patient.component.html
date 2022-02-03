@@ -124,7 +124,6 @@
 </div> -->
 
 <div class="container-fluid">
-  <div class="mat-elevation-z8 w-80 ml-5 mr-5 mb-5">
     <mat-form-field appearance="standard">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="PatientapplyFilter($event)" #input />
@@ -201,11 +200,10 @@
       <tr mat-row *matRowDef="let row; columns: displayedthreeColumns"></tr>
     </table>
 
-    <div class="offset-1"></div>
+  
 
     <mat-paginator
       [pageSizeOptions]="[5, 10, 25, 100]"
       aria-label="Select page of users"
     ></mat-paginator>
-  </div>
 </div>
