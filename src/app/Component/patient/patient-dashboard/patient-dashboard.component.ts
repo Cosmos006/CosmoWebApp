@@ -406,13 +406,10 @@ export class PatientDashboardComponent implements OnInit {
       this.exportPrescription();
     }
     if (obj.columnDef == 'viewdetailBtn') {
-      this.router.navigate(['/PatientViewdetails']);
       var id = obj.guid;
-      let apointdata = this.patientDashboardService
-        .GetAppointmentById(obj.guid)
-        .subscribe((v) => {
-          console.log(v.id);
-        });
+      this.router.navigate(['PatientViewdetails'], {
+        queryParams: { appointmentId: id },
+      });
     }
     if (obj.columnDef == 'reasonBtn') {
       var id = obj.guid;
