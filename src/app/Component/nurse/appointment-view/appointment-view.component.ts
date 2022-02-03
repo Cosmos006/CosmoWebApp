@@ -56,15 +56,25 @@ export class AppointmentViewComponent {
     console.log("vamsiclicked")
     this.router.navigateByUrl('/nurseBookappointment');
   }
-  OnVitalRecord(){
+  OnVitalRecord(rowid:any){
     
-    console.log("vamsiclicked")
-    this.router.navigateByUrl('/NursePatientViewdetails');
+    
+    // this.router.navigateByUrl('/NursePatientViewdetails');
+    this.router.navigate(['NursePatientViewdetails'], {
+
+      queryParams: { appointmentId: rowid },
+
+    });
   }
-  OnProviousVisit(){
+  OnProviousVisit(rowid:any){
     
     console.log("vamsiclicked")
-    this.router.navigateByUrl('/NursePreviousVisitDetails');
+    
+    this.router.navigate(['NursePreviousVisitDetails'], {
+
+      queryParams: { appointmentId: rowid },
+
+    });
   }
 }
 

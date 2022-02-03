@@ -37,7 +37,9 @@ export class UpcomingAppointmentComponent implements OnInit {
     const dialogRef = this.dialogService.open(EditDailogeComponent, {
       data: { data }
     });
-    dialogRef.afterClosed()
+    dialogRef.afterClosed().subscribe(r=>{
+      this.getdata()
+    })
   }
   applyFilter(filterValue: any) {
     let itemvalue = filterValue.target.value;   

@@ -9,11 +9,13 @@ import { id } from 'date-fns/locale';
 import { Mode } from 'src/app/models/patient.model';
 import { GenerateTimeSlot } from 'src/app/models/Globalfunctions';
 import { BookAppointmentService } from 'src/app/Services/BookAppointment/book-appointment.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-dailoge',
   templateUrl: './edit-dailoge.component.html',
-  styleUrls: ['./edit-dailoge.component.css']
+  styleUrls: ['./edit-dailoge.component.css'],
+  providers: [DatePipe]
 })
 export class EditDailogeComponent implements OnInit {
   registerForm !: FormGroup;
@@ -37,10 +39,14 @@ export class EditDailogeComponent implements OnInit {
   incomingslot: Array<string> = [];
   outgoingslot!: Array<string>;
 
-  constructor( private service: BookAppointmentService,public dialogRef: MatDialogRef<EditDailogeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public dailogueservice: DailogeService, private formBuilder: FormBuilder) {
 
-      }
+  constructor( private service: BookAppointmentService,public dialogRef: MatDialogRef<EditDailogeComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any, public dailogueservice: DailogeService, private formBuilder: FormBuilder,private datePipe: DatePipe) {
+
+      this.registerForm = this.formBuilder.group({
+        field1: [this.datePipe.transform(this.data.data.appointmentDateTime, 'medium')]
+      })
+     }
 
 
 
@@ -96,6 +102,7 @@ export class EditDailogeComponent implements OnInit {
       physician: [''],
       appointmentDateTime: ['', Validators.required],
     });
+    
     this.registerForm.controls['name'].setValue(this.data.data.name)
     this.registerForm.controls['name'].disable()
    
@@ -108,6 +115,7 @@ export class EditDailogeComponent implements OnInit {
     this.registerForm.controls['physician'].disable()
     this.registerForm.controls['diagnosis'].setValue(this.data.data.diagnosis)
     this.registerForm.controls['diagnosis'].disable()
+    // this.registerForm.controls['appointmentDateTime'].setValue(this.datePipe.transform(this.data.data.appointmentDateTime, 'shortDate'))
     this.registerForm.controls['appointmentDateTime'].setValue(this.data.data.appointmentDateTime)
     this.registerForm.controls['id'].setValue(this.data.data.id)
   }
@@ -118,8 +126,7 @@ export class EditDailogeComponent implements OnInit {
 
     let data = this.registerForm.value;
     let id = data['id']
-    console.log(data['id']);
-    this.dailogueservice.updateIssue(id, data)
+    this.dailogueservice.updateIssue(id, data).subscribe( );
   }
 
   SlotGenerator(UserType: string, date: string):any  

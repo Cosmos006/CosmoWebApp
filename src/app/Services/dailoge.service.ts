@@ -29,6 +29,7 @@ export class DailogeService {
   private readonly BAR_URL1 = 'http://localhost:3000/BarList';
   baseUrl = environment.LocalUrl;
   appointmentData: any;
+  id:any;
 
   //Dash Board Changes Start
 
@@ -53,15 +54,16 @@ export class DailogeService {
       myHeaders.append('Authorization', `Bearer ${token}`);
     }
     var raw = JSON.stringify(product);
-    return fetch(
-      `https://localhost:44318/api/NurseDash/UpdateUpcomingAppoinmets?Id=${id}`,
-      {
-        method: 'PUT',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow',
-      }
-    );
+    // return fetch(
+    //   `https://localhost:44318/api/NurseDash/UpdateUpcomingAppoinmets?Id=${id}`,
+    //   {
+    //     method: 'PUT',
+    //     headers: myHeaders,
+    //     body: raw,
+    //     redirect: 'follow',
+    //   }
+    // );
+    return this.http.put<any>('https://localhost:44318/api/NurseDash/UpdateUpcomingAppoinmets?Id='+id, product);
   }
   // this.http.post('https://localhost:44318/api/NurseDash/UpdateUpcomingAppoinmets?Id='+id, this.appointmentData).subscribe((res) => {
   //   console.log("datacame");
