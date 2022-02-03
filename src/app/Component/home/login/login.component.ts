@@ -64,7 +64,9 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService,
     private authenticationService: AuthenticationService,
     private modalService: NgbModal
-  ) {}
+  ) {
+    // window.location.reload();
+  }
 
   open(content: any) {
     this.modalService
@@ -105,7 +107,6 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.getUserData().subscribe((res: User[]) => {
       this.userList.push(...res);
-      console.log(this.userList);
     });
   }
 

@@ -41,7 +41,7 @@ export class PatientDashboardComponent implements OnInit {
       this.router.navigate(['PatientBookAppointment/Covid']);
     } else if (Type == 'Appointment') {
       this.router.navigate(['PatientBookAppointment/Patient'], {
-        queryParams: { appointmentId: '209B85F4-77A1-45AA-5244-08D9D85C96B7' },
+        queryParams: { appointmentId: '643EF306-4A57-474A-9D66-FAE0FF220041' },
       });
     }
   }
@@ -340,7 +340,7 @@ export class PatientDashboardComponent implements OnInit {
           .subscribe((v) => {
             console.log(v.id, v.appointmentStatus);
           });
-          this.router.navigate([PatientDashboardComponent]);
+        this.router.navigate([PatientDashboardComponent]);
         this.showSubmitModal = true;
       }
     }
@@ -369,12 +369,11 @@ export class PatientDashboardComponent implements OnInit {
         );
         csv.unshift(header.join(','));
         let csvArray = csv.join('\r\n');
-    
+
         var blob = new Blob([csvArray], { type: 'text/csv' });
         saveAs(blob, 'myFile.csv');
-
       });
-    }
+  }
   updatePagination(event: any) {
     this.filterAppointments(this.selectedValue, event);
   }

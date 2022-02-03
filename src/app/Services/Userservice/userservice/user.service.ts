@@ -4,13 +4,11 @@ import { environment } from 'src/environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User';
 
-
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    readonly baseUrl = environment.apiUrl;
-    constructor(private http: HttpClient,private fb: FormBuilder) { }
+  readonly baseUrl = environment.apiUrl;
+  constructor(private http: HttpClient, private fb: FormBuilder) {}
 
-    
   // formModel = this.fb.group({
   //   TitleFName: this.fb.group({
   //     Title:['',Validators.required],
@@ -36,27 +34,24 @@ export class UserService {
   //   }),
   // })
 
-    getAll() {
-        return this.http.get<User[]>(`${environment.apiUrl}/users`);
-    }
+  getAll() {
+    return this.http.get<User[]>(`${environment.apiUrl}/users`);
+  }
 
-    getById(id?: number) {
-       
-            return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
-    }
+  getById(id?: number) {
+    return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+  }
 
-    
-  register(registrationform:FormGroup){
-  
+  register(registrationform: FormGroup) {
     var userDetails = {
       Title: registrationform.value.Title,
-      FirstName:registrationform.value.FirstName,
+      FirstName: registrationform.value.FirstName,
       LastName: registrationform.value.LastName,
       UserName: registrationform.value.UserName.toLowerCase(),
       PhoneNo: registrationform.value.PhoneNo,
       Email: registrationform.value.Email,
       DateOfBirth: registrationform.value.DateOfBirth,
-      Role:"Patient",
+      Role: 'Patient',
       // Title: this.formModel.value.TitleFName.Title,
       // FirstName: this.formModel.value.TitleFName.FirstName,
       // LastName: this.formModel.value.LNameUserName.LastName,
@@ -72,7 +67,10 @@ export class UserService {
     };
     console.log(userDetails);
     registrationform.reset();
-    return this.http.post(this.baseUrl+'User/Patient/Register', userDetails , {responseType: 'text'});
+    return this.http.post(
+      'https://localhost:44359/api/User/Register',
+      userDetails,
+      { responseType: 'text' }
+    );
   }
 }
-

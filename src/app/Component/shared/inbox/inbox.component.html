@@ -2,7 +2,7 @@
   <div class="row" style="max-height: 50%">
     <div class="col-xl-6">
       <mat-card>
-        <mat-card-header style="text-align: center;color: cornflowerblue;">
+        <mat-card-header style="text-align: center; color: cornflowerblue">
           <mat-card-title>NOTES</mat-card-title>
         </mat-card-header>
         <mat-tab-group
@@ -87,7 +87,6 @@
             </form>
           </mat-tab>
 
-         
           <mat-tab class="mat-headline" label="RECIEVED">
             <table
               mat-table
@@ -96,9 +95,14 @@
               #recievedsort
               matSort
             >
-              <ng-container matColumnDef="Sender Name" >
-                <th class="widthcol2" style="text-align: center;" mat-header-cell *matHeaderCellDef>
-                  Sender Name 
+              <ng-container matColumnDef="Sender Name">
+                <th
+                  class="widthcol2"
+                  style="text-align: center"
+                  mat-header-cell
+                  *matHeaderCellDef
+                >
+                  Sender Name
                 </th>
                 <td
                   class="widthcol2"
@@ -111,7 +115,12 @@
               </ng-container>
 
               <ng-container matColumnDef="Designation">
-                <th class="widthcol2" style="text-align: center;" mat-header-cell *matHeaderCellDef>
+                <th
+                  class="widthcol2"
+                  style="text-align: center"
+                  mat-header-cell
+                  *matHeaderCellDef
+                >
                   Designation
                 </th>
                 <td
@@ -124,8 +133,13 @@
                 </td>
               </ng-container>
 
-              <ng-container matColumnDef="Message" >
-                <th class="widthcol4" style="text-align: center;" mat-header-cell *matHeaderCellDef>
+              <ng-container matColumnDef="Message">
+                <th
+                  class="widthcol4"
+                  style="text-align: center"
+                  mat-header-cell
+                  *matHeaderCellDef
+                >
                   Message
                 </th>
                 <td
@@ -134,7 +148,9 @@
                   mat-cell
                   *matCellDef="let element"
                 >
-                  <textarea [readOnly]="true" style="width:100%;">{{ element.message }}</textarea>
+                  <textarea [readOnly]="true" style="width: 100%">{{
+                    element.message
+                  }}</textarea>
                 </td>
               </ng-container>
 
@@ -149,11 +165,19 @@
                 </td>
               </ng-container> -->
 
-              <ng-container  matColumnDef="DateTime">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="widthcol2" style="text-align: center;" >Date & Time</th>
+              <ng-container matColumnDef="DateTime">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  class="widthcol2"
+                  style="text-align: center"
+                >
+                  Date & Time
+                </th>
                 <td
                   align="center"
-                  class="widthcol2" 
+                  class="widthcol2"
                   [style.color]="getBackgroundColor(element.date)"
                   mat-cell
                   *matCellDef="let element"
@@ -162,21 +186,37 @@
                 </td>
               </ng-container>
 
-              <ng-container matColumnDef="Action">align
-                <th mat-header-cell class="widthcol2"  *matHeaderCellDef style="text-align: center;">Action</th>
-                <td mat-cell *matCellDef="let element; let j = index;"  class="widthcol2" align="center">
-                  <span style= "color:cornflowerblue;" tabindex="-1" (click)='OnReply("SEND", element)'>
-                      <i class="fa fa-reply" aria-hidden="true"></i>
-                  </span> | 
+              <ng-container matColumnDef="Action"
+                >align
+                <th
+                  mat-header-cell
+                  class="widthcol2"
+                  *matHeaderCellDef
+                  style="text-align: center"
+                >
+                  Action
+                </th>
+                <td
+                  mat-cell
+                  *matCellDef="let element; let j = index"
+                  class="widthcol2"
+                  align="center"
+                >
                   <span
-                    (click)="onDelete('RECIEVED',element)"
-                     style= "color:red; padding-left: 5px;"
+                    style="color: cornflowerblue"
+                    tabindex="-1"
+                    (click)="OnReply('SEND', element)"
+                  >
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                  </span>
+                  |
+                  <span
+                    (click)="onDelete('RECIEVED', element)"
+                    style="color: red; padding-left: 5px"
                     aria-label="Example icon button with a delete icon"
                   >
-                  
-                   <i class="fa fa-trash"></i>
+                    <i class="fa fa-trash"></i>
                   </span>
-               
                 </td>
               </ng-container>
 
@@ -193,17 +233,17 @@
             </mat-paginator>
           </mat-tab>
 
-          <mat-tab class="mat-headline" label="SENT"> 
-          <table
+          <mat-tab class="mat-headline" label="SENT">
+            <table
               mat-table
               [dataSource]="SentdataSource"
               class="demo-table tablemobile"
               #sentsort
               matSort
             >
-              <ng-container matColumnDef="Reciever Name" >
-                <th class="widthcol2"mat-header-cell *matHeaderCellDef>
-                  Receiver Name 
+              <ng-container matColumnDef="Reciever Name">
+                <th class="widthcol2" mat-header-cell *matHeaderCellDef>
+                  Receiver Name
                 </th>
                 <td
                   class="widthcol2"
@@ -231,7 +271,12 @@
               </ng-container>
 
               <ng-container matColumnDef="Message">
-                <th class="widthcol4" style="text-align: center;" mat-header-cell *matHeaderCellDef>
+                <th
+                  class="widthcol4"
+                  style="text-align: center"
+                  mat-header-cell
+                  *matHeaderCellDef
+                >
                   Message
                 </th>
                 <td
@@ -240,7 +285,9 @@
                   mat-cell
                   *matCellDef="let element"
                 >
-                  <textarea [readOnly]="true" style="width:100%;">{{ element.message }}</textarea>
+                  <textarea [readOnly]="true" style="width: 100%">{{
+                    element.message
+                  }}</textarea>
                 </td>
               </ng-container>
 
@@ -256,10 +303,18 @@
               </ng-container> -->
 
               <ng-container matColumnDef="DateTime">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="widthcol1" style="text-align: center;">Date & Time</th>
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  class="widthcol1"
+                  style="text-align: center"
+                >
+                  Date & Time
+                </th>
                 <td
-                  style="text-align: center;"
-                  class="widthcol1" 
+                  style="text-align: center"
+                  class="widthcol1"
                   [style.color]="getBackgroundColor(element.date)"
                   mat-cell
                   *matCellDef="let element"
@@ -270,16 +325,19 @@
 
               <ng-container matColumnDef="Delete">
                 <th mat-header-cell *matHeaderCellDef align="center">Delete</th>
-                <td mat-cell *matCellDef="let element"  class="widthcol3" align="center">
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  class="widthcol3"
+                  align="center"
+                >
                   <span
-                    (click)="onDelete('SENT',element)"
-                     style= "color:red; padding-left: 5px;"
+                    (click)="onDelete('SENT', element)"
+                    style="color: red; padding-left: 5px"
                     aria-label="Example icon button with a delete icon"
                   >
-                  
-                   <i class="fa fa-trash"></i>
+                    <i class="fa fa-trash"></i>
                   </span>
-                 
                 </td>
               </ng-container>
 
@@ -287,13 +345,13 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
             </table>
             <mat-paginator
-            #paginator2
-            class="paginator"
-            [pageSizeOptions]="[4]"
-            showFirstLastButtons
-            aria-label="Select page of sent notes"
-          >
-          </mat-paginator>
+              #paginator2
+              class="paginator"
+              [pageSizeOptions]="[4]"
+              showFirstLastButtons
+              aria-label="Select page of sent notes"
+            >
+            </mat-paginator>
           </mat-tab>
         </mat-tab-group>
       </mat-card>
@@ -302,12 +360,17 @@
     <!-- APPOINTMENTS -->
     <div class="col-xl-6">
       <mat-card style="min-height: 400px">
-        <mat-card-header  style="text-align: center;color: cornflowerblue;">
+        <mat-card-header style="text-align: center; color: cornflowerblue">
           <mat-card-title>APPOINTMENTS</mat-card-title>
         </mat-card-header>
         <table mat-table [dataSource]="dataSource" appointmentsort matSort>
           <ng-container matColumnDef="Meeting Title">
-            <th class="widthcol1" mat-header-cell *matHeaderCellDef style="text-align: center;">
+            <th
+              class="widthcol1"
+              mat-header-cell
+              *matHeaderCellDef
+              style="text-align: center"
+            >
               Meeting Title
             </th>
             <td
@@ -316,44 +379,61 @@
               mat-cell
               *matCellDef="let element"
             >
-              {{ element.meetingTitle }} 
+              {{ element.meetingTitle }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="Diagnosis">
-            <th class="widthcol6" mat-header-cell *matHeaderCellDef style="text-align: center;">
+            <th
+              class="widthcol6"
+              mat-header-cell
+              *matHeaderCellDef
+              style="text-align: center"
+            >
               Diagnosis
             </th>
             <td
-             class="widthcol6"
+              class="widthcol6"
               [style.color]="getBackgroundColor(element.date)"
               mat-cell
               *matCellDef="let element"
             >
-              {{ element.diagnosis }} 
+              {{ element.diagnosis }}
             </td>
-          </ng-container> 
+          </ng-container>
 
           <ng-container matColumnDef="Patient Name">
-            <th class="widthcol1" mat-header-cell *matHeaderCellDef style="text-align: center;">
+            <th
+              class="widthcol1"
+              mat-header-cell
+              *matHeaderCellDef
+              style="text-align: center"
+            >
               Patient
             </th>
             <td
               class="widthcol1"
-              
               [style.color]="getBackgroundColor(element.date)"
               mat-cell
               *matCellDef="let element"
             >
-              {{ element.patientName }} 
+              {{ element.patientName }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="DateTime">
-            <th class="widthcol1" mat-header-cell mat-sort-header *matHeaderCellDef style="text-align: center;">Date</th>
+            <th
+              class="widthcol1"
+              mat-header-cell
+              mat-sort-header
+              *matHeaderCellDef
+              style="text-align: center"
+            >
+              Date
+            </th>
             <td
               class="widthcol1"
-              style="text-align: center;"
+              style="text-align: center"
               [style.color]="getBackgroundColor(element.date)"
               mat-cell
               *matCellDef="let element"
@@ -374,17 +454,17 @@
           </ng-container> -->
 
           <ng-container matColumnDef="Visit Details">
-            <th class="widthcol2" mat-header-cell *matHeaderCellDef style="text-align: center;">
+            <th
+              class="widthcol2"
+              mat-header-cell
+              *matHeaderCellDef
+              style="text-align: center"
+            >
               Patient Details
             </th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;">
-              <span
-              routerLink="/viewpatient/{{
-                element.patientId ? element.patientId : 0
-              }}"
-                    mat-mini-fab
-                  >
-                  <i  class="fa fa-eye " style="color: black;" ></i>
+            <td mat-cell *matCellDef="let element" style="text-align: center">
+              <span (click)="onviewclick(element.id)" mat-mini-fab>
+                <i class="fa fa-eye" style="color: black"></i>
               </span>
             </td>
           </ng-container>
@@ -407,7 +487,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-<!--   
+        <!--   
         <div *ngIf="dataSource.data.length === 0">
           <h3>There are no appointments this week</h3>
         </div> -->

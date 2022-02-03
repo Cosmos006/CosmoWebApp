@@ -30,11 +30,11 @@ export class BookAppointmentService {
   }
 
   //GEt Physician
-  // GetPhysician() {
-  //   return this.http.get<Physician[]>(
-  //     'https://localhost:44347/api/Appointments/GetAllPhysician'
-  //   );
-  // }
+  GetPhysician() {
+    return this.http.get<Physician[]>(
+      'https://localhost:44347/api/Appointments/GetAllPhysician'
+    );
+  }
 
   GetPhysicianById(Diagnosics: string) {
     return this.http.get<Physician[]>(
