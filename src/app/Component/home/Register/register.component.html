@@ -53,21 +53,15 @@
                     name="First Name"
                     class="form-control"
                     formControlName="FirstName"
-                    [ngClass]="{
-                      'is-invalid':
-                        submitted &&
-                        this.registrationform.controls['FirstName'].invalid
-                    }"
+                   
                   />
                   <div class="text-danger">
                     <span
                       *ngIf="
-                      submitted &&
-                      this.registrationform.controls['FirstName'].invalid
-                      && this.registrationform.controls['FirstName']?.errors?.['pattern']
-                      && this.registrationform.controls['FirstName']?.status === 'INVALID'
-                      && this.registrationform.status === 'INVALID'
-                    "
+                  
+                      this.registrationform.controls['FirstName']?.errors?.['pattern'] &&
+                      this.registrationform.controls['FirstName']?.touched"
+                    
                       >First Name is invalid</span
                     >
                     <span
@@ -97,16 +91,18 @@
                     }"
                   />
                   <div class="text-danger">
-                    <span
+                   <span
                       *ngIf="
-                      submitted &&
+                      
                       this.registrationform.controls['LastName'].invalid
                       && this.registrationform.controls['LastName']?.errors?.['pattern']
                       && this.registrationform.controls['LastName']?.status === 'INVALID'
                       && this.registrationform.status === 'INVALID'
-                    "
-                      >Last Name is invalid</span
-                    >
+
+                    " 
+                    
+                      >Last Name is invalid</span>
+                   
                     <span
                       *ngIf="
                         (this.registrationform.controls['LastName']?.touched && this.registrationform.controls['LastName']?.value === '')
@@ -164,6 +160,8 @@
                     name="phone"
                     class="form-control"
                     formControlName="PhoneNo"
+                    maxlength="10"
+                    minlength="10"
                     [ngClass]="{
                       'is-invalid':
                         submitted &&
@@ -182,13 +180,17 @@
                       >Contact is invalid</span
                     >
                     <span
-                      *ngIf="
-                        (this.registrationform.controls['PhoneNo']?.touched && this.registrationform.controls['PhoneNo']?.value === '')
-                        || (submitted && this.registrationform.controls['PhoneNo']?.untouched
-                        && this.registrationform.controls['PhoneNo']?.value === '')
-                      "
-                      >Contact is required</span
-                    >
+                      *ngIf="registrationform.controls['PhoneNo']?.errors?.['minlength']">Telephone number has
+                      XX Digits</span>
+                    <span *ngIf="registrationform.controls['PhoneNo']?.errors?.['minlength']">Telephone number has
+                      XX Digits
+                    </span>
+                    <span *ngIf="registrationform.controls['PhoneNo']?.errors?.['maxlength']">Telephone number has
+                      XX Digits
+                    </span>
+                    <mat-error *ngIf="registrationform.controls['PhoneNo']?.errors?.['pattern']">Only numbers are
+                      allowed
+                    </mat-error>
                   </div>
                 </div>
 
@@ -208,15 +210,8 @@
                   />
                   <div class="text-danger">
                     <span
-                      *ngIf="
-                      submitted &&
-                      this.registrationform.controls['Email'].invalid
-                      && this.registrationform.controls['Email']?.errors?.['pattern']
-                      && this.registrationform.controls['Email']?.status === 'INVALID'
-                      && this.registrationform.status === 'INVALID'
-                    "
-                      >Email is invalid</span
-                    >
+                    *ngIf="registrationform.controls['Email']?.errors?.['email'] && registrationform.controls['Email']?.touched">Enter
+                    email in correct format</span>
                     <span
                       *ngIf="
                         (this.registrationform.controls['Email']?.touched && this.registrationform.controls['Email']?.value === '')
@@ -262,7 +257,9 @@
                     type="date"
                     name="Date of birth"
                     class="form-control"
+                    [max]="today"
                     formControlName="DateOfBirth"
+                    
                    [ngClass]="{
                       'is-invalid':
                         submitted &&
@@ -274,10 +271,12 @@
                       *ngIf="
                       (this.registrationform.controls['DateOfBirth']?.touched && this.registrationform.controls['DateOfBirth']?.value === '')
                         || (submitted && this.registrationform.controls['DateOfBirth']?.untouched
-                        && this.registrationform.controls['DateOfBirth']?.value === '')
-                      "
+                        && this.registrationform.controls['DateOfBirth']?.value === '')"
                       >DateOfBirth is required</span
                     >
+                    <span *ngIf="this.registrationform.controls['DateOfBirth']?.errors?.['matDatepickerMax']">Date should be
+                      inferior
+                      </span>
                   </div>
                 </div>
               </div>
