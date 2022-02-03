@@ -45,6 +45,8 @@ import { AdminHospitalComponent } from './admin-hospital/admin-hospital.componen
 import { MatPaginator } from '@angular/material/paginator';
 import { BarchartComponent } from '../nurse/barchart/barchart.component';
 import { DoctorlistComponent } from '../nurse/doctorlist/doctorlist.component';
+import { MaterialModule } from '../../material.module';
+import { MatSelectModule } from '@angular/material/select';
 //
 //MatSlideToggleModule;
 
@@ -94,6 +96,7 @@ const routes: Routes = [
     AdminHospitalComponent,
     BarchartComponent,
     DoctorlistComponent,
+    DoctorlistComponent
   ],
   imports: [
     CommonModule,
@@ -124,6 +127,8 @@ const routes: Routes = [
     MatPaginatorModule,
     //SnakBar
     MatSnackBarModule,
+    MatSelectModule,
+    MaterialModule
   ],
 })
 export class AdminModule {}

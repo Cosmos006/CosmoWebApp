@@ -127,7 +127,7 @@ console.log(pageIndex,pageSize);
   }
   Onsubmitbook(){
     console.log("vamsiclicked")
-    this.router.navigateByUrl('/NurseBookappointment');
+    this.router.navigateByUrl('/Inbox');
   }
   Onsubmitbar(){
     console.log("vamsiclickedt")

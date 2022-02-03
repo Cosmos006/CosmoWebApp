@@ -1,15 +1,14 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementClosest } from '@fullcalendar/angular';
-import { th } from 'date-fns/locale';
 
 
 import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
 import { Allergy } from 'src/app/models/allergy-model';
 import { diagnosis } from 'src/app/models/diagnosis-model';
-//import { logKeyValuePairs } from 'src/app/models/Globalfunctions';
+
 import { medication } from 'src/app/models/medication-model';
 import { patientvisitdetails } from 'src/app/models/patientvisitdetails';
 import { procedure } from 'src/app/models/procedure-model';
@@ -38,8 +37,7 @@ export class PatientViewdetailsComponent implements OnInit
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
   postobj:patientvisitdetails=new patientvisitdetails();
-  //postobj!:patientvisitdetails; 
-  // private postObj= new BehaviorSubject<patientdetails>();
+ 
   iseditable=true;
   Id:any;
   diagnosisobj!:diagnosis;
@@ -47,12 +45,12 @@ export class PatientViewdetailsComponent implements OnInit
   listOfdiagnosis: diagnosis[] = [];
   listOfdiagnosisdiscription: string[] = ['others'];
   listOfprocedure:procedure[]=[];
-  listOfprocedurediscription:string[]=['others'];
-  listOfmedication:medication[]=[];
+  listOfprocedurediscription:string[]=[];
+  listOfmedication:string[]=['others'];
   selectionlist: string[] = ['Yes', 'No'];
   Guid:any;
- 
-  constructor(private patient:patientdetails,private router: Router,private route:ActivatedRoute) { }
+  public selected:any;
+  constructor(private patient:patientdetails,private router: Router,private route:ActivatedRoute,private fb: FormBuilder) { }
   height?:number;
  
   public filteredList1: any;
@@ -63,7 +61,7 @@ export class PatientViewdetailsComponent implements OnInit
     VisitId:any;
   ngOnInit(): void 
   {
-    this.bindToUI();
+    
     var Get = localStorage.getItem('currentUser');
  
     if (typeof Get === 'string') {
@@ -81,20 +79,37 @@ export class PatientViewdetailsComponent implements OnInit
     this.getproceduredetails();
     this.filteredList2= this.listOfprocedurediscription.slice();
     this.getmedicationdetails();
-    this.fetchdata(this.Guid);
-    //this.filteredList3=this.listOfmedication.slice();
-  this.route.queryParams.subscribe(params=>
-  {
-     var appid =params['appointmentId'];
-     this.Guid=appid;   
-  })
-
-  if(this.Guid!=null)
-  {
-    this.fetchdata(this.Guid);
- }
+    this.filteredList3= this.listOfmedication.slice();
   
-  } 
+    this.bindToUI();
+    
+    
+    this.route.queryParams.subscribe(params=>
+
+      {
+    
+         var appid =params['appointmentId'];
+    
+         this.Guid=appid;  
+    
+      })
+    
+    
+    
+      if(this.Guid!=null)
+    
+      {
+    
+        this.fetchdata(this.Guid);
+    
+     }
+
+  
+  
+  }
+
+
+  
 
 Addupdatepatientdetails()
 {
@@ -102,7 +117,8 @@ Addupdatepatientdetails()
   if(this.nurseform.invalid)
   {
     alert("check all fields are filled");
-   
+  
+    console.log(this.nurseform);
   }
   else
   {
@@ -115,25 +131,16 @@ Addupdatepatientdetails()
         bodyTemprature: this.nurseform.value.bodytemprature,
         respirationRate: this.nurseform.value.respirationrate,
 
-        //diagnosisid:this.physicianform.value.diagnosisid,
-        //diagnosisList:this.physicianform.value.diagnosisdiscription,
-
-        //diagnosisid:this.physicianform.value.diagnosisid,
-        
+       
         diagnosislist:this.physicianform.value.diagnosisdiscription,
-        //diagnosisDescription: this.physicianform.value.diagnosisdiscription,
         
-        //diagnosisisdepricated:this.physicianform.value.diagnosisisdepricated,
-        //procedureId:this.physicianform.value.procedureid,
-       // diagnosislist:JSON.parse(this.physicianform.value.diagnosisdiscription),
        procedureslist:this.physicianform.value.procedurediscription,
-        //proceduredepricated:this.physicianform.value.proceduredepricated,
-        //drugid:this.physicianform.value.drugid,
+        
         druglist:this.physicianform.value.drugname,
         
         doctorDescription: this.physicianform.value.diagnosisdiscriptionifother,
         appointmentId: this.Guid,
-        //appointments: ,
+       
         createddate: new Date(),
        
       };
@@ -151,18 +158,26 @@ Addupdatepatientdetails()
         })
   
   
-  this.patient.Addpatientvisitdetails(dat);
-   alert("PatietDetails saved succesfully");
+  this.patient.Addpatientvisitdetails(dat)
+  .then(response => response.text())
+  .then(result =>{
+    if(result=='Success')
+    {
+      alert("Add Successfully");
+    }
+    else{
+      alert("Not Added");
+    }
+  })
+  .catch(error => console.log('error', error));
+  this.fetchdata(this.Guid);  
   
 }
  
 }
 updatepatientdetails()
 {
-  
-  if(this.physicianform.invalid)
-  
-  {
+ 
     
       var dat:patientvisitdetails=
       {
@@ -172,35 +187,33 @@ updatepatientdetails()
         bodyTemprature: this.nurseform.value.bodytemprature,
         respirationRate: this.nurseform.value.respirationrate,
 
-        //diagnosisid:this.physicianform.value.diagnosisid,
-        //diagnosisList:this.physicianform.value.diagnosisdiscription,
-
-        //diagnosisid:this.physicianform.value.diagnosisid,
-        
         diagnosislist:this.physicianform.value.diagnosisdiscription,
-        //diagnosisDescription: this.physicianform.value.diagnosisdiscription,
         
-        //diagnosisisdepricated:this.physicianform.value.diagnosisisdepricated,
-        //procedureId:this.physicianform.value.procedureid,
-       // diagnosislist:JSON.parse(this.physicianform.value.diagnosisdiscription),
        procedureslist:this.physicianform.value.procedurediscription,
-        //proceduredepricated:this.physicianform.value.proceduredepricated,
-        //drugid:this.physicianform.value.drugid,
-        druglist:['para','vicks'],
+       
+        druglist:this.physicianform.value.drugname,
         
         doctorDescription: this.physicianform.value.diagnosisdiscriptionifother,
-        appointmentId: 'F15B843F-E04B-46A4-3817-08D9E5551C14',
+        appointmentId: this.Guid,
         //appointments: ,
         createddate: new Date(),
        
       };
       
-      this.patient.UpdatePatientvisitdetails(dat,this.VisitId);
-      alert("PatietDetails saved succesfully");
-   
+      this.patient.UpdatePatientvisitdetails(dat,this.VisitId).then(response => response.text())
+      .then(result =>{
+        if(result=='Success')
+        {
+          alert("Update Successfully");
+        }
+        else{
+          alert("Not Added");
+        }
+      })
+      
+      .catch(error => console.log('error', error));
+      
       this.fetchdata(this.Guid)
-   }
-  
   }
 
 fetchdata(Id:any)
@@ -228,7 +241,7 @@ fetchdata(Id:any)
   bindToUI() {
     this.nurseform=new FormGroup
     ({
-     //patientid:new FormControl(this.postobj.patientid?this.postobj.patientid:null,),
+     
      height:new FormControl(this.postobj?.height,[Validators.required]),
      weight:new FormControl(this.postobj?.weight,[Validators.required]),
      bloodpressure:new FormControl(this.postobj?.bloodPressure,[Validators.required]),
@@ -237,24 +250,24 @@ fetchdata(Id:any)
     });
     this.physicianform=new FormGroup({
     diagnosisid:new FormControl(null,),
-     diagnosisdiscription:new FormControl(this.postobj.diagnosislist? this.postobj.diagnosislist:null,[Validators.required]),
+     diagnosisdiscription:new FormControl(this.postobj?.diagnosislist,[Validators.required]),
      diagnosisdiscriptionifother:new FormControl(
-      this.postobj?.doctorDescription
-     
-     ),
+      this.postobj?.doctorDescription),
     diagnosisisdepricated:new FormControl(null,),
      procedureid:new FormControl(null,),
-     procedurediscription:new FormControl(this.postobj.procedureslist?this.postobj.procedureslist:null,[Validators.required]),
+     procedurediscription:new FormControl(this.postobj?.procedureslist,[Validators.required]),
      proceduredepricated:new FormControl(null,),
     drugid:new FormControl(null,),
-     drugname:new FormControl(this.postobj.druglist?this.postobj.druglist:null,),
+     drugname:new FormControl(this.postobj?.druglist,),
      druggenericname:new FormControl(null,),
     drugbrandname:new FormControl(null,),
     drugform:new FormControl(null,[Validators.required]),
+    readdiagnosisdiscription:new FormControl(this.postobj?.diagnosisDescription,),
+    readprodurediscription:new FormControl(this.postobj?.procedureDesciption),
+    readdrug:new FormControl(this.postobj?.drugDescription)
     });
-
-    
-}
+   
+  }
 getdiscriptiondetails()
 {
   this.patient.GetDiagnosisdetails().subscribe((x) => {
@@ -266,9 +279,13 @@ getdiscriptiondetails()
       this.listOfdiagnosisdiscription = [...mySet];
      console.log(this.listOfdiagnosisdiscription);
      
+     
     }
+
+   
    
   });
+  
 }
 getproceduredetails()
 {
@@ -296,12 +313,14 @@ SetConditionforvisibility()
   this.patient.GetRole(this.patientid) .then(async response => {
     response.text().then(responseData => {
        this.Rolename = responseData; 
-       
+       alert(this.Rolename);
  
   if((this.Rolename=="nurse") || (this.Rolename=="NURSE"))
   {
     this.patientvisitbuttonsave=true;
     this.patientvisitbuttonupdate=true;
+    this.physicianform.controls['readdiagnosisdiscription'].enable();
+    this.physicianform.controls['diagnosisdiscription'].disable();
     this.physicianform.disable();
     
   }
@@ -310,14 +329,18 @@ SetConditionforvisibility()
    this.patientvisitbuttonsave=false;
    this.patientvisitbuttonupdate=true;
     this.nurseform.disable();
+    this.physicianform.controls['readdiagnosisdiscription'].disable();
+    this.physicianform.controls['diagnosisdiscription'].enable();
   }
-  else if(this.Rolename=="PATIENT" || this.Rolename=='patient')
+  else 
   {
-    
     this.physicianform.disable();
     this.nurseform.disable();
     this.patientvisitbuttonsave=false;
+    this.physicianform.controls['readdiagnosisdiscription'].disable();
+    this.physicianform.controls['diagnosisdiscription'].disable();
     this.patientvisitbuttonupdate=false;
+    
   }
 })
 });
@@ -327,66 +350,5 @@ cleardata()
   this.physicianform.reset();
   this.nurseform.reset();
 }
-ondiscriptionselect(event:any)
-{
-  if(event.value==='others')
-  {
-    this.physicianform.controls['diagnosisdiscriptionifother'].enable();
-    //this.physicianform.getRawValue().
-    //this.iseditable=false;
-  }
-  else if(event.value===!'others' || !(event.value ===''))
-  {
-    this.physicianform.controls['diagnosisdiscriptionifother'].disable();
-  }
 
-   this.patient.GetidfromDiagnosisdetails(event.value).subscribe(x =>this.diagnosisidlist=x) 
-    {
-      for(let i=0;i<this.diagnosisidlist.length;i++)
-      {
-        if(event.value==='others')
-        {
-          this.physicianform.controls['diagnosisid'].setValue('0');
-        }
-       else if(event.value===this.diagnosisidlist[i].description)
-        {
-          this.physicianform.controls['diagnosisid'].setValue(this.diagnosisidlist[i].id);
-        }
-      }
-      
-      //console.log(this.diagnosisidlist);
-    }
-//   this.physicianform.controls['diagnosisid'].patchValue(this.diagnosisobj.ID);
-//  console.log(this.diagnosisobj);
-
-}
-onselectprocedure(event:any)
-{
-  if(event.value==='others')
-  {
-    //this.physicianform.controls['diagnosisdiscriptionifother'].enable();
-    //this.physicianform.getRawValue().
-    //this.iseditable=false;
-  }
-  else if(event.value===!'others' || !(event.value ===''))
-  {
-    //this.physicianform.controls['diagnosisdiscriptionifother'].disable();
-  }
-
-  //  this.patient.GetidfromDiagnosisdetails(event.value).subscribe(x =>this.diagnosisidlist=x) 
-  //   {
-      for(let i=0;i<this.listOfprocedure.length;i++)
-      {
-        if(event.value==='others')
-        {
-          this.physicianform.controls['procedureid'].setValue('0');
-        }
-       else if(event.value===this.listOfprocedure[i].description)
-        {
-          this.physicianform.controls['procedureid'].setValue(this.listOfprocedure[i].id);
-        }
-      }
-      
-      //console.log(this.diagnosisidlist);
-    }
 }

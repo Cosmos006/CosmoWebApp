@@ -7,6 +7,11 @@ export interface AdminDashboard {
   LockedAccount: number;
 }
 
+export interface Master { 
+  value: string;
+  viewValue: string;
+}
+
 export interface PeriodicElement {
   imageUrl: string;
   name: string;
