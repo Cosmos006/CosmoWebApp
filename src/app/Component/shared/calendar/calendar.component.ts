@@ -47,6 +47,14 @@ export class CalendarComponent implements OnInit {
   //user
   AppointmentId?: string;
 
+  //Calendar Data
+  appointmentdate?: string;
+  firstName?: string;
+  appointmentDate?: string;
+  bookSlot?: string;
+  physicianName?: string;
+  diagnosis?: string;
+
   constructor(
     private adminService: AdminService,
     private admim: CalendarService,
@@ -158,6 +166,25 @@ export class CalendarComponent implements OnInit {
     var time = dateparms?.toTimeString();
     var color = clickInfo.event._def?.ui.backgroundColor;
     this.date = date;
+
+    //
+
+    this.admim
+      .GetCalendarData(this.AppointmentId)
+      .then((response) => response.text())
+      .then((result) => {
+        if (result != null) {
+          var data = JSON.parse(result);
+          this.firstName = data[0].firstName;
+          this.appointmentDate = data[0].appointmentDate;
+          this.bookSlot = data[0].bookSlot;
+          this.physicianName = data[0].physicianName;
+          this.diagnosis = data[0].diagnosis;
+        }
+      })
+      .catch((error) => console.log('error', error));
+
+    //
     if (color == 'red') {
       this.ApproveModal = true;
     } else {

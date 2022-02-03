@@ -27,6 +27,9 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 
+//Mat Alert
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-book-appointment',
   templateUrl: './book-appointment.component.html',
@@ -92,7 +95,8 @@ export class BookAppointmentComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private service: BookAppointmentService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     var CurrentDate = new Date();
     this.minDate = CurrentDate;
@@ -188,10 +192,21 @@ export class BookAppointmentComponent implements OnInit {
               this.IncomingSlotBooked = x[0].slotBooked;
               this.IncomingPhysicianName = x[0].physicianName;
               var Diagnosics = x[0].diagnosis;
+              var Mode = x[0].mode;
+
+              this.registrationForm.controls['calendardata'].patchValue(
+                this.AppointmentDate
+              );
+
+              this.registrationForm.controls['ModeType'].patchValue(Mode);
 
               this.registrationForm.controls['diagnosicsName'].patchValue(
                 Diagnosics
               );
+
+              this.service.GetPhysicianById(Diagnosics).subscribe((res) => {
+                this.physician.push(...res);
+              });
 
               this.registrationForm.controls['phsicianName'].patchValue(
                 this.IncomingPhysicianName
@@ -202,8 +217,7 @@ export class BookAppointmentComponent implements OnInit {
                 var full =
                   date.getDate() +
                   '-' +
-                  date.getMonth() +
-                  1 +
+                  (date.getMonth() + 1) +
                   '-' +
                   date.getFullYear();
                 this.selectedDate = full;
@@ -216,19 +230,20 @@ export class BookAppointmentComponent implements OnInit {
                   date.getDate();
                 this.SlotGenerator(this.UserType, SendDatetoSlot);
                 this.expClick();
+                //this.dateClass();
               }
             }
           });
 
         this.TextInput = 'Update Appointment';
         this.editing = true;
-        this.registrationForm = this.fb.group({
-          diagnosicsName: ['', [Validators.required]],
-          phsicianName: ['', [Validators.required]],
-          descriptionName: ['', [Validators.required]],
-          calendardata: ['', Validators.required],
-          slotName: ['', [Validators.required]],
-        });
+        // this.registrationForm = this.fb.group({
+        //   diagnosicsName: ['', [Validators.required]],
+        //   phsicianName: ['', [Validators.required]],
+        //   descriptionName: ['', [Validators.required]],
+        //   calendardata: ['', Validators.required],
+        //   slotName: ['', [Validators.required]],
+        // });
       }
     } else if (UserType == 'Covid') {
       this.TextInput = 'Book Appointment For Covid';
@@ -239,6 +254,25 @@ export class BookAppointmentComponent implements OnInit {
     } else if (UserType == 'Admin') {
     }
   }
+
+  // dateClass() {
+  //   return (date: Date): MatCalendarCellCssClasses => {
+  //     const highlightDate = this.AppointmentDate.map(
+  //       (strDate: string | number | Date) => new Date(strDate)
+  //     ).some(
+  //       (d: {
+  //         getDate: () => number;
+  //         getMonth: () => number;
+  //         getFullYear: () => number;
+  //       }) =>
+  //         d.getDate() === date.getDate() &&
+  //         d.getMonth() === date.getMonth() &&
+  //         d.getFullYear() === date.getFullYear()
+  //     );
+
+  //     return highlightDate ? 'special-date' : '';
+  //   };
+  // }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
@@ -255,7 +289,7 @@ export class BookAppointmentComponent implements OnInit {
       var month = date.getMonth();
       var year = date.getFullYear();
       var full =
-        date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
+        date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
       this.selectedDate = full;
       this.datecheck = false;
     } else {

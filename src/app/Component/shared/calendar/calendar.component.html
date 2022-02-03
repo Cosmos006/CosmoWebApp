@@ -35,7 +35,16 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">Event Start From : {{ date }}</div>
+      <div class="modal-body">
+        <ng-container *ngIf="!CheckPatient">
+          Patient :{{ firstName }}
+        </ng-container>
+        <p>Appointment Date:{{ date }}</p>
+        <p>Book Slot:{{ bookSlot }}</p>
+        <p>Physician Name:{{ physicianName }}</p>
+        <p>Diagnosis:{{ diagnosis }}</p>
+        <!-- Event Start From : {{ date }} -->
+      </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
@@ -77,7 +86,16 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">Event Start From : {{ date }}</div>
+      <div class="modal-body">
+        <ng-container *ngIf="!CheckPatient">
+          Patient :{{ firstName }}
+        </ng-container>
+        <p>AppointmentDate:{{ date }}</p>
+        <p>BookSlot:{{ bookSlot }}</p>
+        <p>PhysicianName:{{ physicianName }}</p>
+        <p>Diagnosis:{{ diagnosis }}</p>
+        <!-- Event Start From : {{ date }} -->
+      </div>
 
       <!-- Modal footer -->
 

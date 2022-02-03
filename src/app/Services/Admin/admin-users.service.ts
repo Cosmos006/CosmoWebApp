@@ -25,13 +25,18 @@ export class AdminUsersService {
 
   AdminLockHospitalUsers(id: string, Status: boolean, Type: string) {
     const PatientID = id;
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
 
     return fetch(
       `https://localhost:44318/api/AdminUserInfo/HospitalLocked/${PatientID}?Status=${Status}&Type=${Type}`,
       {
         method: 'PUT',
+        headers: myHeaders,
         redirect: 'follow',
       }
     );
@@ -45,13 +50,18 @@ export class AdminUsersService {
 
   PatientLockHospitalUsers(id: string, Status: boolean, Type: string) {
     const PatientID = id;
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
 
     return fetch(
       `https://localhost:44318/api/AdminUserInfo/PatientActive/${PatientID}?Status=${Status}&Type=${Type}`,
       {
         method: 'PUT',
+        headers: myHeaders,
         redirect: 'follow',
       }
     );

@@ -16,20 +16,51 @@ export class CalendarService {
   }
 
   ApproveReject(Id: any, Type: string) {
+    const token = localStorage.getItem('token');
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     return fetch(
       `https://localhost:44347/api/Appointments/ApproveReject/${Id}?Status=${Type}`,
       {
         method: 'PATCH',
+        headers: myHeaders,
         redirect: 'follow',
       }
     );
   }
 
   GetZoomLink(Id: any, Role: string) {
+    const token = localStorage.getItem('token');
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     return fetch(
       `https://localhost:44347/api/Appointments/GetZoomLink/${Id}?Role=${Role}`,
       {
         method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      }
+    );
+  }
+
+  GetCalendarData(Id: any) {
+    const token = localStorage.getItem('token');
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
+    return fetch(
+      `https://localhost:44347/api/Appointments/GetCalendarData/${Id}`,
+      {
+        method: 'GET',
+        headers: myHeaders,
         redirect: 'follow',
       }
     );
