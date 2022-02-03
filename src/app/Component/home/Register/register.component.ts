@@ -49,10 +49,7 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z]+$'),
       ]),
-      UserName: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9]+$'),
-      ]),
+      //UserName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]),
       PhoneNo: new FormControl('', [
         Validators.required,
         Validators.maxLength(10),
