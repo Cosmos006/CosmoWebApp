@@ -1,26 +1,38 @@
 
 <div class="example-container mat-elevation-z8" class="table-content" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;">
-   <!-- <div>
+   <div  class="mt-3" [formGroup]="form">
     <label style="font: medium; padding-left: 10px;">Departments:</label>
     &nbsp;
-    <select (change)="onSelect($event)" style="width: auto;">
-      <option value="0">Select  Available Dactor</option>
-      <option *ngFor="let doctor of doctorlist" value= {{doctor.id}} style="border-radius: 2%;">{{doctor.isAbsent}} </option>
-    </select>
+    <span>
+      <mat-form-field appearance="outline">
+        <mat-label>Select Specialization</mat-label>
+        <mat-select
+          (selectionChange)="select($event.value)"
+          formControlName="speciliazation"
+        >
+          <mat-option>Select</mat-option>
+          <mat-option
+            *ngFor="let item of doctorlist"
+            [value]="item.specialization"
+          >
+            {{ item.specialization }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </span>
    </div>
-   <div> -->
-   
-    <mat-table #table [dataSource]="dataSource1" style="margin-left: 15px ;width:100%"  >
+   <div>
+    <mat-table #table [dataSource]="dataSource1" class="text-center text-white" style="width:100%"  >
   
       <ng-container matColumnDef="id"  [style.display]="'none'">
-        <mat-header-cell *matHeaderCellDef [style.display]="'none'" mat-sort-headerstyle="font-size: medium;" style="font-size: medium;"> Id
+        <mat-header-cell *matHeaderCellDef [style.display]="'none'" mat-sort-header> Id
         </mat-header-cell>
         <mat-cell *matCellDef="let element" [style.display]="'none'" matTooltip="id"> {{element.id}} </mat-cell>
       </ng-container>
   
       <!-- Second Column -->
       <ng-container matColumnDef="physicianId" [style.display]="'none'">
-        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;" [style.display]="'none'"> PhysicianId
+        <mat-header-cell *matHeaderCellDef mat-sort-header [style.display]="'none'"> PhysicianId
         </mat-header-cell>
         <!-- matTooltip={{element.userName}} -->
         <mat-cell *matCellDef="let element"  [style.display]="'none'"><span class="ellipsis">{{element.physicianId}}</span></mat-cell>
@@ -29,6 +41,18 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header> Not Available Slots
         </mat-header-cell>
         <mat-cell *matCellDef="let element" matTooltip="{{element.timeSlot}}"> {{element.timeSlot}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" matTooltip="{{element.firstName}}"> {{element.firstName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="speciliazation">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Specialization
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" matTooltip="{{element.speciliazation}}"> {{element.speciliazation}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="dateTime">
         <mat-header-cell *matHeaderCellDef mat-sort-header > Date

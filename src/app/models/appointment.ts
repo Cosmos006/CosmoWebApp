@@ -11,6 +11,7 @@ export interface Product {
     AppointmentDateTime?:Date;
     PhysicianId?:string;
     bookslot?:string;
+    isCompleted:boolean;
 }
 
 

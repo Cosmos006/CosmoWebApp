@@ -1,11 +1,41 @@
 @import url('../../../../assets/css/Common.css');
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+ 
+
+}
+
+th {
+  border-bottom: 1px solid #fff;
+  background-color:#0A95E6;
+  color: white;
+}
+td{
+   border-bottom: 1px solid #000;  
+}
+
+td.mat-cell { 
+  padding: 20px 0;
+  text-align: center;
+  border: 1px solid lightgray;
+}
+
+tr {
+  background: #fff;
+}
+
+th.mat-header-cell {
+  font-size: 1.2vw;
+  border: 1px solid #fff;
+  text-align: center;
+}
+
 .example-card {
     max-width: 400px;
     margin: 8px;
     padding: 10px;
   }
 
-  table {
-    width: 100%;
-  }
+  
