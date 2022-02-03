@@ -138,8 +138,12 @@ export class AdminService {
   }
 
   PostPatient(value: any) {
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     var raw = JSON.stringify(value);
 
     return fetch('https://localhost:44318/api/EmployeRegister', {
