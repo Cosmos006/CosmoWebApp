@@ -46,8 +46,12 @@ export class DailogeService {
   }
   updateIssue(id: string, product: Product) {
     this.appointmentData = product;
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     var raw = JSON.stringify(product);
     return fetch(
       `https://localhost:44318/api/NurseDash/UpdateUpcomingAppoinmets?Id=${id}`,
@@ -88,8 +92,12 @@ export class DailogeService {
   }
   UpdateStatus(id: string, data: Product) {
     // this.listOdeletefPosts.splice(index, 1);
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     var raw = JSON.stringify(data);
     return fetch(
       `https://localhost:44318/api/NurseDash/UpdateNextPatient?Id=${id}`,
