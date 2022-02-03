@@ -1,16 +1,16 @@
 
 <div class="example-container mat-elevation-z8" class="table-content" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;">
-   <div>
+   <!-- <div>
     <label style="font: medium; padding-left: 10px;">Departments:</label>
     &nbsp;
     <select (change)="onSelect($event)" style="width: auto;">
-      <option value="0">Select Doctor On Specialization</option>
-      <option *ngFor="let country of countries" value= {{country.id}} style="border-radius: 2%;">{{country.specailization}} </option>
+      <option value="0">Select  Available Dactor</option>
+      <option *ngFor="let doctor of doctorlist" value= {{doctor.id}} style="border-radius: 2%;">{{doctor.isAbsent}} </option>
     </select>
    </div>
-   <div>
+   <div> -->
    
-    <mat-table #table [dataSource]="dataSource1" style="margin-left: 15px"  >
+    <mat-table #table [dataSource]="dataSource1" style="margin-left: 15px ;width:100%"  >
   
       <ng-container matColumnDef="id"  [style.display]="'none'">
         <mat-header-cell *matHeaderCellDef [style.display]="'none'" mat-sort-headerstyle="font-size: medium;" style="font-size: medium;"> Id
@@ -19,20 +19,26 @@
       </ng-container>
   
       <!-- Second Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Name
+      <ng-container matColumnDef="physicianId" [style.display]="'none'">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;" [style.display]="'none'"> PhysicianId
         </mat-header-cell>
-        <mat-cell *matCellDef="let element" matTooltip={{element.name}}><span class="ellipsis">{{element.name}}</span></mat-cell>
+        <!-- matTooltip={{element.userName}} -->
+        <mat-cell *matCellDef="let element"  [style.display]="'none'"><span class="ellipsis">{{element.physicianId}}</span></mat-cell>
       </ng-container>
-      <ng-container matColumnDef="specailization">
-        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Specailization
+      <ng-container matColumnDef="timeSlot">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Not Available Slots
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.specailization}} </mat-cell>
+        <mat-cell *matCellDef="let element" matTooltip="{{element.timeSlot}}"> {{element.timeSlot}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dateTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header > Date
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" matTooltip="{{element.dateTime}}"> {{element.dateTime}} </mat-cell>
       </ng-container>
       <!-- Third Column -->
-      <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Status </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.status}}
+      <ng-container matColumnDef="isAbsent">
+        <mat-header-cell *matHeaderCellDef mat-sort-header > Status </mat-header-cell>
+        <mat-cell  *matCellDef="let element" > <span  [ngClass]="element.isAbsent ? 'red': 'green'">{{element.isAbsent ? 'Absent' : 'Present'}}</span>
         </mat-cell>
       </ng-container>
 

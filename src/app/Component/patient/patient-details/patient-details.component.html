@@ -1,18 +1,5 @@
 <div style="margin-left: 3px">
-  <!-- <div>
-    <mat-card>
-      <div style="margin-left: 60%">
-        <button mat-raised-button color="primary" (click)="Addupdatepatientdetails(0)">
-          Save
-        </button>
-
-        <button mat-raised-button color="primary" (click)="Addupdatepatientdetails(1)">update</button>
-
-        <button mat-raised-button color="primary" (click)="Clearpatientdetails()">Clear</button>
-        
-      </div>
-    </mat-card>
-  </div> -->
+ 
   <mat-card-content>
     <div class="container">
       <div>
@@ -141,7 +128,7 @@
 
                         </mat-form-field>
                       </span>
-
+                      
                       <span class='col-md-6'>
                         <mat-form-field appearance="outline">
                           <mat-label>Home Address</mat-label>
@@ -276,6 +263,7 @@
                           </mat-error>
                         </mat-form-field>
                       </span>
+                      <mat-checkbox class="example-margin" (change)="setAll($event.checked)">Select Above Address</mat-checkbox>
                       <span class='col-md-6'>
                         <mat-form-field appearance="outline">
                           <mat-label>Home Address</mat-label>
@@ -311,7 +299,7 @@
                           <input type="text" matInput formControlName="emergancycountry" />
                         </mat-form-field>
                       </span>
-                      <span class='col-md-12'>
+                      <!-- <span class='col-md-12'>
                         <br />
                         <label>Do you need access to patient portal: </label>
                         <span>
@@ -323,7 +311,7 @@
                             </mat-radio-button>
                           </mat-radio-group>
                         </span>
-                      </span>
+                      </span> -->
                       <div class='col-md-12 nextBtn'>
                         <button mat-button matStepperPrevious >Back</button>
                         <button mat-button (click)="stepper.reset()">Reset</button>
@@ -332,20 +320,31 @@
                     </mat-step>
 
                     <mat-step>
+                      <ng-template matStepLabel>Allergy Details</ng-template>
+                      <span>
+                        <label>Do you have any allergies</label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                          [(ngModel)]="selection" (change)="radioChange($event)">
+                          <mat-radio-button class="example-radio-button" *ngFor="let selections of selectionlist"
+                            [value]="selections">
+                            {{ selections }}
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </span>
                       <div class="row">
                       <span class='col-md-6'>
                         <mat-form-field appearance="outline">
                           <mat-label>Allergytype</mat-label>
-                          <mat-select (selectionChange)="onAllergytypeselect($event)" formControlName="allergytype">
+                          <mat-select (selectionChange)="onAllergytypeselect($event)" formControlName="allergytype" multiple>
                             <!-- <mat-select-filter [array]="listOfPosts" (filteredReturn)="filteredList=$event"></mat-select-filter>  -->
-                            <mat-option *ngFor="let list of listOfAllergytype" [value]="list">{{list}}</mat-option>
+                            <mat-option *ngFor="let list of PostAllergyobj" [value]="list.allergyType">{{list.allergyType}}</mat-option>
                           </mat-select>
                         </mat-form-field>
                       </span>
                       <span class='col-md-6'>
                         <mat-form-field appearance="outline">
                           <mat-label>Allergyname</mat-label>
-                          <mat-select formControlName="allergyname">
+                          <mat-select formControlName="allergyname" multiple>
 
                             <mat-option *ngFor="let an of listOfAllergyName" [value]="an.allergyName">{{an.allergyName}}
                             </mat-option>
