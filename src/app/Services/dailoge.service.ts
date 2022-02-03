@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventInput } from '@fullcalendar/angular';
- 
+
 import { Appointment, environment } from '../Services/Url';
 import { EventMap } from '../Component/admin/model/admin.model';
 import { Product } from '../models/appointment';
@@ -14,26 +14,37 @@ import { Attendance } from '../models/Attendance';
 @Injectable({
   providedIn: 'root',
 })
-export class DailogeService  {
+export class DailogeService {
   constructor(private http: HttpClient) {}
 
   //Url Route
   private readonly API_URL = 'http://localhost:3000/DoctorList';
-  private readonly BAR_URL = 'https://localhost:44318/api/NurseDash/GetallBarChartDetails';
-  private readonly UP_URL = 'https://localhost:44318/api/NurseDash/GetNurseUpComingAppointment';
-  
-  private readonly API_URL1 = 'https://localhost:44318/api/PhysicianDashboard/GetAvailablePhysicianDetails';
+  private readonly BAR_URL =
+    'https://localhost:44318/api/NurseDash/GetallBarChartDetails';
+  private readonly UP_URL =
+    'https://localhost:44318/api/NurseDash/GetNurseUpComingAppointment';
+
+  private readonly API_URL1 =
+    'https://localhost:44318/api/PhysicianDashboard/GetAvailablePhysicianDetails';
   private readonly BAR_URL1 = 'http://localhost:3000/BarList';
   baseUrl = environment.LocalUrl;
   appointmentData: any;
 
   //Dash Board Changes Start
 
-  getAppointmentData(): Observable<Product[]>{
-    
-         return this.http.get<Product[]>('https://localhost:44318/api/NurseDash/GetNurseAppointment');
+  getAppointmentData(): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      'https://localhost:44318/api/NurseDash/GetNurseAppointment'
+    );
   }
-  updateIssue(id :string,product: Product) {
+  uploadMastertData(formdata: FormData): Observable<any> {
+    return this.http.post(
+      'https://localhost:44315/api/Master/ImportMasters',
+      formdata,
+      { reportProgress: true, observe: 'events' }
+    );
+  }
+  updateIssue(id: string, product: Product) {
     this.appointmentData = product;
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -48,65 +59,60 @@ export class DailogeService  {
       }
     );
   }
-    // this.http.post('https://localhost:44318/api/NurseDash/UpdateUpcomingAppoinmets?Id='+id, this.appointmentData).subscribe((res) => {
-    //   console.log("datacame");  
-    // });
-    
-    
-
+  // this.http.post('https://localhost:44318/api/NurseDash/UpdateUpcomingAppoinmets?Id='+id, this.appointmentData).subscribe((res) => {
+  //   console.log("datacame");
+  // });
 
   addAppoinmentData(product: Product) {
-    console.log("calcame"); 
+    console.log('calcame');
     console.log(product.id);
     // this.listOfPosts.push(post);
     // this.http.patch('http://localhost:3000/APPOINTMENT_DATA' ,product).subscribe((res) => {
-      
-      this.http.put<any>('http://localhost:3000/APPOINTMENT_DATA/3',product).subscribe((res) => {;
-      console.log(product.id); 
-     
-    });
+
+    this.http
+      .put<any>('http://localhost:3000/APPOINTMENT_DATA/3', product)
+      .subscribe((res) => {
+        console.log(product.id);
+      });
   }
 
   deletePostapp(id: number | undefined) {
     // this.listOdeletefPosts.splice(index, 1);
-    console.log("deletevalue"+id)
-    this.http.delete('https://localhost:44347/api/Appointments/' + id).subscribe((res) => {
-    console.log(res);
-    this.getAppointmentData();
-   
-    });
-    }
-    UpdateStatus(id: string ,data :Product) {
-      // this.listOdeletefPosts.splice(index, 1);
-      var myHeaders = new Headers();
-      myHeaders.append('Content-Type', 'application/json');
-      var raw = JSON.stringify(data);
-      return fetch(
-        `https://localhost:44318/api/NurseDash/UpdateNextPatient?Id=${id}`,
-        {
-          method: 'PUT',
-          headers: myHeaders,
-          body: raw,
-          redirect: 'follow',
-        }
-      );
-    
+    console.log('deletevalue' + id);
+    this.http
+      .delete('https://localhost:44347/api/Appointments/' + id)
+      .subscribe((res) => {
+        console.log(res);
+        this.getAppointmentData();
+      });
+  }
+  UpdateStatus(id: string, data: Product) {
+    // this.listOdeletefPosts.splice(index, 1);
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    var raw = JSON.stringify(data);
+    return fetch(
+      `https://localhost:44318/api/NurseDash/UpdateNextPatient?Id=${id}`,
+      {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
       }
-    
-    getDoctorListData() : Observable<Attendance[]>{
-    
-        return this.http.get<Attendance[]>(this.API_URL1);
-      }
-     
-      getUpcomingAppointments(): Observable<Product[]>{
-    
-        return this.http.get<Product[]>(this.UP_URL);
- }
- 
-      getBartData() : Observable<Bardata[]>{
-    
-        return this.http.get<Bardata[]>(this.BAR_URL);
-      }
+    );
+  }
+
+  getDoctorListData(): Observable<Attendance[]> {
+    return this.http.get<Attendance[]>(this.API_URL1);
+  }
+
+  getUpcomingAppointments(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.UP_URL);
+  }
+
+  getBartData(): Observable<Bardata[]> {
+    return this.http.get<Bardata[]>(this.BAR_URL);
+  }
 
   //Dash Board Changes End
 
@@ -135,4 +141,3 @@ export class DailogeService  {
 
   //Calendar Changes End
 }
-
