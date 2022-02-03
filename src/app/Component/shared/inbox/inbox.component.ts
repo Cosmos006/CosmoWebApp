@@ -19,6 +19,7 @@ import {
 import { Guid } from 'guid-typescript';
 import { InboxService } from 'src/app/Services/Inbox/inbox.service';
 import { UserDetails } from 'src/app/models/userdetails';
+import { Router } from '@angular/router';
 
 export interface Appointments { 
   appointmentId : Guid
@@ -137,7 +138,7 @@ export class InboxComponent implements OnInit, AfterViewInit {
   todayDate! : Date
   currentnotes!: Notes
 
-  constructor(private fb: FormBuilder, private inboxService: InboxService) {
+  constructor(private fb: FormBuilder, private inboxService: InboxService,  private router: Router) {
     setInterval(() => {
       this.now = new Date();
     }, 1);
@@ -340,4 +341,12 @@ export class InboxComponent implements OnInit, AfterViewInit {
 
     //this.form.get('receiver').patchValue()
   }
+
+  onviewclick(id: Guid){
+    this.router.navigate(['PatientBookAppointment/Patient'], {
+      queryParams: { appointmentId: id },
+
+    });
+  }
+
 }
