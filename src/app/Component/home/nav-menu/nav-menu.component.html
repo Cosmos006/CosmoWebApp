@@ -57,9 +57,14 @@
           DashBoard
         </a>
 
-        <a mat-button class="companyName" [routerLink]="['PatientDetails']" routerLinkActive="router-link-active"
-          *ngIf="isPatient" (click)="setTitle('Patient')">
-          Patient
+        <a
+          mat-button
+          class="companyName"
+          [routerLink]="['PatientDetails']"
+          routerLinkActive="router-link-active"
+          *ngIf="isPatient" (click)="setTitle('Patient')"
+        >
+          Demographics Details
         </a>
         <a mat-button class="companyName" [routerLink]="['PatientBookAppointment/Patient']"
           routerLinkActive="router-link-active" (click)="setTitle('BookAppointment')" *ngIf="isPatient">
