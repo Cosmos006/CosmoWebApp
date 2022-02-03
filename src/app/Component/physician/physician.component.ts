@@ -63,7 +63,7 @@ export class PhysicianComponent implements OnInit {
   // Slots = new FormControl();
 
 
-  displayedColumnsappoinment = ['id', 'name', 'gender', 'diagnosis', 'mobile', 'age', 'physician',
+  displayedColumnsappoinment = ['id', 'name', 'gender', 'mobile', 'age', 'physician',
     'physicianId', 'nurseId', 'patientId', 'action'];
   // 'isCompleted' , 'AppointmentDateTime' , 'modifiedDate' , 'deletedBy' , 'deletedDate' , 'patientId' ,
   //   'physicianId' 
@@ -248,7 +248,11 @@ upappointmentCount!:any;
       console.log(this.dataSource1)
     });
   }
-
+  applyFilter(filterValue: any) {
+    let itemvalue = filterValue.target.value;
+    this.dataSource1.filter = itemvalue.trim().toLowerCase();
+    this.dataSource1.paginator = this.paginator;
+  }
 
 }
 
