@@ -1,6 +1,11 @@
 import { DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,9 +20,12 @@ import { AlertService } from 'src/app/Services/Alert/alert.service';
 import { BookAppointmentService } from 'src/app/Services/BookAppointment/book-appointment.service';
 import { DailogeService } from 'src/app/Services/dailoge.service';
 import { PhysicianService } from 'src/app/Services/Physician/physician.service';
-import {  Specialization } from 'src/app/models/Attendance';
-
-
+import { Specialization } from 'src/app/models/Attendance';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 export interface UsersData {
   name: string;
@@ -44,9 +52,6 @@ export interface Food {
   styleUrls: ['./physician.component.css'],
 })
 export class PhysicianComponent implements OnInit {
-
-
-
   dataSource: Food[] = [
     { name: 'Yogurt', calories: 159, fat: 6, carbs: 24, protein: 4 },
     { name: 'Sandwich', calories: 237, fat: 9, carbs: 37, protein: 4 },
@@ -62,15 +67,24 @@ export class PhysicianComponent implements OnInit {
   // dataSource2 = ELEMENT_DATA;
   // Slots = new FormControl();
 
-
-  displayedColumnsappoinment = ['id', 'name', 'gender', 'mobile', 'age', 'physician',
-    'physicianId', 'nurseId', 'patientId', 'action'];
+  displayedColumnsappoinment = [
+    'id',
+    'name',
+    'gender',
+    'mobile',
+    'age',
+    'physician',
+    'physicianId',
+    'nurseId',
+    'patientId',
+    'action',
+  ];
   // 'isCompleted' , 'AppointmentDateTime' , 'modifiedDate' , 'deletedBy' , 'deletedDate' , 'patientId' ,
-  //   'physicianId' 
+  //   'physicianId'
   //    , 'nurseId'
-  dataSource1 !: MatTableDataSource<Product>;
+  dataSource1!: MatTableDataSource<Product>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort, {}) sort !: MatSort;
+  @ViewChild(MatSort, {}) sort!: MatSort;
 
   displayedColumnspatient = ['id', 'name', 'physician', 'diagnosis', 'edit'];
 
@@ -85,41 +99,41 @@ export class PhysicianComponent implements OnInit {
   incomingslot: Array<string> = [];
   outgoingslot!: Array<string>;
 
-  Patient!:any;
+  Patient!: any;
+  Result: string = '';
   // SlotList: Attendance[] = [];
 
   //SlotList : string[] = ['9:30 to 10:30', '10:30 to 11', '10:30 to 11:30', '9:30 to 10:30', '9:30 to 10:30', '9:30 to 10:30'];
 
-
-  constructor(private service: BookAppointmentService, private formBuilder: FormBuilder, public dialogservice: DailogeService, private physicianservice: PhysicianService, private titleService: Title, private router: Router, private alterservice: AlertService) {
-
-  }
+  constructor(
+    private service: BookAppointmentService,
+    private formBuilder: FormBuilder,
+    public dialogservice: DailogeService,
+    private physicianservice: PhysicianService,
+    private titleService: Title,
+    private router: Router,
+    private alterservice: AlertService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
   }
-specialist!:Specialization[];
+  specialist!: Specialization[];
 
-appointmentCount!:any;
-upappointmentCount!:any;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  appointmentCount!: any;
+  upappointmentCount!: any;
   ngOnInit(): void {
     //this. getPatientCount();
     var date = new Date();
     var full =
-      date.getDate() +
-      '-' +
-      date.getMonth() +
-      1 +
-      '-' +
-      date.getFullYear();
+      date.getDate() + '-' + date.getMonth() + 1 + '-' + date.getFullYear();
 
     var SendDatetoSlot =
-      date.getFullYear() +
-      '-' +
-      date.getMonth() +
-      1 +
-      '-' +
-      date.getDate();
+      date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate();
     var slot = this.SlotGenerator('Nurse', SendDatetoSlot);
 
     // this.getdoctordata()
@@ -136,7 +150,7 @@ upappointmentCount!:any;
 
     this.getTodayAppoinmentdata();
     this.getAppointmentCount();
-    this. getUpAppointmentCount();
+    this.getUpAppointmentCount();
   }
 
   OnVisit(data: any) {
@@ -147,17 +161,16 @@ upappointmentCount!:any;
     this.getTodayAppoinmentdata();
   }
 
-
   getAppointmentCount() {
-    this.dialogservice.getAppointmentData().subscribe(data => {
-      this.appointmentCount=data.length;
-      console.log(data)
+    this.dialogservice.getAppointmentData().subscribe((data) => {
+      this.appointmentCount = data.length;
+      console.log(data);
     });
   }
   getUpAppointmentCount() {
-    this.dialogservice.getUpcomingAppointments().subscribe(data => {
-      this.upappointmentCount=data.length;
-      console.log(data)
+    this.dialogservice.getUpcomingAppointments().subscribe((data) => {
+      this.upappointmentCount = data.length;
+      console.log(data);
     });
   }
   // getPatientCount() {
@@ -166,7 +179,6 @@ upappointmentCount!:any;
   //     console.log(pdata)
   //   });
   // }
-
 
   SlotGenerator(UserType: string, date: string): any {
     if (UserType == 'Nurse') {
@@ -198,54 +210,72 @@ upappointmentCount!:any;
           }
           const duplicate = this.incomingslot;
           let unique = [...new Set(duplicate)];
-          this.firstslot = firstslot.filter((val: any) => !unique.includes(val));
-          this.secondslot = secondslot.filter((val: any) => !unique.includes(val));
-          console.log(this.firstslot)
+          this.firstslot = firstslot.filter(
+            (val: any) => !unique.includes(val)
+          );
+          this.secondslot = secondslot.filter(
+            (val: any) => !unique.includes(val)
+          );
+          console.log(this.firstslot);
 
           this.ModeTypes = this.firstslot;
-
-
-        })
-
-
-
+        });
     }
   }
-  Ondoctorlist(){
-    console.log("VamsiOnDoctor")
+  Ondoctorlist() {
+    console.log('VamsiOnDoctor');
     this.router.navigateByUrl('/NurseUpcomingAppointmentComponent');
   }
 
-  Onappointment(){
-    console.log("vamsiclicked")
+  Onappointment() {
+    console.log('vamsiclicked');
     this.router.navigateByUrl('/AppointmentView');
   }
 
   AddPhysiciandetails(index: number) {
-
-
     var dataemployee: Attendance = {
-
       physicianId: this.form.value.physicianid,
       dateTime: this.form.value.date,
       arrTimeSlot: this.form.value.timeSlot,
       isAbsent: this.form.value.isAbsent,
-    }
-    this.physicianservice.addPhysicianPost(dataemployee);
-
+    };
+    this.physicianservice
+      .addPhysicianPost(dataemployee)
+      .then((response) => response.text())
+      .then((result) => {
+        this.Result += result;
+        if (this.Result == 'Success') {
+          const snackBarRef = this._snackBar.open(
+            `Attendnace Update Successfully`,
+            'Done',
+            {
+              panelClass: 'success',
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 5000,
+            }
+          );
+          snackBarRef.afterDismissed().subscribe((info) => {
+            if (info.dismissedByAction === true) {
+              // your code for handling this goes here
+            }
+          });
+        }
+      })
+      .catch((error) => console.log('error', error));
   }
 
   onSubmit() {
     if (this.form.valid) {
-      this.alterservice.success("Attendance Submitted!");
+      this.alterservice.success('Attendance Submitted!');
       this.form.reset();
     }
   }
   getTodayAppoinmentdata() {
-    this.physicianservice.getAppointmentnextpatientData().subscribe(data => {
-      this.dataSource1 = new MatTableDataSource(data)
+    this.physicianservice.getAppointmentnextpatientData().subscribe((data) => {
+      this.dataSource1 = new MatTableDataSource(data);
       this.dataSource1.paginator = this.paginator;
-      console.log(this.dataSource1)
+      console.log(this.dataSource1);
     });
   }
   applyFilter(filterValue: any) {
@@ -253,6 +283,4 @@ upappointmentCount!:any;
     this.dataSource1.filter = itemvalue.trim().toLowerCase();
     this.dataSource1.paginator = this.paginator;
   }
-
 }
-

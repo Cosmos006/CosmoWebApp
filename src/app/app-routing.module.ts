@@ -150,8 +150,8 @@ const routes: Routes = [
   {
     component: PatientViewdetailsComponent,
     path: 'PatientViewdetails',
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Patient] },
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.Patient] },
   },
   {
     component: PatientDashboardComponent,
@@ -170,8 +170,8 @@ const routes: Routes = [
   {
     component: PatientViewdetailsComponent,
     path: 'NurseViewdetails',
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Nurse] },
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.Nurse] },
   },
   {
     component: CalendarComponent,
@@ -260,8 +260,8 @@ const routes: Routes = [
   {
     component: PatientViewdetailsComponent,
     path: 'NursePatientViewdetails',
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Nurse,Role.Physician] },
+    //canActivate: [AuthGuard],
+    // data: { roles: [Role.Nurse] },
   },
   {
     component: CalendarComponent,

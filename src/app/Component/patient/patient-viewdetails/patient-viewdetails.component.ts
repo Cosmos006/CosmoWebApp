@@ -310,10 +310,12 @@ getmedicationdetails()
 SetConditionforvisibility()
 {
  
-  this.patient.GetRole(this.patientid) .then(async response => {
-    response.text().then(responseData => {
+  this.patient.GetRole(this.patientid) .then(async response => 
+    {
+    response.text().then(responseData => 
+      {
        this.Rolename = responseData; 
-       alert(this.Rolename);
+     
  
   if((this.Rolename=="nurse") || (this.Rolename=="NURSE"))
   {
@@ -342,6 +344,7 @@ SetConditionforvisibility()
     this.patientvisitbuttonupdate=false;
     
   }
+
 })
 });
 }

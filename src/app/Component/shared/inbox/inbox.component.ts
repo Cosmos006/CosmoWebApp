@@ -343,8 +343,8 @@ export class InboxComponent implements OnInit, AfterViewInit {
   }
 
   onviewclick(id: any) {
-    this.router.navigate(['PatientBookAppointment/Patient'], {
-      queryParams: { appointmentId: id },
+    this.router.navigate(['NursePatientViewdetails'], {
+      queryParams: { appointmentId: id.appointmentId },
     });
   }
 }
