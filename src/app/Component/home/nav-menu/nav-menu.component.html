@@ -112,7 +112,7 @@
           routerLinkActive="router-link-active"
           *ngIf="isPatient" (click)="setTitle('Patient')"
         >
-          Patient
+          Demographics Details
         </a>
         <a
           mat-button
@@ -151,7 +151,7 @@
         >
           Patient Visit Details
         </a>
-        <a
+        <!-- <a
           mat-button
           class="companyName"
           [routerLink]="['previouspatientvisitdetails']"
@@ -159,7 +159,7 @@
           *ngIf="isPatient"
         >
           Previouspatient Visit Details
-        </a>
+        </a> -->
         <a
           mat-button
           [routerLink]="['BookAppointment/Patient']"
