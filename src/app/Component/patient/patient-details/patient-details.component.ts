@@ -38,7 +38,7 @@ export class PatientDetailsComponent implements OnInit {
   Pincode: Number = 0;
   step = 0;
   Demographicid:any;
-AllergyType:any
+  AllergyType:any
   today = new Date();
   panelOpenState = false;
   selectedgender: string | undefined;
@@ -55,6 +55,7 @@ AllergyType:any
   postal!: Postal;
   patientid?:string;
   age!:any;
+  selected:any;
  // postobj: Patientdetails = new Patientdetails();
   patientAddressdetailslist: Postal[] | undefined;
   RelationshipList: string[] = [
@@ -89,6 +90,7 @@ AllergyType:any
    this.bindToUI();
    
    this.getAllergyDetails();
+  
    
   }
 
@@ -175,12 +177,12 @@ AllergyType:any
          state: '',
          patientDemographicsId: this.Demographicid,
        },
-       // this.postobj.allergyid = this.form.value.allergyid;
+      
        allergyList: this.form.value.allergytype,
        allergynameList: '',
        allergyDetails: this.form.value.allergydetails,
 
-       //this.postobj.allergydescription = this.form.value.allergydescription;
+      
        clinicalInformation: this.form.value.clinicalinformation,
        dateofBirth: this.form.value.dateofbirth,
        isFatal: false,
@@ -313,8 +315,12 @@ AllergyType:any
       allergydescription: new FormControl(null),
       clinicalinformation: new FormControl(this.postobj?.clinicalInformation),
       checkbox:new FormControl(null),
+      readallegytype:new FormControl(this.postobj?.allergytypeList),
+      readallergyname:new FormControl(this.postobj?.allergynameList),
+
     });
-  }
+    
+ }
 
   Clearpatientdetails() {
     this.form.reset();
