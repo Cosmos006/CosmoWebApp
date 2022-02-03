@@ -15,7 +15,7 @@ export class patientdetails {
   // postobj:Patientdetails=new Patientdetails();
 
   patientvisitdetailsobj: patientvisitdetails = new patientvisitdetails();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   private patientdetailslist: PatientdetailsDemo[] = [];
   private patientAddressdetailslist: Postal[] = [];
   private patientVisitDetailslist: patientvisitdetails[] = [];
@@ -23,18 +23,31 @@ export class patientdetails {
   baseUrl = environment.LocalUrl;
   //patientdetailscreen
   addPost(post: PatientdetailsDemo) {
-    this.http.post('https://localhost:44315/api/Demographicsdetails/PostPatientdemographicsdetails', post).subscribe((res) => {
-      console.log(res);
-    });
+    this.http
+      .post(
+        'https://localhost:44315/api/Demographicsdetails/PostPatientdemographicsdetails',
+        post
+      )
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
   fetchfrombackendfromid1(id: any) {
-
-    return fetch(`https://localhost:44315/api/Demographicsdetails?Patientid=${id}`, {
-      method: 'GET',
-      redirect: 'follow'
-    })
-
+    const token = localStorage.getItem('token');
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
+    return fetch(
+      `https://localhost:44315/api/Demographicsdetails?Patientid=${id}`,
+      {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      }
+    );
   }
 
   deletePost(id: number | undefined) {
@@ -46,117 +59,160 @@ export class patientdetails {
   }
   UpdatePatientdetails(demoid: string, postobj: PatientdetailsDemo) {
     console.log(demoid);
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     var raw = JSON.stringify(postobj);
     console.log(raw);
-    
-    return fetch(`https://localhost:44315/api/Demographicsdetails/UpdateDemographic/${demoid}`, {
-      method: 'PUT',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    });
 
-
+    return fetch(
+      `https://localhost:44315/api/Demographicsdetails/UpdateDemographic/${demoid}`,
+      {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
+      }
+    );
   }
 
   getCountrynamefrompincodconsole(Countrycode: string, pincode: Number) {
     return this.http.get<any>(
       'https://api.worldpostallocations.com/?postalcode=' +
-      pincode +
-      '&countrycode=' +
-      Countrycode
+        pincode +
+        '&countrycode=' +
+        Countrycode
     );
   }
   //get allergy list for dropdown
   getallergydata() {
-
+    const token = localStorage.getItem('token');
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     return fetch(`https://localhost:44315/api/Master/GetallAllergydetails`, {
       method: 'GET',
-      redirect: 'follow'
-    })
+      headers: myHeaders,
+      redirect: 'follow',
+    });
   }
   getAllerynamefromallergytype(AllergyType: string) {
-
-    
-
-    return fetch(`https://localhost:44315/api/Master/GetdetailsfromAllergytype?AllergyType=${AllergyType}`, {
-      method: 'GET',
-      redirect: 'follow'
-    })
+    const token = localStorage.getItem('token');
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
+    return fetch(
+      `https://localhost:44315/api/Master/GetdetailsfromAllergytype?AllergyType=${AllergyType}`,
+      {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      }
+    );
   }
   //patientvisitdetails
 
   Addpatientvisitdetails(patientvisitobj: patientvisitdetails) {
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-  
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
 
     var raw = JSON.stringify(patientvisitobj);
     console.log(raw);
 
-   return fetch("https://localhost:44315/api/PatientDetails", {
+    return fetch('https://localhost:44315/api/PatientDetails', {
       method: 'POST',
       headers: myHeaders,
       body: raw,
-      redirect: 'follow'
-    })
-      
+      redirect: 'follow',
+    });
   }
 
   UpdatePatientvisitdetails(
     patientvisitdetailsobj: patientvisitdetails,
-    visitid:string
+    visitid: string
   ) {
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     var raw = JSON.stringify(patientvisitdetailsobj);
-   console.log(raw);
-   return fetch(`https://localhost:44315/api/PatientDetails/PutPatientDetails?id=${visitid}`, {
-      method: 'PUT',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    })
-      
-     
+    console.log(raw);
+    return fetch(
+      `https://localhost:44315/api/PatientDetails/PutPatientDetails?id=${visitid}`,
+      {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
+      }
+    );
   }
 
-
-  Getpatientvisitdetailsfromid(id:string) {
+  Getpatientvisitdetailsfromid(id: string) {
     const getuser = localStorage.getItem('USerID');
-    return fetch(`https://localhost:44315/api/PatientDetails?Appointmentid=${id}`, {
-      method: 'GET',
-      redirect: 'follow'
-    });
+    const token = localStorage.getItem('token');
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
+    return fetch(
+      `https://localhost:44315/api/PatientDetails?Appointmentid=${id}`,
+      {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      }
+    );
   }
-
 
   Getpatientvisitdetailsfrompatientid(id: any) {
     const getuser = localStorage.getItem('USerID');
 
-    return this.http.get<any>('https://localhost:44315/api/Master/Getdiagnosisdetails');
-
+    return this.http.get<any>(
+      'https://localhost:44315/api/Master/Getdiagnosisdetails'
+    );
   }
-  GetRole(id:any)
-  {
-   
-    
+  GetRole(id: any) {
+    const token = localStorage.getItem('token');
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     return fetch(`https://localhost:44315/api/Master?id=${id}`, {
       method: 'GET',
-      redirect: 'follow'
-    })
+      headers: myHeaders,
+      redirect: 'follow',
+    });
   }
   GetDiagnosisdetails() {
-    return this.http.get<any>('https://localhost:44315/api/Master/Getdiagnosisdetails');
+    return this.http.get<any>(
+      'https://localhost:44315/api/Master/Getdiagnosisdetails'
+    );
   }
   GetProceduredetails() {
-    return this.http.get<any>('https://localhost:44315/api/Master/Getproceduredetails');
+    return this.http.get<any>(
+      'https://localhost:44315/api/Master/Getproceduredetails'
+    );
   }
   GetMedicationdetails() {
-    return this.http.get<any>('https://localhost:44315/api/Master/Getdrugdetails');
+    return this.http.get<any>(
+      'https://localhost:44315/api/Master/Getdrugdetails'
+    );
   }
   GetidfromDiagnosisdetails(diagnosisdetails: string) {
     return this.http.get<any>(
@@ -168,14 +224,22 @@ export class patientdetails {
       'http://localhost:3000/previousvisitdetails?PatientID=4'
     );
   }
-  Updatepreviousvisitdetails() { }
-  GetPatientId(UserID:any)
-  {
-    return fetch(`https://localhost:44315/api/Master/GetPatientId?userid=${UserID}`, {
-      method: 'GET',
-      redirect: 'follow'
-    })
-    
+  Updatepreviousvisitdetails() {}
+  GetPatientId(UserID: any) {
+    const token = localStorage.getItem('token');
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
+    return fetch(
+      `https://localhost:44315/api/Master/GetPatientId?userid=${UserID}`,
+      {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      }
+    );
   }
 
   Observeevent() {
