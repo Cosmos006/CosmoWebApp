@@ -49,7 +49,7 @@
 
     <ng-container matColumnDef="appointmentdatetime">
       <mat-header-cell *matHeaderCellDef mat-sort-header  style="font-size: medium;"> DateOfAppointment </mat-header-cell>
-      <mat-cell *matCellDef="let element" matTooltip={{element.appointmentDateTime}}><span class="ellipsis">{{element.appointmentDateTime|date:'shortDate'}}</span> </mat-cell>
+      <mat-cell *matCellDef="let element" matTooltip={{element.appointmentDateTime}}><span class="ellipsis">{{element.appointmentDateTime|date:'short'}}</span> </mat-cell>
     </ng-container>
     <ng-container matColumnDef="physician">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Physician </mat-header-cell>
