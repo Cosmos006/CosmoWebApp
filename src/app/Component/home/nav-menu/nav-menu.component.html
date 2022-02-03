@@ -13,31 +13,50 @@
     <span class="text-white" style="color: white; margin-right: 10px"><a class="navbar-item">
         <img src="assets/Images/CosmosLogo.png" style="width: 100px; height: 20px" /> </a></span>
 
+
     <span class="example-spacer"></span>
     <div fxShow="true" fxHide.lt-md="true">
       <span>
-        <a class="companyName" [routerLink]="['AdminDashboard']" routerLinkActive="router-link-active" *ngIf="isAdmin">
+        <a class="companyName" [routerLink]="['AdminDashboard']" routerLinkActive="router-link-active" *ngIf="isAdmin" mat-button>
           DashBoard
         </a>
 
         <a class="companyName" [routerLink]="['Physician']" (click)="setTitle('Physician')"
-          routerLinkActive="router-link-active" *ngIf="isPhysician" mat-button>Physician</a>
+          routerLinkActive="router-link-active" *ngIf="isPhysician" mat-button>DashBoard</a>
 
-        <a class="companyName" [routerLink]="['AddPhysician/physician']" routerLinkActive="router-link-active"
-          *ngIf="isAdmin" (click)="setTitle('Register Physician')" mat-button>
-          Add Physician
-        </a>
-        <a class="companyName" [routerLink]="['AddNurse/nurse']" routerLinkActive="router-link-active" *ngIf="isAdmin"
-          (click)="setTitle('Register Nurse')" mat-button>
-          Register Nurse
-        </a>
+
+        <a class=""    [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
+            <!-- Register -->
+          </a>
+          <a class="companyName" *ngIf="isAdmin" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" mat-button>
+            Register
+          </a>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false">
+          <span (mouseleave)="menuTrigger.closeMenu()">
+            <button mat-menu-item>
+              <span> <p class="text-dark dropdown-item"  [routerLink]="['AddNurse/nurse']"
+                routerLinkActive="router-link-active" style="color: black!important;"  *ngIf="isAdmin" (click)="setTitle('Register Physician')"
+                mat-button>
+                Register Nurse
+              </p></span>
+            </button>
+            <button mat-menu-item>
+              <span> <p class="text-dark dropdown-item" [routerLink]="['AddPhysician/physician']"
+                  routerLinkActive="router-link-active" style="color: black !important;" *ngIf="isAdmin" (click)="setTitle('Register Physician')"
+                  mat-button>
+                  Register Physician
+              </p></span>
+            </button>
+          </span>
+        </mat-menu>
+
         <a mat-button class="companyName" [routerLink]="['ViewPhysician']" routerLinkActive="router-link-active"
           *ngIf="isPhysician" (click)="setTitle('View Physician')">
           Calendar
         </a>
         <a class="companyName" [routerLink]="['NurseDashboard']" routerLinkActive="router-link-active" *ngIf="isNurse"
           (click)="setTitle('Nurse')">
-          Nurse
+          DashBoard
         </a>
         <a mat-button class="companyName" [routerLink]="['Inbox']" routerLinkActive="router-link-active"
           *ngIf="isNurse || isPhysician">

@@ -22,3 +22,9 @@ button{
     color: white;
     font-size: medium;
 }
+
+button:focus {
+    outline: none;
+}
+
+
