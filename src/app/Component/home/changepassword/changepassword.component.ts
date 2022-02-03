@@ -14,26 +14,25 @@ import { AuthenticationService } from 'src/app/Services';
 @Component({
   selector: 'app-changepassword',
   templateUrl: './changepassword.component.html',
-  styleUrls: ['./changepassword.component.css']
+  styleUrls: ['./changepassword.component.css'],
 })
 export class ChangepasswordComponent implements OnInit {
-
   //@Input() user!:User | undefined;
-  
+
   // oldpassword!: string;
   // newpassword!: string;
-  
+
   // confirmpassword!: string;
-  id!:Guid;
+  id!: Guid;
   errormessage!: string;
   changepasswordform!: FormGroup;
-  submitted:boolean=false;
+  submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authenticationService: AuthenticationService,
-  ) { }
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
     this.changepasswordform = this.formBuilder.group({
@@ -42,10 +41,10 @@ export class ChangepasswordComponent implements OnInit {
       confirmpassword: ['', Validators.required],
     });
     var Get = localStorage.getItem('currentUser');
-        if (typeof Get === 'string') {
-          this.id = JSON.parse(Get).id;
-        }
-    console.log(this.id)
+    if (typeof Get === 'string') {
+      this.id = JSON.parse(Get).id;
+    }
+    console.log(this.id);
   }
 
   onSubmit() {
@@ -56,23 +55,25 @@ export class ChangepasswordComponent implements OnInit {
 
     this.submitted = true;
     //var data = this.changepasswordform.value;
-    if(this.changepasswordform.value.oldpassword !== 'Password@123'){
+    if (this.changepasswordform.value.oldpassword !== 'Password@123') {
       this.errormessage = 'Old password is incorrect';
       return;
     }
-    if(this.changepasswordform.value.password !== this.changepasswordform.value.confirmpassword){
+    if (
+      this.changepasswordform.value.password !==
+      this.changepasswordform.value.confirmpassword
+    ) {
       this.errormessage = 'Password and Confirm password are not same.';
       return;
     }
-    let password = this.changepasswordform.value.password
-    let obj : Changepassword = {
-      Id : this.id,
-      Password: this.changepasswordform.value.password
-    }
+    let password = this.changepasswordform.value.password;
+    let obj: Changepassword = {
+      Id: this.id,
+      Password: this.changepasswordform.value.password,
+    };
     //console.log(data)
-    console.log(obj)
-    this.authenticationService.changepassword(obj)
-    this.router.navigate(['/'])
+    console.log(obj);
+    this.authenticationService.changepassword(obj);
+    this.router.navigate(['/Login']);
   }
-
 }
