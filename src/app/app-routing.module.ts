@@ -261,7 +261,7 @@ const routes: Routes = [
     component: PatientViewdetailsComponent,
     path: 'NursePatientViewdetails',
     canActivate: [AuthGuard],
-    data: { roles: [Role.Nurse,Role.Physician] },
+    data: { roles: [Role.Nurse] },
   },
   {
     component: CalendarComponent,
