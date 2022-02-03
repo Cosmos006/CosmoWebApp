@@ -10,6 +10,7 @@ import { AdminPatientComponent } from './Component/admin/admin-patient/admin-pat
 import { LockedAccountComponent } from './Component/admin/locked-account/locked-account.component';
 import { PatientUserComponent } from './Component/admin/patient-user/patient-user.component';
 import { ViewPhysicianComponent } from './Component/admin/view-physician/view-physician.component';
+import { ChangepasswordComponent } from './Component/home/changepassword/changepassword.component';
 import { ForgotpasswordComponent } from './Component/home/forgotpassword/forgotpassword.component';
 import { HomeComponent } from './Component/home/home/home.component';
 import { LoginComponent } from './Component/home/login/login.component';
@@ -28,6 +29,7 @@ import { PatientDashboardComponent } from './Component/patient/patient-dashboard
 import { PatientDetailsComponent } from './Component/patient/patient-details/patient-details.component';
 import { PatientViewdetailsComponent } from './Component/patient/patient-viewdetails/patient-viewdetails.component';
 import { PreviouspatientvisitdetailsComponent } from './Component/patient/previouspatientvisitdetails/previouspatientvisitdetails.component';
+import { CurrentPatientComponent } from './Component/physician/CurrentPatient/current-patient.component';
 //import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
 import { PhysicianComponent } from './Component/physician/physician.component';
 import { BookAppointmentComponent } from './Component/shared/book-appointment/book-appointment.component';
@@ -39,17 +41,26 @@ import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
   {
+    path: '',
+    component: HomeComponent,
+  },
+  {
     path: 'Home',
     component: HomeComponent,
   },
   {
-    path: '',
+    path: 'Login',
     component: LoginComponent,
   },
-
   {
     component: PhysicianComponent,
     path: 'Physician',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Physician] },
+  },
+  {
+    component: CurrentPatientComponent,
+    path: 'CurrentPatient',
     canActivate: [AuthGuard],
     data: { roles: [Role.Physician] },
   },
@@ -267,6 +278,11 @@ const routes: Routes = [
   {
     component: InboxComponent,
     path: 'Inbox',
+    canActivate: [AuthGuard],
+  },
+  {
+    component: ChangepasswordComponent,
+    path: 'Changepassword',
     //canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: '' },

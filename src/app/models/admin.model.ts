@@ -49,17 +49,27 @@ export interface AdminPatient {
   isLocked: boolean;
 }
 
-//Hospital
+export interface Specalization {
+  id: string;
+  value: string;
+}
 
-// export interface HospitalUser {
-//   id: number;
-//   title: string;
-//   firstName: string;
-//   lastName: string;
-//   contact: number;
-//   specialization: string;
-//   email: string;
-//   createdOn: string;
-//   isActive: boolean;
+export interface Department {
+  id: string;
+  value: string;
+}
 
-// }
+export interface Eduaction {
+  id: string;
+  value: string;
+}
+
+export interface Gender {
+  id: string;
+  value: string;
+}
+
+export interface Designation {
+  id: string;
+  value: string;
+}

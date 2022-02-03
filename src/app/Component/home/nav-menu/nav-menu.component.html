@@ -35,7 +35,7 @@
 
         <a
           class="companyName"
-          [routerLink]="['Physician']"
+          [routerLink]="['Physician']" (click)="setTitle('Physician')"
           routerLinkActive="router-link-active"
           *ngIf="isPhysician"
           mat-button
@@ -46,7 +46,7 @@
           class="companyName"
           [routerLink]="['AddPhysician/physician']"
           routerLinkActive="router-link-active"
-          *ngIf="isAdmin"
+          *ngIf="isAdmin" (click)="setTitle('Register Physician')"
           mat-button
         >
           Add Physician
@@ -55,7 +55,7 @@
           class="companyName"
           [routerLink]="['AddNurse/nurse']"
           routerLinkActive="router-link-active"
-          *ngIf="isAdmin"
+          *ngIf="isAdmin" (click)="setTitle('Register Nurse')"
           mat-button
         >
           Register Nurse
@@ -65,7 +65,7 @@
           class="companyName"
           [routerLink]="['ViewPhysician']"
           routerLinkActive="router-link-active"
-          *ngIf="isPhysician"
+          *ngIf="isPhysician" (click)="setTitle('View Physician')"
         >
           Calendar
         </a>
@@ -73,7 +73,7 @@
           class="companyName"
           [routerLink]="['NurseDashboard']"
           routerLinkActive="router-link-active"
-          *ngIf="isNurse"
+          *ngIf="isNurse" (click)="setTitle('Nurse')"
         >
           Nurse
         </a>
@@ -91,7 +91,7 @@
           class="companyName"
           [routerLink]="['DynamicView']"
           routerLinkActive="router-link-active"
-          *ngIf="isNurse"
+          *ngIf="isNurse" (click)="setTitle('Nurse1')"
         >
           Nurse1
         </a> -->
@@ -100,7 +100,7 @@
           class="companyName"
           [routerLink]="['PatientDashboard']"
           routerLinkActive="router-link-active"
-          *ngIf="isPatient"
+          *ngIf="isPatient" (click)="setTitle('PatientDashboard')"
         >
           DashBoard
         </a>
@@ -110,7 +110,7 @@
           class="companyName"
           [routerLink]="['PatientDetails']"
           routerLinkActive="router-link-active"
-          *ngIf="isPatient"
+          *ngIf="isPatient" (click)="setTitle('Patient')"
         >
           Patient
         </a>
@@ -118,7 +118,7 @@
           mat-button
           class="companyName"
           [routerLink]="['PatientBookAppointment/Patient']"
-          routerLinkActive="router-link-active"
+          routerLinkActive="router-link-active" (click)="setTitle('BookAppointment')"
           *ngIf="isPatient"
         >
           BookAppointment
@@ -128,7 +128,7 @@
           class="companyName"
           [routerLink]="['PatientCalender/Patient']"
           routerLinkActive="router-link-active"
-          *ngIf="isPatient"
+          *ngIf="isPatient" (click)="setTitle(' Patient Calendar')"
         >
           Patient Calendar
         </a>
@@ -137,7 +137,7 @@
           class="companyName"
           [routerLink]="['Subscription']"
           routerLinkActive="router-link-active"
-          *ngIf="isPatient"
+          *ngIf="isPatient" (click)="setTitle('Subscription')"
         >
           Subscription
         </a>
@@ -147,7 +147,7 @@
           class="companyName"
           [routerLink]="['PatientViewdetails']"
           routerLinkActive="router-link-active"
-          *ngIf="isPatient"
+          *ngIf="isPatient"  (click)="setTitle('Patient')"
         >
           Patient Visit Details
         </a>
@@ -164,7 +164,7 @@
           mat-button
           [routerLink]="['BookAppointment/Patient']"
           routerLinkActive="router-link-active"
-          *ngIf="isAdmin"
+          *ngIf="isAdmin" (click)="setTitle(' Book Appointment')"
         >
           Book Appointment
         </a>
@@ -172,11 +172,21 @@
           mat-button
           class="companyName"
           [routerLink]="['Calender']"
-          routerLinkActive="router-link-active"
+          routerLinkActive="router-link-active" (click)="setTitle('Calendar')"
           *ngIf="isAdmin"
         >
           Calendar
         </a>
+
+        <a
+        mat-button
+        class="companyName"
+        [routerLink]="['CurrentPatient']"
+        routerLinkActive="router-link-active" (click)="setTitle('CurrentPatient')"
+        *ngIf="isPhysician"
+      >
+      Current Patient
+      </a>
       </span>
 
       <!-- <button routerLink="login"><b>Login</b></button> -->
@@ -185,7 +195,7 @@
     <i
       class="material-icons text-white pointer"
       (click)="logout()"
-      *ngIf="currentUser"
+      *ngIf="currentUser" (click)="setTitle('logout')"
       >logout</i
     >
   </mat-toolbar>

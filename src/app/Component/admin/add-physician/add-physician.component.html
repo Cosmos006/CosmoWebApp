@@ -102,9 +102,9 @@
                     <option value="" disabled>Select Gender</option>
                     <option
                       *ngFor="let gender of genderdata"
-                      [ngValue]="gender.Value"
+                      [ngValue]="gender.value"
                     >
-                      {{ gender.Value }}
+                      {{ gender.value }}
                     </option>
                   </select>
                   <!-- <span
@@ -154,7 +154,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label>Designation</label>
+                  <label>Specialization</label>
                   <!-- <select class="form-control select2" style="width: 100%">
                     <option selected="selected">Gender</option>
                   </select> -->
@@ -168,12 +168,12 @@
                         this.Physician.controls['designation'].invalid
                     }"
                   >
-                    <option value="" disabled>Select Designation</option>
+                    <option value="" disabled>Select Specialization</option>
                     <option
                       *ngFor="let designation of designationdata"
-                      [ngValue]="designation.Value"
+                      [ngValue]="designation.value"
                     >
-                      {{ designation.Value }}
+                      {{ designation.value }}
                     </option>
                   </select>
                   <span
@@ -200,9 +200,9 @@
                     <option value="" disabled>Select Education</option>
                     <option
                       *ngFor="let education of educationdata"
-                      [ngValue]="education.Value"
+                      [ngValue]="education.value"
                     >
-                      {{ education.Value }}
+                      {{ education.value }}
                     </option>
                   </select>
                   <span
@@ -307,7 +307,7 @@
                   >
                 </div>
                 <div class="form-group">
-                  <label>Department</label>
+                  <label>Designation</label>
                   <!-- <select class="form-control select2" style="width: 100%">
                     <option selected="selected">Alabama</option>
                   </select>
@@ -322,12 +322,12 @@
                         this.Physician.controls['department'].invalid
                     }"
                   >
-                    <option value="" disabled>Select Department</option>
+                    <option value="" disabled>Select Designation</option>
                     <option
                       *ngFor="let department of departmentdata"
-                      [ngValue]="department.Value"
+                      [ngValue]="department.value"
                     >
-                      {{ department.Value }}
+                      {{ department.value }}
                     </option>
                   </select>
                   <span

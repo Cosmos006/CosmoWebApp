@@ -42,7 +42,7 @@
                   (click)="Payment('199')"
                   [disabled]="basic"
                 >
-                  Buy Now
+                  {{ basicbutton }}
                 </button>
                 <!-- <ngx-paypal [config]="payPalConfig"> </ngx-paypal> -->
               </div>
@@ -76,7 +76,7 @@
                   (click)="Payment('499')"
                   [disabled]="standard"
                 >
-                  Buy Now
+                  {{ standardbutton }}
                 </button>
               </div>
             </div>
@@ -108,7 +108,7 @@
                   (click)="Payment('999')"
                   [disabled]="premium"
                 >
-                  Buy Now
+                  {{ premiumbutton }}
                 </button>
               </div>
             </div>
