@@ -21,3 +21,18 @@ mat-form-field{
   mat-radio-button{
     margin-left: 3%;
   }   
+  .textcolor{
+    color:white;
+    background-color: lightgreen;
+  
+  }
+  .textcolor1
+  {
+    color:white;
+    background-color:blue;
+  }
+  .textcolor2
+  {
+    color:white;
+    background-color:red;
+  }

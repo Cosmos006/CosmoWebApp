@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   registrationform! : FormGroup
   keyboard!: Keyboard;
   value = '';
+  today = new Date();
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   submitted=false;
@@ -28,7 +29,9 @@ export class RegisterComponent implements OnInit {
         FirstName: new FormControl('',[Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         LastName: new FormControl('',[Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         UserName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]),
-        PhoneNo: new FormControl('',[Validators.required, Validators.pattern('^[0-9]+$')]),
+        PhoneNo: new FormControl('',[Validators.required,  Validators.maxLength(10),
+          Validators.minLength(10),
+          Validators.pattern('^[0-9]+$')]),
         Email: new FormControl('',[Validators.required, Validators.email]),
         DateOfBirth: new FormControl('',[Validators.required]),
       });

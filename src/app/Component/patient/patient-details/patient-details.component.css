@@ -39,3 +39,18 @@ mat-radio-button{
 .nextBtn{
   text-align: right;
 }
+.textcolor{
+  color:white;
+  background-color: lightgreen;
+
+}
+.textcolor1
+{
+  color:white;
+  background-color:blue;
+}
+.textcolor2
+{
+  color:white;
+  background-color:red;
+}
