@@ -1,5 +1,3 @@
-import { UserDetails } from 'src/app/models/UserDetails';
-
 
 export interface Doctor {
     id:number;
@@ -13,6 +11,5 @@ export interface Doctor {
     createdOn: string;
     isAvailablity: boolean;
     date:Date;
- userDetails :UserDetails;
     
 }

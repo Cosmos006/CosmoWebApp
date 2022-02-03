@@ -102,6 +102,7 @@ export class DailogeService  {
     
         return this.http.get<Product[]>(this.UP_URL);
  }
+ 
       getBartData() : Observable<Bardata[]>{
     
         return this.http.get<Bardata[]>(this.BAR_URL);

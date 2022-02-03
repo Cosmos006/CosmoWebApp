@@ -4,7 +4,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { Product } from 'src/app/models/appointment';
-import { UserDetails } from 'src/app/models/UserDetails';
 import { PhysicianService } from 'src/app/Services/Physician/physician.service';
 
 @Component({

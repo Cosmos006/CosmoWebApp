@@ -134,6 +134,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PatientDynamicTableComponent } from './Component/shared/patientdynamic-table/patientdynamic-table.component';
 
 import { CurrentPatientComponent } from './Component/physician/CurrentPatient/current-patient.component';
+import { AdminDashboardComponent } from './Component/admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -170,7 +171,8 @@ import { CurrentPatientComponent } from './Component/physician/CurrentPatient/cu
     AdminHospitalComponent,
     UpcomingAppointmentComponent,
     InboxComponent,
-    PatientDynamicTableComponent
+    PatientDynamicTableComponent,
+    AdminDashboardComponent
 
   ],
   imports: [

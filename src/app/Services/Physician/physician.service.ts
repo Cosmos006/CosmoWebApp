@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/appointment';
-import { Attendance } from 'src/app/models/Attendance';
+import { Attendance, Specialization } from 'src/app/models/Attendance';
 import { Bardata } from 'src/app/models/bardata';
-import { Booking } from 'src/app/models/patient.model';
-import { UserDetails } from 'src/app/models/UserDetails';
+import { Booking, Employee } from 'src/app/models/patient.model';
+import { UserDetails } from 'src/app/models/userdetails';
 import { Appointment, environment } from '../Url';
 
 @Injectable({
@@ -58,7 +58,7 @@ export class PhysicianService {
  
  
   // getPatient() {
-  //   return this.http.get<UserDetails[]>('https://localhost:44318/api/GetAvailablePhysicianDetails');
+  //   return this.http.get<UserDetails[]>('https://localhost:44318/api/AdminUserInfo/GetPatientUsers');
   // }
 
 
@@ -67,6 +67,11 @@ export class PhysicianService {
 //     return this.http.get<Booking[]>(this.baseUrl + Appointment.AppointmentGrid);
 // }
 
+GetAllSpecialization() {
+  return this.http.get<Specialization[]>(
+    'https://localhost:44318/api/PhysicianDashboard/GetAllSpecialization'
+  );
+}
 
 
 getAppointmentnextpatientData() : Observable<Product[]>{

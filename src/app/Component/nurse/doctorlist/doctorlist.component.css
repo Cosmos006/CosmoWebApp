@@ -1,5 +1,12 @@
 /* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~material-design-icons/iconfont/material-icons.css'; */
+
+/* mat-header-row{
+  background-color:rgb(175, 221, 240) !important;
+  color:white!important;
+  text-align: center;
+
+} */
 .green {
  color:green;
 }
@@ -48,15 +55,7 @@
   }
   
   
-  .mat-cell:nth-child(4),
-  .mat-header-cell:nth-child(4) {
-    
-  }
-  
-  .mat-cell:nth-child(5),
-  .mat-header-cell:nth-child(5) {
-   
-  }
+
   
   .mat-sort-header-container {
     font-size: larger;
@@ -93,52 +92,55 @@
     font-size: 40px;
   }
   
-  .mat-column-name {
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    flex: 0 0 auto !important;
-    width: 28% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-  
-    word-break: break-word;
-  
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-  }
-  .mat-column-address {
+  .mat-column-speciliazation {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 auto !important;
     width: 20% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  padding-left: 10px;
+  padding: 5px;
     word-break: break-word;
   
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
+  
+  }
+  .mat-column-firstName {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 auto !important;
+    width: 17% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  padding-left: 10px;
+    word-break: break-word;
+    padding: 5px;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+   
   }
   .mat-column-timeSlot {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 auto !important;
-    width: 30% !important;
+    width: 20% !important;
     padding: 10px !important;
-    margin: 10px !important;
+ 
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
+    padding: 5px;
     word-break: break-word;
   
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
+   
   }
   
   
@@ -147,11 +149,13 @@
      overflow: hidden; 
      white-space: nowrap;
   }
-  .mat-column-edit {
+  .mat-column-dateTime {
+   
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 auto !important;
-    width: 28% !important;
+    width: 15% !important;
+    padding: 5px;
     overflow-wrap: break-word;
     word-wrap: break-word;
   
@@ -162,20 +166,20 @@
     -webkit-hyphens: auto;
     hyphens: auto;
   }
-  .mat-column-age {
+  .mat-column-isAbsent {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 auto !important;
     width: 28% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
+  padding: 5px;
     word-break: break-word;
-  
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
+   
   }
   .active-pink-2 input[type=search]:focus:not([readonly]) {
     border-bottom: 1px solid #f48fb1;
