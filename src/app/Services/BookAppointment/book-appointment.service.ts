@@ -23,10 +23,22 @@ export class BookAppointmentService {
     );
   }
 
+  GetSpecialization() {
+    return this.http.get<Diagnosics[]>(
+      'https://localhost:44347/api/Appointments/Specialization'
+    );
+  }
+
   //GEt Physician
   GetPhysician() {
     return this.http.get<Physician[]>(
       'https://localhost:44347/api/Appointments/GetAllPhysician'
+    );
+  }
+
+  GetPhysicianById(Diagnosics: string) {
+    return this.http.get<Physician[]>(
+      `https://localhost:44347/api/Appointments/GetPhysicianByDiagnosics/${Diagnosics}`
     );
   }
 
@@ -39,8 +51,12 @@ export class BookAppointmentService {
 
   //Post Appointment
   BookAppointmentPost(value: any) {
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     var raw = JSON.stringify(value);
     return fetch('https://localhost:44347/api/Appointments', {
       method: 'POST',
@@ -51,8 +67,12 @@ export class BookAppointmentService {
   }
 
   UpdateAppointment(AppointmentId: string, value: any) {
+    const token = localStorage.getItem('token');
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    if (token != null) {
+      myHeaders.append('Authorization', `Bearer ${token}`);
+    }
     var raw = JSON.stringify(value);
     return fetch(
       `https://localhost:44347/api/Appointments/UpdateAppointments/${AppointmentId}`,

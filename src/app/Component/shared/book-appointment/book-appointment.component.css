@@ -23,3 +23,7 @@ mat-form-field.border-red ::ng-deep .mat-form-field-outline {
 mat-form-field.border-red ::ng-deep .mat-form-field-label {
   color: red !important;
 }
+
+.special-date {
+  background-color: red;
+}

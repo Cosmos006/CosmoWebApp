@@ -18,9 +18,10 @@ import {
 } from '@angular/forms';
 import { Guid } from 'guid-typescript';
 import { InboxService } from 'src/app/Services/Inbox/inbox.service';
+import { Router } from '@angular/router';
 
-export interface Appointments { 
-  appointmentId : Guid
+export interface Appointments {
+  appointmentId: Guid;
   meetingTitle: string;
   //description: string;
   physicianName: string;
@@ -30,7 +31,7 @@ export interface Appointments {
   // PhysicianId: Guid;
   // NurseId: Guid;
   //AppointmentType : string
-  diagnosis : string
+  diagnosis: string;
 }
 
 export interface ReceivedNotes {
@@ -68,7 +69,7 @@ export interface Notes {
 //   message: string;
 //   date: Date;
 // }
-const ELEMENT_DATA: Appointments[] = []
+const ELEMENT_DATA: Appointments[] = [];
 export interface User {
   Id: Guid;
   name: string;
@@ -83,8 +84,7 @@ export interface User {
   encapsulation: ViewEncapsulation.None,
 })
 export class InboxComponent implements OnInit, AfterViewInit {
-  
-  ELEMENT_DATA1: Notes[] = []
+  ELEMENT_DATA1: Notes[] = [];
   displayedColumns1: string[] = [
     'Sender Name',
     'Designation',
@@ -94,9 +94,9 @@ export class InboxComponent implements OnInit, AfterViewInit {
   ];
   RecieveddataSource = new MatTableDataSource<Notes>(this.ELEMENT_DATA1);
   @ViewChild('paginator1') paginator1!: MatPaginator;
-  @ViewChild('sentsort', {read: MatSort}) sentsort!: MatSort;
+  @ViewChild('sentsort', { read: MatSort }) sentsort!: MatSort;
 
-  ELEMENT_DATA2: Notes[] = []
+  ELEMENT_DATA2: Notes[] = [];
   displayedColumns2: string[] = [
     'Reciever Name',
     'Designation',
@@ -106,7 +106,7 @@ export class InboxComponent implements OnInit, AfterViewInit {
   ];
   SentdataSource = new MatTableDataSource<Notes>(this.ELEMENT_DATA2);
   @ViewChild('paginator2') paginator2!: MatPaginator;
-  @ViewChild('recievedsort', {read: MatSort}) recievedsort!: MatSort;
+  @ViewChild('recievedsort', { read: MatSort }) recievedsort!: MatSort;
 
   replyicon: string = '<mat-icon >replay</mat-icon>';
   repliedicon: string = '<mat-icon >done</mat-icon>';
@@ -122,7 +122,7 @@ export class InboxComponent implements OnInit, AfterViewInit {
   showButton: boolean = false;
   newReceivedMsg: number = 10;
   @ViewChild('paginator') paginator!: MatPaginator;
-  @ViewChild('appointmentsort', {read: MatSort}) appointmentsort!: MatSort;
+  @ViewChild('appointmentsort', { read: MatSort }) appointmentsort!: MatSort;
 
   control = new FormControl();
   form!: FormGroup;
@@ -133,67 +133,66 @@ export class InboxComponent implements OnInit, AfterViewInit {
   error!: string;
   currentEmployee: any;
   //userdetail!: UserDetails;
-  todayDate! : Date
-  currentnotes!: Notes
+  todayDate!: Date;
+  currentnotes!: Notes;
 
-  constructor(private fb: FormBuilder, private inboxService: InboxService) {
+  constructor(
+    private fb: FormBuilder,
+    private inboxService: InboxService,
+    private router: Router
+  ) {
     setInterval(() => {
       this.now = new Date();
     }, 1);
-    this.todayDate= new Date();
+    this.todayDate = new Date();
   }
 
   ngOnInit(): void {
     var getuser = localStorage.getItem('user');
     if (typeof getuser === 'string') {
       var id = JSON.parse(getuser).id;
-    
     }
 
     this.inboxService.GetAppointmentByEmployeeId(id).subscribe({
-      next:(res: any)=>{
+      next: (res: any) => {
         this.dataSource.data = res;
         this.dataSource._updateChangeSubscription();
         this.dataSource.sort = this.appointmentsort;
-        console.log(this.dataSource.data)
+        console.log(this.dataSource.data);
       },
-      error: (e: any) => console.error(e)
-      
+      error: (e: any) => console.error(e),
     });
 
     this.inboxService.GetEmployee().subscribe({
       next: (res: any) => {
         console.log(res);
-        for(var i=0;i<res.length;i++)
-        {
-           this.users.push({ 
+        for (var i = 0; i < res.length; i++) {
+          this.users.push({
             Id: res[i].id,
-            name: res[i].firstName +' '+res[i].lastName,         
-            designation: res[i].designation,       
-            UserId: res[i].userId,        
-            });
+            name: res[i].firstName + ' ' + res[i].lastName,
+            designation: res[i].designation,
+            UserId: res[i].userId,
+          });
         }
         //this.users.push();
-       
-          //alert(id);
-          this.currentEmployee = this.users.filter((x) => x.Id == id);
 
-          console.log(this.currentEmployee)
-          this.GetNotes(this.currentEmployee[0].Id)
-          var index = this.users.indexOf(this.currentEmployee[0])
-          this.users.splice(index,1)
-          console.log(this.users)
+        //alert(id);
+        this.currentEmployee = this.users.filter((x) => x.Id == id);
 
-          this.filteredOptions = this.control.valueChanges.pipe(
-            startWith(''),
-            map((value) => this._filter(value))
-          );
+        console.log(this.currentEmployee);
+        this.GetNotes(this.currentEmployee[0].Id);
+        var index = this.users.indexOf(this.currentEmployee[0]);
+        this.users.splice(index, 1);
+        console.log(this.users);
+
+        this.filteredOptions = this.control.valueChanges.pipe(
+          startWith(''),
+          map((value) => this._filter(value))
+        );
         //}
       },
       error: (e: any) => console.error(e),
     });
-
-    
 
     //ELEMENT_DATA.sort((x, y) => +new Date(x.date) - +new Date(y.date));
 
@@ -212,23 +211,26 @@ export class InboxComponent implements OnInit, AfterViewInit {
     );
   }
 
-  private GetNotes(loggedInUserId : Guid){
-    console.log(loggedInUserId)
-     this.inboxService.GetNotesById(loggedInUserId).subscribe({
+  private GetNotes(loggedInUserId: Guid) {
+    console.log(loggedInUserId);
+    this.inboxService.GetNotesById(loggedInUserId).subscribe({
       next: (res: any) => {
-        console.log(res)
-        this.SentdataSource.data = res.filter((x :Notes) => x.isSentOrRecieved === 'SENT')
-        this.RecieveddataSource.data = res.filter((x :Notes) => x.isSentOrRecieved === 'RECIEVED')
-        this.SentdataSource._updateChangeSubscription()
-        this.RecieveddataSource._updateChangeSubscription()
+        console.log(res);
+        this.SentdataSource.data = res.filter(
+          (x: Notes) => x.isSentOrRecieved === 'SENT'
+        );
+        this.RecieveddataSource.data = res.filter(
+          (x: Notes) => x.isSentOrRecieved === 'RECIEVED'
+        );
+        this.SentdataSource._updateChangeSubscription();
+        this.RecieveddataSource._updateChangeSubscription();
         this.SentdataSource.sort = this.sentsort;
         this.RecieveddataSource.sort = this.recievedsort;
-        console.log(this.SentdataSource.data)
-        console.log(this.RecieveddataSource.data)
+        console.log(this.SentdataSource.data);
+        console.log(this.RecieveddataSource.data);
       },
       error: (e: any) => console.error(e),
-       
-     })
+    });
   }
 
   OnClickName(designation: string) {
@@ -276,19 +278,19 @@ export class InboxComponent implements OnInit, AfterViewInit {
         this.error = 'User does not exsist';
         return;
       }
-      var date =new Date();
+      var date = new Date();
       //let latest_date =this.datepipe.transform(date, 'yyyy-MM-dd hh:mm:ss');
-      this.currentnotes = {
-        id: Guid.createEmpty(),
-        message: this.form.value.message,
-        notesDateTime: this.todayDate,
-        recieverName: filtereduser?.name,
-        senderName: this.currentEmployee[0].name,
-        designation: filtereduser?.designation,
-        isSentOrRecieved : 'SENT'
-      };
-      this.SentdataSource.data.push(this.currentnotes)
-      this.SentdataSource._updateChangeSubscription();
+      // this.currentnotes = {
+      //   id: Guid.createEmpty(),
+      //   message: this.form.value.message,
+      //   notesDateTime: this.todayDate,
+      //   recieverName: filtereduser?.name,
+      //   senderName: this.currentEmployee[0].name,
+      //   designation: filtereduser?.designation,
+      //   isSentOrRecieved : 'SENT'
+      // };
+      // this.SentdataSource.data.push(this.currentnotes)
+      // this.SentdataSource._updateChangeSubscription();
 
       var notes = {
         Message: this.form.value.message,
@@ -302,7 +304,8 @@ export class InboxComponent implements OnInit, AfterViewInit {
       console.log(notes);
 
       this.inboxService.SendNotes(notes);
-      this.form.reset()
+      this.GetNotes(this.currentEmployee[0].Id);
+      this.form.reset();
     }
   }
   onDelete(tabName: string, j: Notes) {
@@ -337,5 +340,11 @@ export class InboxComponent implements OnInit, AfterViewInit {
     this.form.controls?.['designation'].patchValue(obj.designation);
 
     //this.form.get('receiver').patchValue()
+  }
+
+  onviewclick(id: any) {
+    this.router.navigate(['PatientBookAppointment/Patient'], {
+      queryParams: { appointmentId: id },
+    });
   }
 }

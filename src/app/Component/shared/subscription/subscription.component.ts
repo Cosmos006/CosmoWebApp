@@ -29,6 +29,11 @@ export class SubscriptionComponent implements OnInit {
   standard: boolean = false;
   premium: boolean = false;
 
+  //Subscription Logic
+  basicbutton: string = 'Buy Now';
+  standardbutton: string = 'Buy Now';
+  premiumbutton: string = 'Buy Now';
+
   constructor(private auth: PaymentService, private _snackBar: MatSnackBar) {
     // this.cachedImages.set('myImage', 'src/assets/Images/CosmosLogo.png');
     this.fullImagePath = 'src/assets/Images/CosmosLogo.png';
@@ -48,11 +53,23 @@ export class SubscriptionComponent implements OnInit {
           var amount = data[0].amount;
 
           if (amount == 199) {
-            this.basic = false;
+            this.basic = true;
+            this.basicbutton = 'Subscribed';
+            this.standardbutton = 'Upgrade';
+            this.premiumbutton = 'Upgrade';
           } else if (amount == 499) {
+            this.basic = true;
             this.standard = true;
+            this.basicbutton = 'Subscribe Higher Plan';
+            this.standardbutton = 'Subscribed';
+            this.premiumbutton = 'Upgrade';
           } else if (amount == 999) {
+            this.basic = true;
+            this.standard = true;
             this.premium = true;
+            this.basicbutton = 'Subscribe Higher Plan';
+            this.standardbutton = 'Subscribe Higher Plan';
+            this.premiumbutton = 'Subscribed';
           }
         }
       })
