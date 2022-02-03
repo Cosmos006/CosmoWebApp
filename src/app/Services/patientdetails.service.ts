@@ -97,16 +97,13 @@ export class patientdetails {
     var raw = JSON.stringify(patientvisitobj);
     console.log(raw);
 
-    fetch("https://localhost:44315/api/PatientDetails", {
+   return fetch("https://localhost:5001/api/PatientDetails", {
       method: 'POST',
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
     })
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-    
+      
   }
 
   UpdatePatientvisitdetails(
@@ -117,22 +114,20 @@ export class patientdetails {
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(patientvisitdetailsobj);
    console.log(raw);
-    fetch(`https://localhost:44315/api/PatientDetails/PutPatientDetails?id=${visitid}`, {
+   return fetch(`https://localhost:5001/api/PatientDetails/PutPatientDetails?id=${visitid}`, {
       method: 'PUT',
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
     })
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+      
      
   }
 
 
   Getpatientvisitdetailsfromid(id:string) {
     const getuser = localStorage.getItem('USerID');
-    return fetch(`https://localhost:44315/api/PatientDetails?Appointmentid=${id}` ,{
+    return fetch(`https://localhost:5001/api/PatientDetails?Appointmentid=${id}`, {
       method: 'GET',
       redirect: 'follow'
     });

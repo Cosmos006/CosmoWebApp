@@ -8,7 +8,11 @@ import { DailogeService } from 'src/app/Services/dailoge.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Doctor } from 'src/app/models/doctordata';
-import { Attendance } from 'src/app/models/Attendance';
+import { Attendance, Specialization } from 'src/app/models/Attendance';
+import { BookAppointmentService } from 'src/app/Services/BookAppointment/book-appointment.service';
+import { Employee, Physician } from 'src/app/models/patient.model';
+import { PhysicianService } from 'src/app/Services/Physician/physician.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-doctorlist',
@@ -17,55 +21,84 @@ import { Attendance } from 'src/app/models/Attendance';
 })
 
 export class DoctorlistComponent implements OnInit {
-doctorlist!:Attendance[];
-  displayedColumns = ['id', 'physicianId', 'timeSlot' , 'dateTime' , 'isAbsent' ];
+  displayedColumns = ['id', 'firstName', 'speciliazation', 'physicianId', 'timeSlot', 'dateTime', 'isAbsent'];
+
+
+  doctorlist: Specialization[] = [];
+
+
   dataSource1 !: MatTableDataSource<Attendance>;
+  dataSource2!: MatTableDataSource<Attendance>;
+
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort, {}) sort !: MatSort;
-
-  pastVisit:string="PastVisit";
-  constructor(public dialogService: MatDialog, public appoiService: DailogeService, private router:Router) { }
+  pastVisit: string = "PastVisit";
+  specialistcheck = false;
+  constructor(public dialogService: MatDialog, public fb: FormBuilder, private physicianservice: PhysicianService, public appoiService: DailogeService, private router: Router, private service: BookAppointmentService,) { }
 
   ngOnInit() {
     this.getdata();
-   this.getdoctordata();
+    this.getSpecialization();
   }
+  speciliazation: string = '';
+
+  form = this.fb.group({
+
+    speciliazation: ['', [Validators.required]],
+  });
+
   getdata() {
     this.appoiService.getDoctorListData().subscribe(data => {
-      this.dataSource1 = new MatTableDataSource(data)    
+      this.dataSource1 = new MatTableDataSource(data)
       this.dataSource1.paginator = this.paginator;
+      debugger
       console.log(this.dataSource1)
+
     });
+
+
   }
-  
+
+  getSpecialization() {
+
+    this.physicianservice
+      .GetAllSpecialization()
+      .subscribe((x) => {
+
+        this.doctorlist.push(...x);
+
+      });
+
+
+  }
+
   applyFilter(filterValue: any) {
-    let itemvalue = filterValue.target.value;   
+    let itemvalue = filterValue.target.value;
     this.dataSource1.filter = itemvalue.trim().toLowerCase();
     this.dataSource1.paginator = this.paginator;
 
   }
-  OnVisit(){
-    console.log("vamsiclicked")
-    this.router.navigateByUrl('/PatientDetails');
-  }
- 
-  getdoctordata() {
-    this.appoiService.getDoctorListData().subscribe(data => {
-      this.doctorlist=data;     
-      
-    });
-  }
-  onSelect(id: any) {
-    let itemvalue = id.target.value;   
-    console.log(id.target.value);
-    if (itemvalue!=0){
+
+  select(e: any) {
+
+
+    let itemvalue = e;
+    if (itemvalue != undefined) {
+      ///this.dataSource1.filter = itemvalue.trim().toLowerCase();
+      this.dataSource1.paginator = this.paginator;
       this.dataSource1.filter = itemvalue.trim().toLowerCase();
+
+
+      // this.dataSource2.paginator = this.paginator;
+      // this.dataSource2.filter = itemvalue.trim().toLowerCase();
+
     }
-    else{
+    else {
       this.getdata();
 
     }
-   
-    
   }
+
+
+
 }

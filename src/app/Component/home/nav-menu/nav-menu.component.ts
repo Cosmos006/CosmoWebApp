@@ -26,6 +26,8 @@ import { AuthenticationService } from 'src/app/Services';
 export class NavMenuComponent implements OnInit {
   isLoggedIn$!: Observable<boolean>; // {1}
   currentUser?: User;
+  username: string | undefined;
+
 
   constructor(
     private authService: AuthenticationService,private titleService: Title,
@@ -33,12 +35,24 @@ export class NavMenuComponent implements OnInit {
   ) {
     this.authService.currentUser.subscribe((x) => (this.currentUser = x));
   }
-  
+ 
+
+
+ 
+
   public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
   }
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
+    var Get = localStorage.getItem('currentUser');
+    if (typeof Get === 'string') {
+      var userName = JSON.parse(Get).userName;
+    }
+
+    this.username =this.currentUser?.userName;
+    
+
   }
 
   logout() {
@@ -60,4 +74,7 @@ export class NavMenuComponent implements OnInit {
     //return true;
     return this.currentUser && this.currentUser.role === Role.Nurse;
   }
+
+ 
+  
 }

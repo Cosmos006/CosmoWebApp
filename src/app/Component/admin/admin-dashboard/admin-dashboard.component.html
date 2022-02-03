@@ -411,6 +411,52 @@
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <br>
+                      <h3 class="card-title">Import Masters</h3> 
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                      <br>
+                      <mat-form-field appearance="fill" style="width: 80%; padding-left: 2%;">
+                        <mat-label>Select Master</mat-label>
+                        <mat-select
+                        (selectionChange)="filterMasters(selectedValue)"
+                          [(ngModel)]="selectedValue"
+                          name="master"
+                        >
+                          <mat-option
+                            *ngFor="let master of masters"
+                            [value]="master.value"
+                          >
+                            {{ master.viewValue }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <button type="button" (click)="import()" class="btn btn-primary float-right">
+                        Import
+                    </button>
+                    </div>
+                    <div style="width: 80%; padding-left: 2%; padding-top: 3%; padding-bottom: 5%;">
+                      <input type="file" class="file-upload" (change)="onFileSelected($event)" #fileUpload>
+                    </div>
+                    <div class="col-md-4">
+                      <span class="upload" *ngIf="progress > 0">
+                        {{progress}}%
+                      </span>
+                      <span class="upload" *ngIf="message">
+                        {{message}}
+                      </span>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+                </div>
+              </div>
+
               <!-- /.card -->
             </section>
             <!-- /.Left col -->
@@ -424,9 +470,13 @@
                   </div>
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title" style="color:blueviolet;">Doctors List</h3>
-                </div>              
-                <app-doctorlist></app-doctorlist>
+                  <h3 class="card-title">Physician List</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <app-doctorlist></app-doctorlist>
+                </div>
+                <!-- /.card-body -->
               </div>
 
               <!-- /.card -->
