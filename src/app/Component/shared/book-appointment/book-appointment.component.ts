@@ -27,6 +27,9 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 
+//Mat Alert
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-book-appointment',
   templateUrl: './book-appointment.component.html',
@@ -92,7 +95,8 @@ export class BookAppointmentComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private service: BookAppointmentService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     var CurrentDate = new Date();
     this.minDate = CurrentDate;
