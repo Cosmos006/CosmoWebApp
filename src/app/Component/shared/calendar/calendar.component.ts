@@ -75,8 +75,14 @@ export class CalendarComponent implements OnInit {
       this.CheckPatient = true;
     }
 
+    var Get = localStorage.getItem('currentUser');
+    if (typeof Get === 'string') {
+      var id = JSON.parse(Get).id;
+      var Role = JSON.parse(Get).role;
+    }
+
     this.adminService
-      .GetListofData()
+      .GetListofDataById(id, Role)
       .subscribe((x) => {
         this.listOfEvent.push(...x);
         for (var i = 0; i < this.listOfEvent.length; i++) {
@@ -95,6 +101,27 @@ export class CalendarComponent implements OnInit {
           this.calendarVisible = true;
         }
       });
+
+    // this.adminService
+    //   .GetListofData()
+    //   .subscribe((x) => {
+    //     this.listOfEvent.push(...x);
+    //     for (var i = 0; i < this.listOfEvent.length; i++) {
+    //       var title = this.listOfEvent[i].title;
+    //       var start = DateType(this.listOfEvent[i].date);
+    //       this.value.push({
+    //         publicId: this.listOfEvent[i].publicId,
+    //         title: this.listOfEvent[i].title,
+    //         date: this.listOfEvent[i].date,
+    //         color: this.listOfEvent[i].color,
+    //       });
+    //     }
+    //   })
+    //   .add(() => {
+    //     if (this.value.length > 0) {
+    //       this.calendarVisible = true;
+    //     }
+    //   });
 
     function DateType(date: any): Date {
       var convertDate = new Date(date);

@@ -69,6 +69,18 @@ export class AdminService {
     );
   }
 
+  GetListofDataById(Id: string, Role: string) {
+    if (Role == 'ADMIN' || Role == 'NURSE') {
+      return this.http.get<EventMap[]>(
+        'https://localhost:44347/api/Appointments/GetAllAppointments'
+      );
+    } else {
+      return this.http.get<EventMap[]>(
+        `https://localhost:44347/api/Appointments/GetAllAppointmentsById/${Id}?Role=${Role}`
+      );
+    }
+  }
+
   GetAdminDashboard(): Observable<AdminDashboard[]> {
     return this.http.get<AdminDashboard[]>(this.baseUrl + Admin.DashBoard);
   }
