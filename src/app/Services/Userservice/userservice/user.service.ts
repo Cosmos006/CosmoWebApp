@@ -47,7 +47,7 @@ export class UserService {
       Title: registrationform.value.Title,
       FirstName: registrationform.value.FirstName,
       LastName: registrationform.value.LastName,
-      UserName: registrationform.value.UserName.toLowerCase(),
+      UserName: registrationform.value.Email,
       PhoneNo: registrationform.value.PhoneNo,
       Email: registrationform.value.Email,
       DateOfBirth: registrationform.value.DateOfBirth,

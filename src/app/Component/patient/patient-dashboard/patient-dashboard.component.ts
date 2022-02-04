@@ -41,7 +41,7 @@ export class PatientDashboardComponent implements OnInit {
       this.router.navigate(['PatientBookAppointment/Covid']);
     } else if (Type == 'Appointment') {
       this.router.navigate(['PatientBookAppointment/Patient'], {
-        queryParams: { appointmentId: '643EF306-4A57-474A-9D66-FAE0FF220041' },
+        queryParams: { appointmentId: 'B751E04F-F94A-422B-973C-6C6BFD96BF6D' },
       });
     }
   }

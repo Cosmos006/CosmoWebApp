@@ -14,71 +14,77 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-appointment-view',
   templateUrl: './appointment-view.component.html',
-  styleUrls: ['./appointment-view.component.css']
+  styleUrls: ['./appointment-view.component.css'],
 })
 export class AppointmentViewComponent {
-  displayedColumns = ['id', 'name', 'gender', 'diagnosis', 'mobile', 'age', 'email','physician','edit', 'pastvisit','delete'];
-  dataSource1 !: MatTableDataSource<Product>;
-  @ViewChild(MatPaginator) paginator !: MatPaginator;
-  @ViewChild(MatSort, {}) sort !: MatSort;
+  displayedColumns = [
+    'id',
+    'name',
+    'gender',
+    'diagnosis',
+    'mobile',
+    'age',
+    'email',
+    'physician',
+    'edit',
+    'pastvisit',
+    'delete',
+  ];
+  dataSource1!: MatTableDataSource<Product>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort, {}) sort!: MatSort;
 
-  pastVisit:string="PastVisit";
-  constructor(public dialogService: MatDialog, public appoiService: DailogeService, private router:Router) { }
+  pastVisit: string = 'PastVisit';
+  constructor(
+    public dialogService: MatDialog,
+    public appoiService: DailogeService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getdata();
   }
   getdata() {
-    this.appoiService.getAppointmentData().subscribe(data => {
-      this.dataSource1 = new MatTableDataSource(data)    
+    this.appoiService.getAppointmentData().subscribe((data) => {
+      this.dataSource1 = new MatTableDataSource(data);
       this.dataSource1.paginator = this.paginator;
-      console.log(data)
+      console.log(data);
     });
   }
-  startEdit(data: any[]) {    
+  startEdit(data: any[]) {
     const dialogRef = this.dialogService.open(EditDailogeComponent, {
-      data: { data }
+      data: { data },
     });
-    dialogRef.afterClosed()
+    dialogRef.afterClosed();
   }
   applyFilter(filterValue: any) {
-    let itemvalue = filterValue.target.value;   
+    let itemvalue = filterValue.target.value;
     this.dataSource1.filter = itemvalue.trim().toLowerCase();
     this.dataSource1.paginator = this.paginator;
-
   }
   onDelete(rowid: number) {
     this.appoiService.deletePostapp(rowid);
     this.getdata();
   }
-  OnVisit(){
-    
-    console.log("vamsiclicked")
+  OnVisit() {
+    console.log('vamsiclicked');
     this.router.navigateByUrl('/nurseBookappointment');
   }
-  OnVitalRecord(rowid:any){
-    
+  OnVitalRecord(rowid: any) {
     // this.router.navigateByUrl('/NursePatientViewdetails');
     this.router.navigate(['NursePatientViewdetails'], {
-
       queryParams: { appointmentId: rowid },
-
     });
   }
-  OnProviousVisit(rowid:any){
-    
-    console.log("vamsiclicked")
-    
+  OnProviousVisit(rowid: any) {
+    console.log('vamsiclicked');
+
     this.router.navigate(['NursePreviousVisitDetails'], {
-
       queryParams: { appointmentId: rowid },
-
     });
   }
 }
-
 
 function ELEMENT_DATA(ELEMENT_DATA: any) {
   throw new Error('Function not implemented.');
 }
-

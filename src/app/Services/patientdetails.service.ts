@@ -162,7 +162,7 @@ export class patientdetails {
   }
 
   Getpatientvisitdetailsfromid(id: string) {
-    const getuser = localStorage.getItem('USerID');
+    // const getuser = localStorage.getItem('USerID');
     const token = localStorage.getItem('token');
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -180,7 +180,7 @@ export class patientdetails {
   }
 
   Getpatientvisitdetailsfrompatientid(id: any) {
-    const getuser = localStorage.getItem('USerID');
+    // const getuser = localStorage.getItem('USerID');
 
     return this.http.get<any>(
       'https://localhost:44315/api/Master/Getdiagnosisdetails'
@@ -193,7 +193,7 @@ export class patientdetails {
     if (token != null) {
       myHeaders.append('Authorization', `Bearer ${token}`);
     }
-    return fetch(`https://localhost:44315/api/Master?id=${id}`, {
+    return fetch(`https://localhost:44315/api/Master/GetRole?id=${id}`, {
       method: 'GET',
       headers: myHeaders,
       redirect: 'follow',

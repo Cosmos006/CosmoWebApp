@@ -73,7 +73,7 @@ export class AuthenticationService {
     };
     this.currentUserSubject.next(emptyDataResult);
     //this.router.navigateByUrl('/login');
-    this.router.navigate(['/login']).then(() => {
+    this.router.navigate(['Login']).then(() => {
       window.location.reload();
     });
   }
