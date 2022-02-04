@@ -74,6 +74,9 @@ export class ChangepasswordComponent implements OnInit {
     //console.log(data)
     console.log(obj);
     this.authenticationService.changepassword(obj);
-    this.router.navigate(['/Login']);
+    this.authenticationService.logout();
+    // this.router.navigate(['Login']).then(() => {
+    //   window.location.reload();
+    // });
   }
 }

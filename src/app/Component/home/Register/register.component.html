@@ -15,7 +15,12 @@
                 style="margin-bottom: 1rem"
                 ><h3 class="">Register</h3></span
               > -->
-              <h1 class=" text-black font-bold text-center" style="color: cornflowerblue; font-weight: bold;">Registration Form</h1>
+              <h1
+                class="text-black font-bold text-center"
+                style="color: cornflowerblue; font-weight: bold"
+              >
+                Registration Form
+              </h1>
 
               <div class="form-group row">
                 <div class="col-6">
@@ -33,18 +38,21 @@
                     <option value="Ms">Ms</option>
                     <option value="Mrs">Mrs</option>
                   </select>
-                  
-                  <div class = "text-danger">
-                  <span
+
+                  <div class="text-danger">
+                    <span
                       *ngIf="
-                      (this.registrationform.controls['Title']?.touched && this.registrationform.controls['Title']?.value === '')
-                        || (submitted && this.registrationform.controls['Title']?.untouched
-                        && this.registrationform.controls['Title']?.value === '')
+                        (this.registrationform.controls['Title']?.touched &&
+                          this.registrationform.controls['Title']?.value ===
+                            '') ||
+                        (submitted &&
+                          this.registrationform.controls['Title']?.untouched &&
+                          this.registrationform.controls['Title']?.value === '')
                       "
-                      >Title is required</span>
+                      >Title is required</span
+                    >
                   </div>
                 </div>
-
 
                 <div class="col-6">
                   <label for="name">First Name : </label>
@@ -53,7 +61,6 @@
                     name="First Name"
                     class="form-control"
                     formControlName="FirstName"
-                   
                   />
                   <div class="text-danger">
                     <span
@@ -61,14 +68,18 @@
                   
                       this.registrationform.controls['FirstName']?.errors?.['pattern'] &&
                       this.registrationform.controls['FirstName']?.touched"
-                    
                       >First Name is invalid</span
                     >
                     <span
                       *ngIf="
-                        (this.registrationform.controls['FirstName']?.touched && this.registrationform.controls['FirstName']?.value === '')
-                        || (submitted && this.registrationform.controls['FirstName']?.untouched
-                        && this.registrationform.controls['FirstName']?.value === '')
+                        (this.registrationform.controls['FirstName']?.touched &&
+                          this.registrationform.controls['FirstName']?.value ===
+                            '') ||
+                        (submitted &&
+                          this.registrationform.controls['FirstName']
+                            ?.untouched &&
+                          this.registrationform.controls['FirstName']?.value ===
+                            '')
                       "
                       >First Name is required</span
                     >
@@ -91,7 +102,7 @@
                     }"
                   />
                   <div class="text-danger">
-                   <span
+                    <span
                       *ngIf="
                       
                       this.registrationform.controls['LastName'].invalid
@@ -99,21 +110,26 @@
                       && this.registrationform.controls['LastName']?.status === 'INVALID'
                       && this.registrationform.status === 'INVALID'
 
-                    " 
-                    
-                      >Last Name is invalid</span>
-                   
+                    "
+                      >Last Name is invalid</span
+                    >
+
                     <span
                       *ngIf="
-                        (this.registrationform.controls['LastName']?.touched && this.registrationform.controls['LastName']?.value === '')
-                        || (submitted && this.registrationform.controls['LastName']?.untouched
-                        && this.registrationform.controls['LastName']?.value === '')
+                        (this.registrationform.controls['LastName']?.touched &&
+                          this.registrationform.controls['LastName']?.value ===
+                            '') ||
+                        (submitted &&
+                          this.registrationform.controls['LastName']
+                            ?.untouched &&
+                          this.registrationform.controls['LastName']?.value ===
+                            '')
                       "
                       >Last Name is required</span
                     >
                   </div>
                 </div>
-                
+
                 <div class="col-6">
                   <label for="name">EmailId : </label>
                   <input
@@ -121,7 +137,7 @@
                     name="EmailId"
                     class="form-control"
                     formControlName="Email"
-                  [ngClass]="{
+                    [ngClass]="{
                       'is-invalid':
                         submitted &&
                         this.registrationform.controls['Email'].invalid
@@ -129,13 +145,17 @@
                   />
                   <div class="text-danger">
                     <span
-                    *ngIf="registrationform.controls['Email']?.errors?.['email'] && registrationform.controls['Email']?.touched">Enter
-                    email in correct format</span>
+                      *ngIf="registrationform.controls['Email']?.errors?.['email'] && registrationform.controls['Email']?.touched"
+                      >Enter email in correct format</span
+                    >
                     <span
                       *ngIf="
-                        (this.registrationform.controls['Email']?.touched && this.registrationform.controls['Email']?.value === '')
-                        || (submitted && this.registrationform.controls['Email']?.untouched
-                        && this.registrationform.controls['Email']?.value === '')
+                        (this.registrationform.controls['Email']?.touched &&
+                          this.registrationform.controls['Email']?.value ===
+                            '') ||
+                        (submitted &&
+                          this.registrationform.controls['Email']?.untouched &&
+                          this.registrationform.controls['Email']?.value === '')
                       "
                       >Email is required</span
                     >
@@ -175,12 +195,11 @@
                     >
                   </div>
                 </div> -->
-
               </div>
 
               <div class="form-group row">
                 <div class="col-6">
-                  <label for="name">Phone : </label>
+                  <label for="name">Contact : </label>
                   <input
                     type="text"
                     name="phone"
@@ -206,16 +225,16 @@
                       >Contact is invalid</span
                     >
                     <span
-                      *ngIf="registrationform.controls['PhoneNo']?.errors?.['minlength']">Telephone number has
-                      XX Digits</span>
-                    <span *ngIf="registrationform.controls['PhoneNo']?.errors?.['minlength']">Telephone number has
-                      XX Digits
+                      *ngIf="registrationform.controls['PhoneNo']?.errors?.['minlength']"
+                      >Contact number has XX Digits
                     </span>
-                    <span *ngIf="registrationform.controls['PhoneNo']?.errors?.['maxlength']">Telephone number has
-                      XX Digits
+                    <span
+                      *ngIf="registrationform.controls['PhoneNo']?.errors?.['maxlength']"
+                      >Contact number has XX Digits
                     </span>
-                    <mat-error *ngIf="registrationform.controls['PhoneNo']?.errors?.['pattern']">Only numbers are
-                      allowed
+                    <mat-error
+                      *ngIf="registrationform.controls['PhoneNo']?.errors?.['pattern']"
+                      >Only numbers are allowed
                     </mat-error>
                   </div>
                 </div>
@@ -226,10 +245,9 @@
                     type="date"
                     name="Date of birth"
                     class="form-control"
-                    [max]="today"
+                    max="2022-02-04"
                     formControlName="DateOfBirth"
-                    
-                   [ngClass]="{
+                    [ngClass]="{
                       'is-invalid':
                         submitted &&
                         this.registrationform.controls['DateOfBirth'].invalid
@@ -238,19 +256,24 @@
                   <div class="text-danger">
                     <span
                       *ngIf="
-                      (this.registrationform.controls['DateOfBirth']?.touched && this.registrationform.controls['DateOfBirth']?.value === '')
-                        || (submitted && this.registrationform.controls['DateOfBirth']?.untouched
-                        && this.registrationform.controls['DateOfBirth']?.value === '')"
+                        (this.registrationform.controls['DateOfBirth']
+                          ?.touched &&
+                          this.registrationform.controls['DateOfBirth']
+                            ?.value === '') ||
+                        (submitted &&
+                          this.registrationform.controls['DateOfBirth']
+                            ?.untouched &&
+                          this.registrationform.controls['DateOfBirth']
+                            ?.value === '')
+                      "
                       >DateOfBirth is required</span
                     >
-                    <span *ngIf="this.registrationform.controls['DateOfBirth']?.errors?.['matDatepickerMax']">Date should be
-                      inferior
-                      </span>
+                    <span
+                      *ngIf="this.registrationform.controls['DateOfBirth']?.errors?.['matDatepickerMax']"
+                      >Date should be inferior
+                    </span>
                   </div>
                 </div>
-               
-
-
               </div>
 
               <!-- <div class="form-group row">
@@ -281,7 +304,10 @@
                
               </div> -->
 
-              <div class="align-items-center text-center justify-content-center" style="width: 100px ;">
+              <div
+                class="align-items-center text-center justify-content-center"
+                style="width: 100px"
+              >
                 <div>
                   <button type="submit" class="btn btn-success">Sign Up</button>
                 </div>

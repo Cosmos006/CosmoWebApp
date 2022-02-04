@@ -33,30 +33,30 @@ export class PatientDetailsComponent implements OnInit {
   value: any;
   Allergytype: string = '';
   AllergyId: string = '';
- 
+
   Countrycode: string = '';
   Pincode: Number = 0;
   step = 0;
-  Demographicid:any;
-  AllergyType:any
+  Demographicid: any;
+  AllergyType: any;
   today = new Date();
   panelOpenState = false;
   selectedgender: string | undefined;
   selection: string | undefined;
-  Postlist:string[]=[];
-  PostAllergyobj:Allergy[]=[];
+  Postlist: string[] = [];
+  PostAllergyobj: Allergy[] = [];
   listOfAllergytype: string[] = [];
-  listOfAllergyName: Allergy[]=[];
+  listOfAllergyName: Allergy[] = [];
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
   postobj!: PatientdetailsDemo;
-  relativeobj!:Patientrelativedetails;
+  relativeobj!: Patientrelativedetails;
   form!: FormGroup;
   postal!: Postal;
-  patientid?:string;
-  age!:any;
-  selected:any;
- // postobj: Patientdetails = new Patientdetails();
+  patientid?: string;
+  age!: any;
+  selected: any;
+  // postobj: Patientdetails = new Patientdetails();
   patientAddressdetailslist: Postal[] | undefined;
   RelationshipList: string[] = [
     'Father',
@@ -73,177 +73,155 @@ export class PatientDetailsComponent implements OnInit {
   ngOnInit(): void {
     var Get = localStorage.getItem('currentUser');
     this.postobj = new PatientdetailsDemo();
-    this.relativeobj=new Patientrelativedetails();
+    this.relativeobj = new Patientrelativedetails();
     if (typeof Get === 'string') {
-       var id= JSON.parse(Get).id;
-       
-
-
+      var id = JSON.parse(Get).id;
     }
-    this.patient.GetPatientId(id) .then(async response => {
-      response.text().then(responseData => {
-         this.patientid = responseData; 
+    this.patient.GetPatientId(id).then(async (response) => {
+      response.text().then((responseData) => {
+        this.patientid = responseData;
         // alert(this.patientid);
         this.fetchdata(this.patientid);
-      })
+      });
     });
-   this.bindToUI();
-   
-   this.getAllergyDetails();
-  
-   
+    this.bindToUI();
+
+    this.getAllergyDetails();
   }
 
   getAllergyDetails() {
     let _that = this;
-    this.patient.getallergydata().then(async response => {
-       response.text().then(responseData => {
+    this.patient.getallergydata().then(async (response) => {
+      response.text().then((responseData) => {
         _that.PostAllergyobj = JSON.parse(responseData);
-         console.log(_that.PostAllergyobj);
+        console.log(_that.PostAllergyobj);
         _that.bindToUI();
-        
       });
-    })
-    
+    });
   }
 
   getAllergyNameDetails(Allergytype: string) {
-    
     let _that = this;
-    var allergynameselection=this.Allergytype ;
+    var allergynameselection = this.Allergytype;
 
     var checkmultiple = allergynameselection.includes(',');
 
-   
-  
-    if(checkmultiple==true)
-    {
-      this.patient.getallergydata()
-      .then(async response => {
-        response.text().then(responseData => {
+    if (checkmultiple == true) {
+      this.patient.getallergydata().then(async (response) => {
+        response.text().then((responseData) => {
           _that.listOfAllergyName = JSON.parse(responseData);
-       
         });
       });
-    }
-    else
-    {
-      window.setInterval(()=>{
-        this.patient.getAllerynamefromallergytype(Allergytype)
-        .then(async response => {
-          response.text().then(responseData => {
-            _that.listOfAllergyName = JSON.parse(responseData);
-           
+    } else {
+      window.setInterval(() => {
+        this.patient
+          .getAllerynamefromallergytype(Allergytype)
+          .then(async (response) => {
+            response.text().then((responseData) => {
+              _that.listOfAllergyName = JSON.parse(responseData);
+            });
           });
-        });
-      },5000)
-    
+      }, 5000);
     }
   }
 
   Addupdatepatientdetails() {
+    // if (this.form.invalid) {
+    //   alert('check all fields are filled');
 
-    if (this.form.invalid) {
-      alert('check all fields are filled');
-      
-    } 
-    else {
-     var dat:PatientdetailsDemo ={
-       firstName: this.form.value.firstname,
+    // }
+    if (1 == 1) {
+      var dat: PatientdetailsDemo = {
+        firstName: this.form.value.firstname,
 
-       lastName: this.form.value.lastname,
-       age: this.form.value.age,
-       gender: this.form.value.gender,
-       race: this.form.value.race,
-       ethinicity: this.form.value.ethnicity,
-       //this.postobj.languagesknown = this.form.value.languagesknown;
-       email: this.form.value.email,
-       address: this.form.value.homeaddress,
-       pincode: this.form.value.pincode,
-       country: this.form.value.country1,
-       state: this.form.value.state,
-       contact: this.form.value.contactnumber,
-       patientRelativeDetails: {
-         title: 'Mrs',
-         firstName: this.form.value.emergancyfirstname,
-         lastName: this.form.value.emergancylastname,
-         relation: this.form.value.emergancyrelationship,
-         email: this.form.value.emergancyemail,
-         contact: this.form.value.emergancycontactnumber,
-         address: this.form.value.emergancyaddress,
-         pincode: this.form.value.emergancypincode,
-         country: this.form.value.emergancycountry,
-         isAccess: true,
-         state: '',
-         patientDemographicsId: this.Demographicid,
-       },
-      
-       allergyList: this.form.value.allergytype,
-       allergynameList: '',
-       allergyDetails: this.form.value.allergydetails,
+        lastName: this.form.value.lastname,
+        age: this.form.value.age,
+        gender: this.form.value.gender,
+        race: this.form.value.race,
+        ethinicity: this.form.value.ethnicity,
+        //this.postobj.languagesknown = this.form.value.languagesknown;
+        email: this.form.value.email,
+        address: this.form.value.homeaddress,
+        pincode: this.form.value.pincode,
+        country: this.form.value.country1,
+        state: this.form.value.state,
+        contact: this.form.value.contactnumber,
+        patientRelativeDetails: {
+          title: 'Mrs',
+          firstName: this.form.value.emergancyfirstname,
+          lastName: this.form.value.emergancylastname,
+          relation: this.form.value.emergancyrelationship,
+          email: this.form.value.emergancyemail,
+          contact: this.form.value.emergancycontactnumber,
+          address: this.form.value.emergancyaddress,
+          pincode: this.form.value.emergancypincode,
+          country: this.form.value.emergancycountry,
+          isAccess: true,
+          state: '',
+          patientDemographicsId: this.Demographicid,
+        },
 
-      
-       clinicalInformation: this.form.value.clinicalinformation,
-       dateofBirth: this.form.value.dateofbirth,
-       isFatal: false,
-       patientId: this.patientid,
-       createddate: new Date,
-       allergytypeList: '',
-       allergyListname: this.form.value.allergyname,
-     }
- 
+        allergyList: this.form.value.allergytype,
+        allergynameList: '',
+        allergyDetails: this.form.value.allergydetails,
+
+        clinicalInformation: this.form.value.clinicalinformation,
+        dateofBirth: this.form.value.dateofbirth,
+        isFatal: false,
+        patientId: this.patientid,
+        createddate: new Date(),
+        allergytypeList: '',
+        allergyListname: this.form.value.allergyname,
+      };
+
       this.patient
-      .UpdatePatientdetails(this.Demographicid,dat)
-      .then(response => response.text())
-      .then(result =>{
-        if(result=='Success')
-        {
-          alert("Update Successfully");
-        }
-        else{
-          alert("Not Added");
-        }
-      })
-      
-      .catch(error => console.log('error', error));
+        .UpdatePatientdetails(this.Demographicid, dat)
+        .then((response) => response.text())
+        .then((result) => {
+          if (result == 'Success') {
+            alert('Update Successfully');
+          } else {
+            alert('Not Added');
+          }
+        })
+
+        .catch((error) => console.log('error', error));
       //alert("hii")
     }
-    
   }
-  
 
-  fetchdata(id:any) {
+  fetchdata(id: any) {
     let _that = this;
     this.patient
       .fetchfrombackendfromid1(id)
-      .then(async response => {
-        response.text().then(responseData => {
+      .then(async (response) => {
+        response.text().then((responseData) => {
           var result = JSON.parse(responseData);
           _that.postobj = result;
-          
-          this.Demographicid=_that.postobj.id;
+
+          this.Demographicid = _that.postobj.id;
           _that.bindToUI();
           console.log(this.Demographicid);
-          console.log(this.postobj.allergytypeList)
+          console.log(this.postobj.allergytypeList);
         });
       })
-      
-      
-      .catch(error => console.log('error', error));
-      
-      
+
+      .catch((error) => console.log('error', error));
   }
-  bindToUI(){
+  bindToUI() {
     this.form = new FormGroup({
       patientid: new FormControl(null),
-      firstname: new FormControl(
-        this.postobj?.firstName,[titleValidator(), Validators.pattern('^[a-zA-Z]+$')]
-      ),
+      firstname: new FormControl(this.postobj?.firstName, [
+        titleValidator(),
+        Validators.pattern('^[a-zA-Z]+$'),
+      ]),
       lastname: new FormControl(this.postobj?.lastName, [
         titleValidator(),
         Validators.pattern('^[a-zA-Z]+$'),
       ]),
-      dateofbirth: new FormControl(this.postobj?.dateofBirth, [Validators.required]),
+      dateofbirth: new FormControl(this.postobj?.dateofBirth, [
+        Validators.required,
+      ]),
       age: new FormControl(this.postobj?.age),
       gender: new FormControl(this.postobj?.gender, [Validators.required]),
       race: new FormControl(this.postobj?.race, [
@@ -279,79 +257,85 @@ export class PatientDetailsComponent implements OnInit {
         Validators.minLength(10),
         Validators.pattern('^[0-9]+$'),
       ]),
-      emergancyfirstname: new FormControl(this.postobj.patientRelativeDetails?.firstName, [
-        titleValidator(),
-        Validators.pattern('^[a-zA-Z]+$'),
-      ]),
-      emergancylastname: new FormControl(this.postobj.patientRelativeDetails?.lastName, [
-        titleValidator(),
-        Validators.pattern('^[a-zA-Z]+$'),
-      ]),
-      emergancyrelationship: new FormControl(this.postobj.patientRelativeDetails?.relation, [Validators.required]),
-      emergancyemail: new FormControl(this.postobj.patientRelativeDetails?.email, [
-        Validators.required,
-        Validators.email,
-      ]),
-      emergancycontactnumber: new FormControl(this.postobj.patientRelativeDetails?.contact, [
-        Validators.required,
-        Validators.maxLength(10),
-        Validators.pattern('^[0-9]+$'),
-      ]),
-      emergancyaddress: new FormControl(this.postobj.patientRelativeDetails?.address, [
-        Validators.required,
-        Validators.minLength(10),
-      ]),
-      emergancypincode: new FormControl(this.postobj.patientRelativeDetails?.pincode, [
-        Validators.required,
-        Validators.maxLength(6),
-        Validators.pattern('^[0-9]+$'),
-      ]),
-      emergancycountry: new FormControl(this.postobj.patientRelativeDetails?.country),
-      accessforpatientportal: new FormControl(this.postobj.patientRelativeDetails?.isAccess, [Validators.required]),
+      emergancyfirstname: new FormControl(
+        this.postobj.patientRelativeDetails?.firstName,
+        [titleValidator(), Validators.pattern('^[a-zA-Z]+$')]
+      ),
+      emergancylastname: new FormControl(
+        this.postobj.patientRelativeDetails?.lastName,
+        [titleValidator(), Validators.pattern('^[a-zA-Z]+$')]
+      ),
+      emergancyrelationship: new FormControl(
+        this.postobj.patientRelativeDetails?.relation,
+        [Validators.required]
+      ),
+      emergancyemail: new FormControl(
+        this.postobj.patientRelativeDetails?.email,
+        [Validators.required, Validators.email]
+      ),
+      emergancycontactnumber: new FormControl(
+        this.postobj.patientRelativeDetails?.contact,
+        [
+          Validators.required,
+          Validators.maxLength(10),
+          Validators.pattern('^[0-9]+$'),
+        ]
+      ),
+      emergancyaddress: new FormControl(
+        this.postobj.patientRelativeDetails?.address,
+        [Validators.required, Validators.minLength(10)]
+      ),
+      emergancypincode: new FormControl(
+        this.postobj.patientRelativeDetails?.pincode,
+        [
+          Validators.required,
+          Validators.maxLength(6),
+          Validators.pattern('^[0-9]+$'),
+        ]
+      ),
+      emergancycountry: new FormControl(
+        this.postobj.patientRelativeDetails?.country
+      ),
+      accessforpatientportal: new FormControl(
+        this.postobj.patientRelativeDetails?.isAccess,
+        [Validators.required]
+      ),
       allergyid: new FormControl(null),
-      allergytype: new FormControl(this.postobj?.allergyList),//this.AllergyType=this.postobj.allergyList.join(', ')
+      allergytype: new FormControl(this.postobj?.allergyList), //this.AllergyType=this.postobj.allergyList.join(', ')
       allergyname: new FormControl(this.postobj?.allergyListname),
       allergydetails: new FormControl(this.postobj?.allergyDetails),
       allergydescription: new FormControl(null),
       clinicalinformation: new FormControl(this.postobj?.clinicalInformation),
-      checkbox:new FormControl(null),
-      readallegytype:new FormControl(this.postobj?.allergytypeList),
-      readallergyname:new FormControl(this.postobj?.allergynameList),
-
+      checkbox: new FormControl(null),
+      readallegytype: new FormControl(this.postobj?.allergytypeList),
+      readallergyname: new FormControl(this.postobj?.allergynameList),
     });
-    
- }
+  }
 
   Clearpatientdetails() {
     this.form.reset();
   }
 
-
   //events
-  onCountryChange(event: any)
-  {
+  onCountryChange(event: any) {
     console.log(event);
 
-    this.Countrycode=event.iso2;
+    this.Countrycode = event.iso2;
 
     this.form.controls['country1'].setValue(event.name);
-
   }
-  onCountryChange2(event: any)
-  {
+  onCountryChange2(event: any) {
     console.log(event);
 
-    this.Countrycode=event.iso2;
+    this.Countrycode = event.iso2;
 
     this.form.controls['emergancycountry'].setValue(event.name);
-
   }
   isDisabled: boolean = false;
 
   onChange() {
     this.isDisabled = true;
   }
-
 
   setStep(index: number) {
     this.step = index;
@@ -362,75 +346,67 @@ export class PatientDetailsComponent implements OnInit {
   }
 
   addEvent(event: MatDatepickerInputEvent<Date>) {
-    
     var dateValue = event.value!;
     var selectedYear = new Date(dateValue).getFullYear();
     var currentYear = new Date().getFullYear();
     this.age = currentYear - selectedYear;
     this.form.controls['age'].setValue(this.age);
     if (event.value) {
-     
-      
     }
-   
   }
 
-  onChangeEvent(event: any){
-
+  onChangeEvent(event: any) {
     this.Pincode = event.target.value;
-    this.patient.getCountrynamefrompincodconsole(this.Countrycode,this.Pincode).subscribe(result=>
-     {
-      console.log(result.result[0].state);
-      this.form.controls['state'].setValue(result.result[0].state);
-
-     });
-   }
-   onAllergytypeselect(event:any)
-  {
-      this.Allergytype=event.value;
-      this.getAllergyNameDetails(this.Allergytype);
+    this.patient
+      .getCountrynamefrompincodconsole(this.Countrycode, this.Pincode)
+      .subscribe((result) => {
+        console.log(result.result[0].state);
+        this.form.controls['state'].setValue(result.result[0].state);
+      });
   }
-  radioChange(event:any) {
-    if(event.value=='No')
-    {
+  onAllergytypeselect(event: any) {
+    this.Allergytype = event.value;
+    this.getAllergyNameDetails(this.Allergytype);
+  }
+  radioChange(event: any) {
+    if (event.value == 'No') {
       this.form.controls['allergydetails'].disable();
       this.form.controls['allergytype'].disable();
       this.form.controls['allergyname'].disable();
       this.form.controls['allergydescription'].disable();
       this.form.controls['clinicalinformation'].disable();
-    }
-    else{
+    } else {
       this.form.controls['allergydetails'].enable();
       this.form.controls['allergytype'].enable();
       this.form.controls['allergyname'].enable();
       this.form.controls['allergydescription'].enable();
       this.form.controls['clinicalinformation'].enable();
     }
-}
-setAll(completed: boolean) {
-  
-  if(completed.valueOf()==true)
-  {
-    
-    this.form.controls['emergancyaddress'].setValue(this.form.controls['homeaddress'].value);
-    this.form.controls['emergancypincode'].setValue(this.form.controls['pincode'].value);
-    this.form.controls['emergancycountry'].setValue(this.form.controls['country1'].value);
-   
-    // this.form.controls['emergancyaddress'].disable();
-    // this.form.controls['emergancypincode'].disable();
-    // this.form.controls['emergancycountry'].disable();
+  }
+  setAll(completed: boolean) {
+    if (completed.valueOf() == true) {
+      this.form.controls['emergancyaddress'].setValue(
+        this.form.controls['homeaddress'].value
+      );
+      this.form.controls['emergancypincode'].setValue(
+        this.form.controls['pincode'].value
+      );
+      this.form.controls['emergancycountry'].setValue(
+        this.form.controls['country1'].value
+      );
 
+      // this.form.controls['emergancyaddress'].disable();
+      // this.form.controls['emergancypincode'].disable();
+      // this.form.controls['emergancycountry'].disable();
+    } else {
+      this.form.controls['emergancyaddress'].enable();
+      this.form.controls['emergancypincode'].enable();
+      this.form.controls['emergancycountry'].enable();
+      this.form.controls['emergancyaddress'].setValue('');
+      this.form.controls['emergancypincode'].setValue('');
+      this.form.controls['emergancycountry'].setValue('');
+    }
   }
-  else{
-    this.form.controls['emergancyaddress'].enable();
-    this.form.controls['emergancypincode'].enable();
-    this.form.controls['emergancycountry'].enable();
-    this.form.controls['emergancyaddress'].setValue('');
-    this.form.controls['emergancypincode'].setValue('');
-    this.form.controls['emergancycountry'].setValue('');
-  }
-  
-}
 }
 
 export function titleValidator(): ValidatorFn {
