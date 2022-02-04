@@ -55,7 +55,10 @@ export class NursedashboardgridComponent implements OnInit {
     console.log(data);
     let id = data['id'];
     console.log(id);
-    this.appoiService.UpdateStatus(id, data);
-    this.getdata();
+    this.appoiService.UpdateStatus(id, data).subscribe(r=>{
+      this.getdata()  
+    });
+    
+   
   }
 }

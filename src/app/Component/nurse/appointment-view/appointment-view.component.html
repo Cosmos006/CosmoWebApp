@@ -62,9 +62,9 @@
           <mat-icon matTooltip="Click To Record Vitals"> perm_identity </mat-icon>
         </button> </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="pastvisit">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Visit </mat-header-cell>
-      <mat-cell *matCellDef="let element" >
+    <ng-container matColumnDef="pastvisit" [style.display]="'none'">
+      <mat-header-cell *matHeaderCellDef mat-sort-header [style.display]="'none'" style="font-size: medium;">  </mat-header-cell>
+      <mat-cell *matCellDef="let element" [style.display]="'none'">
          <button mat-icon-button class="iconbutton"
           color="primary" (click)="OnProviousVisit(element.id)">
           <mat-icon matTooltip="Previous Visit Details"> history </mat-icon>
