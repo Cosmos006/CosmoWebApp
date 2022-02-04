@@ -295,11 +295,10 @@ export class PhysicianComponent implements OnInit {
     this.dialogservice.deletePostapp(rowid);
     this.getTodayAppoinmentdata();
   }
-  OnVisit(data: any) {
-    console.log(data);
-    let id = data['id'];
-    console.log(id);
-    this.dialogservice.UpdateStatus(id, data);
-    this.getTodayAppoinmentdata();
+  OnVitalRecord(rowid: any) {
+    // this.router.navigateByUrl('/NursePatientViewdetails');
+    this.router.navigate(['PhysicianPatientViewdetails'], {
+      queryParams: { appointmentId: rowid },
+    });
   }
 }
