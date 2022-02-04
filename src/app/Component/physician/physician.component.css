@@ -19,9 +19,9 @@ table {
   }
   
   th {
-    border-bottom: 1px solid #fff;
-    background-color:#0A95E6;
-    color: white;
+    border-bottom: 1px solid #000;
+    background-color:#ABCFE6;
+    color: black;
   }
   td{
      border-bottom: 1px solid #000;  
@@ -38,17 +38,19 @@ table {
   }
   
   th{
-
+    border-bottom: 1px solid #000;
+    background-color:#ABCFE6;
+    color: black;
     font-size: 1vw;
-    border: 1px solid #fff;
+    border: 1px solid #000;
     text-align: center;
   }
   
    
   mat-header-cell{
-    border: 1px solid #fff;
-    background-color:#0A95E6;
-    color: white;
+    border-bottom: 1px solid #000;
+    background-color:#ABCFE6;
+    color: black;
     font-size: 0.9vw;
     text-align: center !important;
 
