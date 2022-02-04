@@ -27,6 +27,8 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 
+import { MatDialog } from '@angular/material/dialog';
+import { EditDailogeComponent } from '../nurse/dailoge/edit-dailoge/edit-dailoge.component';
 export interface UsersData {
   name: string;
   id: number;
@@ -52,6 +54,9 @@ export interface Food {
   styleUrls: ['./physician.component.css'],
 })
 export class PhysicianComponent implements OnInit {
+
+  submitted=false;
+
   dataSource: Food[] = [
     { name: 'Yogurt', calories: 159, fat: 6, carbs: 24, protein: 4 },
     { name: 'Sandwich', calories: 237, fat: 9, carbs: 37, protein: 4 },
@@ -153,13 +158,6 @@ export class PhysicianComponent implements OnInit {
     this.getUpAppointmentCount();
   }
 
-  OnVisit(data: any) {
-    console.log(data);
-    let id = data['id'];
-    console.log(id);
-    this.dialogservice.UpdateStatus(id, data);
-    this.getTodayAppoinmentdata();
-  }
 
   getAppointmentCount() {
     this.dialogservice.getAppointmentData().subscribe((data) => {
@@ -173,12 +171,7 @@ export class PhysicianComponent implements OnInit {
       console.log(data);
     });
   }
-  // getPatientCount() {
-  //   //this.physicianservice.getPatient().subscribe(pdata => {
-  //     this.Patient=pdata.length;
-  //     console.log(pdata)
-  //   });
-  // }
+ 
 
   SlotGenerator(UserType: string, date: string): any {
     if (UserType == 'Nurse') {
@@ -222,9 +215,18 @@ export class PhysicianComponent implements OnInit {
         });
     }
   }
-  Ondoctorlist() {
-    console.log('VamsiOnDoctor');
-    this.router.navigateByUrl('/NurseUpcomingAppointmentComponent');
+  Ondoctorlist(){
+    console.log("VamsiOnDoctor")
+    this.router.navigateByUrl('/PhysicianUpcomingAppointmentComponent');
+  }
+  OnInbox(){
+    console.log("VamsiOnDoctor")
+    this.router.navigateByUrl('/Inbox');
+  }
+  
+  OnclickCalander(){
+    console.log("VamsiOnDoctor")
+    this.router.navigateByUrl('/ViewPhysician');
   }
 
   Onappointment() {
@@ -233,6 +235,7 @@ export class PhysicianComponent implements OnInit {
   }
 
   AddPhysiciandetails(index: number) {
+    this.submitted=true;
     var dataemployee: Attendance = {
       physicianId: this.form.value.physicianid,
       dateTime: this.form.value.date,
@@ -278,9 +281,25 @@ export class PhysicianComponent implements OnInit {
       console.log(this.dataSource1);
     });
   }
+ 
+
+
+ 
+ 
   applyFilter(filterValue: any) {
     let itemvalue = filterValue.target.value;
     this.dataSource1.filter = itemvalue.trim().toLowerCase();
     this.dataSource1.paginator = this.paginator;
+  }
+  onDelete(rowid: number) {
+    this.dialogservice.deletePostapp(rowid);
+    this.getTodayAppoinmentdata();
+  }
+  OnVisit(data: any) {
+    console.log(data);
+    let id = data['id'];
+    console.log(id);
+    this.dialogservice.UpdateStatus(id, data);
+    this.getTodayAppoinmentdata();
   }
 }

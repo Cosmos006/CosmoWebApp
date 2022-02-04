@@ -88,7 +88,7 @@
     font-size: 40px;
   }
   
-  .mat-column-name {
+  /* .mat-column-name {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 auto !important;
@@ -154,6 +154,22 @@
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
+  } */
+  
+  mat-header-cell{
+    border: 1px solid #fff;
+    background-color:#0A95E6;
+    color: white;
+    font-size: 0.9vw;
+    text-align: center !important;
+
   }
-  
-  
+ 
+  mat-header-cell, mat-cell {
+    justify-content: center;
+  }
+  mat-cell ,td { 
+    font-size: 0.9vw;
+    text-align: center !important;
+    border: 1px solid lightgray;
+  }

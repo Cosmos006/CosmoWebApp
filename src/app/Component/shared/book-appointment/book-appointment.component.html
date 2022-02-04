@@ -1,26 +1,7 @@
 <!-- <p>book-appointment works!</p> -->
 <div style="margin-left: 3px">
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <div>
-      <mat-card>
-        <div style="margin-left: 75%">
-          <button mat-raised-button color="primary" type="submit">Save</button>
-
-          <!-- <button mat-raised-button color="primary" type="button">
-              Update
-            </button> -->
-
-          <button
-            mat-raised-button
-            color="primary"
-            type="button"
-            (click)="Clear()"
-          >
-            Clear
-          </button>
-        </div>
-      </mat-card>
-    </div>
+ 
     <mat-card-content>
       <div class="container" style="margin: 2%">
         <div
@@ -182,9 +163,34 @@
                 </button>
               </div>
             </mat-expansion-panel>
+
+         
           </div>
+        
         </div>
       </div>
+      <div>
+        <mat-card>
+          <div style="margin-left: 75%">
+            <button mat-raised-button class="btn-success bg-success text-white btn" type="submit">Save</button>
+  
+            <!-- <button mat-raised-button color="primary" type="button">
+                Update
+              </button> -->
+  
+            <button
+              mat-raised-button
+              class="btn-danger bg-danger text-white btn"
+              type="button"
+              (click)="Clear()"
+            >
+              Clear
+            </button>
+          </div>
+        </mat-card>
+      </div>
     </mat-card-content>
+    
+   
   </form>
 </div>
