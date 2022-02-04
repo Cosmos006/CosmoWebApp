@@ -276,6 +276,12 @@ const routes: Routes = [
     data: { roles: [Role.Nurse] },
   },
   {
+    component: UpcomingAppointmentComponent,
+    path: 'PhysicianUpcomingAppointmentComponent',
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Physician] },
+  },
+  {
     component: InboxComponent,
     path: 'Inbox',
     canActivate: [AuthGuard],
