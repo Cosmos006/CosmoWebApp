@@ -1,14 +1,14 @@
 
-<h2>Upcoming Patient Appointment Details</h2>
+<h2 class="p-2">Upcoming Patient Appointment Details</h2>
 
-<div class="example-container mat-elevation-z8" class="table-content" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;">
-  <mat-form-field style="margin-left: 15px" style="width: 100%" >
+<div class="example-container mat-elevation-z8 m-2" class="table-content" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;">
+  <mat-form-field class="pl-3" style="width: 50%" >
     <input matInput (keyup)="applyFilter($event)" placeholder="Search Here">
   </mat-form-field>
   <div class="spinner-container">
   </div>
 
-  <mat-table #table [dataSource]="dataSource1" style="margin-left: 15px"  >
+  <mat-table #table [dataSource]="dataSource1"  >
 
     <ng-container matColumnDef="id"  [style.display]="'none'">
       <mat-header-cell *matHeaderCellDef [style.display]="'none'" mat-sort-headerstyle="font-size: medium;" style="font-size: medium;"> Id
@@ -32,7 +32,7 @@
 
     <!-- Fourth Column -->
     <ng-container matColumnDef="diagnosis">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> DiagnosisReason </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Diagnosis Reason </mat-header-cell>
       <mat-cell *matCellDef="let element" matTooltip={{element.diagnosis}}><span class="ellipsis">{{element.diagnosis}}</span> </mat-cell>
     </ng-container>
 
@@ -48,7 +48,7 @@
     </ng-container>
 
     <ng-container matColumnDef="appointmentdatetime">
-      <mat-header-cell *matHeaderCellDef mat-sort-header  style="font-size: medium;"> DateOfAppointment </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header  style="font-size: medium;"> Date Of Appointment </mat-header-cell>
       <mat-cell *matCellDef="let element" matTooltip={{element.appointmentDateTime}}><span class="ellipsis">{{element.appointmentDateTime|date:'shortDate'}}</span> </mat-cell>
     </ng-container>
     <ng-container matColumnDef="physician">
@@ -56,7 +56,7 @@
       <mat-cell *matCellDef="let element"> {{element.physicanName}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;">  </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Edit </mat-header-cell>
       <mat-cell *matCellDef="let element"> <button mat-icon-button class="iconbutton"
           color="primary" (click)="startEdit(element)">
           <mat-icon matTooltip="Click To Edit Details"> perm_identity </mat-icon>
@@ -71,7 +71,7 @@
         </button> </mat-cell>
     </ng-container> -->
     <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> 
+      <mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Delete
       </mat-header-cell>
       <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click To Cancel Appointment" class="iconbutton"
           color="warn" (click)="onDelete(element.id)">

@@ -16,6 +16,8 @@ import { BookAppointmentService } from 'src/app/Services/BookAppointment/book-ap
 import { DailogeService } from 'src/app/Services/dailoge.service';
 import { PhysicianService } from 'src/app/Services/Physician/physician.service';
 import {  Specialization } from 'src/app/models/Attendance';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDailogeComponent } from '../nurse/dailoge/edit-dailoge/edit-dailoge.component';
 
 
 
@@ -45,7 +47,7 @@ export interface Food {
 })
 export class PhysicianComponent implements OnInit {
 
-
+  submitted=false;
 
   dataSource: Food[] = [
     { name: 'Yogurt', calories: 159, fat: 6, carbs: 24, protein: 4 },
@@ -91,7 +93,8 @@ export class PhysicianComponent implements OnInit {
   //SlotList : string[] = ['9:30 to 10:30', '10:30 to 11', '10:30 to 11:30', '9:30 to 10:30', '9:30 to 10:30', '9:30 to 10:30'];
 
 
-  constructor(private service: BookAppointmentService, private formBuilder: FormBuilder, public dialogservice: DailogeService, private physicianservice: PhysicianService, private titleService: Title, private router: Router, private alterservice: AlertService) {
+  constructor(private service: BookAppointmentService, public dialogService: MatDialog,
+    public appoiService: DailogeService, private formBuilder: FormBuilder, private physicianservice: PhysicianService, private titleService: Title, private router: Router, private alterservice: AlertService) {
 
   }
 
@@ -137,35 +140,24 @@ upappointmentCount!:any;
     this.getTodayAppoinmentdata();
     this.getAppointmentCount();
     this. getUpAppointmentCount();
+   
   }
 
-  OnVisit(data: any) {
-    console.log(data);
-    let id = data['id'];
-    console.log(id);
-    this.dialogservice.UpdateStatus(id, data);
-    this.getTodayAppoinmentdata();
-  }
 
 
   getAppointmentCount() {
-    this.dialogservice.getAppointmentData().subscribe(data => {
+    this.appoiService.getAppointmentData().subscribe(data => {
       this.appointmentCount=data.length;
       console.log(data)
     });
   }
   getUpAppointmentCount() {
-    this.dialogservice.getUpcomingAppointments().subscribe(data => {
+    this.appoiService.getUpcomingAppointments().subscribe(data => {
       this.upappointmentCount=data.length;
       console.log(data)
     });
   }
-  // getPatientCount() {
-  //   //this.physicianservice.getPatient().subscribe(pdata => {
-  //     this.Patient=pdata.length;
-  //     console.log(pdata)
-  //   });
-  // }
+ 
 
 
   SlotGenerator(UserType: string, date: string): any {
@@ -213,7 +205,16 @@ upappointmentCount!:any;
   }
   Ondoctorlist(){
     console.log("VamsiOnDoctor")
-    this.router.navigateByUrl('/NurseUpcomingAppointmentComponent');
+    this.router.navigateByUrl('/PhysicianUpcomingAppointmentComponent');
+  }
+  OnInbox(){
+    console.log("VamsiOnDoctor")
+    this.router.navigateByUrl('/Inbox');
+  }
+  
+  OnclickCalander(){
+    console.log("VamsiOnDoctor")
+    this.router.navigateByUrl('/ViewPhysician');
   }
 
   Onappointment(){
@@ -222,8 +223,7 @@ upappointmentCount!:any;
   }
 
   AddPhysiciandetails(index: number) {
-
-
+    this.submitted=true;
     var dataemployee: Attendance = {
 
       physicianId: this.form.value.physicianid,
@@ -248,11 +248,31 @@ upappointmentCount!:any;
       console.log(this.dataSource1)
     });
   }
+ 
+
+
+ 
+  startEdit(data: any[]) {
+    const dialogRef = this.dialogService.open(EditDailogeComponent, {
+      data: { data },
+    });
+    dialogRef.afterClosed();
+  }
   applyFilter(filterValue: any) {
     let itemvalue = filterValue.target.value;
     this.dataSource1.filter = itemvalue.trim().toLowerCase();
     this.dataSource1.paginator = this.paginator;
   }
-
+  onDelete(rowid: number) {
+    this.appoiService.deletePostapp(rowid);
+    this.getTodayAppoinmentdata();
+  }
+  OnVisit(data: any) {
+    console.log(data);
+    let id = data['id'];
+    console.log(id);
+    this.appoiService.UpdateStatus(id, data);
+    this.getTodayAppoinmentdata();
+  }
 }
 

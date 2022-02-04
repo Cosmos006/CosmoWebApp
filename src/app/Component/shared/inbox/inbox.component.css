@@ -117,44 +117,59 @@ a{
     text-decoration: underline;
   }
   
+  table {
+    width: 100%;
+    border-collapse: collapse;
+   
   
-table {
-  width: 100%;
-  border-collapse: collapse;
- 
-
-}
-
-th {
-  border-bottom: 1px solid #fff;
-  background-color:#0A95E6;
-  color: white !important;
-  text-align: center;
-}
-td{
-   border-bottom: 1px solid #000;  
-}
-
-td.mat-cell { 
-  padding: 1px ;
-  text-align: center;
-  border: 1px solid lightgray;
-}
-
-tr {
-  background: #fff;
-}
-
-th.mat-header-cell {
-  font-size: 1vw;
-  border: 1px solid #fff;
-  text-align: center;
-}
-
-
-
-
-
+  }
+  
+  th {
+    border-bottom: 1px solid #000;
+    background-color:#ABCFE6;
+    color: black;
+  }
+  td{
+     border-bottom: 1px solid #000;  
+  }
+  
+  td{ 
+    padding: 20px 0;
+    text-align: center;
+    border: 1px solid lightgray;
+  }
+  
+  tr {
+    background: #fff;
+  }
+  
+  th{
+    border-bottom: 1px solid #000;
+    background-color:#ABCFE6;
+    color: black;
+    font-size: 1vw;
+    border: 1px solid #000;
+    text-align: center;
+  }
+  
+   
+  mat-header-cell{
+    border-bottom: 1px solid #000;
+    background-color:#ABCFE6;
+    color: black;
+    font-size: 0.9vw;
+    text-align: center !important;
+  
+  }
+  
+  mat-header-cell, mat-cell {
+    justify-content: center;
+  }
+  mat-cell ,td { 
+    font-size: 0.9vw;
+    text-align: center !important;
+    border: 1px solid lightgray;
+  }
 .mat-input-element {
   font: inherit;
   background: none !important;
