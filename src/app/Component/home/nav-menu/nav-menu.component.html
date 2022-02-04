@@ -1,13 +1,10 @@
 <!-- Old Navbar-->
 
 <div>
-  <mat-toolbar
-    *ngIf="currentUser"
-    style="
-      background-color: #a6d3f0;
-      background-image: linear-gradient(to right, #a6d3f0, rgb(23, 118, 177));
-    "
-  >
+  <mat-toolbar *ngIf="currentUser" style="
+     
+      background-image: linear-gradient(to right, #d7e9f5, rgb(23, 118, 177));
+    ">
     <div fxShow="true" fxHide.gt-sm="true">
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
@@ -20,6 +17,7 @@
           style="width: 100px; height: 20px"
         /> </a
     ></span>
+
 
     <span class="example-spacer"></span>
     <div fxShow="true" fxHide.lt-md="true">
@@ -189,7 +187,7 @@
           *ngIf="isPhysician"
         >
           Current Patient
-        </a>
+        </a> -->
       </span>
 
       <!-- <button routerLink="login"><b>Login</b></button> -->

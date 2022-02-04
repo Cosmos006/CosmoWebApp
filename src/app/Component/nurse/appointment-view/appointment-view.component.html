@@ -1,14 +1,14 @@
 
-<h2>Patient Appointment Details</h2>
+<h2 class="p-2">Patient Appointment Details</h2>
 
-<div class="example-container mat-elevation-z8" class="table-content" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;">
-  <mat-form-field style="margin-left: 15px" style="width: 100%" >
+<div class="example-container mat-elevation-z8 m-2" class="table-content" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;">
+  <mat-form-field class="pl2" style="margin-left: 15px" style="width: 100%" >
     <input matInput (keyup)="applyFilter($event)" placeholder="Search Here">
   </mat-form-field>
   <div class="spinner-container">
   </div>
 
-  <mat-table #table [dataSource]="dataSource1" style="margin-left: 15px"  >
+  <mat-table #table [dataSource]="dataSource1"  >
 
     <ng-container matColumnDef="id"  [style.display]="'none'">
       <mat-header-cell *matHeaderCellDef [style.display]="'none'" mat-sort-headerstyle="font-size: medium;" style="font-size: medium;"> Id

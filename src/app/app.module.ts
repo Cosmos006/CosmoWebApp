@@ -120,6 +120,8 @@ import { InboxComponent } from './Component/shared/inbox/inbox.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PhysicianService } from './Services/Physician/physician.service';
 import {  MatFormFieldModule } from '@angular/material/form-field';
+
+import {MatMenuModule} from '@angular/material/menu';
 //Edit Table
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -217,7 +219,8 @@ import { CurrentPatientComponent } from './Component/physician/CurrentPatient/cu
     CdkTableModule,
     CdkStepperModule,
     MatRadioModule,
-
+//menu
+MatMenuModule,
     //Full Calender
     FullCalendarModule,
     //Http
