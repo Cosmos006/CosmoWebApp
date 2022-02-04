@@ -58,7 +58,6 @@ export class AppointmentViewComponent {
   }
   OnVitalRecord(rowid:any){
     
-    
     // this.router.navigateByUrl('/NursePatientViewdetails');
     this.router.navigate(['NursePatientViewdetails'], {
 
