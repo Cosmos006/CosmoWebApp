@@ -36,6 +36,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PatientDashboardComponent implements OnInit {
+  totalPastAppointmentCount!: any;
   PatientLink(Type: string) {
     if (Type == 'Covid') {
       this.router.navigate(['PatientBookAppointment/Covid']);
@@ -176,6 +177,7 @@ export class PatientDashboardComponent implements OnInit {
   });
   selectedRow: any;
   userRole: any;
+
   appointments: Appointment[] = [
     { value: '1', viewValue: 'Upcoming Appointments' },
     { value: '2', viewValue: 'Past Appointments' },
@@ -206,6 +208,11 @@ export class PatientDashboardComponent implements OnInit {
         );
         this.filterAppointments('1');
       });
+
+    this.patientDashboardService.GetPastAppointmentList().subscribe((x) => {
+      this.totalPastAppointmentCount = x.length;
+      console.log(x);
+    });
   }
 
   filterAppointments(val: any, pagination: any = {}) {
